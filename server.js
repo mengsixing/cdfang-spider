@@ -4,6 +4,8 @@
 const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
+const request = require('superagent')
+const cheerio = require('cheerio')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -11,20 +13,25 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    // Be sure to pass `true` as the second argument to `url.parse`.
-    // This tells it to parse the query portion of the URL.
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
-
-    if (pathname === '/') {
-        console.log(res);
-        handle(req, res, parsedUrl)
-      //app.render(req, res, '/b', query)
-    } else if (pathname === '/b') {
-      app.render(req,res,'/','{message:123}')
-    } else {
-      handle(req, res, parsedUrl)
-    }
+    //请求
+    request
+      .post('http://171.221.172.13:8888/lottery/accept/projectList')
+      .end((err, result) => {
+         var $=cheerio.load(result.res.text);
+         var trList=[];
+         $('#_projectInfo>tr').each((i,tr)=>{
+           var tdList=[];
+           $(tr).find('td').each((j,td)=>{
+              tdList.push($(td).text());
+           });
+          trList.push(tdList);
+         });
+         res.myData=trList;
+         app.render(req,res,'/')
+      });
+    
   }).listen(3000, err => {
     if (err) throw err
     console.log('> Ready on http://localhost:3000')

@@ -8,3 +8,5 @@ gulp.task('default', () =>
         }))
         .pipe(gulp.dest('./dist'))
 );
+
+var watcher = gulp.watch('*.js', ['default']);

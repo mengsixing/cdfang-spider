@@ -7,7 +7,8 @@ const cheerio = require('cheerio')
 const app = new koa();
 
 app.use(async (ctx) => {
-  
+  const mongoose = require('mongoose');
+  mongoose.connect('mongodb://localhost/my_database');
   var result = await new Promise((resolve,reject)=>{
     request
     .post('http://171.221.172.13:8888/lottery/accept/projectList')

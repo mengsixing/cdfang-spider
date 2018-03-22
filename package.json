@@ -22,6 +22,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "koa": "^2.5.0",
+    "koa-router": "^7.4.0",
     "mongoose": "^5.0.11",
     "superagent": "^3.8.2"
   },

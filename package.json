@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint server.js",
-    "fix": "./node_modules/.bin/eslint --fix server.js",
+    "lint": "./node_modules/.bin/eslint --ignore-pattern '/gulpfile.js' *.js",
+    "fix": "./node_modules/.bin/eslint --ignore-pattern '/gulpfile.js' --fix *.js",
     "dev": "gulp & supervisor ./dist/server.js"
   },
   "repository": {

@@ -1,14 +1,14 @@
 import koa from 'koa';
-
 import 'babel-polyfill';
 import request from 'superagent';
 import cheerio from 'cheerio';
-import mongoose from 'mongoose';
+import myMongoose from './mongoose.js';
 
 const app = new koa();
 
 app.use(async (ctx) => {
-	mongoose.connect('mongodb://localhost/my_database');
+  myMongoose.add();
+  myMongoose.find();
 	var result = await new Promise((resolve) => {
 		request
 			.post('http://171.221.172.13:8888/lottery/accept/projectList')
@@ -29,5 +29,5 @@ app.use(async (ctx) => {
 	ctx.body = result;
 });
 
-console.log('server run at4: localhost:3333');
+console.log('server run at: localhost:3333');
 app.listen(3333);

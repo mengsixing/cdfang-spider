@@ -9,6 +9,10 @@ import * as util from './util';
 
 const router = new Router();
 const app = new koa();
+const serve = require('koa-static');
+
+
+app.use(serve('./client'));
 
 router.get('/',async (ctx) => {
   ctx.body = 'Visit /startspider to storeData';

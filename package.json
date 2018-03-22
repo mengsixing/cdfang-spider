@@ -23,7 +23,10 @@
     "cheerio": "^1.0.0-rc.2",
     "koa": "^2.5.0",
     "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
     "mongoose": "^5.0.11",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "superagent": "^3.8.2"
   },
   "devDependencies": {
@@ -33,6 +36,8 @@
     "eslint": "^4.19.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
-    "supervisor": "^0.12.0"
+    "html-webpack-plugin": "^3.0.7",
+    "supervisor": "^0.12.0",
+    "webpack": "^4.2.0"
   }
 }

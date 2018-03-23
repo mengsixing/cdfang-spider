@@ -1,33 +1,21 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
-    entry: './client/App.js',
+    mode: 'development',
+    entry: './client/index.js',
     output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, './client'),
-        //publicPath: ''
+        filename: './client/bundle.js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            loader: 'babel-loader',
-        }]
+        rules: [
+            { test: /\.js$/, use: 'babel-loader' },
+            { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] },
+            { test: /\.less$/, use: [ 'style-loader', 'css-loader', 'less-loader' ] }
+        ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './public/index.html'
-        }),
-        new webpack.HotModuleReplacementPlugin()
-    ],
-    // 定义webpack-dev-server
-    devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        // 静态文件目录位置，只有当你需要在webpack-dev-server本地服务器查看或引用静态文件时用到。类型：boolean | string | array, 建议使用绝对路径
-        hot: true,
-        // 模块热更新。依赖于HotModuleReplacementPlugin
-        noInfo: false,
-        // 在命令行窗口显示打包信息
-    }
-}
+        new HtmlWebpackPlugin({  
+          filename: './client/index.html',
+          template: './client/index.html'
+        })
+      ]
+};

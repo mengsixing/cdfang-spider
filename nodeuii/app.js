@@ -2,12 +2,12 @@ import koa from 'koa';
 import 'babel-polyfill';
 import serve from 'koa-static';
 
-import router from './router';
-import './schedule';
+import router from './src/router';
+import './src/schedule';
 
 const app = new koa();
 
-app.use(serve('./client'));
+app.use(serve('./dist'));
 router.init(app);
 
 //404中间件

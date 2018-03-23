@@ -6,7 +6,8 @@ import myMongoose from './mongoose.js';
 
 //定时器middleware
 const runEveryMinute = async () => {
-  schedule.scheduleJob('1 * * * * *',async function () {
+  schedule.scheduleJob('1 * * * * *', async function () {
+    console.warn('爬取数据...');
     var page = await new Promise((resolve) => {
       request
         .post('http://171.221.172.13:8888/lottery/accept/projectList')
@@ -23,10 +24,21 @@ const runEveryMinute = async () => {
           resolve(util.transformArray(trList));
         });
     });
-    page.forEach(item => {
-      myMongoose.add(item);
+    var newNumber= await new Promise((resolve)=>{
+      var newDataNumber = 0;
+      var i=0;
+      page.forEach((item) => {
+        myMongoose.add(item).then((isSuccess=>{
+          i++;
+          isSuccess && newDataNumber++;
+          if(i==page.length-1){
+            resolve(newDataNumber);
+          }
+        }));
+      });
     });
-    console.warn('抓取成功');
+    
+    console.warn(`抓取数据${page.length}条，新数据${newNumber}条。`);
   });
 };
 

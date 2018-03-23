@@ -2,11 +2,11 @@ var gulp = require('gulp');
 const babel = require('gulp-babel');
 
 gulp.task('default', () =>
-	gulp.src('./*.js')
+	gulp.src('./nodeuii/**/*.js')
 		.pipe(babel({
 			presets: ['env']
 		}))
-		.pipe(gulp.dest('./dist'))
+		.pipe(gulp.dest('./dist/'))
 );
 
-var watcher = gulp.watch('*.js', ['default']);
+gulp.watch('./nodeuii/*.js', ['default']);

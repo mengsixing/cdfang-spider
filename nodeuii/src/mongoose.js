@@ -20,13 +20,13 @@ var result = {
   async add(item) {
     var findItem = await this.find({ _id: item._id });
     if (findItem.length > 0) {
-      console.warn('禁止添加重复数据');
-      return;
+      return false;
     }
     var house = new HouseCol(item);
     house.save(function (err) {
       if (err) return console.error(err);
     });
+    return true;
   },
   find(query) {
     var result = HouseCol.find(query, function (err, house) {

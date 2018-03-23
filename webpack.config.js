@@ -3,7 +3,8 @@ module.exports = {
     mode: 'development',
     entry: './client/index.js',
     output: {
-        filename: './client/bundle.js'
+        path: __dirname+'/dist/client',
+        filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -14,7 +15,6 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({  
-          filename: './client/index.html',
           template: './client/index.html'
         })
       ]

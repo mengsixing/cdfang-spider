@@ -1,13 +1,13 @@
 import koa from 'koa';
 import 'babel-polyfill';
-import serve from 'koa-static';
+import cors from 'koa2-cors';
 
 import router from './src/router';
 import './src/schedule';
 
 const app = new koa();
 
-app.use(serve('./dist'));
+app.use(cors());
 router.init(app);
 
 //404中间件
@@ -19,5 +19,5 @@ app.use(async (ctx,next) => {
   }
 });
 
-console.warn('server run at: localhost:3333');
+console.warn('server run at2 : localhost:3333');
 app.listen(3333);

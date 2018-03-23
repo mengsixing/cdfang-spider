@@ -15,7 +15,7 @@ module.exports = {
         }]
     },
     plugins: [
-        new HtmlWebpackPlugin({ 
+        new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './public/index.html'
         }),

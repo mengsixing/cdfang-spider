@@ -1,5 +1,6 @@
 import React from 'react'
 import 'whatwg-fetch'
+import _ from 'lodash'
 
 import Chart from './chart'
 import Table from './table'
@@ -29,13 +30,15 @@ class App extends React.Component {
 				allData:json
 			});
 		})
-	}
+	}  
 	
 	componentDidMount(){
 		console.log('mountd');
 		var _this=this;
 	}
 	render() {
+		var totalNumber=_.sumBy(this.state.allData, 'number');
+		
 		return (
 			<div>
 				<Layout>
@@ -54,16 +57,16 @@ class App extends React.Component {
 						<div className="content-card">
 							<Row gutter={16}>
 								<Col span={6}>
-									<Card title="Card title" bordered={false}>Card content</Card>
+									<Card title="本周开盘" bordered={false}>Card content</Card>
 								</Col>
 								<Col span={6}>
-									<Card title="Card title" bordered={false}>Card content</Card>
+									<Card title="本月开盘" bordered={false}>Card content</Card>
 								</Col>
 								<Col span={6}>
-									<Card title="Card title" bordered={false}>Card content</Card>
+									<Card title="本季度开盘" bordered={false}>Card content</Card>
 								</Col>
 								<Col span={6}>
-									<Card title="Card title" bordered={false}>Card content</Card>
+									<Card title="总开盘" bordered={false}>{totalNumber}</Card>
 								</Col>
 							</Row>
 						</div>

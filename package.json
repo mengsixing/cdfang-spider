@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./nodeuii/*.js",
     "fix": "./node_modules/.bin/eslint --fix ./nodeuii/*.js",
-    "dev": "node_modules/.bin/webpack-dev-server & gulp  & supervisor ./dist/app.js"
+    "dev": "node_modules/.bin/webpack-dev-server & node_modules/.bin/gulp  & supervisor ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "koa": "^2.5.0",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.5",
+    "lodash": "^4.17.5",
     "mongoose": "^5.0.11",
     "node-schedule": "^1.3.0",
     "react": "^16.2.0",

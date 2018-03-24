@@ -48,7 +48,14 @@ class App extends React.Component {
 		var tabpanels=util.sortArea(Object.keys(areas)).map((item,index)=>{
 			return (
 				<TabPane tab={item} key={index}>
-					<BarGraph data={areas[item]}></BarGraph>
+					<Row>
+						<Col span={18}>
+						<BarGraph data={areas[item]}></BarGraph>
+						</Col>
+						<Col span={6}>
+							楼盘排名：
+						</Col>
+					</Row>
 				</TabPane>
 			)
 		})

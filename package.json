@@ -6,9 +6,8 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint */*.js",
     "fix": "./node_modules/.bin/eslint --fix */*.js",
-    "dev": "node_modules/.bin/webpack-dev-server & node_modules/.bin/gulp  & supervisor ./dist/app.js",
-    "build": "node_modules/.bin/cross-env NODE_ENV=production & node_modules/.bin/gulp & node_modules/.bin/webpack --mode=production",
-    "webpack": "node_modules/.bin/webpack-dev-server"
+    "dev": "node_modules/.bin/webpack-dev-server --open & node_modules/.bin/gulp  & supervisor ./dist/app.js",
+    "build": "node_modules/.bin/cross-env NODE_ENV=production & node_modules/.bin/gulp & node_modules/.bin/webpack --mode=production"
   },
   "pre-commit": [
     "lint"

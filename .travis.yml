@@ -6,5 +6,5 @@ node_js:
 branches:
   only:
     - master
-after_script:
+script:
     - npm run build

@@ -24,7 +24,7 @@ if(process.env.NODE_ENV=='production'){
 
 
 class App extends React.Component {
-	constructor(){
+	constructor(ss){
 		super();
 		var _this=this;
 		this.state={

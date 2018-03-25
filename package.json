@@ -10,6 +10,9 @@
     "build": "node_modules/.bin/cross-env NODE_ENV=production & node_modules/.bin/gulp & node_modules/.bin/webpack --mode=production",
     "webpack": "node_modules/.bin/webpack-dev-server"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yhlben/cdfang-spider.git"

@@ -33,10 +33,6 @@ class App extends React.Component {
 		})
 	}  
 	
-	componentDidMount(){
-		console.log('mountd');
-		var _this=this;
-	}
 	render() {
 		var allData=this.state.allData;
 		var totalNumber=_.sumBy(allData, 'number');
@@ -44,18 +40,13 @@ class App extends React.Component {
 		var thisWeekInfo= util.getThisWeekInfo(allData);
 		var thisMonthInfo= util.getThisMonthInfo(allData);
 		var thisQuarterInfo= util.getThisQuarterInfo(allData);
+
 		var areas=_.groupBy(allData,function(item){return item.area } );
-		var tabpanels=util.sortArea(Object.keys(areas)).map((item,index)=>{
+		var areasList=Object.keys(areas);
+		var tabpanels=util.sortArea(areasList).map((item,index)=>{
 			return (
 				<TabPane tab={item} key={index}>
-					<Row>
-						<Col span={18}>
-						<BarGraph data={areas[item]}></BarGraph>
-						</Col>
-						<Col span={6}>
-							楼盘排名：
-						</Col>
-					</Row>
+					<BarGraph data={areas[item]}></BarGraph>
 				</TabPane>
 			)
 		})
@@ -68,7 +59,7 @@ class App extends React.Component {
 						<Menu
 							theme="light"
 							mode="horizontal"
-							defaultSelectedKeys={['2']}
+							defaultSelectedKeys={['1']}
 							style={{ lineHeight: '64px' }}
 						>
 							<Menu.Item key="1">首页</Menu.Item>
@@ -104,12 +95,14 @@ class App extends React.Component {
 							</Row>
 						</div>
 						<div className="content-graph-bar">
-							<Tabs defaultActiveKey="1">
+							<Tabs defaultActiveKey="5">
 								{tabpanels}
 							</Tabs>
 						</div>
 						<div className="content-graph-table">
-							<Table data={this.state.allData}></Table>
+							{
+								this.state.allData.length>0?<Table data={this.state.allData} areaList={areasList}></Table>:''
+							}
 						</div>
 					</Content>
 					<Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>

@@ -6,7 +6,7 @@ import myMongoose from './mongoose.js';
 
 //定时器middleware
 const runEveryMinute = async () => {
-  schedule.scheduleJob('* 1 * * * *', async function () {
+  schedule.scheduleJob('* 10 * * * *', async function () {
     console.warn('爬取数据...');
     var page = await new Promise((resolve) => {
       request

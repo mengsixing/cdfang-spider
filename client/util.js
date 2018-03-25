@@ -89,7 +89,7 @@ var util = {
   },
   sortArea(areaArray){
     //把主城区排在前面
-    const mainArea='天府新区,高新南区,成华区,武侯区,青羊区,金牛区,锦江区';
+    const mainArea='天府新区,高新南区,龙泉驿区,成华区,武侯区,青羊区,金牛区,锦江区';
     var newArray=_.sortBy(areaArray, [function(area) {
       return -mainArea.indexOf(area); 
     }]);

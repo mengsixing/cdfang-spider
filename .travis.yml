@@ -1,0 +1,10 @@
+
+sudo: required
+language: node_js
+node_js:
+  - "9"
+branches:
+  only:
+    - master
+after_script:
+    - npm run build

@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, '连接mongodb成功。'));
 db.once('open', function () {
-  console.warn('连接mongodb成功');
+  console.warn('连接mongodb成功。');
 });
 var HouseSchema = mongoose.Schema({
   _id: String,
@@ -34,11 +34,6 @@ var result = {
       return house;
     });
     return result;
-  },
-  delete() {
-    HouseCol.remove({ name: 'xxx' }, function (err) {
-      console.warn(err);
-    });
   }
 };
 

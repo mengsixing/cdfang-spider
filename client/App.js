@@ -1,55 +1,58 @@
-import React from 'react'
-import 'whatwg-fetch'
-import _ from 'lodash'
-import moment from 'moment'
-import util from './util'
+import React from 'react';
+import 'whatwg-fetch';
+import _ from 'lodash';
+import moment from 'moment';
+import util from './util';
 
-import BarGraph from './chart'
-import Table from './table'
+import BarGraph from './chart';
+import Table from './table';
 import { Layout,Menu } from 'antd';
 
-import './App.less'
+import './App.less';
 const { Header, Footer, Content } = Layout;
 
 import { Card, Col, Row } from 'antd';
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 
+var serverDomain='http://localhost:3333';
 
+if(process.env.NODE_ENV=='production'){
+	serverDomain='http://yinhengli.com:3333';
+}
 
 
 
 class App extends React.Component {
-	constructor(props){
+	constructor(){
 		super();
 		var _this=this;
 		this.state={
 			allData: []
-		}
-		fetch('http://localhost:3333/getMongoData').then((response)=>response.json()).then(json=>{
+		};
+		fetch(serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
 			_this.setState({
 				allData:json
 			});
-		})
+		});
 	}  
 	
 	render() {
 		var allData=this.state.allData;
-		var totalNumber=_.sumBy(allData, 'number');
 		var allInfo=util.getAllInfo(allData);
 		var thisWeekInfo= util.getThisWeekInfo(allData);
 		var thisMonthInfo= util.getThisMonthInfo(allData);
 		var thisQuarterInfo= util.getThisQuarterInfo(allData);
 
-		var areas=_.groupBy(allData,function(item){return item.area } );
+		var areas=_.groupBy(allData,function(item){return item.area; } );
 		var areasList=Object.keys(areas);
 		var tabpanels=util.sortArea(areasList).map((item,index)=>{
 			return (
 				<TabPane tab={item} key={index}>
 					<BarGraph data={areas[item]}></BarGraph>
 				</TabPane>
-			)
-		})
+			);
+		});
 		window.moment=moment;
 		return (
 			<div>
@@ -108,7 +111,7 @@ class App extends React.Component {
 					<Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>
 				</Layout>
 			</div>
-		)
+		);
 	}
 }
 

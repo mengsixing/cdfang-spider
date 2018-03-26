@@ -9,6 +9,9 @@
 * [x] mongoose配置MongoDB数据库
 * [x] node-schedule定时抓取数据
 * [x] 搭建react环境
-* [x] 配置webpack4环境
+* [x] 配置webpack4
+* [x] 配置eslint
 * [x] bizcharts图表控件
-* [ ] 页面显示优化 
+* [x] 客户端页面
+* [ ] 服务器端推送
+* [ ] 持续优化

@@ -4,9 +4,9 @@ import cheerio from 'cheerio';
 import * as util from './util';
 import myMongoose from './mongoose.js';
 
-//定时器middleware
+//定时器middleware,每隔15分钟爬一次
 const runEveryMinute = async () => {
-  schedule.scheduleJob('* 10 * * * *', async function () {
+  schedule.scheduleJob('*/15 * * * *', async function () {
     console.warn('爬取数据...');
     var page = await new Promise((resolve) => {
       request
@@ -37,7 +37,6 @@ const runEveryMinute = async () => {
         }));
       });
     });
-    
     console.warn(`抓取数据${page.length}条，新数据${newNumber}条。`);
   });
 };

@@ -4,6 +4,7 @@ import cors from 'koa2-cors';
 import 'babel-polyfill';
 
 import router from './src/router';
+import './src/schedule';
 
 const app = new koa();
 

@@ -12,7 +12,13 @@ class CircleGraph extends React.Component {
 	selectMonth(item) {
 		this.props.changeMonth(item);
 	}
-	shouldComponentUpdate(){
+	shouldComponentUpdate(nextProps){
+		if(nextProps.data.length!=this.props.data.length){
+			return true;
+		}
+		if(nextProps.isChangeTab){
+			return true;
+		}
 		return false;
 	}
 	render() {
@@ -86,7 +92,7 @@ class CircleGraph extends React.Component {
 CircleGraph.propTypes={
 	data: PropTypes.array,
 	changeMonth:PropTypes.func,
-	title:PropTypes.string
+	isChangeTab:PropTypes.bool
 };
 
 

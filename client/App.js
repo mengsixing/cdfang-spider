@@ -23,7 +23,9 @@ class App extends React.Component {
 		super();
 		var _this=this;
 		this.state={
-			allData: []
+			allData: [],
+			isTabChanged:false,
+			activityKey:5
 		};
 		fetch(serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
 			_this.setState({
@@ -34,6 +36,11 @@ class App extends React.Component {
 	gotoGithub(){
 		location.href='https://github.com/yhlben/cdfang-spider';
 	}
+	changeTab(activityKey){
+		this.setState({
+			activityKey: Number.parseInt(activityKey)
+		});
+	}
 	
 	render() {
 		var allData=this.state.allData;
@@ -42,7 +49,7 @@ class App extends React.Component {
 		var tabpanels=util.sortArea(areasList).map((item,index)=>{
 			return (
 				<TabPane tab={item} key={index}>
-					<ChartPanel data={areas[item]}></ChartPanel>
+					<ChartPanel data={areas[item]} panelIndex={index} activityKey={this.state.activityKey}></ChartPanel>
 				</TabPane>
 			);
 		});
@@ -67,7 +74,7 @@ class App extends React.Component {
 					<Content className="content">
 						<StatisticCard data={this.state.allData}></StatisticCard>
 						<div className="content-graph-bar">
-							<Tabs defaultActiveKey="5">
+							<Tabs defaultActiveKey="5" onChange={this.changeTab.bind(this)}>
 								{tabpanels}
 							</Tabs>
 						</div>

@@ -7,31 +7,23 @@ import util from './util';
 import ChartPanel from './components/ChartPanel';
 import Table from './components/WholeTable';
 import StatisticCard from './components/StatisticCard';
+import Notice from './components/Notice';
+import config from './config/config';
 import { Layout,Menu,Icon,Tabs } from 'antd';
 
 import './App.less';
 const { Header, Footer, Content } = Layout;
 const TabPane = Tabs.TabPane;
 
-var serverDomain='http://localhost:3333';
-if(process.env.NODE_ENV=='production'){
-	serverDomain='http://yinhengli.com:3333';
-}
-
 class App extends React.Component {
 	constructor(){
 		super();
-		var _this=this;
 		this.state={
 			allData: [],
 			isTabChanged:false,
 			activityKey:5
 		};
-		fetch(serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
-			_this.setState({
-				allData:json
-			});
-		});
+		this.reloadData();
 	}
 	gotoGithub(){
 		location.href='https://github.com/yhlben/cdfang-spider';
@@ -39,6 +31,13 @@ class App extends React.Component {
 	changeTab(activityKey){
 		this.setState({
 			activityKey: Number.parseInt(activityKey)
+		});
+	}
+	reloadData(){
+		fetch(config.serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
+			this.setState({
+				allData:json
+			});
 		});
 	}
 	
@@ -60,6 +59,7 @@ class App extends React.Component {
 				<Layout>
 					<Header style={{backgroundColor:'white'}}>
 						<div className="logo">
+							<Notice reloadData={this.reloadData.bind(this)}></Notice>
 							<Icon type="github" onClick={this.gotoGithub} />
 						</div>
 						<Menu

@@ -21,7 +21,6 @@ var HouseCol = mongoose.model('house', HouseSchema);
 var result = {
   async add(item) {
     var findItem = await this.find({ _id: item._id });
-    console.log(findItem);
     if (findItem.length > 0) {
       //执行更新操作
       this.update(item);

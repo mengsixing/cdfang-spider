@@ -70,7 +70,12 @@ class CommonTable extends React.Component {
 			item.key=item._id;
 			return item;
 		});
-		return <Table title={() => '汇总表'} columns={this.state.columns} dataSource={data} />;
+		return <Table title={() => '汇总表'} columns={this.state.columns} dataSource={data} locale = {{
+			filterTitle: '筛选',
+			filterConfirm: '确定',
+			filterReset: '重置',
+			emptyText: '暂无数据'
+		}} />;
 	}
 }
 

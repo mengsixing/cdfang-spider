@@ -39,7 +39,7 @@ router.get('/startspider', async (ctx) => {
 }).get('/initspider', async (ctx) => {
   var i = 1;
   var allArray = [];
-  while (i < 14) {
+  while (i < 25) {
     var page = await new Promise((resolve) => {
       request
         .post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)
@@ -61,11 +61,37 @@ router.get('/startspider', async (ctx) => {
   }
   myMongoose.addMany(allArray);
   ctx.body = allArray;
+}).get('/spiderPageOne', async (ctx) => {
+  var page = await new Promise((resolve) => {
+    request
+      .post('http://171.221.172.13:8888/lottery/accept/projectList')
+      .end((err, result) => {
+        var $ = cheerio.load(result.res.text);
+        var trList = [];
+        $('#_projectInfo>tr').each((i, tr) => {
+          var tdList = [];
+          $(tr).find('td').each((j, td) => {
+            tdList.push($(td).text());
+          });
+          trList.push(tdList);
+        });
+        resolve(util.transformArray(trList));
+      });
+  });
+  var successLength=0;
+  page.forEach(async item => {
+    var isSuccess= await myMongoose.add(item);
+    isSuccess && successLength++;
+  });
+  ctx.body = {
+    successLength,
+    allLength:page.length
+  };
 });
 
 
 export default {
-  init(app){
+  init(app) {
     app.use(router.routes()).use(router.allowedMethods());
   }
 };

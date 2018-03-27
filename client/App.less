@@ -76,3 +76,19 @@
   font-weight: 500;
   padding: 16px;
 }
+
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.notice-icon{
+  margin-right: 75px;
+  display: inline-block;
+}
+.loading{
+  animation: donut-spin 3s linear infinite;
+}

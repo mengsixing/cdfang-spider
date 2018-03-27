@@ -9,7 +9,7 @@ const router = new Router();
 router.get('/startspider', async (ctx) => {
   var i = 1;
   var allArray = [];
-  while (i < 14) {
+  while (i < 25) {
     var page = await new Promise((resolve) => {
       request
         .post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)

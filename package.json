@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint */*.js",
-    "fix": "./node_modules/.bin/eslint --fix */*.js",
-    "dev": "node_modules/.bin/cross-env NODE_ENV=development && node_modules/.bin/gulp & node_modules/.bin/webpack-dev-server --open & supervisor ./dist/app.js",
-    "build": "node_modules/.bin/cross-env NODE_ENV=production && node_modules/.bin/gulp & node_modules/.bin/webpack --mode=production"
+    "lint": "eslint */*.js",
+    "fix": "eslint --fix */*.js",
+    "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
+    "prebuild":"npm run lint",
+    "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"
   },
   "pre-commit": [
     "lint"

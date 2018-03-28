@@ -1,13 +1,13 @@
 import React from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';
-import moment from 'moment';
 import util from './util';
 
 import ChartPanel from './components/ChartPanel';
 import Table from './components/WholeTable';
 import StatisticCard from './components/StatisticCard';
 import Notice from './components/Notice';
+import CurrentHouse from './components/CurrentHouse';
 import config from './config/config';
 import { Layout,Menu,Icon,Tabs } from 'antd';
 
@@ -52,10 +52,8 @@ class App extends React.Component {
 				</TabPane>
 			);
 		});
-		window.moment=moment;
 		return (
 			<div>
-				
 				<Layout>
 					<Header style={{backgroundColor:'white'}}>
 						<div className="logo">
@@ -72,6 +70,7 @@ class App extends React.Component {
 						</Menu>
 					</Header>
 					<Content className="content">
+						<CurrentHouse  data={this.state.allData}></CurrentHouse>
 						<StatisticCard data={this.state.allData}></StatisticCard>
 						<div className="content-graph-bar">
 							<Tabs defaultActiveKey="5" onChange={this.changeTab.bind(this)}>

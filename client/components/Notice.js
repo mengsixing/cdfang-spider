@@ -18,7 +18,7 @@ class Notice extends React.Component{
 		fetch(config.serverDomain+'/spiderPageOne').then((response)=>response.json()).then(json=>{
 			notification.open({
 				message: '消息提醒',
-				description: `抓取数据${json.allLength}条，新数据${json.successLength}条。`,
+				description: `成功更新数据${json.allLength}条，新数据${json.successLength}条。`,
 			});
 			this.setState({
 				isLoading:false

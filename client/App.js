@@ -8,6 +8,7 @@ import Table from './components/WholeTable';
 import StatisticCard from './components/StatisticCard';
 import Notice from './components/Notice';
 import CurrentHouse from './components/CurrentHouse';
+import AreaBar from './components/AreaBar';
 import config from './config/config';
 import { Layout,Menu,Icon,Tabs } from 'antd';
 
@@ -76,6 +77,12 @@ class App extends React.Component {
 							<Tabs defaultActiveKey="5" onChange={this.changeTab.bind(this)}>
 								{tabpanels}
 							</Tabs>
+						</div>
+						<div className="content-areabar">
+							<div className="content-areabar-title">整体统计</div>
+							{
+								this.state.allData.length>0?<AreaBar data={this.state.allData}></AreaBar>:''
+							}
 						</div>
 						<div className="content-graph-table">
 							{

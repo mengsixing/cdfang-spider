@@ -7,7 +7,7 @@
     "lint": "eslint */*.js",
     "fix": "eslint --fix */*.js",
     "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
-    "prebuild":"npm run lint",
+    "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"
   },
   "pre-commit": [
@@ -59,7 +59,7 @@
     "html-webpack-plugin": "^3.1.0",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
-    "pm2": "^2.10.1",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.20.3",
     "supervisor": "^0.12.0",
     "webpack": "^4.2.0",

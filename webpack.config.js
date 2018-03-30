@@ -10,7 +10,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname+'/dist/client',
-		chunkFilename: '[name].bundle.js',
+		chunkFilename: '[name][hash].bundle.js',
 		filename: 'bundle.js'
 	},
 	module: {

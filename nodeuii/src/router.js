@@ -7,91 +7,91 @@ import myMongoose from './mongoose.js';
 const router = new Router();
 
 router.get('/startspider', async (ctx) => {
-  var i = 1;
-  var allArray = [];
-  while (i < 25) {
-    var page = await new Promise((resolve) => {
-      request
-        .post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)
-        .end((err, result) => {
-          var $ = cheerio.load(result.res.text);
-          var trList = [];
-          $('#_projectInfo>tr').each((i, tr) => {
-            var tdList = [];
-            $(tr).find('td').each((j, td) => {
-              tdList.push($(td).text());
-            });
-            trList.push(tdList);
-          });
-          resolve(util.transformArray(trList));
-        });
-    });
-    allArray = allArray.concat(page);
-    ++i;
-  }
-  allArray.forEach(item => {
-    myMongoose.add(item);
-  });
-  ctx.body = allArray;
+	var i = 1;
+	var allArray = [];
+	while (i < 25) {
+		var page = await new Promise((resolve) => {
+			request
+				.post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)
+				.end((err, result) => {
+					var $ = cheerio.load(result.res.text);
+					var trList = [];
+					$('#_projectInfo>tr').each((i, tr) => {
+						var tdList = [];
+						$(tr).find('td').each((j, td) => {
+							tdList.push($(td).text());
+						});
+						trList.push(tdList);
+					});
+					resolve(util.transformArray(trList));
+				});
+		});
+		allArray = allArray.concat(page);
+		++i;
+	}
+	allArray.forEach(item => {
+		myMongoose.add(item);
+	});
+	ctx.body = allArray;
 }).get('/getMongoData', async (ctx) => {
-  var result = await myMongoose.find();
-  ctx.body = result;
+	var result = await myMongoose.find();
+	ctx.body = result;
 }).get('/initspider', async (ctx) => {
-  var i = 1;
-  var allArray = [];
-  while (i < 25) {
-    var page = await new Promise((resolve) => {
-      request
-        .post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)
-        .end((err, result) => {
-          var $ = cheerio.load(result.res.text);
-          var trList = [];
-          $('#_projectInfo>tr').each((i, tr) => {
-            var tdList = [];
-            $(tr).find('td').each((j, td) => {
-              tdList.push($(td).text());
-            });
-            trList.push(tdList);
-          });
-          resolve(util.transformArray(trList));
-        });
-    });
-    allArray = allArray.concat(page);
-    ++i;
-  }
-  myMongoose.addMany(allArray);
-  ctx.body = allArray;
+	var i = 1;
+	var allArray = [];
+	while (i < 25) {
+		var page = await new Promise((resolve) => {
+			request
+				.post('http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i)
+				.end((err, result) => {
+					var $ = cheerio.load(result.res.text);
+					var trList = [];
+					$('#_projectInfo>tr').each((i, tr) => {
+						var tdList = [];
+						$(tr).find('td').each((j, td) => {
+							tdList.push($(td).text());
+						});
+						trList.push(tdList);
+					});
+					resolve(util.transformArray(trList));
+				});
+		});
+		allArray = allArray.concat(page);
+		++i;
+	}
+	myMongoose.addMany(allArray);
+	ctx.body = allArray;
 }).get('/spiderPageOne', async (ctx) => {
-  var page = await new Promise((resolve) => {
-    request
-      .post('http://171.221.172.13:8888/lottery/accept/projectList')
-      .end((err, result) => {
-        var $ = cheerio.load(result.res.text);
-        var trList = [];
-        $('#_projectInfo>tr').each((i, tr) => {
-          var tdList = [];
-          $(tr).find('td').each((j, td) => {
-            tdList.push($(td).text());
-          });
-          trList.push(tdList);
-        });
-        resolve(util.transformArray(trList));
-      });
-  });
-  var successLength=0;
-  page.forEach(async item => {
-    var isSuccess= await myMongoose.add(item);
-    isSuccess && successLength++;
-  });
-  ctx.body = {
-    successLength,
-    allLength:page.length
-  };
+	var page = await new Promise((resolve) => {
+		request
+			.post('http://171.221.172.13:8888/lottery/accept/projectList')
+			.end((err, result) => {
+				var $ = cheerio.load(result.res.text);
+				var trList = [];
+				$('#_projectInfo>tr').each((i, tr) => {
+					var tdList = [];
+					$(tr).find('td').each((j, td) => {
+						tdList.push($(td).text());
+					});
+					trList.push(tdList);
+				});
+				resolve(util.transformArray(trList));
+			});
+	});
+	var successLength=0;
+	page.forEach(async item => {
+		var isSuccess= await myMongoose.add(item);
+		isSuccess && successLength++;
+	});
+	ctx.body = {
+		successLength,
+		allLength:page.length
+	};
 });
 
 
 export default {
-  init(app) {
-    app.use(router.routes()).use(router.allowedMethods());
-  }
+	init(app) {
+		app.use(router.routes()).use(router.allowedMethods());
+	}
 };

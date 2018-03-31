@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint */*.js",
-    "fix": "eslint --fix */*.js",
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
     "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"

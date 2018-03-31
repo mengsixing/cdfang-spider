@@ -14,7 +14,8 @@ module.exports = {
             "experimentalObjectRestSpread": true,
             "jsx": true
         },
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 8
     },
     "plugins": [
         "react"
@@ -35,6 +36,7 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-console": "off",
     }
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';
 import util from './util';
+import PropTypes from 'prop-types';
+
 
 import ChartPanel from './components/ChartPanel';
 import Table from './components/WholeTable';
@@ -11,6 +13,7 @@ import CurrentHouse from './components/CurrentHouse';
 import AreaBar from './components/AreaBar';
 import config from './config/config';
 import { Layout,Menu,Icon,Tabs } from 'antd';
+import { inject, observer } from 'mobx-react';
 
 import './App.less';
 const { Header, Footer, Content } = Layout;
@@ -20,9 +23,8 @@ class App extends React.Component {
 	constructor(){
 		super();
 		this.state={
-			allData: [],
 			isTabChanged:false,
-			activityKey:5
+			activityKey:6
 		};
 		this.reloadData();
 	}
@@ -36,14 +38,13 @@ class App extends React.Component {
 	}
 	reloadData(){
 		fetch(config.serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
-			this.setState({
-				allData:json
-			});
+			this.props.appState.allData.replace(json);
 		});
+		
 	}
 	
 	render() {
-		var allData=this.state.allData;
+		var allData=this.props.appState.allData;
 		var areas=_.groupBy(allData,function(item){return item.area; } );
 		var areasList=Object.keys(areas);
 		var tabpanels=util.sortArea(areasList).map((item,index)=>{
@@ -71,8 +72,8 @@ class App extends React.Component {
 						</Menu>
 					</Header>
 					<Content className="content">
-						<CurrentHouse  data={this.state.allData}></CurrentHouse>
-						<StatisticCard data={this.state.allData}></StatisticCard>
+						<CurrentHouse></CurrentHouse>
+						<StatisticCard></StatisticCard>
 						<div className="content-graph-bar">
 							<Tabs defaultActiveKey="5" onChange={this.changeTab.bind(this)}>
 								{tabpanels}
@@ -81,12 +82,12 @@ class App extends React.Component {
 						<div className="content-areabar">
 							<div className="content-areabar-title">整体统计</div>
 							{
-								this.state.allData.length>0?<AreaBar data={this.state.allData}></AreaBar>:''
+								this.props.appState.allData.length>0?<AreaBar></AreaBar>:''
 							}
 						</div>
 						<div className="content-graph-table">
 							{
-								this.state.allData.length>0?<Table data={this.state.allData} areaList={areasList}></Table>:''
+								this.props.appState.allData.length>0?<Table areaList={areasList}></Table>:''
 							}
 						</div>
 					</Content>
@@ -97,4 +98,8 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+App.propTypes = {
+	appState: PropTypes.object
+};
+
+export default inject('appState')(observer(App));

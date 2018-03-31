@@ -7,6 +7,7 @@ import CricleGraph from './CricleGraph';
 import Rank from './Rank';
 import BarGraph from './BarGraph';
 import _ from 'lodash';
+import { inject, observer } from 'mobx-react';
 
 
 
@@ -45,7 +46,7 @@ class ChartPanel extends React.Component{
 	}
 
 	render(){
-		
+		console.log('chart',this.state.rank);
 		return (
 			<Row>
 				<Col span={9}>
@@ -69,4 +70,4 @@ ChartPanel.propTypes = {
 	activityKey:PropTypes.number
 };
 
-export default ChartPanel;
+export default inject('appState')(observer(ChartPanel));

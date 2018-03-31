@@ -4,7 +4,7 @@ export function transformArray(array){
 			_id: item[0],
 			area: item[2],
 			name: item[3],
-			number: item[6],
+			number: Number.parseInt(item[6]),
 			beginTime: item[8],
 			endTime: item[9],
 			status: item[10]

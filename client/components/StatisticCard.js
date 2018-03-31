@@ -3,11 +3,12 @@ import 'whatwg-fetch';
 import util from '../util';
 import { Card, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
+import { inject, observer } from 'mobx-react';
 
 class StatisticCard extends React.Component {
 
 	render() {
-		var allData=this.props.data;
+		var allData=this.props.appState.allData;
 		var allInfo=util.getAllInfo(allData);
 		var thisWeekInfo= util.getThisWeekInfo(allData);
 		var thisMonthInfo= util.getThisMonthInfo(allData);
@@ -46,7 +47,7 @@ class StatisticCard extends React.Component {
 }
 
 StatisticCard.propTypes = {
-	data: PropTypes.array
+	appState: PropTypes.object,
 };
 
-export default StatisticCard;
+export default inject('appState')(observer(StatisticCard));

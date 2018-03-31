@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon, notification } from 'antd';
 import PropTypes from 'prop-types';
 import config from '../config/config';
+import { inject, observer } from 'mobx-react';
 
 
 class Notice extends React.Component{
@@ -18,13 +19,13 @@ class Notice extends React.Component{
 		fetch(config.serverDomain+'/spiderPageOne').then((response)=>response.json()).then(json=>{
 			notification.open({
 				message: '消息提醒',
-				description: `成功更新数据${json.allLength}条，新数据${json.successLength}条。`,
+				description: `成功更新数据${json.allLength}条，新数据${json.successArray.length}条。`,
 			});
 			this.setState({
 				isLoading:false
 			});
-			if(json.successLength>0){
-				this.props.reloadData();
+			if(json.successArray.length>0){
+				this.props.appState.allData=this.props.appState.allData.concat(json.successArray);
 			}
 		});
 	}
@@ -40,7 +41,8 @@ class Notice extends React.Component{
 
 Notice.propTypes = {
 	reloadData: PropTypes.func,
+	appState: PropTypes.object,
 };
 
-export default Notice;
+export default inject('appState')(observer(Notice));
 

@@ -6,6 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint --fix .",
+    "client":"webpack-dev-server --open",
+    "server":"cross-env NODE_ENV=development && gulp & supervisor ./dist/app.js",
     "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"
@@ -33,6 +35,8 @@
     "koa-static": "^4.0.2",
     "koa2-cors": "^2.0.5",
     "lodash": "^4.17.5",
+    "mobx": "^4.1.1",
+    "mobx-react": "^5.0.0",
     "moment": "^2.21.0",
     "mongoose": "^5.0.11",
     "node-schedule": "^1.3.0",

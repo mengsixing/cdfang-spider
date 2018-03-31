@@ -3,11 +3,12 @@ import 'whatwg-fetch';
 import PropTypes from 'prop-types';
 import { Collapse, List,Col, Row,Icon } from 'antd';
 const Panel = Collapse.Panel;
+import { inject, observer } from 'mobx-react';
 
 class CurrentHouse extends React.Component {
 
 	render() {
-		var allData=this.props.data;
+		var allData=this.props.appState.allData;
 		var currentHouses = allData.filter(item=>item.status!='报名结束').map(item=>{
 			return (
 				<div className="current-house-list"  key={item._id}>
@@ -37,7 +38,7 @@ class CurrentHouse extends React.Component {
 }
 
 CurrentHouse.propTypes = {
-	data: PropTypes.array
+	appState: PropTypes.object,
 };
 
-export default CurrentHouse;
+export default inject('appState')(observer(CurrentHouse));

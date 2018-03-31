@@ -22,9 +22,13 @@ var result = {
 	async add(item) {
 		var findItem = await this.find({ _id: item._id });
 		if (findItem.length > 0) {
-			//执行更新操作
-			this.update(item);
-			return false;
+			//如果状态变更执行更新操作
+			if(findItem[0].status!=item.status){
+				this.update(item);
+				return item;
+			}else{
+				return false;
+			}
 		}
 		var house = new HouseCol(item);
 		house.save(function (err) {
@@ -33,7 +37,7 @@ var result = {
 				return false;
 			}
 		});
-		return true;
+		return item;
 	},
 	async addMany(array){
 		HouseCol.create(array, function (err) {
@@ -41,8 +45,10 @@ var result = {
 		});
 	},
 	update(item){
-		HouseCol.findOneAndUpdate({ _id: item._id }, item, function(data){
-			console.log(data);
+		HouseCol.findOneAndUpdate({ _id: item._id }, item, function(err){
+			if(err){
+				console.log(err);
+			}
 		});
 	},
 	find(query) {

@@ -78,13 +78,20 @@ router.get('/startspider', async (ctx) => {
 				resolve(util.transformArray(trList));
 			});
 	});
-	var successLength=0;
-	page.forEach(async item => {
-		var isSuccess= await myMongoose.add(item);
-		isSuccess && successLength++;
+	// 生成一个Promise对象的数组
+	const promises = page.map(function (item) {
+		return new Promise(resolve=>{
+			resolve(myMongoose.add(item));
+		});
+	});
+	var successArray=await Promise.all(promises).then(function (posts) {
+		console.log(posts);
+		return posts.filter(item=>!!item);
+	}).catch(function(){
+		return [];
 	});
 	ctx.body = {
-		successLength,
+		successArray,
 		allLength:page.length
 	};
 });

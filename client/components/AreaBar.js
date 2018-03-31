@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import util from '../util';
+import { inject, observer } from 'mobx-react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 
 class AreaBar extends React.Component{
@@ -11,7 +12,7 @@ class AreaBar extends React.Component{
 	}
 
 	render(){
-		var array=this.props.data;
+		var array=this.props.appState.allData;
 		var areas=_.groupBy(array,function(item){return item.area; } );
 		var data=[];
 		util.sortArea(Object.keys(areas)).forEach(key=>{
@@ -29,7 +30,7 @@ class AreaBar extends React.Component{
 }
 
 AreaBar.propTypes = {
-	data: PropTypes.array
+	appState: PropTypes.object
 };
 
-export default AreaBar;
+export default inject('appState')(observer(AreaBar));

@@ -9,9 +9,6 @@ import BarGraph from './BarGraph';
 import _ from 'lodash';
 import { inject, observer } from 'mobx-react';
 
-
-
-
 class ChartPanel extends React.Component{
 
 	constructor(props){
@@ -19,30 +16,43 @@ class ChartPanel extends React.Component{
 		this.state={
 			rank:props.data,
 			rankTitle:'',
-			isChangeTab:false
+			isChangeTab:false,
+			isOpen:false
 		};
 	}
+
 	componentWillReceiveProps(){
-		if(this.props.panelIndex!=this.props.activityKey){
+		if(this.props.panelIndex!=this.props.appState.activityKey){
 			this.setState({
 				rank:this.props.data,
 				rankTitle:'',
-				isChangeTab:true
+				isChangeTab:true,
+				isOpen:false
 			});
 		}
 	}
 
 	changeMonth(item){
-		var selectMonth=item.data._origin.date;
-		var selectMonthTitle=item.data._origin.item;
-		var newRank= _.filter(this.props.data, function(item) { 
-			return moment(item.beginTime)>moment(selectMonth) && moment(item.beginTime)<moment(selectMonth).endOf('month');
-		});
-		this.setState({
-			rank:newRank,
-			rankTitle:selectMonthTitle,
-			isChangeTab:false
-		});
+		if(this.state.rankTitle==item.data._origin.item&&this.state.isOpen){
+			this.setState({
+				rank:this.props.data,
+				rankTitle:'',
+				isChangeTab:false,
+				isOpen:false
+			});
+		}else{
+			var selectMonth=item.data._origin.date;
+			var selectMonthTitle=item.data._origin.item;
+			var newRank= _.filter(this.props.data, function(item) { 
+				return moment(item.beginTime)>moment(selectMonth) && moment(item.beginTime)<moment(selectMonth).endOf('month');
+			});
+			this.setState({
+				rank:newRank,
+				rankTitle:selectMonthTitle,
+				isChangeTab:false,
+				isOpen:true
+			});
+		}
 	}
 
 	render(){
@@ -64,9 +74,8 @@ class ChartPanel extends React.Component{
 
 ChartPanel.propTypes = {
 	data: PropTypes.array,
-	isTabChanged:PropTypes.bool,
-	panelIndex:PropTypes.number,
-	activityKey:PropTypes.number
+	appState:PropTypes.object,
+	panelIndex:PropTypes.number
 };
 
 export default inject('appState')(observer(ChartPanel));

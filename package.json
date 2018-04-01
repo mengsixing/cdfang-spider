@@ -6,15 +6,18 @@
   "scripts": {
     "lint": "eslint .",
     "fix": "eslint --fix .",
-    "client":"webpack-dev-server --open",
-    "server":"cross-env NODE_ENV=development && gulp & supervisor ./dist/app.js",
+    "client": "webpack-dev-server --open",
+    "server": "cross-env NODE_ENV=development && gulp & supervisor ./dist/app.js",
     "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yhlben/cdfang-spider.git"
@@ -61,6 +64,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.1",
     "html-webpack-plugin": "^3.1.0",
+    "husky": "^0.14.3",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "rimraf": "^2.6.2",

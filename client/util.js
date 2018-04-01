@@ -76,12 +76,12 @@ var util = {
 		var time= getCurrentQuarter();
 		var thisQuarterStart = time.thisQuarterStart;
 		var thisQuarterEnd = time.thisQuarterEnd;
-		var weekData = _.filter(allData, (item) => {
+		var quarterData = _.filter(allData, (item) => {
 			var beginTime = moment(item.beginTime);
 			return (beginTime > thisQuarterStart) && (beginTime < thisQuarterEnd);
 		});
-		var houseNumber = _.sumBy(weekData, 'number');
-		var buildNumber = weekData.length;
+		var houseNumber = _.sumBy(quarterData, 'number');
+		var buildNumber = quarterData.length;
 		return {
 			houseNumber,
 			buildNumber

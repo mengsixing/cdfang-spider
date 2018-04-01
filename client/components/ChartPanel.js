@@ -46,7 +46,6 @@ class ChartPanel extends React.Component{
 	}
 
 	render(){
-		console.log('chart',this.state.rank);
 		return (
 			<Row>
 				<Col span={9}>

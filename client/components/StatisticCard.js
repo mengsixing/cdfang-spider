@@ -9,6 +9,7 @@ class StatisticCard extends React.Component {
 
 	render() {
 		var allData=this.props.appState.allData;
+		console.log('分析卡片的数字',allData);
 		var allInfo=util.getAllInfo(allData);
 		var thisWeekInfo= util.getThisWeekInfo(allData);
 		var thisMonthInfo= util.getThisMonthInfo(allData);

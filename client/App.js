@@ -1,8 +1,8 @@
 import React from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';
-import util from './util';
 import PropTypes from 'prop-types';
+import util from './util';
 
 
 import ChartPanel from './components/ChartPanel';
@@ -22,25 +22,18 @@ const TabPane = Tabs.TabPane;
 class App extends React.Component {
 	constructor(){
 		super();
-		this.state={
-			isTabChanged:false,
-			activityKey:6
-		};
 		this.reloadData();
 	}
 	gotoGithub(){
 		location.href='https://github.com/yhlben/cdfang-spider';
 	}
 	changeTab(activityKey){
-		this.setState({
-			activityKey: Number.parseInt(activityKey)
-		});
+		this.props.appState.activityKey=Number.parseInt(activityKey);
 	}
 	reloadData(){
 		fetch(config.serverDomain+'/getMongoData').then((response)=>response.json()).then(json=>{
 			this.props.appState.allData.replace(json);
 		});
-		
 	}
 	
 	render() {
@@ -50,7 +43,7 @@ class App extends React.Component {
 		var tabpanels=util.sortArea(areasList).map((item,index)=>{
 			return (
 				<TabPane tab={item} key={index}>
-					<ChartPanel data={areas[item]} panelIndex={index} activityKey={this.state.activityKey}></ChartPanel>
+					<ChartPanel data={areas[item]} panelIndex={index} activityKey={this.props.appState.activityKey}></ChartPanel>
 				</TabPane>
 			);
 		});
@@ -75,7 +68,7 @@ class App extends React.Component {
 						<CurrentHouse></CurrentHouse>
 						<StatisticCard></StatisticCard>
 						<div className="content-graph-bar">
-							<Tabs defaultActiveKey="5" onChange={this.changeTab.bind(this)}>
+							<Tabs defaultActiveKey="6" onChange={this.changeTab.bind(this)}>
 								{tabpanels}
 							</Tabs>
 						</div>
@@ -92,7 +85,7 @@ class App extends React.Component {
 						</div>
 					</Content>
 					<Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>
-				</Layout>
+				</Layout>                      
 			</div>
 		);
 	}

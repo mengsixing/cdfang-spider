@@ -35,7 +35,6 @@ class App extends React.Component {
 			this.props.appState.allData.replace(json);
 		});
 	}
-	asdasda
 	render() {
 		var allData=this.props.appState.allData;
 		var areas=_.groupBy(allData,function(item){return item.area; } );

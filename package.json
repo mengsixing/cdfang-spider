@@ -7,10 +7,10 @@
     "lint": "eslint .",
     "fix": "eslint --fix .",
     "client": "webpack-dev-server --open",
-    "server": "cross-env NODE_ENV=development && gulp & supervisor ./dist/app.js",
-    "dev": "cross-env NODE_ENV=development && gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
+    "server": "cross-env NODE_ENV=development gulp & supervisor ./dist/app.js",
+    "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
-    "build": "cross-env NODE_ENV=production && gulp & webpack --mode=production"
+    "build": "cross-env NODE_ENV=production gulp & webpack --mode=production"
   },
   "husky": {
     "hooks": {

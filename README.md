@@ -36,7 +36,6 @@
       <img src="https://github.com/yhlben.png?s=100" width="100">
     </td>
     <td>
-      yhlben<br />
       <a href="https://github.com/yhlben">yhlben</a><br />
       <a href="mailto:yinhengliben@gmail.com">yinhengliben@gmail.com</a><br />
     </td>

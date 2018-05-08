@@ -28,13 +28,17 @@
 * eslint
 * gulp
 
-## 开发进度
-* [x] node抓取成都房协网数据
-* [x] mongoose配置MongoDB数据库
-* [x] node-schedule定时抓取数据
-* [x] 搭建react环境
-* [x] 配置webpack4
-* [x] 配置eslint
-* [x] bizcharts图表控件
-* [x] 客户端页面
-* [ ] 持续优化
+## 作者
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/yhlben.png?s=100" width="100">
+    </td>
+    <td>
+      yhlben<br />
+      <a href="https://github.com/yhlben">yhlben</a><br />
+      <a href="mailto:yinhengliben@gmail.com">yinhengliben@gmail.com</a><br />
+    </td>
+  </tr>
+</table>

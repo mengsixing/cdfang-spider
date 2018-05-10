@@ -6,6 +6,18 @@
 [![Build Status](https://www.travis-ci.org/yhlben/cdfang-spider.svg?branch=master)](https://www.travis-ci.org/yhlben/cdfang-spider)
 
 
+## 使用
+
+``` shell
+
+git clone https://github.com/yhlben/cdfang-spider.git
+cd cdfang-spider
+yarn
+yarn run dev
+
+```
+
+
 ## 特点
 * 手动搭建react环境
 * 手动搭建koa环境

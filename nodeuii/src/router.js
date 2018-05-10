@@ -96,7 +96,6 @@ router.get('/startspider', async (ctx) => {
 	};
 });
 
-
 export default {
 	init(app) {
 		app.use(router.routes()).use(router.allowedMethods());

@@ -21,7 +21,7 @@ class ChartPanel extends React.Component{
 		};
 	}
 
-	componentWillReceiveProps(){
+	UNSAFE_componentWillReceiveProps(){
 		if(this.props.panelIndex!=this.props.appState.activityKey){
 			this.setState({
 				rank:this.props.data,

@@ -7,7 +7,7 @@ export function transformArray(array){
 			number: Number.parseInt(item[6]),
 			beginTime: item[8],
 			endTime: item[9],
-			status: item[10]
+			status: item[11]
 		};
 	});
 	return result;

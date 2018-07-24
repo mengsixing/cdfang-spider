@@ -23,7 +23,7 @@ branches:
     - master
 
 script:
-    - yarn build
+    - yarn run test
 
 after_success: yarn run coverage
 

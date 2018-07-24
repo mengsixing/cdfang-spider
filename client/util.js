@@ -94,7 +94,8 @@ var util = {
 			return -mainArea.indexOf(area); 
 		}]);
 		return newArray;
-	}
+	},
+	getCurrentQuarter
 };
 
 

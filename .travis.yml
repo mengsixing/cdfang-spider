@@ -25,5 +25,8 @@ branches:
 script:
     - yarn build
 
+after_script:
+  - npx codecov
+
 
 

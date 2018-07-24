@@ -21,6 +21,7 @@ node_js:
 branches:
   only:
     - master
+    - test
 
 script:
     - yarn run test

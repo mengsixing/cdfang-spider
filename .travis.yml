@@ -25,8 +25,7 @@ branches:
 script:
     - yarn build
 
-after_script:
-  - npx codecov
+after_success: yarn run coverage
 
 
 

@@ -8,9 +8,6 @@
       "lcov",
       "text-summary"
     ],
-    "include": [
-      "nodeuii"
-    ],
     "produce-source-map": true
   },
   "scripts": {

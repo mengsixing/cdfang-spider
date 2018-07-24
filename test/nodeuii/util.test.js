@@ -1,4 +1,4 @@
-import * as util from '../nodeuii/src/util.js';
+import * as util from '../../nodeuii/src/util.js';
 
 import chai from 'chai';
 var assert = chai.assert;

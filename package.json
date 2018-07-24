@@ -21,12 +21,11 @@
     "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production gulp & webpack --mode=production",
-    "test": "nyc mocha",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "test": "nyc mocha --recursive",
+    "coverage": "codecov"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
       "pre-push": "npm run lint"
     }
   },

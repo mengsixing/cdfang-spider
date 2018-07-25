@@ -1,33 +1,24 @@
-
 sudo: required
-
 language: node_js
-
 before_install:
   - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
   - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   - sudo apt-get update -qq
   - sudo apt-get install -y -qq yarn
-
 install:
   - yarn
-
 cache:
   yarn: true
-
 node_js:
   - "9"
-
 branches:
   only:
     - master
     - test
-
-script:
-    - yarn run test
-    - yarn run build
-
-after_success: yarn run coverage
-
-
-
+jobs:
+  include:
+    - stage: unit tests
+      script: yarn run test
+      after_success: yarn run coverage
+    - stage: build
+      script: yarn run build

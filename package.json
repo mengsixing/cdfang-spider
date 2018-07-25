@@ -1,7 +1,7 @@
 {
   "name": "cdfang-spider",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "nyc": {
     "reporter": [
@@ -30,7 +30,7 @@
     "type": "git",
     "url": "git+https://github.com/yhlben/cdfang-spider.git"
   },
-  "author": "",
+  "author": "yhlben",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yhlben/cdfang-spider/issues"

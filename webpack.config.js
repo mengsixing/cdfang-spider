@@ -1,8 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-var mode = 'development';
-if (process.NODE_ENV == 'production') {
-	mode = 'production';
-}
+var mode = process.NODE_ENV == 'production' ? 'production' : 'development';
+
 module.exports = {
 	mode: mode,
 	entry: {
@@ -14,18 +12,19 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	module: {
-		rules: [{
-			test: /\.js$/,
-			use: 'babel-loader'
-		},
-		{
-			test: /\.css$/,
-			use: ['style-loader', 'css-loader']
-		},
-		{
-			test: /\.less$/,
-			use: ['style-loader', 'css-loader', 'less-loader']
-		}
+		rules: [
+			{
+				test: /\.js$/,
+				use: 'babel-loader'
+			},
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.less$/,
+				use: ['style-loader', 'css-loader', 'less-loader']
+			}
 		]
 	},
 	plugins: [
@@ -37,6 +36,6 @@ module.exports = {
 		runtimeChunk: true,
 		splitChunks: {
 			chunks: 'all'
-		},
+		}
 	}
 };

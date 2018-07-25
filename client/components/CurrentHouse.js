@@ -16,7 +16,7 @@ class CurrentHouse extends React.Component {
 						<Col span={4}> <span className="notification-icon"><Icon type="notification" /></span> {item.area}</Col> 
 						<Col span={8}>{item.name}</Col>
 						<Col span={4}>{item.number}套</Col> 
-						<Col span={8}>登记截止时间：{item.endTime} <a className="register-link" rel="nofollow me noopener noreferrer" target="_blank" href="http://171.221.172.13:8888/lottery/accept/projectList">登记</a></Col>
+						<Col span={8}>登记截止时间：{item.endTime} <a className="register-link" rel="nofollow me noopener noreferrer" target="_blank" href="http://gfdj.cdfgj.gov.cn/lottery/accept/projectList">登记</a></Col>
 					</Row>
 				</div>
 			);

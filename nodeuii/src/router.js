@@ -85,7 +85,6 @@ router.get('/startspider', async (ctx) => {
 		});
 	});
 	var successArray=await Promise.all(promises).then(function (posts) {
-		console.log(posts);
 		return posts.filter(item=>!!item);
 	}).catch(function(){
 		return [];

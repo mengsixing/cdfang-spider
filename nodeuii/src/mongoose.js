@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test', {
+	useNewUrlParser: true,
+});
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, '连接mongodb成功。'));
+db.on('error', console.error.bind(console, '连接mongodb失败。'));
 db.once('open', function () {
 	console.warn('连接mongodb成功。');
 });

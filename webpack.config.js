@@ -32,6 +32,13 @@ module.exports = {
 			template: './client/index.html'
 		})
 	],
+	externals: {
+		'lodash': '_',
+		'react': 'React',
+		'react-dom': 'ReactDOM',
+		'bizcharts': 'BizCharts',
+		'@antv/data-set': 'DataSet',
+	},
 	optimization: {
 		runtimeChunk: true,
 		splitChunks: {

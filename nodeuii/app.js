@@ -8,10 +8,12 @@ import './src/schedule';
 
 const app = new koa();
 
+// 允许跨域
 app.use(cors());
 router.init(app);
+// 静态资源目录
 app.use(serve('client'));
 
 /*eslint no-console: 0 */
-console.warn('server is running at : localhost:3333');
-app.listen(3333);
+console.warn('server is running at : localhost:8082');
+app.listen(8082);

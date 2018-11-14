@@ -1,5 +1,5 @@
-export function transformArray(array){
-	var result= array.map((item)=>{
+export function transformArray(array) {
+	var result = array.map(item => {
 		return {
 			_id: item[0],
 			area: item[2],
@@ -12,6 +12,3 @@ export function transformArray(array){
 	});
 	return result;
 }
-
-
-

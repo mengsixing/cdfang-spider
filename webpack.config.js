@@ -8,8 +8,7 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/dist/client',
-		chunkFilename: '[name][hash].bundle.js',
-		filename: 'bundle.js'
+		filename: '[name]-[hash:8].js'
 	},
 	module: {
 		rules: [
@@ -33,16 +32,15 @@ module.exports = {
 		})
 	],
 	externals: {
-		'lodash': '_',
-		'react': 'React',
+		lodash: '_',
+		react: 'React',
 		'react-dom': 'ReactDOM',
-		'bizcharts': 'BizCharts',
-		'@antv/data-set': 'DataSet',
+		bizcharts: 'BizCharts',
+		'@antv/data-set': 'DataSet'
 	},
 	optimization: {
-		runtimeChunk: true,
-		splitChunks: {
-			chunks: 'all'
+		runtimeChunk: {
+			name: 'runtime'
 		}
 	}
 };

@@ -11,12 +11,8 @@ describe('client util测试', function() {
 		expect(util.getCurrentQuarter()).to.have.property('thisQuarterStart');
 		expect(util.getCurrentQuarter()).to.have.property('thisQuarterEnd');
 		for (var i = 0; i < 12; i++) {
-			expect(util.getCurrentQuarter(i)).to.have.property(
-				'thisQuarterStart'
-			);
-			expect(util.getCurrentQuarter(i)).to.have.property(
-				'thisQuarterEnd'
-			);
+			expect(util.getCurrentQuarter(i)).to.have.property('thisQuarterStart');
+			expect(util.getCurrentQuarter(i)).to.have.property('thisQuarterEnd');
 		}
 	});
 	it('getAllInfo返回参数是否正确？', function() {
@@ -42,12 +38,8 @@ describe('client util测试', function() {
 	});
 	it('getThisQuarterInfo返回参数是否正确？', function() {
 		assert.typeOf(util.getThisQuarterInfo, 'function');
-		expect(util.getThisQuarterInfo(mockData)).to.have.property(
-			'houseNumber'
-		);
-		expect(util.getThisQuarterInfo(mockData)).to.have.property(
-			'buildNumber'
-		);
+		expect(util.getThisQuarterInfo(mockData)).to.have.property('houseNumber');
+		expect(util.getThisQuarterInfo(mockData)).to.have.property('buildNumber');
 		expect(util.getThisQuarterInfo(mockData).houseNumber).to.be.a('number');
 		expect(util.getThisQuarterInfo(mockData).buildNumber).to.be.a('number');
 	});

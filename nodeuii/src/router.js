@@ -9,9 +9,10 @@ const router = new Router();
 
 router
 	.get('/initspider', async ctx => {
-		var i = 1;
+		const pageStart = ctx.request.query.pageStart;
+		const pageEnd = ctx.request.query.pageEnd;
 		var allArray = [];
-		while (i < 100) {
+		for (let i = pageStart; i <= pageEnd; i++) {
 			var page = await new Promise(resolve => {
 				request
 					.post(config.spiderDomain + '/lottery/accept/projectList?pageNo=' + i)
@@ -31,7 +32,6 @@ router
 					});
 			});
 			allArray = allArray.concat(page);
-			++i;
 		}
 		myMongoose.addMany(allArray);
 		ctx.body = allArray;

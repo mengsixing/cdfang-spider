@@ -3,13 +3,12 @@ import request from 'superagent';
 import cheerio from 'cheerio';
 import * as util from './util';
 import myMongoose from './mongoose.js';
+import config from './config.js';
 
 function grabPage(pageNo) {
 	return new Promise(resolve => {
 		request
-			.post(
-				'http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + pageNo
-			)
+			.post(config.spiderDomain + '/lottery/accept/projectList?pageNo=' + pageNo)
 			.end((err, result) => {
 				var $ = cheerio.load(result.res.text);
 				var trList = [];

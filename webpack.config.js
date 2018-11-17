@@ -1,46 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-var mode = process.NODE_ENV == 'production' ? 'production' : 'development';
-
-module.exports = {
-	mode: mode,
-	entry: {
-		index: './client/index.js'
-	},
-	output: {
-		path: __dirname + '/dist/client',
-		filename: '[name]-[hash:8].js'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				use: 'babel-loader'
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
-			{
-				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'less-loader']
-			}
-		]
-	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			template: './client/index.html'
-		})
-	],
-	externals: {
-		lodash: '_',
-		react: 'React',
-		'react-dom': 'ReactDOM',
-		bizcharts: 'BizCharts',
-		'@antv/data-set': 'DataSet'
-	},
-	optimization: {
-		runtimeChunk: {
-			name: 'runtime'
-		}
-	}
-};
+switch (process.env.NODE_ENV) {
+case 'production':
+	module.exports = require('./build/webpack.prod.config');
+	break;
+default:
+	module.exports = require('./build/webpack.dev.config');
+}

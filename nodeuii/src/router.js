@@ -3,6 +3,7 @@ import request from 'superagent';
 import cheerio from 'cheerio';
 import * as util from './util';
 import myMongoose from './mongoose.js';
+import config from './config.js';
 
 const router = new Router();
 
@@ -10,12 +11,10 @@ router
 	.get('/initspider', async ctx => {
 		var i = 1;
 		var allArray = [];
-		while (i < 25) {
+		while (i < 100) {
 			var page = await new Promise(resolve => {
 				request
-					.post(
-						'http://171.221.172.13:8888/lottery/accept/projectList?pageNo=' + i
-					)
+					.post(config.spiderDomain + '/lottery/accept/projectList?pageNo=' + i)
 					.end((err, result) => {
 						var $ = cheerio.load(result.res.text);
 						var trList = [];
@@ -44,7 +43,7 @@ router
 	.get('/spiderPageOne', async ctx => {
 		var page = await new Promise(resolve => {
 			request
-				.post('http://171.221.172.13:8888/lottery/accept/projectList')
+				.post(config.spiderDomain + '/lottery/accept/projectList')
 				.end((err, result) => {
 					var $ = cheerio.load(result.res.text);
 					var trList = [];

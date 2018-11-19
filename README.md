@@ -1,10 +1,11 @@
 # cdfang-spider
 
-成都房协网数据分析
-项目简介：每隔 15 分钟爬取房协网数据，前端处理元数据，用可视化图标框架渲染。
-
 [![Build Status](https://www.travis-ci.org/yhlben/cdfang-spider.svg?branch=master)](https://www.travis-ci.org/yhlben/cdfang-spider)
 [![codecov](https://codecov.io/gh/yhlben/cdfang-spider/branch/master/graph/badge.svg)](https://codecov.io/gh/yhlben/cdfang-spider)
+
+> 成都房协网数据分析
+
+每隔 15 分钟爬取房协网数据，前端处理元数据，用可视化图标框架渲染。
 
 ## 使用
 

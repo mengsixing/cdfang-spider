@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MyQiniuUploadPlugin = require('./myQiniuUploadPlugin');
+const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './client/index.html'
 		}),
-		new MyQiniuUploadPlugin()
+		new QiniuUploadPlugin(qiniuConfig)
 	],
 	externals: {
 		lodash: '_',

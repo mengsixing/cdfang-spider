@@ -15,6 +15,7 @@ branches:
   only:
     - master
     - test
+    - /^greenkeeper/.*$/
 jobs:
   include:
     - stage: unit tests

@@ -1,7 +1,7 @@
 # cdfang-spider
 
 [![Build Status](https://www.travis-ci.org/yhlben/cdfang-spider.svg?branch=master)](https://www.travis-ci.org/yhlben/cdfang-spider)
-[![codecov](https://codecov.io/gh/yhlben/cdfang-spider/branch/master/graph/badge.svg)](https://codecov.io/gh/yhlben/cdfang-spider)
+[![codecov](https://codecov.io/gh/yhlben/cdfang-spider/branch/master/graph/badge.svg)](https://codecov.io/gh/yhlben/cdfang-spider) [![Greenkeeper badge](https://badges.greenkeeper.io/yhlben/cdfang-spider.svg)](https://greenkeeper.io/)
 
 > 成都房协网数据分析
 

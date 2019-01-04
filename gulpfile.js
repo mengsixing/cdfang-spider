@@ -7,7 +7,7 @@ gulp.task('default', () =>
 		.src('./nodeuii/**/*.js')
 		.pipe(
 			babel({
-				presets: ['env']
+				presets: ['@babel/preset-env']
 			})
 		)
 		.pipe(gulp.dest('./dist/'))

@@ -2,6 +2,7 @@
 
 [![Build Status](https://www.travis-ci.org/yhlben/cdfang-spider.svg?branch=master)](https://www.travis-ci.org/yhlben/cdfang-spider)
 [![codecov](https://codecov.io/gh/yhlben/cdfang-spider/branch/master/graph/badge.svg)](https://codecov.io/gh/yhlben/cdfang-spider) [![Greenkeeper badge](https://badges.greenkeeper.io/yhlben/cdfang-spider.svg)](https://greenkeeper.io/)
+[![David](https://img.shields.io/david/yhlben/cdfang-spider.svg)](https://david-dm.org/yhlben/cdfang-spider)
 
 > 成都房协网数据分析
 

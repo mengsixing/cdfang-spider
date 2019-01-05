@@ -1,6 +1,6 @@
 import React from 'react';
 import DataSet from '@antv/data-set';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
@@ -13,7 +13,7 @@ class BarGraph extends React.Component {
 	render() {
 		var array = this.props.data;
 		var arrayByMonth = _.groupBy(array, item => {
-			return moment(item.beginTime)
+			return dayjs(item.beginTime)
 				.startOf('month')
 				.format('YYYY-MM');
 		});
@@ -34,7 +34,7 @@ class BarGraph extends React.Component {
 		});
 		fields = _.sortBy(fields, [
 			function(o) {
-				return moment(o);
+				return dayjs(o);
 			}
 		]);
 		const data = [

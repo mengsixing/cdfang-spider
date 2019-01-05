@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
 import DataSet from '@antv/data-set';
 import PropTypes from 'prop-types';
@@ -23,7 +23,7 @@ class CircleGraph extends React.Component {
 	render() {
 		var array = this.props.data;
 		var arrayByMonth = _.groupBy(array, item => {
-			return moment(item.beginTime)
+			return dayjs(item.beginTime)
 				.startOf('month')
 				.format('YYYY-MM');
 		});
@@ -31,7 +31,7 @@ class CircleGraph extends React.Component {
 		Object.keys(arrayByMonth).forEach(key => {
 			var houseNumber = _.sumBy(arrayByMonth[key], 'number');
 			cricleObj.push({
-				item: moment(key).format('YYYY年MM月'),
+				item: dayjs(key).format('YYYY年MM月'),
 				number: houseNumber,
 				date: key
 			});

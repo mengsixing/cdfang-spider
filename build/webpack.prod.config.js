@@ -1,13 +1,12 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const QiniuUploadPlugin = require('qiniu-upload-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const merge = require('webpack-merge');
+// const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
+const baseConfig = require('./webpack.base.config');
 
-module.exports = {
+const prodConfig = {
 	mode: 'production',
-	entry: {
-		index: './client/index.js'
-	},
 	output: {
 		publicPath: qiniuConfig.publicPath,
 		path: path.resolve('./dist/client'),
@@ -16,35 +15,32 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				use: 'babel-loader'
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
-			{
 				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'less-loader']
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
 			}
 		]
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: './client/index.html'
-		}),
-		new QiniuUploadPlugin(qiniuConfig)
+		// new QiniuUploadPlugin(qiniuConfig),
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[id].[hash].css'
+		})
 	],
-	externals: {
-		lodash: '_',
-		react: 'React',
-		'react-dom': 'ReactDOM',
-		bizcharts: 'BizCharts',
-		'@antv/data-set': 'DataSet'
-	},
 	optimization: {
 		runtimeChunk: {
 			name: 'runtime'
+		},
+		splitChunks: {
+			chunks: 'all',
+			cacheGroups: {
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors'
+				}
+			}
 		}
 	}
 };
+
+module.exports = merge(baseConfig, prodConfig);

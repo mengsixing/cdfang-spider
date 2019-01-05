@@ -1,51 +1,51 @@
-import moment from 'moment';
 import _ from 'lodash';
+import dayjs from 'dayjs';
 
 function getCurrentQuarter(month) {
-	var currentMonth = month || moment().month();
+	var currentMonth = month || dayjs().month();
 	switch (currentMonth) {
 	case 0:
 	case 1:
 	case 2:
 		return {
-			thisQuarterStart: moment()
-				.month(0)
+			thisQuarterStart: dayjs()
+				.set('month', 0)
 				.startOf('month'),
-			thisQuarterEnd: moment()
-				.month(2)
+			thisQuarterEnd: dayjs()
+				.set('month', 2)
 				.startOf('month')
 		};
 	case 3:
 	case 4:
 	case 5:
 		return {
-			thisQuarterStart: moment()
-				.month(3)
+			thisQuarterStart: dayjs()
+				.set('month', 3)
 				.startOf('month'),
-			thisQuarterEnd: moment()
-				.month(5)
+			thisQuarterEnd: dayjs()
+				.set('month', 5)
 				.startOf('month')
 		};
 	case 6:
 	case 7:
 	case 8:
 		return {
-			thisQuarterStart: moment()
-				.month(6)
+			thisQuarterStart: dayjs()
+				.set('month', 6)
 				.startOf('month'),
-			thisQuarterEnd: moment()
-				.month(8)
+			thisQuarterEnd: dayjs()
+				.set('month', 8)
 				.startOf('month')
 		};
 	case 9:
 	case 10:
 	case 11:
 		return {
-			thisQuarterStart: moment()
-				.month(9)
+			thisQuarterStart: dayjs()
+				.set('month', 9)
 				.startOf('month'),
-			thisQuarterEnd: moment()
-				.month(11)
+			thisQuarterEnd: dayjs()
+				.set('month', 11)
 				.startOf('month')
 		};
 	}
@@ -61,10 +61,10 @@ var util = {
 		};
 	},
 	getThisWeekInfo(allData) {
-		var thisWeekStart = moment().day(0);
-		var thisWeekEnd = moment().day(7);
+		var thisWeekStart = dayjs().set('day', 0);
+		var thisWeekEnd = dayjs().set('day', 7);
 		var weekData = _.filter(allData, item => {
-			var beginTime = moment(item.beginTime);
+			var beginTime = dayjs(item.beginTime);
 			return beginTime > thisWeekStart && beginTime < thisWeekEnd;
 		});
 		var houseNumber = _.sumBy(weekData, 'number');
@@ -75,10 +75,10 @@ var util = {
 		};
 	},
 	getThisMonthInfo(allData) {
-		var thisMonthStart = moment().startOf('month');
-		var thisMonthEnd = moment().endOf('month');
+		var thisMonthStart = dayjs().startOf('month');
+		var thisMonthEnd = dayjs().endOf('month');
 		var weekData = _.filter(allData, item => {
-			var beginTime = moment(item.beginTime);
+			var beginTime = dayjs(item.beginTime);
 			return beginTime > thisMonthStart && beginTime < thisMonthEnd;
 		});
 		var houseNumber = _.sumBy(weekData, 'number');
@@ -93,7 +93,7 @@ var util = {
 		var thisQuarterStart = time.thisQuarterStart;
 		var thisQuarterEnd = time.thisQuarterEnd;
 		var quarterData = _.filter(allData, item => {
-			var beginTime = moment(item.beginTime);
+			var beginTime = dayjs(item.beginTime);
 			return beginTime > thisQuarterStart && beginTime < thisQuarterEnd;
 		});
 		var houseNumber = _.sumBy(quarterData, 'number');

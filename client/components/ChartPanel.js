@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import CricleGraph from './CricleGraph';
 import Rank from './Rank';
@@ -44,8 +44,8 @@ class ChartPanel extends React.Component {
 			var selectMonthTitle = item.data._origin.item;
 			var newRank = _.filter(this.props.data, function(item) {
 				return (
-					moment(item.beginTime) > moment(selectMonth) &&
-					moment(item.beginTime) < moment(selectMonth).endOf('month')
+					dayjs(item.beginTime) > dayjs(selectMonth) &&
+					dayjs(item.beginTime) < dayjs(selectMonth).endOf('month')
 				);
 			});
 			this.setState({

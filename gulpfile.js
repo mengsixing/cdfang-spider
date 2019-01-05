@@ -14,5 +14,5 @@ gulp.task('default', () =>
 );
 
 if (process.env.NODE_ENV != 'production') {
-	gulp.watch('./nodeuii/**/*.js', ['default']);
+	gulp.watch('./nodeuii/**/*.js', gulp.series('default'));
 }

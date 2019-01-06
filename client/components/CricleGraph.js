@@ -62,13 +62,13 @@ class CircleGraph extends React.Component {
 				data={dv}
 				scale={cols}
 				forceFit
-				onClick={this.selectMonth.bind(this)}
+				onIntervalClick={this.selectMonth.bind(this)}
 			>
 				<Coord type={'theta'} radius={0.75} innerRadius={0.6} />
 				<Axis name="percent" />
 				<Tooltip
 					showTitle={false}
-					itemTpl="<li><span style=&quot;background-color:{color};&quot; class=&quot;g2-tooltip-marker&quot;></span>{name}: {value}</li>"
+					itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
 				/>
 				<Guide>
 					<Html
@@ -79,7 +79,12 @@ class CircleGraph extends React.Component {
 					/>
 				</Guide>
 				<Geom
-					select={true}
+					select={[
+						true,
+						{
+							animate: false
+						}
+					]}
 					type="intervalStack"
 					position="percent"
 					color="item"

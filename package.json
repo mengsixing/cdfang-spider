@@ -49,6 +49,7 @@
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.5",
     "lodash": "^4.17.11",
+    "log4js": "^3.0.6",
     "mobx": "^5.8.0",
     "mobx-react": "^5.3.6",
     "mongoose": "^5.3.12",

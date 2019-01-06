@@ -1,7 +1,6 @@
 sudo: required
 language: node_js
 env:
-  - NODE_ENV=production
   - BUILD_ENV=ci
 install:
   - npm i

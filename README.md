@@ -45,4 +45,4 @@ yarn run dev
 
 ## TODOLIST
 
-- [ ] antd icon 打包过大（官方还未提供按需加载）
+- [x] antd icon 打包过大（官方还未提供按需加载，已使用替代方案优化）

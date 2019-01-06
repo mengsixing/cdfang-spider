@@ -20,7 +20,8 @@
     "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
     "analysis": "cross-env NODE_ENV=analysis webpack",
     "test": "nyc mocha --recursive",
-    "coverage": "codecov"
+    "coverage": "codecov",
+    "commit": "npx git-cz"
   },
   "husky": {
     "hooks": {
@@ -81,6 +82,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "qiniu": "^7.2.1",
     "qiniu-upload-plugin": "^1.2.4",
     "rimraf": "^2.6.2",
@@ -89,6 +91,7 @@
     "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
+    "webpack-deep-scope-plugin": "^1.6.0",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.2.1"
   }

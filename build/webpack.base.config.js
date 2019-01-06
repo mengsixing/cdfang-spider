@@ -9,10 +9,6 @@ module.exports = {
 			{
 				test: /\.js$/,
 				use: 'babel-loader'
-			},
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
 			}
 		]
 	},
@@ -36,6 +32,8 @@ module.exports = {
 		react: 'React',
 		'react-dom': 'ReactDOM',
 		bizcharts: 'BizCharts',
-		'@antv/data-set': 'DataSet'
+		'@antv/data-set': 'DataSet',
+		mobx: 'mobx',
+		'mobx-react': 'mobxReact'
 	}
 };

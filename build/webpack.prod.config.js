@@ -1,7 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
-// const QiniuUploadPlugin = require('qiniu-upload-plugin');
+const WebpackDeepScopeAnalysisPlugin = require('webpack-deep-scope-plugin')
+	.default;
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
 const baseConfig = require('./webpack.base.config');
 
@@ -16,16 +20,28 @@ const prodConfig = {
 		rules: [
 			{
 				test: /\.less$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					{
+						loader: 'less-loader',
+						options: {
+							javascriptEnabled: true
+						}
+					}
+				]
 			}
 		]
 	},
 	plugins: [
-		// new QiniuUploadPlugin(qiniuConfig),
+		new QiniuUploadPlugin(qiniuConfig),
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: '[id].[hash].css'
-		})
+		}),
+		new WebpackDeepScopeAnalysisPlugin(),
+		new webpack.optimize.ModuleConcatenationPlugin(),
+		new OptimizeCSSAssetsPlugin({})
 	],
 	optimization: {
 		runtimeChunk: {

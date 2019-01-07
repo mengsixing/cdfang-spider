@@ -46,3 +46,5 @@ npm run dev
 ## TODOLIST
 
 - [x] antd icon 打包过大（官方还未提供按需加载，已使用替代方案优化）
+- [ ] webpack 打包优化
+- [ ] 页面性能优化

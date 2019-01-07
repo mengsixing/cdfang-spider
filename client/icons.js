@@ -17,3 +17,7 @@ export {
 export {
 	default as LeftOutline
 } from '@ant-design/icons/lib/outline/LeftOutline';
+
+export {
+	default as HomeOutline
+} from '@ant-design/icons/lib/outline/HomeOutline';

@@ -9,12 +9,17 @@ module.exports = {
 			{
 				test: /\.js$/,
 				use: 'babel-loader'
+			},
+			{
+				test: /\.png$/,
+				use: 'url-loader'
 			}
 		]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './client/index.html'
+			template: './client/index.html',
+			favicon: './client/favicon.ico'
 		})
 	],
 	resolve: {

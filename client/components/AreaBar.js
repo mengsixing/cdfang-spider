@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import util from '../util';
 import { inject, observer } from 'mobx-react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 

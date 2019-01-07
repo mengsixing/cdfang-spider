@@ -1,5 +1,7 @@
 sudo: required
 language: node_js
+env:
+  - BUILD_ENV=ci
 install:
   - npm i
 cache: npm
@@ -13,7 +15,7 @@ branches:
 jobs:
   include:
     - stage: unit tests
-      script: yarn run test
-      after_success: yarn run coverage
+      script: npm run test
+      after_success: npm run coverage
     - stage: build
-      script: yarn run build
+      script: npm run build

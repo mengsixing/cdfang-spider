@@ -34,7 +34,6 @@ const prodConfig = {
 		]
 	},
 	plugins: [
-		new QiniuUploadPlugin(qiniuConfig),
 		new MiniCssExtractPlugin({
 			filename: '[name].[hash].css',
 			chunkFilename: '[id].[hash].css'
@@ -58,5 +57,10 @@ const prodConfig = {
 		}
 	}
 };
+
+// ci 环境不上传cdn
+if (process.env.BUILD_ENV !== 'ci' && process.env.BUILD_ENV !== 'analysis') {
+	prodConfig.plugins.push(new QiniuUploadPlugin(qiniuConfig));
+}
 
 module.exports = merge(baseConfig, prodConfig);

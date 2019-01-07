@@ -21,7 +21,6 @@ const TabPane = Tabs.TabPane;
 class App extends React.Component {
 	constructor() {
 		super();
-		this.reloadData();
 	}
 	gotoGithub() {
 		location.href = 'https://github.com/yhlben/cdfang-spider';
@@ -35,6 +34,9 @@ class App extends React.Component {
 			.then(json => {
 				this.props.appState.allData.replace(json);
 			});
+	}
+	componentDidMount() {
+		this.reloadData();
 	}
 	render() {
 		var allData = this.props.appState.allData;
@@ -57,7 +59,7 @@ class App extends React.Component {
 			<div>
 				<Layout>
 					<Header style={{ backgroundColor: 'white' }}>
-						<div className="logo">
+						<div className="header-item">
 							<Notice reloadData={this.reloadData.bind(this)} />
 							<Icon type="github" onClick={this.gotoGithub} />
 						</div>
@@ -67,7 +69,10 @@ class App extends React.Component {
 							defaultSelectedKeys={['1']}
 							style={{ lineHeight: '64px' }}
 						>
-							<Menu.Item key="1">首页</Menu.Item>
+							<Menu.Item key="1">
+								<Icon type="home" />
+								首页
+							</Menu.Item>
 						</Menu>
 					</Header>
 					<Content className="content">

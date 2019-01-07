@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import util from '../util';
 import { inject, observer } from 'mobx-react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 
@@ -16,8 +15,12 @@ class AreaBar extends React.Component {
 			return item.area;
 		});
 		var data = [];
-		util.sortArea(Object.keys(areas)).forEach(key => {
+		// 倒序排列
+		Object.keys(areas).forEach(key => {
 			data.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
+		});
+		data = data.sort((a, b) => {
+			return b['房源'] - a['房源'];
 		});
 		return (
 			<Chart height={400} data={data} forceFit>

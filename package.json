@@ -18,7 +18,7 @@
     "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
-    "analysis": "cross-env NODE_ENV=production BUILD_ENV=ci webpack",
+    "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
     "test": "nyc mocha --recursive",
     "coverage": "codecov",
     "commit": "npx git-cz"

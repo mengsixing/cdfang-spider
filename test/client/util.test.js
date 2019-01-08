@@ -1,4 +1,5 @@
 import util from '../../client/util';
+import dayjs from 'dayjs';
 import { mockHouse as mockData, mockArea } from '../mock/db';
 
 import chai from 'chai';
@@ -7,13 +8,9 @@ var expect = chai.expect;
 
 describe('client util测试', function() {
 	it('getCurrentQuarter返回参数是否正确？', function() {
-		assert.typeOf(util.getCurrentQuarter, 'function');
-		expect(util.getCurrentQuarter()).to.have.property('thisQuarterStart');
-		expect(util.getCurrentQuarter()).to.have.property('thisQuarterEnd');
-		for (var i = 0; i < 12; i++) {
-			expect(util.getCurrentQuarter(i)).to.have.property('thisQuarterStart');
-			expect(util.getCurrentQuarter(i)).to.have.property('thisQuarterEnd');
-		}
+    assert.typeOf(util.getCurrentQuarter, 'function');
+    expect(util.getCurrentQuarter(dayjs('2010-10-10')).thisQuarterStart.month()).eq(9);
+    expect(util.getCurrentQuarter().thisQuarterStart.month()).eq(dayjs().month());
 	});
 	it('getAllInfo返回参数是否正确？', function() {
 		assert.typeOf(util.getAllInfo, 'function');

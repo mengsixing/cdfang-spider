@@ -1,15 +1,12 @@
-const analysisConfig = require('./build/webpack.analysis.config');
-const prodConfig = require('./build/webpack.prod.config');
-const devConfig = require('./build/webpack.dev.config');
-
+/* eslint-disable global-require */
 switch (process.env.NODE_ENV) {
   case 'production':
     if (process.env.BUILD_ENV === 'analysis') {
-      module.exports = analysisConfig;
+      module.exports = require('./build/webpack.analysis.config');
     } else {
-      module.exports = prodConfig;
+      module.exports = require('./build/webpack.prod.config');
     }
     break;
   default:
-    module.exports = devConfig;
+    module.exports = require('./build/webpack.dev.config');
 }

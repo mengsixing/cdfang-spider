@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 const { default: WebpackDeepScopeAnalysisPlugin } = require('webpack-deep-scope-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
 const baseConfig = require('./webpack.base.config');
@@ -40,7 +39,6 @@ const prodConfig = {
     }),
     new WebpackDeepScopeAnalysisPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new OptimizeCSSAssetsPlugin({}),
   ],
   optimization: {
     runtimeChunk: {

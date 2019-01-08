@@ -1,3 +1,3 @@
 export default {
-	spiderDomain:'https://gfdj.cdfgj.gov.cn'
+  spiderDomain: 'https://gfdj.cdfgj.gov.cn',
 };

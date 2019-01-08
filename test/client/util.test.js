@@ -8,9 +8,16 @@ var expect = chai.expect;
 
 describe('client util测试', function() {
 	it('getCurrentQuarter返回参数是否正确？', function() {
-    assert.typeOf(util.getCurrentQuarter, 'function');
-    expect(util.getCurrentQuarter(dayjs('2010-10-10')).thisQuarterStart.month()).eq(9);
-    expect(util.getCurrentQuarter().thisQuarterStart.month()).eq(dayjs().month());
+		assert.typeOf(util.getCurrentQuarter, 'function');
+		const quarterMap = [0, 0, 0, 0, 3, 3, 3, 6, 6, 6, 9, 9, 9];
+		for (var i = 1; i <= 12; i++) {
+			expect(
+				util.getCurrentQuarter(dayjs(`2019-${i}-10`)).thisQuarterStart.month()
+			).eq(quarterMap[i]);
+		}
+		expect(util.getCurrentQuarter().thisQuarterStart.month()).eq(
+			dayjs().month()
+		);
 	});
 	it('getAllInfo返回参数是否正确？', function() {
 		assert.typeOf(util.getAllInfo, 'function');

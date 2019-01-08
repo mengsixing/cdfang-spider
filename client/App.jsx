@@ -22,10 +22,13 @@ const { Header, Footer, Content } = Layout;
 const { TabPane } = Tabs;
 
 class App extends React.Component {
+  static gotoGithub() {
+    window.location.href = 'https://github.com/yhlben/cdfang-spider';
+  }
+
   constructor() {
     super();
     this.reloadData = this.reloadData.bind(this);
-    this.gotoGithub = this.gotoGithub.bind(this);
     this.changeTab = this.changeTab.bind(this);
   }
 
@@ -33,19 +36,17 @@ class App extends React.Component {
     this.reloadData();
   }
 
-  gotoGithub() {
-    location.href = 'https://github.com/yhlben/cdfang-spider';
-  }
-
   changeTab(activityKey) {
-    this.props.appState.activityKey = Number.parseInt(activityKey, 10);
+    const { appState } = this.props;
+    appState.activityKey = Number.parseInt(activityKey, 10);
   }
 
   reloadData() {
     fetch(`${config.serverDomain}/getMongoData`)
       .then(response => response.json())
       .then((json) => {
-        this.props.appState.allData.replace(json);
+        const { appState } = this.props;
+        appState.allData.replace(json);
       });
   }
 
@@ -56,18 +57,20 @@ class App extends React.Component {
     } = this.props;
     const areas = _.groupBy(allData, item => item.area);
     const areasList = Object.keys(areas);
+    /* eslint-disable react/no-array-index-key */
     const tabpanels = util.sortArea(areasList).map((item, index) => (
       <TabPane tab={item} key={index}>
         <ChartPanel data={areas[item]} panelIndex={index} activityKey={appState.activityKey} />
       </TabPane>
     ));
+    /* eslint-enable react/no-array-index-key */
     return (
       <div>
         <Layout>
           <Header style={{ backgroundColor: 'white' }}>
             <div className="header-item">
               <Notice reloadData={this.reloadData} />
-              <Icon type="github" onClick={this.gotoGithub} />
+              <Icon type="github" onClick={App.gotoGithub} />
             </div>
             <Menu
               theme="light"
@@ -105,7 +108,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  appState: PropTypes.object,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default inject('appState')(observer(App));

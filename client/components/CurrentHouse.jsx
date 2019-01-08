@@ -6,13 +6,15 @@ import {
 } from 'antd';
 import { inject, observer } from 'mobx-react';
 
-const Panel = Collapse.Panel;
+const { Panel } = Collapse;
 
-class CurrentHouse extends React.Component {
+class CurrentHouse extends React.PureComponent {
   render() {
-    const allData = this.props.appState.allData;
+    const {
+      appState: { allData },
+    } = this.props;
     const currentHouses = allData
-      .filter(item => item.status != '报名结束')
+      .filter(item => item.status !== '报名结束')
       .map(item => (
         <div className="current-house-list" key={item._id}>
           <Row>
@@ -30,7 +32,7 @@ class CurrentHouse extends React.Component {
 套
             </Col>
             <Col span={8}>
-								登记截止时间：
+              登记截止时间：
               {item.endTime}
               {' '}
               <a
@@ -39,8 +41,7 @@ class CurrentHouse extends React.Component {
                 target="_blank"
                 href="http://gfdj.cdfgj.gov.cn/lottery/accept/projectList"
               >
-									登记
-
+                登记
               </a>
             </Col>
           </Row>
@@ -63,7 +64,7 @@ class CurrentHouse extends React.Component {
 }
 
 CurrentHouse.propTypes = {
-  appState: PropTypes.object,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default inject('appState')(observer(CurrentHouse));

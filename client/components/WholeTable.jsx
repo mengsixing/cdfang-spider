@@ -1,11 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 class CommonTable extends React.Component {
-  constructor(props) {
-    super();
+  static getDerivedStateFromProps(props) {
     const nameFilter = props.areaList.map(item => ({
       text: item,
       value: item,
@@ -70,35 +68,31 @@ class CommonTable extends React.Component {
         },
       },
     ];
-    this.state = {
+
+    const data = props.appState.allData.map(item => Object.assign({ key: item._id }, item));
+
+    return {
       columns,
+      data,
     };
   }
 
   render() {
-    const data = this.props.appState.allData.map((item) => {
-      item.key = item._id;
-      return item;
-    });
+    const { state } = this;
     return (
       <Table
         title={() => '汇总表'}
-        columns={this.state.columns}
-        dataSource={data}
+        columns={state.columns}
+        dataSource={state.data}
         locale={{
-				  filterTitle: '筛选',
-				  filterConfirm: '确定',
-				  filterReset: '重置',
-				  emptyText: '暂无数据',
+          filterTitle: '筛选',
+          filterConfirm: '确定',
+          filterReset: '重置',
+          emptyText: '暂无数据',
         }}
       />
     );
   }
 }
-
-CommonTable.propTypes = {
-  appState: PropTypes.object,
-  areaList: PropTypes.array,
-};
 
 export default inject('appState')(observer(CommonTable));

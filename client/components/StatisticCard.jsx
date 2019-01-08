@@ -1,13 +1,14 @@
 import React from 'react';
 import 'whatwg-fetch';
 import { Card, Col, Row } from 'antd';
-import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import util from '../util';
 
 class StatisticCard extends React.Component {
   static getDerivedStateFromProps(props) {
-    const { allData } = props.appState;
+    const {
+      appState: { allData },
+    } = props;
     const allInfo = util.getAllInfo(allData);
     const thisWeekInfo = util.getThisWeekInfo(allData);
     const thisMonthInfo = util.getThisMonthInfo(allData);
@@ -20,7 +21,7 @@ class StatisticCard extends React.Component {
     };
   }
 
-  renderCard(info) {
+  static renderCard(info) {
     return (
       <>
         <div className="content-card-text">
@@ -52,17 +53,17 @@ class StatisticCard extends React.Component {
         <Row gutter={16}>
           <Col span={6}>
             <Card title="本周开盘" bordered={false} extra={<span>相比上周</span>}>
-              {this.renderCard(state.thisWeekInfo)}
+              {StatisticCard.renderCard(state.thisWeekInfo)}
             </Card>
           </Col>
           <Col span={6}>
             <Card title="本月开盘" bordered={false} extra={<span>相比上月</span>}>
-              {this.renderCard(state.thisMonthInfo)}
+              {StatisticCard.renderCard(state.thisMonthInfo)}
             </Card>
           </Col>
           <Col span={6}>
             <Card title="本季度开盘" bordered={false} extra={<span>相比上季</span>}>
-              {this.renderCard(state.thisQuarterInfo)}
+              {StatisticCard.renderCard(state.thisQuarterInfo)}
             </Card>
           </Col>
           <Col span={6}>
@@ -82,9 +83,5 @@ class StatisticCard extends React.Component {
     );
   }
 }
-
-StatisticCard.propTypes = {
-  appState: PropTypes.object,
-};
 
 export default inject('appState')(observer(StatisticCard));

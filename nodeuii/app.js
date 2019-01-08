@@ -1,4 +1,6 @@
 import 'babel-polyfill';
+import https from 'https';
+import fs from 'fs';
 import koa from 'koa';
 import serve from 'koa-static';
 import cors from 'koa2-cors';
@@ -24,6 +26,24 @@ router.init(app);
 // 静态资源目录
 app.use(serve('client'));
 
-/*eslint no-console: 0 */
-console.warn('server is running at : localhost:8082');
-app.listen(8082);
+// 我服务器上的地址
+if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
+	const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
+	const serverCert = '/etc/letsencrypt/live/yinhengli.com/fullchain.pem';
+	https
+		.createServer(
+			{
+				key: fs.readFileSync(serverKey),
+				cert: fs.readFileSync(serverCert)
+			},
+			app
+		)
+		.listen(8082, () => {
+			/*eslint no-console: 0 */
+			console.log('server is running at : https://localhost:8082');
+		});
+} else {
+	/*eslint no-console: 0 */
+	console.log('server is running at : http://localhost:8082');
+	app.listen(8082);
+}

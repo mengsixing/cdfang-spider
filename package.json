@@ -11,7 +11,7 @@
     "produce-source-map": true
   },
   "scripts": {
-    "lint": "eslint --fix .",
+    "lint": "eslint --ext jsx,js test",
     "client": "webpack-dev-server --open",
     "server": "cross-env NODE_ENV=development gulp & supervisor ./dist/app.js",
     "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor -w ./dist/src/*,./dist/middlewares/*,./dist/app.js ./dist/app.js & wait",
@@ -75,6 +75,7 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-import": "^1.11.0",
     "chai": "^4.2.0",

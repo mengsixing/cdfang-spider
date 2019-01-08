@@ -10,6 +10,7 @@ class Notice extends React.Component {
     this.state = {
       isLoading: false,
     };
+    this.openNotification = this.openNotification.bind(this);
   }
 
   openNotification() {
@@ -21,35 +22,30 @@ class Notice extends React.Component {
       .then((json) => {
         notification.open({
           message: '消息提醒',
-          description: `成功更新数据${json.allLength}条，新数据${
-            json.successArray.length
-          }条。`,
+          description: `成功更新数据${json.allLength}条，新数据${json.successArray.length}条。`,
         });
         this.setState({
           isLoading: false,
         });
         if (json.successArray.length > 0) {
-          this.props.appState.allData = this.props.appState.allData.concat(
-            json.successArray,
-          );
+          const { appState } = this.props;
+          appState.allData = appState.allData.concat(json.successArray);
         }
       });
   }
 
   render() {
+    const { isLoading } = this.state;
     return (
-      <span
-        className={this.state.isLoading ? 'loading notice-icon' : 'notice-icon'}
-      >
-        <Icon type="sync" onClick={this.openNotification.bind(this)} />
+      <span className={isLoading ? 'loading notice-icon' : 'notice-icon'}>
+        <Icon type="sync" onClick={this.openNotification} />
       </span>
     );
   }
 }
 
 Notice.propTypes = {
-  reloadData: PropTypes.func,
-  appState: PropTypes.object,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default inject('appState')(observer(Notice));

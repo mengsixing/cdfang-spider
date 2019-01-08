@@ -27,10 +27,7 @@ module.exports = {
     extensions: ['.jsx', '.js'],
     // antd icon 不支持按需加载，使用替代方案完成
     alias: {
-      '@ant-design/icons/lib/dist$': path.resolve(
-        __dirname,
-        '../client/icons.js',
-      ),
+      '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../client/icons.js'),
     },
   },
   externals: {

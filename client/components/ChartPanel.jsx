@@ -18,34 +18,41 @@ class ChartPanel extends React.Component {
       isChangeTab: false,
       isOpen: false,
     };
+    this.changeMonth = this.changeMonth.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps() {
-    if (this.props.panelIndex !== this.props.appState.activityKey) {
-      this.setState({
-        rank: this.props.data,
+  static getDerivedStateFromProps(props) {
+    const { panelIndex, appState, data } = props;
+    if (panelIndex !== appState.activityKey) {
+      return {
+        rank: data,
         rankTitle: '',
         isChangeTab: true,
         isOpen: false,
-      });
+      };
     }
+    return {};
   }
 
   changeMonth(item) {
-    if (this.state.rankTitle === item.data._origin.item && this.state.isOpen) {
+    const { rankTitle, isOpen } = this.state;
+    const { data } = this.props;
+    const { _origin } = item.data;
+    if (rankTitle === _origin.item && isOpen) {
       this.setState({
-        rank: this.props.data,
+        rank: data,
         rankTitle: '',
         isChangeTab: false,
         isOpen: false,
       });
     } else {
-      const selectMonth = item.data._origin.date;
-      const selectMonthTitle = item.data._origin.item;
-      const newRank = _.filter(this.props.data, item => (
-        dayjs(item.beginTime) > dayjs(selectMonth)
-					&& dayjs(item.beginTime) < dayjs(selectMonth).endOf('month')
-      ));
+      const selectMonth = _origin.date;
+      const selectMonthTitle = _origin.item;
+      const newRank = _.filter(
+        data,
+        dataItem => dayjs(dataItem.beginTime) > dayjs(selectMonth)
+          && dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month'),
+      );
       this.setState({
         rank: newRank,
         rankTitle: selectMonthTitle,
@@ -56,20 +63,18 @@ class ChartPanel extends React.Component {
   }
 
   render() {
+    const { data } = this.props;
+    const { isChangeTab, rank, rankTitle } = this.state;
     return (
       <Row>
         <Col span={9}>
-          <BarGraph data={this.props.data} />
+          <BarGraph data={data} />
         </Col>
         <Col span={9}>
-          <CricleGraph
-            data={this.props.data}
-            changeMonth={this.changeMonth.bind(this)}
-            isChangeTab={this.state.isChangeTab}
-          />
+          <CricleGraph data={data} changeMonth={this.changeMonth} isChangeTab={isChangeTab} />
         </Col>
         <Col span={6}>
-          <Rank data={this.state.rank} title={this.state.rankTitle} />
+          <Rank data={rank} title={rankTitle} />
         </Col>
       </Row>
     );
@@ -77,9 +82,7 @@ class ChartPanel extends React.Component {
 }
 
 ChartPanel.propTypes = {
-  data: PropTypes.array,
-  appState: PropTypes.object,
-  panelIndex: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default inject('appState')(observer(ChartPanel));

@@ -7,8 +7,9 @@ import cors from 'koa2-cors';
 import log4js from 'log4js';
 
 import ErrorHander from './middlewares/ErrorHander';
-import router from './src/router';
-import './src/schedule';
+import controller from './controllers';
+import config from './config';
+import './controllers/schedule';
 
 const app = new Koa();
 
@@ -32,7 +33,7 @@ ErrorHander.init(app, logger);
 
 // 允许跨域
 app.use(cors());
-router.init(app);
+controller.init(app);
 // 静态资源目录
 app.use(serve('client'));
 
@@ -48,12 +49,12 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
       },
       app.callback(),
     )
-    .listen(8082, () => {
+    .listen(config.serverPort, () => {
       /* eslint no-console: 0 */
-      console.log('server is running at : https://localhost:8082');
+      console.log(`server is running at : https://localhost:${config.serverPort}`);
     });
 } else {
   /* eslint no-console: 0 */
-  console.log('server is running at : http://localhost:8082');
-  app.listen(8082);
+  console.log(`server is running at : http://localhost:${config.serverPort}`);
+  app.listen(config.serverPort);
 }

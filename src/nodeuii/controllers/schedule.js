@@ -1,9 +1,9 @@
 import schedule from 'node-schedule';
 import request from 'superagent';
 import cheerio from 'cheerio';
-import * as util from './util';
-import myMongoose from './mongoose';
-import config from './config';
+import * as util from '../utils';
+import houseModel from '../models/houseModel';
+import config from '../config';
 
 function grabPage(pageNo) {
   return new Promise((resolve) => {
@@ -35,7 +35,7 @@ const runEvery15Minute = async () => {
       let newDataNumber = 0;
       let i = 0;
       page.forEach((item) => {
-        myMongoose.add(item).then((isSuccess) => {
+        houseModel.add(item).then((isSuccess) => {
           i += 1;
           if (isSuccess) {
             newDataNumber += 1;

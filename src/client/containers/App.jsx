@@ -6,15 +6,15 @@ import {
   Layout, Menu, Icon, Tabs,
 } from 'antd';
 import { inject, observer } from 'mobx-react';
-import util from './util';
+import util from '../utils';
 
-import ChartPanel from './components/ChartPanel';
-import Table from './components/WholeTable';
-import StatisticCard from './components/StatisticCard';
-import Notice from './components/Notice';
-import CurrentHouse from './components/CurrentHouse';
-import AreaBar from './components/AreaBar';
-import config from './config/config';
+import ChartPanel from '../components/ChartPanel';
+import Table from '../components/WholeTable';
+import StatisticCard from '../components/StatisticCard';
+import Notice from '../components/Notice';
+import CurrentHouse from '../components/CurrentHouse';
+import AreaBar from '../components/AreaBar';
+import config from '../config/config';
 
 import './App.less';
 

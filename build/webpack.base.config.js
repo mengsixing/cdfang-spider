@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './client/index.jsx',
+    index: './src/client/index.jsx',
   },
   module: {
     rules: [
@@ -19,15 +19,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/index.html',
-      favicon: './client/favicon.ico',
+      template: './src/client/index.html',
+      favicon: './src/client/favicon.ico',
     }),
   ],
   resolve: {
     extensions: ['.jsx', '.js'],
     // antd icon 不支持按需加载，使用替代方案完成
     alias: {
-      '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../client/icons.js'),
+      '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../src/client/icons.js'),
     },
   },
   externals: {

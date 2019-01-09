@@ -2,7 +2,7 @@ import React from 'react';
 import 'whatwg-fetch';
 import { Card, Col, Row } from 'antd';
 import { inject, observer } from 'mobx-react';
-import util from '../util';
+import util from '../utils';
 
 class StatisticCard extends React.Component {
   static getDerivedStateFromProps(props) {

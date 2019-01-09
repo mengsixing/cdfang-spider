@@ -1,5 +1,5 @@
 import chai from 'chai';
-import * as util from '../../nodeuii/src/util';
+import * as util from '../../src/nodeuii/utils';
 
 const { assert, expect } = chai;
 

@@ -36,7 +36,7 @@ router.init(app);
 // 静态资源目录
 app.use(serve('client'));
 
-// 我服务器上的地址
+// 服务器上的地址
 if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
   const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
   const serverCert = '/etc/letsencrypt/live/yinhengli.com/fullchain.pem';
@@ -46,7 +46,7 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
         key: fs.readFileSync(serverKey),
         cert: fs.readFileSync(serverCert),
       },
-      app,
+      app.callback(),
     )
     .listen(8082, () => {
       /* eslint no-console: 0 */

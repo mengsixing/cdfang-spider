@@ -39,7 +39,7 @@ class CurrentHouse extends React.PureComponent {
                 className="register-link"
                 rel="nofollow me noopener noreferrer"
                 target="_blank"
-                href="http://gfdj.cdfgj.gov.cn/lottery/accept/projectList"
+                href="https://gfdj.cdfgj.gov.cn/lottery/accept/index"
               >
                 登记
               </a>

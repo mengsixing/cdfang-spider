@@ -2,7 +2,8 @@ import React from 'react';
 import { Icon, notification } from 'antd';
 import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
-import config from '../config/config';
+import config from '../../config';
+import './styles.less';
 
 class Notice extends React.Component {
   constructor() {

@@ -14,7 +14,7 @@ import StatisticCard from '../components/StatisticCard';
 import Notice from '../components/Notice';
 import CurrentHouse from '../components/CurrentHouse';
 import AreaBar from '../components/AreaBar';
-import config from '../config/config';
+import config from '../config';
 
 import './App.less';
 

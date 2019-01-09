@@ -5,6 +5,7 @@ import {
   Collapse, List, Col, Row, Icon,
 } from 'antd';
 import { inject, observer } from 'mobx-react';
+import './styles.less';
 
 const { Panel } = Collapse;
 

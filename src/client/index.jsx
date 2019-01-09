@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { observable } from 'mobx';
 import { Provider } from 'mobx-react';
-import App from './App';
+import App from './containers/App';
 
 // 定义全局状态,注入根主键
 const appState = observable({

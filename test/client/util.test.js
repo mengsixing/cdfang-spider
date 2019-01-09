@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import chai from 'chai';
-import util from '../../client/util';
+import util from '../../src/client/utils';
 import { mockHouse as mockData, mockArea } from '../mock/db';
 
 const { assert, expect } = chai;

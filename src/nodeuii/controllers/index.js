@@ -1,9 +1,9 @@
 import Router from 'koa-router';
 import request from 'superagent';
 import cheerio from 'cheerio';
-import * as util from './util';
-import myMongoose from './mongoose';
-import config from './config';
+import * as util from '../utils';
+import houseModel from '../models/houseModel';
+import config from '../config';
 
 const router = new Router();
 
@@ -36,12 +36,12 @@ router
       // allArray = allArray.concat();
     }
     await Promise.all(allPromises).then((posts) => {
-      myMongoose.addMany(posts[0]);
+      houseModel.addMany(posts[0]);
       [ctx.body] = posts;
     });
   })
   .get('/getMongoData', async (ctx) => {
-    const result = await myMongoose.find();
+    const result = await houseModel.find();
     ctx.body = result;
   })
   .get('/spiderPageOne', async (ctx) => {
@@ -64,7 +64,7 @@ router
     // 生成一个Promise对象的数组
     const promises = page.map(
       item => new Promise((resolve) => {
-        resolve(myMongoose.add(item));
+        resolve(houseModel.add(item));
       }),
     );
     const successArray = await Promise.all(promises)

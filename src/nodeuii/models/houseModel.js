@@ -1,18 +1,8 @@
-import mongoose from 'mongoose';
-
 /* eslint-disable no-console,no-underscore-dangle */
+import DbHelper from './dbHelper';
 
-mongoose.connect(
-  'mongodb://localhost/test',
-  {
-    useNewUrlParser: true,
-  },
-);
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, '连接mongodb失败。'));
-db.once('open', () => {
-  console.warn('连接mongodb成功。');
-});
+const mongoose = DbHelper.connect();
+
 // 创建数据库
 const HouseSchema = mongoose.Schema({
   _id: String,
@@ -25,7 +15,8 @@ const HouseSchema = mongoose.Schema({
 });
 // 创建表
 const HouseCol = mongoose.model('house', HouseSchema);
-const result = {
+
+const houseModel = {
   async add(item) {
     const findItem = await this.find({ _id: item._id });
     if (findItem.length > 0) {
@@ -75,4 +66,4 @@ const result = {
   },
 };
 
-export default result;
+export default houseModel;

@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es6: true,
     node: true,
-    mocha: true
+    mocha: true,
   },
   parser: 'babel-eslint',
   parserOptions: {
@@ -18,5 +18,12 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'no-underscore-dangle': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+      },
+    },
   },
 };

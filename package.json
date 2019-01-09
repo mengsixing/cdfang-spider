@@ -11,7 +11,7 @@
     "produce-source-map": true
   },
   "scripts": {
-    "lint": "eslint --ext jsx,js test",
+    "lint": "eslint --ext jsx,js src build test",
     "client": "webpack-dev-server --open",
     "server": "cross-env NODE_ENV=development gulp & supervisor ./dist/app.js",
     "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor -w ./dist/src/*,./dist/middlewares/*,./dist/app.js ./dist/app.js & wait",
@@ -24,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint"
+      "pre-push": "eslint --fix --ext jsx,js src build test"
     }
   },
   "repository": {

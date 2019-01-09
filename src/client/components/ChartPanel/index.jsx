@@ -5,9 +5,9 @@ import dayjs from 'dayjs';
 
 import _ from 'lodash';
 import { inject, observer } from 'mobx-react';
-import CricleGraph from './CricleGraph';
-import Rank from './Rank';
-import BarGraph from './BarGraph';
+import CricleGraph from '../CricleGraph';
+import Rank from '../Rank';
+import BarGraph from '../BarGraph';
 
 class ChartPanel extends React.Component {
   constructor(props) {

@@ -1,40 +1,45 @@
 import React from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react';
 import {
   Chart, Geom, Axis, Tooltip,
 } from 'bizcharts';
+import './styles.less';
 
 class AreaBar extends React.Component {
+  static defaultProps = {
+    desc: false,
+  };
+
   shouldComponentUpdate() {
     return false;
   }
 
   render() {
     const {
-      appState: { allData: array },
+      data, title, xAxis, yAxis, desc,
     } = this.props;
-    const areas = _.groupBy(array, item => item.area);
-    let data = [];
-    // 倒序排列
-    Object.keys(areas).forEach((key) => {
-      data.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
-    });
-    data = data.sort((a, b) => b['房源'] - a['房源']);
+    let chartData = [];
+    if (desc) {
+      chartData = data.sort((a, b) => b[yAxis] - a[yAxis]);
+    }
     return (
-      <Chart height={400} data={data} forceFit>
-        <Axis name="区域" />
-        <Axis name="房源" />
+      <Chart height={400} data={chartData} forceFit>
+        <div className="char-title">{title}</div>
+        <Axis name={xAxis} />
+        <Axis name={yAxis} />
         <Tooltip />
-        <Geom type="interval" position="区域*房源" />
+        <Geom type="interval" position={`${xAxis}*${yAxis}`} />
       </Chart>
     );
   }
 }
 
 AreaBar.propTypes = {
-  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
+  title: PropTypes.string.isRequired,
+  xAxis: PropTypes.string.isRequired,
+  yAxis: PropTypes.string.isRequired,
+  desc: PropTypes.bool,
 };
 
-export default inject('appState')(observer(AreaBar));
+export default AreaBar;

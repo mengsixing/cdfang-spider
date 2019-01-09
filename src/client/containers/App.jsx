@@ -64,6 +64,14 @@ class App extends React.Component {
       </TabPane>
     ));
     /* eslint-enable react/no-array-index-key */
+    const chartHouseData = [];
+    const chartBuildData = [];
+    // 倒序排列
+    Object.keys(areas).forEach((key) => {
+      chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
+      chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
+    });
+
     return (
       <div>
         <Layout>
@@ -94,7 +102,28 @@ class App extends React.Component {
             </div>
             <div className="content-areabar">
               <div className="content-areabar-title">整体统计</div>
-              {allData.length > 0 ? <AreaBar /> : ''}
+              {chartHouseData.length > 0 ? (
+                <AreaBar
+                  title="房源数排序图"
+                  data={chartHouseData}
+                  xAxis="区域"
+                  yAxis="房源"
+                  desc
+                />
+              ) : (
+                ''
+              )}
+              {chartBuildData.length > 0 ? (
+                <AreaBar
+                  title="楼盘数排序图"
+                  data={chartBuildData}
+                  xAxis="区域"
+                  yAxis="楼盘数"
+                  desc
+                />
+              ) : (
+                ''
+              )}
             </div>
             <div className="content-graph-table">
               {allData.length > 0 ? <Table areaList={areasList} /> : ''}

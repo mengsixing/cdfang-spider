@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {
-  Layout, Menu, Icon, Tabs,
+  Layout, Menu, Icon, Tabs, BackTop,
 } from 'antd';
 import { inject, observer } from 'mobx-react';
 import util from '../utils';
@@ -12,11 +12,14 @@ import ChartPanel from '../components/ChartPanel';
 import Table from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import Notice from '../components/Notice';
-import CurrentHouse from '../components/CurrentHouse';
+// import CurrentHouse from '../components/CurrentHouse';
 import AreaBar from '../components/AreaBar';
+import Loading from '../components/Loading';
 import config from '../config';
 
 import './App.less';
+
+const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 
 const { Header, Footer, Content } = Layout;
 const { TabPane } = Tabs;
@@ -74,6 +77,7 @@ class App extends React.Component {
 
     return (
       <div>
+        <BackTop />
         <Layout>
           <Header style={{ backgroundColor: 'white' }}>
             <div className="header-item">
@@ -93,7 +97,7 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Content className="content">
-            <CurrentHouse />
+            <Suspense fallback={<Loading />}>{allData.length > 0 ? <CurrentHouse /> : ''}</Suspense>
             <StatisticCard />
             <div className="content-graph-bar">
               <Tabs defaultActiveKey="6" onChange={this.changeTab}>

@@ -10,6 +10,8 @@ export { default as LeftOutline } from '@ant-design/icons/lib/outline/LeftOutlin
 
 export { default as HomeOutline } from '@ant-design/icons/lib/outline/HomeOutline';
 
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline';
+
 export { default as CaretUpFill } from '@ant-design/icons/lib/fill/CaretUpFill';
 
 export { default as CaretDownFill } from '@ant-design/icons/lib/fill/CaretDownFill';

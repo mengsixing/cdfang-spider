@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { observable } from 'mobx';
 import { Provider } from 'mobx-react';
-import App from './containers/App';
+import Loading from './components/Loading';
+
+const App = lazy(() => import('./containers/App'));
 
 // 定义全局状态,注入根主键
 const appState = observable({
@@ -12,7 +14,9 @@ const appState = observable({
 
 ReactDOM.render(
   <Provider appState={appState}>
-    <App />
+    <Suspense fallback={<Loading height="100vh" tip="页面加载中..." />}>
+      <App />
+    </Suspense>
   </Provider>,
   document.getElementById('root'),
 );

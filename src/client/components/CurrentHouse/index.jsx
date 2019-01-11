@@ -5,6 +5,7 @@ import {
   Collapse, List, Col, Row, Icon,
 } from 'antd';
 import { inject, observer } from 'mobx-react';
+import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import './styles.less';
 
 const { Panel } = Collapse;
@@ -66,4 +67,4 @@ CurrentHouse.propTypes = {
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default inject('appState')(observer(CurrentHouse));
+export default inject('appState')(observer(RenderNoEmptyComponent(CurrentHouse, ['appState', 'allData'])));

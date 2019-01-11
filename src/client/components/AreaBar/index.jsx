@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Chart, Geom, Axis, Tooltip,
 } from 'bizcharts';
+import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import './styles.less';
 
 class AreaBar extends React.Component {
@@ -24,7 +25,7 @@ class AreaBar extends React.Component {
     }
     return (
       <Chart height={400} data={chartData} forceFit>
-        <div className="char-title">{title}</div>
+        <div className="chart-title">{title}</div>
         <Axis name={xAxis} />
         <Axis name={yAxis} />
         <Tooltip />
@@ -42,4 +43,4 @@ AreaBar.propTypes = {
   desc: PropTypes.bool,
 };
 
-export default AreaBar;
+export default RenderNoEmptyComponent(AreaBar, ['data']);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 import { inject, observer } from 'mobx-react';
+import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 
 class CommonTable extends React.Component {
   static getDerivedStateFromProps(props) {
@@ -80,19 +81,23 @@ class CommonTable extends React.Component {
   render() {
     const { state } = this;
     return (
-      <Table
-        title={() => '汇总表'}
-        columns={state.columns}
-        dataSource={state.data}
-        locale={{
-          filterTitle: '筛选',
-          filterConfirm: '确定',
-          filterReset: '重置',
-          emptyText: '暂无数据',
-        }}
-      />
+      <div className="margin-white">
+        <Table
+          title={() => '汇总表'}
+          columns={state.columns}
+          dataSource={state.data}
+          locale={{
+            filterTitle: '筛选',
+            filterConfirm: '确定',
+            filterReset: '重置',
+            emptyText: '暂无数据',
+          }}
+        />
+      </div>
     );
   }
 }
 
-export default inject('appState')(observer(CommonTable));
+export default inject('appState')(
+  observer(RenderNoEmptyComponent(CommonTable, ['appState', 'allData'])),
+);

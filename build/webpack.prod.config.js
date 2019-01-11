@@ -34,8 +34,7 @@ const prodConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: 'cdfang-spider-[name].[hash:8].css',
     }),
     new WebpackDeepScopeAnalysisPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),

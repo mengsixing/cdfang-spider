@@ -6,7 +6,7 @@ import './styles.less';
 function Rank(props) {
   const { data, title } = props;
   const rankData = _.sortBy(data, item => -item.number);
-  const rankTitle = title ? `楼盘排名：${title}` : '楼盘排名：';
+  const rankTitle = title ? `楼盘排名：${title}` : '楼盘排名';
   return (
     <div className="rank">
       <div className="rank-title">{rankTitle}</div>

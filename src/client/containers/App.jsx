@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import {
-  Layout, Menu, Icon, Tabs,
+  Layout, Menu, Icon, Tabs, BackTop,
 } from 'antd';
 import { inject, observer } from 'mobx-react';
 import util from '../utils';
@@ -12,11 +12,13 @@ import ChartPanel from '../components/ChartPanel';
 import Table from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import Notice from '../components/Notice';
-import CurrentHouse from '../components/CurrentHouse';
 import AreaBar from '../components/AreaBar';
+import Loading from '../components/Loading';
 import config from '../config';
 
 import './App.less';
+
+const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 
 const { Header, Footer, Content } = Layout;
 const { TabPane } = Tabs;
@@ -66,7 +68,6 @@ class App extends React.Component {
     /* eslint-enable react/no-array-index-key */
     const chartHouseData = [];
     const chartBuildData = [];
-    // 倒序排列
     Object.keys(areas).forEach((key) => {
       chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
       chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
@@ -74,6 +75,7 @@ class App extends React.Component {
 
     return (
       <div>
+        <BackTop />
         <Layout>
           <Header style={{ backgroundColor: 'white' }}>
             <div className="header-item">
@@ -93,7 +95,9 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Content className="content">
-            <CurrentHouse />
+            <Suspense fallback={<Loading />}>
+              <CurrentHouse />
+            </Suspense>
             <StatisticCard />
             <div className="content-graph-bar">
               <Tabs defaultActiveKey="6" onChange={this.changeTab}>
@@ -102,31 +106,17 @@ class App extends React.Component {
             </div>
             <div className="content-areabar">
               <div className="content-areabar-title">整体统计</div>
-              {chartHouseData.length > 0 ? (
-                <AreaBar
-                  title="房源数排序图"
-                  data={chartHouseData}
-                  xAxis="区域"
-                  yAxis="房源"
-                  desc
-                />
-              ) : (
-                ''
-              )}
-              {chartBuildData.length > 0 ? (
-                <AreaBar
-                  title="楼盘数排序图"
-                  data={chartBuildData}
-                  xAxis="区域"
-                  yAxis="楼盘数"
-                  desc
-                />
-              ) : (
-                ''
-              )}
+              <AreaBar title="房源数排序图" data={chartHouseData} xAxis="区域" yAxis="房源" desc />
+              <AreaBar
+                title="楼盘数排序图"
+                data={chartBuildData}
+                xAxis="区域"
+                yAxis="楼盘数"
+                desc
+              />
             </div>
             <div className="content-graph-table">
-              {allData.length > 0 ? <Table areaList={areasList} /> : ''}
+              <Table areaList={areasList} />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>

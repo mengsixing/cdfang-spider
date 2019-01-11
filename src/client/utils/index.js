@@ -43,7 +43,7 @@ function getIncreaseNumber(number) {
     return `${number}↑`;
   }
   if (number === 0) {
-    return `${number}-`;
+    return '持平';
   }
   return `${number}↓`;
 }

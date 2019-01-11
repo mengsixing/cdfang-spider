@@ -38,13 +38,14 @@ class BarGraph extends React.Component {
     const dv = ds.createView().source(data);
     dv.transform({
       type: 'fold',
-      fields, // [ 'Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.' ], // 展开字段集
+      fields,
       key: '月份',
       value: '数量',
     });
 
     return (
       <Chart height={400} forceFit data={dv}>
+        <div className="chart-title">月份统计图</div>
         <Axis name="月份" />
         <Axis name="数量" />
         <Legend />

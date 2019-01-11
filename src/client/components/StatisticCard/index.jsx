@@ -69,12 +69,9 @@ class StatisticCard extends React.Component {
           <Col span={6}>
             <Card title="总开盘" bordered={false}>
               楼盘数：
-              {' '}
               {state.allInfo.buildNumber}
-              {' '}
               <br />
               房源数：
-              {' '}
               {state.allInfo.houseNumber}
             </Card>
           </Col>

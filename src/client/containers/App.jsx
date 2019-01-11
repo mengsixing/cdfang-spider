@@ -12,7 +12,6 @@ import ChartPanel from '../components/ChartPanel';
 import Table from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import Notice from '../components/Notice';
-// import CurrentHouse from '../components/CurrentHouse';
 import AreaBar from '../components/AreaBar';
 import Loading from '../components/Loading';
 import config from '../config';
@@ -69,7 +68,6 @@ class App extends React.Component {
     /* eslint-enable react/no-array-index-key */
     const chartHouseData = [];
     const chartBuildData = [];
-    // 倒序排列
     Object.keys(areas).forEach((key) => {
       chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
       chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
@@ -97,7 +95,9 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Content className="content">
-            <Suspense fallback={<Loading />}>{allData.length > 0 ? <CurrentHouse /> : ''}</Suspense>
+            <Suspense fallback={<Loading />}>
+              <CurrentHouse />
+            </Suspense>
             <StatisticCard />
             <div className="content-graph-bar">
               <Tabs defaultActiveKey="6" onChange={this.changeTab}>
@@ -106,31 +106,17 @@ class App extends React.Component {
             </div>
             <div className="content-areabar">
               <div className="content-areabar-title">整体统计</div>
-              {chartHouseData.length > 0 ? (
-                <AreaBar
-                  title="房源数排序图"
-                  data={chartHouseData}
-                  xAxis="区域"
-                  yAxis="房源"
-                  desc
-                />
-              ) : (
-                ''
-              )}
-              {chartBuildData.length > 0 ? (
-                <AreaBar
-                  title="楼盘数排序图"
-                  data={chartBuildData}
-                  xAxis="区域"
-                  yAxis="楼盘数"
-                  desc
-                />
-              ) : (
-                ''
-              )}
+              <AreaBar title="房源数排序图" data={chartHouseData} xAxis="区域" yAxis="房源" desc />
+              <AreaBar
+                title="楼盘数排序图"
+                data={chartBuildData}
+                xAxis="区域"
+                yAxis="楼盘数"
+                desc
+              />
             </div>
             <div className="content-graph-table">
-              {allData.length > 0 ? <Table areaList={areasList} /> : ''}
+              <Table areaList={areasList} />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>

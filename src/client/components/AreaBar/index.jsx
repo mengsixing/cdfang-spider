@@ -25,7 +25,7 @@ class AreaBar extends React.Component {
     }
     return (
       <Chart height={400} data={chartData} forceFit>
-        <div className="char-title">{title}</div>
+        <div className="chart-title">{title}</div>
         <Axis name={xAxis} />
         <Axis name={yAxis} />
         <Tooltip />

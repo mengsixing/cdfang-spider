@@ -6,6 +6,7 @@ import {
 } from 'bizcharts';
 import DataSet from '@antv/data-set';
 import PropTypes from 'prop-types';
+import './styles.less';
 
 const { DataView } = DataSet;
 const { Html } = Guide;
@@ -34,21 +35,23 @@ class CircleGraph extends React.Component {
 
   render() {
     const { data: array } = this.props;
+
     const arrayByMonth = _.groupBy(array, item => dayjs(item.beginTime)
       .startOf('month')
       .format('YYYY-MM'));
-    const cricleObj = [];
+    let cricleArray = [];
     Object.keys(arrayByMonth).forEach((key) => {
       const houseNumber = _.sumBy(arrayByMonth[key], 'number');
-      cricleObj.push({
+      cricleArray.push({
         item: dayjs(key).format('YYYY年MM月'),
         number: houseNumber,
         date: key,
       });
     });
-
+    // 按日期排序
+    cricleArray = _.sortBy(cricleArray, 'date');
     const dv = new DataView();
-    dv.source(cricleObj).transform({
+    dv.source(cricleArray).transform({
       type: 'percent',
       field: 'number',
       dimension: 'item',
@@ -65,6 +68,7 @@ class CircleGraph extends React.Component {
     `;
     return (
       <Chart height={400} data={dv} scale={cols} forceFit onIntervalClick={this.selectMonth}>
+        <div className="chart-title">房源分部图</div>
         <Coord type="theta" radius={0.75} innerRadius={0.6} />
         <Axis name="percent" />
         <Tooltip

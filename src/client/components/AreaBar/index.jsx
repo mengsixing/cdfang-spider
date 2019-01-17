@@ -4,7 +4,7 @@ import {
   Chart, Geom, Axis, Tooltip,
 } from 'bizcharts';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
-import './styles.less';
+// import './styles.less';
 
 class AreaBar extends React.Component {
   static defaultProps = {

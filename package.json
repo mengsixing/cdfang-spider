@@ -3,28 +3,11 @@
   "version": "2.1.1",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
-  "jest": {
-    "setupFiles": [
-      "./__test__/setup.js",
-      "jest-canvas-mock"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      ".*\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
-    }
-  },
   "scripts": {
     "lint": "eslint --ext jsx,js src build test",
     "client": "webpack-dev-server --open",
     "server": "cross-env NODE_ENV=development gulp & supervisor ./dist/app.js",
-    "dev": "cross-env NODE_ENV=development gulp & webpack-dev-server --open & supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
+    "dev": "cross-env NODE_ENV=development BABEL_ENV=production gulp & BABEL_ENV=production webpack-dev-server --open & supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
     "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",

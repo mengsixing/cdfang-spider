@@ -6,7 +6,7 @@ import serve from 'koa-static';
 import cors from 'koa2-cors';
 import log4js from 'log4js';
 
-import ErrorHander from './middlewares/ErrorHander';
+import ErrorHander from './middleware/ErrorHander';
 import controller from './controllers';
 import config from './config';
 import './controllers/schedule';

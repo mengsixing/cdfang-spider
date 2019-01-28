@@ -13,7 +13,7 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束',
+        status: '报名中',
       },
     ],
     activityKey: 6,
@@ -35,6 +35,6 @@ describe('CurrentHouse 组件', () => {
   const cheerioWrapper = wrapper.render();
 
   it('是否渲染成功 ?', () => {
-    expect(cheerioWrapper.find('canvas').length).toBe(0);
+    expect(cheerioWrapper.find('.ant-list-item').length).toBe(1);
   });
 });

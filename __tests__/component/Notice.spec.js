@@ -28,6 +28,7 @@ describe('Notice 组件', () => {
   const cheerioWrapper = wrapper.render();
 
   it('是否渲染成功 ?', () => {
-    expect(cheerioWrapper.find('canvas').length).toBe(0);
+    expect(cheerioWrapper.hasClass('notice-icon')).toBe(true);
+    expect(cheerioWrapper.find('svg').length).toBe(1);
   });
 });

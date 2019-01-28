@@ -5,7 +5,7 @@ import Rank from '../../src/client/components/Rank';
 
 const setup = () => {
   const props = {
-    title: '月份统计图',
+    title: '2018年06月',
     data: [
       {
         area: '高新南区',
@@ -27,10 +27,12 @@ const setup = () => {
 };
 
 describe('Rank 组件', () => {
-  const { wrapper } = setup();
+  const { wrapper, props } = setup();
   const cheerioWrapper = wrapper.render();
-
-  it('是否渲染成功 ?', () => {
-    expect(cheerioWrapper.find('canvas').length).toBe(0);
+  it('title 是否正确 ?', () => {
+    expect(cheerioWrapper.find('.rank-title').text()).toBe(`楼盘排名：${props.title}`);
+  });
+  it('渲染列表是否正确 ?', () => {
+    expect(cheerioWrapper.find('.rank-list>li').length).toBe(props.data.length);
   });
 });

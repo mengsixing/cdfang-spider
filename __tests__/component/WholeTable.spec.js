@@ -36,9 +36,7 @@ const setup = () => {
 
 describe('WholeTable 组件', () => {
   const { wrapper } = setup();
-  // const cheerioWrapper = wrapper.render();
   it('是否渲染成功 ?', () => {
     expect(wrapper.find('table').length).toBe(1);
-    // expect(cheerioWrapper.find('canvas').length).toBe(1);
   });
 });

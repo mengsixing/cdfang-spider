@@ -27,6 +27,7 @@ npm run dev
 ## 客户端
 
 - react
+- less
 - bizcharts
 - antd
 
@@ -42,6 +43,7 @@ npm run dev
 - webpack
 - eslint
 - gulp
+- jest
 
 ## TODOLIST
 

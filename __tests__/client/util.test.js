@@ -22,7 +22,7 @@ describe('client util测试', () => {
         quarterMap[i],
       );
     }
-    expect(currentQuarter.thisQuarterStart.month()).toBe(dayjs().month());
+    expect([0, 3, 6, 9]).toContain(currentQuarter.thisQuarterStart.month());
   });
   it('getAllInfo返回参数是否正确？', () => {
     expect(typeof util.getAllInfo).toBe('function');

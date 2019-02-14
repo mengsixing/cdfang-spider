@@ -28,7 +28,7 @@ npm run dev
 
 - react
 - bizcharts
-- antd-design
+- antd
 
 ## 服务器端
 
@@ -46,5 +46,5 @@ npm run dev
 ## TODOLIST
 
 - [x] antd icon 打包过大（官方还未提供按需加载，已使用替代方案优化）
-- [ ] webpack 打包优化
-- [ ] 页面性能优化
+- [x] webpack 打包优化（持续）
+- [ ] 页面性能优化（持续）

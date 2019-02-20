@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { render } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'mobx-react';
-import WholeTable from '../../src/client/components/WholeTable';
+import CurrentHouse from '../../../src/client/components/CurrentHouse';
 
 const setup = () => {
   const appState = {
@@ -13,30 +13,28 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束',
+        status: '报名中',
       },
     ],
     activityKey: 6,
   };
-  const props = {
-    areaList: ['锦江区', '成华区'],
-  };
   /* eslint-disable */
-  const wrapper = render(
+  const wrapper = mount(
     <Provider appState={appState}>
-      <WholeTable {...props} />
+      <CurrentHouse />
     </Provider>,
   );
   /* eslint-enable */
   return {
-    props,
     wrapper,
   };
 };
 
-describe('WholeTable 组件', () => {
+describe('CurrentHouse 组件', () => {
   const { wrapper } = setup();
+  const cheerioWrapper = wrapper.render();
+
   it('是否渲染成功 ?', () => {
-    expect(wrapper.find('table').length).toBe(1);
+    expect(cheerioWrapper.find('.ant-list-item').length).toBe(1);
   });
 });

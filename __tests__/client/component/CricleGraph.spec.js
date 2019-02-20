@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
-import CricleGraph from '../../src/client/components/CricleGraph';
+import CricleGraph from '../../../src/client/components/CricleGraph';
 
 const setup = () => {
   const props = {

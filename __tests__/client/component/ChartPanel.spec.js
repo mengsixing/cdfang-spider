@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 import { Provider } from 'mobx-react';
-import ChartPanel from '../../src/client/components/ChartPanel';
+import ChartPanel from '../../../src/client/components/ChartPanel';
 
 const setup = () => {
   const appState = {

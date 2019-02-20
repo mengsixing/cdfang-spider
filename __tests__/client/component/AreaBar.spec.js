@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
-import AreaBar from '../../src/client/components/AreaBar';
+import AreaBar from '../../../src/client/components/AreaBar';
 
 const setup = () => {
   const props = {

@@ -9,5 +9,5 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
   },
-  collectCoverageFrom: ['src/client/**/*.{js,jsx}', '!**/node_modules/**'],
+  collectCoverageFrom: ['src/client/components/**/*.{js,jsx}', '!**/node_modules/**'],
 };

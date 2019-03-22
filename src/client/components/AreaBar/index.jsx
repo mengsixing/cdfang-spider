@@ -2,14 +2,14 @@ import React from 'react';
 import {
   Chart, Geom, Axis, Tooltip,
 } from 'bizcharts';
+import PropTypes from 'prop-types';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import './styles.less';
 
 
-function AreaBar(props) {
-  const {
-    data, title, xAxis, yAxis, desc,
-  } = props;
+function AreaBar({
+  data, title, xAxis, yAxis, desc,
+}) {
   let chartData = [];
   if (desc) {
     chartData = data.sort((a, b) => b[yAxis] - a[yAxis]);
@@ -24,5 +24,13 @@ function AreaBar(props) {
     </Chart>
   );
 }
+
+AreaBar.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
+  title: PropTypes.string.isRequired,
+  xAxis: PropTypes.string.isRequired,
+  yAxis: PropTypes.string.isRequired,
+  desc: PropTypes.bool.isRequired,
+};
 
 export default React.memo(RenderNoEmptyComponent(AreaBar, ['data']), () => false);

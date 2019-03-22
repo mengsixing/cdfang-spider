@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Table } from 'antd';
+import PropTypes from 'prop-types';
 import { AppContext } from '../../context/appContext';
 
 
-function CommonTable(props) {
+function CommonTable({ areaList }) {
   const appState = useContext(AppContext);
-  const nameFilter = props.areaList.map(item => ({
+  const nameFilter = areaList.map(item => ({
     text: item,
     value: item,
   }));
@@ -88,5 +89,9 @@ function CommonTable(props) {
     </div>
   );
 }
+
+CommonTable.propTypes = {
+  areaList: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
 
 export default CommonTable;

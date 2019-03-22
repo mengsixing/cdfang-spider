@@ -12,12 +12,8 @@ const { DataView } = DataSet;
 const { Html } = Guide;
 
 
-function CircleGraph(props) {
-  console.log('circle::::::::::::::::::::', props);
-  const { data: array } = props;
-
+function CircleGraph({ data: array, changeMonth }) {
   function selectMonth(item) {
-    const { changeMonth } = props;
     changeMonth(item);
   }
 
@@ -91,25 +87,17 @@ function CircleGraph(props) {
 CircleGraph.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   changeMonth: PropTypes.func.isRequired,
-  isChangeTab: PropTypes.bool.isRequired,
 };
 
 
 function shouldComponentUpdate(prevProps, nextProps) {
-  const { data } = prevProps;
-  if (nextProps.data.length !== data.length) {
-    console.log(nextProps.data.length, data.length, '渲染');
+  if (nextProps.data.length !== prevProps.data.length) {
     return false;
   }
   if (nextProps.isChangeTab) {
-    console.log(nextProps.isChangeTab, '渲染');
     return false;
   }
-  for (let i = 0; i < 4; i++) {
-    console.log(prevProps.data[i] == nextProps.data[i], '不渲染');
-  }
-
-  return true;
+  return false;
 }
 
 export default React.memo(CircleGraph, shouldComponentUpdate);

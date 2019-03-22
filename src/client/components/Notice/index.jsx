@@ -16,7 +16,7 @@ function openNotification(setLoading, appState) {
       });
       setLoading(false);
       if (json.successArray.length > 0) {
-        appState.allData = appState.allData.concat(json.successArray);
+        appState.changeData(appState.allData.concat(json.successArray));
       }
     });
 }

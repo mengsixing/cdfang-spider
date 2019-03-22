@@ -31,7 +31,6 @@ function renderCard(info) {
 
 function StatisticCard() {
   const appState = useContext(AppContext);
-  console.log('StatisticCard appState', appState);
   const { allData } = appState;
   const allInfo = util.getAllInfo(allData);
   const thisWeekInfo = util.getThisWeekInfo(allData);

@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Col, Row } from 'antd';
 import dayjs from 'dayjs';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import { AppContext } from '../../context/appContext';
 
 import CricleGraph from '../CricleGraph';
@@ -12,34 +13,26 @@ import BarGraph from '../BarGraph';
 function ChartPanel(props) {
   const appState = useContext(AppContext);
   const { panelIndex, data } = props;
-  let initState = { isChangeTab: false };
+  const initState = {
+    rank: data,
+    rankTitle: '',
+    isChangeTab: false,
+    isOpen: false,
+  };
+
   if (panelIndex !== appState.activityKey) {
-    initState = {
-      rank: data,
-      rankTitle: '',
-      isChangeTab: true,
-      isOpen: false,
-    };
+    initState.isChangeTab = true;
   }
 
   const [state, setState] = useState(initState);
 
-  useEffect(() => {
-    setState({
-      rank: props.data,
-      rankTitle: '',
-      isChangeTab: false,
-      isOpen: false,
-    });
-  }, []);
-
-  const changeMonth = (item) => {
-    const { rankTitle, isOpen } = state;
-    console.log(state);
+  const changeMonth = (item, newState) => {
+    const { rankTitle, isOpen } = newState;
     const { _origin } = item.data;
+
     if (rankTitle === _origin.item && isOpen) {
       setState({
-        ...state,
+        ...newState,
         rank: data,
         rankTitle: '',
         isChangeTab: false,
@@ -54,7 +47,7 @@ function ChartPanel(props) {
           && dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month'),
       );
       setState({
-        ...state,
+        ...newState,
         rank: newRank,
         rankTitle: selectMonthTitle,
         isChangeTab: false,
@@ -71,7 +64,13 @@ function ChartPanel(props) {
         <BarGraph data={data} />
       </Col>
       <Col span={9}>
-        <CricleGraph data={data} changeMonth={changeMonth} isChangeTab={isChangeTab} />
+        <CricleGraph
+          data={data}
+          changeMonth={(item) => {
+            changeMonth(item, state);
+          }}
+          isChangeTab={isChangeTab}
+        />
       </Col>
       <Col span={6}>
         {rank ? <Rank data={rank} title={rankTitle} /> : ''}
@@ -79,5 +78,11 @@ function ChartPanel(props) {
     </Row>
   );
 }
+
+ChartPanel.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
+  panelIndex: PropTypes.number.isRequired,
+};
+
 
 export default ChartPanel;

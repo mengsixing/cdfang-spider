@@ -1,5 +1,5 @@
 import React, {
-  lazy, Suspense, useEffect, useContext, useState,
+  lazy, Suspense, useEffect, useState,
 } from 'react';
 import 'whatwg-fetch';
 import _ from 'lodash';

@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { render } from 'enzyme';
-import { Provider } from 'mobx-react';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
 import WholeTable from '../../../src/client/components/WholeTable';
 import { mockHouse, mockArea } from '../../../__mocks__/db';
 
 const setup = () => {
   const appState = {
+    ...globalData,
     allData: mockHouse,
     activityKey: 6,
   };
@@ -15,9 +16,9 @@ const setup = () => {
   };
   /* eslint-disable */
   const wrapper = render(
-    <Provider appState={appState}>
+    <AppContext.Provider value={appState}>
       <WholeTable {...props} />
-    </Provider>,
+    </AppContext.Provider>,
   );
   /* eslint-enable */
   return {

@@ -1,88 +1,90 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
 import { Col, Row } from 'antd';
 import dayjs from 'dayjs';
-
 import _ from 'lodash';
-import { inject, observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import { AppContext } from '../../context/appContext';
+
 import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
 import BarGraph from '../BarGraph';
 
-class ChartPanel extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      rank: props.data,
-      rankTitle: '',
-      isChangeTab: false,
-      isOpen: false,
-    };
-    this.changeMonth = this.changeMonth.bind(this);
+
+function ChartPanel(props) {
+  const appState = useContext(AppContext);
+  const { panelIndex, data } = props;
+  const initState = {
+    rank: data,
+    rankTitle: '',
+    isChangeTab: false,
+    isOpen: false,
+  };
+
+  if (panelIndex !== appState.activityKey) {
+    initState.isChangeTab = true;
   }
 
-  static getDerivedStateFromProps(props) {
-    const { panelIndex, appState, data } = props;
-    if (panelIndex !== appState.activityKey) {
+  const [state, setState] = useState(initState);
+
+  function changeMonth(item, newState) {
+    const { rankTitle, isOpen } = newState;
+    const { _origin } = item.data;
+
+    if (rankTitle === _origin.item && isOpen) {
       return {
+        ...newState,
         rank: data,
         rankTitle: '',
-        isChangeTab: true,
+        isChangeTab: false,
         isOpen: false,
       };
     }
-    return {};
-  }
-
-  changeMonth(item) {
-    const { rankTitle, isOpen } = this.state;
-    const { data } = this.props;
-    const { _origin } = item.data;
-    if (rankTitle === _origin.item && isOpen) {
-      this.setState({
-        rank: data,
-        rankTitle: '',
-        isChangeTab: false,
-        isOpen: false,
-      });
-    } else {
-      const selectMonth = _origin.date;
-      const selectMonthTitle = _origin.item;
-      const newRank = _.filter(
-        data,
-        dataItem => dayjs(dataItem.beginTime) > dayjs(selectMonth)
+    const selectMonth = _origin.date;
+    const selectMonthTitle = _origin.item;
+    const newRank = _.filter(
+      data,
+      dataItem => dayjs(dataItem.beginTime) > dayjs(selectMonth)
           && dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month'),
-      );
-      this.setState({
-        rank: newRank,
-        rankTitle: selectMonthTitle,
-        isChangeTab: false,
-        isOpen: true,
-      });
-    }
+    );
+    return {
+      ...newState,
+      rank: newRank,
+      rankTitle: selectMonthTitle,
+      isChangeTab: false,
+      isOpen: true,
+    };
   }
 
-  render() {
-    const { data } = this.props;
-    const { isChangeTab, rank, rankTitle } = this.state;
-    return (
-      <Row>
-        <Col span={9}>
-          <BarGraph data={data} />
-        </Col>
-        <Col span={9}>
-          <CricleGraph data={data} changeMonth={this.changeMonth} isChangeTab={isChangeTab} />
-        </Col>
-        <Col span={6}>
-          <Rank data={rank} title={rankTitle} />
-        </Col>
-      </Row>
-    );
-  }
+  const { isChangeTab, rank, rankTitle } = state;
+
+  return (
+    <Row>
+      <Col span={9}>
+        <BarGraph data={data} />
+      </Col>
+      <Col span={9}>
+        <input id={`ChartPanel${appState.activityKey}`} type="hidden" value={JSON.stringify(state)} />
+        <CricleGraph
+          data={data}
+          changeMonth={(item) => {
+            // 由于circle组件使用React.memo 再不渲染时，不能获取到最新的属性，这里使用input来转换
+            const newState = JSON.parse(document.getElementById(`ChartPanel${appState.activityKey}`).value);
+            setState(changeMonth(item, newState));
+          }}
+          isChangeTab={isChangeTab}
+        />
+      </Col>
+      <Col span={6}>
+        {rank ? <Rank data={rank} title={rankTitle} /> : ''}
+      </Col>
+    </Row>
+  );
 }
 
 ChartPanel.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
+  panelIndex: PropTypes.number.isRequired,
 };
 
-export default inject('appState')(observer(ChartPanel));
+
+export default ChartPanel;

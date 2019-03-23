@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph from '../../src/client/components/BarGraph';
+import Rank from '../../../src/client/components/Rank';
 
 const setup = () => {
   const props = {
-    title: '月份统计图',
+    title: '2018年06月',
     data: [
       {
         area: '高新南区',
@@ -18,7 +18,7 @@ const setup = () => {
     ],
   };
   /* eslint-disable */
-  const wrapper = mount(<BarGraph {...props} />);
+  const wrapper = mount(<Rank {...props} />);
   /* eslint-enable */
   return {
     props,
@@ -26,16 +26,13 @@ const setup = () => {
   };
 };
 
-describe('BarGraph 组件', () => {
+describe('Rank 组件', () => {
   const { wrapper, props } = setup();
   const cheerioWrapper = wrapper.render();
-
-  it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('.chart-title')).toBe(true);
-    expect(cheerioWrapper.find('canvas').length).toBe(1);
+  it('title 是否正确 ?', () => {
+    expect(cheerioWrapper.find('.rank-title').text()).toBe(`楼盘排名：${props.title}`);
   });
-
-  it('title是否正确 ?', () => {
-    expect(wrapper.prop('title')).toEqual(props.title);
+  it('渲染列表是否正确 ?', () => {
+    expect(cheerioWrapper.find('.rank-list>li').length).toBe(props.data.length);
   });
 });

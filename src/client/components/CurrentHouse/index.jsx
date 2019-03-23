@@ -1,19 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import 'whatwg-fetch';
-import PropTypes from 'prop-types';
 import {
   Collapse, List, Col, Row, Icon,
 } from 'antd';
-import { inject, observer } from 'mobx-react';
-import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import './styles.less';
+import { AppContext } from '../../context/appContext';
 
 const { Panel } = Collapse;
 
-function CurrentHouse(props) {
-  const {
-    appState: { allData },
-  } = props;
+function CurrentHouse() {
+  const appState = useContext(AppContext);
+  const { allData } = appState;
   const currentHouses = allData
     .filter(item => item.status !== '报名结束')
     .map(item => (
@@ -63,8 +60,4 @@ function CurrentHouse(props) {
   );
 }
 
-CurrentHouse.propTypes = {
-  appState: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default inject('appState')(observer(RenderNoEmptyComponent(CurrentHouse, ['appState', 'allData'])));
+export default CurrentHouse;

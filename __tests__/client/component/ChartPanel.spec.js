@@ -1,14 +1,10 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
-import { Provider } from 'mobx-react';
-import ChartPanel from '../../src/client/components/ChartPanel';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import ChartPanel from '../../../src/client/components/ChartPanel';
 
 const setup = () => {
-  const appState = {
-    allData: [],
-    activityKey: 6,
-  };
   const props = {
     data: [
       {
@@ -23,9 +19,9 @@ const setup = () => {
   };
   /* eslint-disable */
   const wrapper = mount(
-    <Provider appState={appState}>
+    <AppContext.Provider value={globalData}>
       <ChartPanel {...props} />
-    </Provider>,
+    </AppContext.Provider>,
   );
   /* eslint-enable */
   return {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 import { Provider } from 'mobx-react';
-import Notice from '../../src/client/components/Notice';
+import Notice from '../../../src/client/components/Notice';
 
 const setup = () => {
   const appState = {

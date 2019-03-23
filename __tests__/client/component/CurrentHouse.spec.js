@@ -1,11 +1,11 @@
 import React from 'react';
-
 import { mount } from 'enzyme';
-import { Provider } from 'mobx-react';
-import CurrentHouse from '../../src/client/components/CurrentHouse';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import CurrentHouse from '../../../src/client/components/CurrentHouse';
 
 const setup = () => {
   const appState = {
+    ...globalData,
     allData: [
       {
         area: '高新南区',
@@ -20,9 +20,9 @@ const setup = () => {
   };
   /* eslint-disable */
   const wrapper = mount(
-    <Provider appState={appState}>
+    <AppContext.Provider value={appState}>
       <CurrentHouse />
-    </Provider>,
+    </AppContext.Provider>,
   );
   /* eslint-enable */
   return {

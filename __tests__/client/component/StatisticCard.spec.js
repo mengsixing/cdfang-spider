@@ -1,25 +1,18 @@
 import React from 'react';
-
 import { mount } from 'enzyme';
-import { Provider } from 'mobx-react';
-import StatisticCard from '../../src/client/components/StatisticCard';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import StatisticCard from '../../../src/client/components/StatisticCard';
 
 const setup = () => {
-  const appState = {
-    allData: [],
-    activityKey: 6,
-  };
-  const props = {
-  };
   /* eslint-disable */
   const wrapper = mount(
-    <Provider appState={appState}>
-      <StatisticCard {...props} />
-    </Provider>,
+    <AppContext.Provider value={globalData}>
+      <StatisticCard />
+    </AppContext.Provider>
+    ,
   );
   /* eslint-enable */
   return {
-    props,
     wrapper,
   };
 };

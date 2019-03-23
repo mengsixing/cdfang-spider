@@ -26,35 +26,34 @@ function ChartPanel(props) {
 
   const [state, setState] = useState(initState);
 
-  const changeMonth = (item, newState) => {
+  function changeMonth(item, newState) {
     const { rankTitle, isOpen } = newState;
     const { _origin } = item.data;
 
     if (rankTitle === _origin.item && isOpen) {
-      setState({
+      return {
         ...newState,
         rank: data,
         rankTitle: '',
         isChangeTab: false,
         isOpen: false,
-      });
-    } else {
-      const selectMonth = _origin.date;
-      const selectMonthTitle = _origin.item;
-      const newRank = _.filter(
-        data,
-        dataItem => dayjs(dataItem.beginTime) > dayjs(selectMonth)
-          && dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month'),
-      );
-      setState({
-        ...newState,
-        rank: newRank,
-        rankTitle: selectMonthTitle,
-        isChangeTab: false,
-        isOpen: true,
-      });
+      };
     }
-  };
+    const selectMonth = _origin.date;
+    const selectMonthTitle = _origin.item;
+    const newRank = _.filter(
+      data,
+      dataItem => dayjs(dataItem.beginTime) > dayjs(selectMonth)
+          && dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month'),
+    );
+    return {
+      ...newState,
+      rank: newRank,
+      rankTitle: selectMonthTitle,
+      isChangeTab: false,
+      isOpen: true,
+    };
+  }
 
   const { isChangeTab, rank, rankTitle } = state;
 
@@ -64,10 +63,13 @@ function ChartPanel(props) {
         <BarGraph data={data} />
       </Col>
       <Col span={9}>
+        <input id={`ChartPanel${appState.activityKey}`} type="hidden" value={JSON.stringify(state)} />
         <CricleGraph
           data={data}
           changeMonth={(item) => {
-            changeMonth(item, state);
+            // 由于circle组件使用React.memo 再不渲染时，不能获取到最新的属性，这里使用input来转换
+            const newState = JSON.parse(document.getElementById(`ChartPanel${appState.activityKey}`).value);
+            setState(changeMonth(item, newState));
           }}
           isChangeTab={isChangeTab}
         />

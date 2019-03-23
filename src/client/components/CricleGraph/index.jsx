@@ -16,7 +16,6 @@ function CircleGraph({ data: array, changeMonth }) {
   function selectMonth(item) {
     changeMonth(item);
   }
-
   const arrayByMonth = _.groupBy(array, item => dayjs(item.beginTime)
     .startOf('month')
     .format('YYYY-MM'));
@@ -97,7 +96,7 @@ function shouldComponentUpdate(prevProps, nextProps) {
   if (nextProps.isChangeTab) {
     return false;
   }
-  return false;
+  return true;
 }
 
 export default React.memo(CircleGraph, shouldComponentUpdate);

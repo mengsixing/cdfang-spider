@@ -1,23 +1,12 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
-import { Provider } from 'mobx-react';
 import Notice from '../../../src/client/components/Notice';
 
 const setup = () => {
-  const appState = {
-    allData: [],
-    activityKey: 6,
-  };
-  const props = {};
   /* eslint-disable */
-  const wrapper = mount(
-    <Provider appState={appState}>
-      <Notice {...props} />
-    </Provider>,
-  );
+  const wrapper = mount(<Notice />);
   return {
-    props,
     wrapper,
   };
 };

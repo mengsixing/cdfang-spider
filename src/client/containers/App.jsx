@@ -114,7 +114,7 @@ function App() {
           </div>
         </Content>
 
-        <Footer style={{ textAlign: 'center' }}>Created by yhlben ©2018 </Footer>
+        <Footer style={{ textAlign: 'center' }}>Copyright 2018 - 2019 yhlben. All Rights Reserved</Footer>
       </Layout>
     </AppContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import 'whatwg-fetch';
 import { Card, Col, Row } from 'antd';
 import util from '../../utils';
@@ -36,38 +36,32 @@ function StatisticCard() {
   const thisWeekInfo = util.getThisWeekInfo(allData);
   const thisMonthInfo = util.getThisMonthInfo(allData);
   const thisQuarterInfo = util.getThisQuarterInfo(allData);
-  const [state] = useState({
-    allInfo,
-    thisWeekInfo,
-    thisMonthInfo,
-    thisQuarterInfo,
-  });
 
   return (
     <div className="content-card">
       <Row gutter={16}>
         <Col span={6}>
           <Card title="本周开盘" bordered={false} extra={<span>相比上周</span>}>
-            {renderCard(state.thisWeekInfo)}
+            {renderCard(thisWeekInfo)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="本月开盘" bordered={false} extra={<span>相比上月</span>}>
-            {renderCard(state.thisMonthInfo)}
+            {renderCard(thisMonthInfo)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="本季度开盘" bordered={false} extra={<span>相比上季</span>}>
-            {renderCard(state.thisQuarterInfo)}
+            {renderCard(thisQuarterInfo)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="总开盘" bordered={false}>
             楼盘数：
-            {state.allInfo.buildNumber}
+            {allInfo.buildNumber}
             <br />
             房源数：
-            {state.allInfo.houseNumber}
+            {allInfo.houseNumber}
           </Card>
         </Col>
       </Row>

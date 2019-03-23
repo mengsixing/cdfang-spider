@@ -36,7 +36,5 @@ module.exports = {
     'react-dom': 'ReactDOM',
     bizcharts: 'BizCharts',
     '@antv/data-set': 'DataSet',
-    mobx: 'mobx',
-    'mobx-react': 'mobxReact',
   },
 };

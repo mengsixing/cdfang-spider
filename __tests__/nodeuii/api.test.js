@@ -10,10 +10,8 @@ describe('api 测试', () => {
 
   it('api 返回数据格式是否正确？', (done) => {
     request()
-      .get('/getMongoData')
-      .expect(200)
-      .end((err, res) => {
-        const item1 = JSON.parse(res.text)[0];
+      .get('/getMongoData').then(response=>{
+        const item1 = JSON.parse(response.text)[0];
         expect(item1).toHaveProperty('_id');
         expect(item1).toHaveProperty('area');
         expect(item1).toHaveProperty('name');
@@ -22,12 +20,7 @@ describe('api 测试', () => {
         expect(item1).toHaveProperty('endTime');
         expect(item1).toHaveProperty('status');
         done();
-        if (err) throw err;
-      });
+      })
   });
-
-  // afterEach(() => {
-  //   app.listen().close();
-  // });
 
 });

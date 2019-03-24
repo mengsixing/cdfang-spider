@@ -8,7 +8,7 @@ describe('api 测试', () => {
     return supertest(app.listen());
   }
 
-  it('api 返回数据格式是否正确？', () => {
+  it('api 返回数据格式是否正确？', (done) => {
     request()
       .get('/getMongoData')
       .expect(200)
@@ -21,12 +21,13 @@ describe('api 测试', () => {
         expect(item1).toHaveProperty('beginTime');
         expect(item1).toHaveProperty('endTime');
         expect(item1).toHaveProperty('status');
+        done();
         if (err) throw err;
       });
   });
 
-  afterEach(() => {
-    app.listen().close();
-  });
+  // afterEach(() => {
+  //   app.listen().close();
+  // });
 
 });

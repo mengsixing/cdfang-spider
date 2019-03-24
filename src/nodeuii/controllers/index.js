@@ -41,7 +41,21 @@ router
     });
   })
   .get('/getMongoData', async (ctx) => {
-    const result = await houseModel.find();
+    let result = [];
+    if (process.env.NODE_ENV === 'test') {
+      result = [{
+        _id: '8493C6779815042CE053AC1D15D7580C',
+        area: '温江区',
+        name: '明信城',
+        number: 388,
+        beginTime: '2019-03-22 09:00:00',
+        endTime: '2019-03-24 18:00:00',
+        status: '正在报名',
+        __v: 0,
+      }];
+    } else {
+      result = await houseModel.find();
+    }
     ctx.body = result;
   })
   .get('/spiderPageOne', async (ctx) => {

@@ -1,3 +1,4 @@
+/*eslint-disable */
 import supertest from 'supertest';
 import app from '../../dist/app';
 

@@ -58,3 +58,7 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
   console.log(`server is running at : http://localhost:${config.serverPort}`);
   app.listen(config.serverPort);
 }
+
+
+// export default app;
+module.exports = app;

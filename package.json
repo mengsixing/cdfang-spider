@@ -11,7 +11,7 @@
     "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
     "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
-    "test": "jest --no-cache --colors --coverage",
+    "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
     "coverage": "codecov",
     "commit": "npx git-cz"
   },

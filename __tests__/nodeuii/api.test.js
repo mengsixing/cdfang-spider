@@ -3,9 +3,11 @@ import supertest from 'supertest';
 import app from '../../dist/app';
 
 describe('api 测试', () => {
-  function request() {
+
+  function request(){
     return supertest(app.listen());
   }
+
   it('api 返回数据格式是否正确？', () => {
     request()
       .get('/getMongoData')
@@ -22,4 +24,9 @@ describe('api 测试', () => {
         if (err) throw err;
       });
   });
+
+  afterEach(() => {
+    app.listen().close();
+  });
+
 });

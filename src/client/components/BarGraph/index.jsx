@@ -7,10 +7,6 @@ import {
   Chart, Geom, Axis, Tooltip, Legend,
 } from 'bizcharts';
 
-// shouldComponentUpdate() {
-//   return false;
-// }
-
 function BarGraph(props) {
   const { data: array } = props;
   const arrayByMonth = _.groupBy(array, item => dayjs(item.beginTime)
@@ -64,4 +60,4 @@ BarGraph.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default BarGraph;
+export default React.memo(BarGraph);

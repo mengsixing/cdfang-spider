@@ -15,40 +15,35 @@ import Notice from '../components/Notice';
 import AreaBar from '../components/AreaBar';
 import Loading from '../components/Loading';
 import config from '../config';
-
 import { AppContext, globalData } from '../context/appContext';
-
-
 import './App.less';
 
 const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
-
 const { Header, Footer, Content } = Layout;
 const { TabPane } = Tabs;
 
-
-function gotoGithub() {
-  window.location.href = 'https://github.com/yhlben/cdfang-spider';
-}
-
-
-function reloadData(changeInitData, appState) {
-  fetch(`${config.serverDomain}/getMongoData`)
-    .then(response => response.json())
-    .then((json) => {
-      changeInitData({ ...appState, allData: json });
-    });
-}
-
 function App() {
   const [appState, changeInitData] = useState(globalData);
-  useEffect(() => {
-    reloadData(changeInitData, appState);
-  }, []);
+
+  function gotoGithub() {
+    window.location.href = 'https://github.com/yhlben/cdfang-spider';
+  }
+
+  function reloadData() {
+    fetch(`${config.serverDomain}/getMongoData`)
+      .then(response => response.json())
+      .then((json) => {
+        changeInitData({ ...appState, allData: json });
+      });
+  }
 
   function changeTab(activityKey) {
     appState.activityKey = Number.parseInt(activityKey, 10);
   }
+
+  useEffect(() => {
+    reloadData();
+  }, []);
 
   const { allData } = appState;
   const areas = _.groupBy(allData, item => item.area);

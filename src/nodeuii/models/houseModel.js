@@ -1,5 +1,5 @@
 /* eslint-disable no-console,no-underscore-dangle */
-import DbHelper from './dbHelper';
+import DbHelper from '../utils/dbHelper';
 
 const mongoose = DbHelper.connect();
 

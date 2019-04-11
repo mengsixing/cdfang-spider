@@ -1,11 +1,11 @@
 import React, {
   lazy, Suspense, useEffect, useState,
 } from 'react';
-import 'whatwg-fetch';
 import _ from 'lodash';
 import {
   Layout, Menu, Icon, Tabs, BackTop,
 } from 'antd';
+import gql from 'graphql-tag';
 import util from '../utils';
 
 import ChartPanel from '../components/ChartPanel';
@@ -23,6 +23,7 @@ const { Header, Footer, Content } = Layout;
 const { TabPane } = Tabs;
 
 function App() {
+  const { getGraphqlClient } = config;
   const [appState, changeInitData] = useState(globalData);
 
   function gotoGithub() {
@@ -30,15 +31,28 @@ function App() {
   }
 
   function reloadData() {
-    fetch(`${config.serverDomain}/getMongoData`)
-      .then(response => response.json())
-      .then((json) => {
-        changeInitData({ ...appState, allData: json });
+    getGraphqlClient()
+      .query({
+        query: gql`
+      {
+        allHouses {
+          _id,
+          area,
+          name,
+          number,
+          beginTime,
+          endTime,
+          status
+        }
+      }`,
+      })
+      .then((result) => {
+        changeInitData({ ...appState, allData: result.data.allHouses });
       });
   }
 
   function changeTab(activityKey) {
-    appState.activityKey = Number.parseInt(activityKey, 10);
+    appState.changeActivityKey(Number.parseInt(activityKey, 10));
   }
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import 'whatwg-fetch';
 import {
   Collapse, List, Col, Row, Icon,
 } from 'antd';

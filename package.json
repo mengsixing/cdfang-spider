@@ -1,16 +1,16 @@
 {
   "name": "cdfang-spider",
-  "version": "2.3.3",
+  "version": "2.4.3",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
+    "dev": "npm-run-all --parallel dev:*",
     "lint": "eslint --ext jsx,js src build __tests__ --fix",
-    "client": "webpack-dev-server --open",
-    "server": "cross-env NODE_ENV=development gulp & supervisor ./dist/app.js",
-    "dev": "cross-env NODE_ENV=development BABEL_ENV=production gulp & BABEL_ENV=production webpack-dev-server --open & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
+    "dev:client": "cross-env BABEL_ENV=production webpack-dev-server --open",
+    "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
-    "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
-    "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
+    "build": "cross-env NODE_ENV=production gulp & cross-env BABEL_ENV=production NODE_ENV=production webpack",
+    "analysis": "cross-env BABEL_ENV=production NODE_ENV=production BUILD_ENV=analysis webpack",
     "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
     "coverage": "codecov",
     "commit": "npx git-cz"
@@ -33,6 +33,7 @@
   "dependencies": {
     "@antv/data-set": "^0.10.2",
     "antd": "^3.15.1",
+    "apollo-boost": "^0.3.1",
     "apollo-server-koa": "^2.4.8",
     "autoprefixer": "^9.5.0",
     "babel-polyfill": "^6.26.0",
@@ -43,6 +44,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
     "html-webpack-plugin": "^3.2.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
@@ -63,8 +65,7 @@
     "webpack": "^4.29.6",
     "webpack-bundle-analyzer": "^3.1.0",
     "webpack-deep-scope-plugin": "^1.6.0",
-    "webpack-merge": "^4.2.1",
-    "whatwg-fetch": "^3.0.0"
+    "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -94,6 +95,7 @@
     "jest-fetch-mock": "^2.1.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
     "qiniu": "^7.2.1",
     "rimraf": "^2.6.3",

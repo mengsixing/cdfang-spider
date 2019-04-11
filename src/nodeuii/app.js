@@ -35,7 +35,7 @@ ErrorHander.init(app, logger);
 app.use(cors());
 controller.init(app);
 // 静态资源目录
-app.use(serve(config.getStaticRoot()));
+app.use(serve('client'));
 
 
 // 服务器上的地址

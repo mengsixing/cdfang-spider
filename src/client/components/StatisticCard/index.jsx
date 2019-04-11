@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import 'whatwg-fetch';
 import { Card, Col, Row } from 'antd';
 import util from '../../utils';
 import { AppContext } from '../../context/appContext';

@@ -1,5 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-koa';
 import houseModel from '../models/houseModel';
+import spider from '../utils/spiderHelper';
+
 
 function initGraphQL(app) {
   const typeDefs = gql`
@@ -13,8 +15,14 @@ function initGraphQL(app) {
       status: String
     }
 
+    type PageOneArray {
+      successArray:[House]
+      allLength:Int
+    }
+
     type Query {
       allHouses: [House]
+      spiderPageOne:PageOneArray
     }
   `;
 
@@ -25,6 +33,7 @@ function initGraphQL(app) {
         const allHouses = await houseModel.find();
         return allHouses;
       },
+      spiderPageOne: async () => spider.spiderPageOne(),
     },
   };
 

@@ -35,7 +35,8 @@ ErrorHander.init(app, logger);
 app.use(cors());
 controller.init(app);
 // 静态资源目录
-app.use(serve('client'));
+app.use(serve(config.getStaticRoot()));
+
 
 // 服务器上的地址
 if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {

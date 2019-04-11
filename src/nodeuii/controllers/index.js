@@ -4,6 +4,8 @@ import cheerio from 'cheerio';
 import * as util from '../utils';
 import houseModel from '../models/houseModel';
 import config from '../config';
+import initGraphQL from './graphql';
+
 
 const router = new Router();
 
@@ -93,5 +95,6 @@ router
 export default {
   init(app) {
     app.use(router.routes()).use(router.allowedMethods());
+    initGraphQL(app);
   },
 };

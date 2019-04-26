@@ -2,13 +2,13 @@
 import React from 'react';
 
 function RenderNoEmptyComponent(WrapperedComponent, checkProps) {
-  return function newComponent(props) {
-    let checkValue = props;
-    checkProps.forEach((item) => {
-      checkValue = checkValue[item];
-    });
-    return checkValue.length > 0 ? <WrapperedComponent {...props} /> : '';
-  };
+    return function newComponent(props) {
+        let checkValue = props;
+        checkProps.forEach((item) => {
+            checkValue = checkValue[item];
+        });
+        return checkValue.length > 0 ? <WrapperedComponent {...props} /> : '';
+    };
 }
 
 export default RenderNoEmptyComponent;

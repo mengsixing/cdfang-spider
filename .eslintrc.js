@@ -6,24 +6,48 @@ module.exports = {
     node: true,
     jest: true,
   },
-  parser: 'babel-eslint',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+  extends: [
+    'eslint-config-airbnb',
+    'eslint-config-alloy/react',
+    'eslint-config-alloy/typescript',
+  ],
+  globals: {
+    // 这里填入你的项目需要的全局变量
+    // 这里值为 false 表示这个全局变量不允许被重新赋值，比如：
+    //
+    // jQuery: false,
+    // $: false
   },
-  extends: ['eslint-config-airbnb'],
   plugins: ['react'],
   rules: {
-    'no-underscore-dangle': 'off',
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    // 这里填入你的项目需要的个性化配置，比如：
+    //
+    // // 一个缩进必须用两个空格替代
+    // 'indent': [
+    //     'error',
+    //     2,
+    //     {
+    //         SwitchCase: 1,
+    //         flatTernaryExpressions: true
+    //     }
+    // ]
+    // // 一个缩进必须用两个空格替代
+    // '@typescript-eslint/indent': [
+    //     'error',
+    //     2,
+    //     {
+    //         SwitchCase: 1,
+    //         flatTernaryExpressions: true
+    //     }
+    // ]
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-      },
-    },
+  // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "build/webpack.base.config.js"
+      }
+    }
   },
 };

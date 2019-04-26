@@ -15,18 +15,18 @@ const app = new Koa();
 
 // 错误日志记录
 log4js.configure({
-  appenders: {
-    globallog: {
-      type: 'file',
-      filename: './logs/globallog.log',
+    appenders: {
+        globallog: {
+            type: 'file',
+            filename: './logs/globallog.log',
+        },
     },
-  },
-  categories: {
-    default: {
-      appenders: ['globallog'],
-      level: 'error',
+    categories: {
+        default: {
+            appenders: ['globallog'],
+            level: 'error',
+        },
     },
-  },
 });
 const logger = log4js.getLogger('globallog');
 ErrorHander.init(app, logger);
@@ -40,24 +40,24 @@ app.use(serve('client'));
 
 // 服务器上的地址
 if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
-  const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
-  const serverCert = '/etc/letsencrypt/live/yinhengli.com/fullchain.pem';
-  https
-    .createServer(
-      {
-        key: fs.readFileSync(serverKey),
-        cert: fs.readFileSync(serverCert),
-      },
-      app.callback(),
-    )
-    .listen(config.serverPort, () => {
-      /* eslint no-console: 0 */
-      console.log(`server is running at : https://localhost:${config.serverPort}`);
-    });
+    const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
+    const serverCert = '/etc/letsencrypt/live/yinhengli.com/fullchain.pem';
+    https
+        .createServer(
+            {
+                key: fs.readFileSync(serverKey),
+                cert: fs.readFileSync(serverCert),
+            },
+            app.callback(),
+        )
+        .listen(config.serverPort, () => {
+            /* eslint no-console: 0 */
+            console.log(`server is running at : https://localhost:${config.serverPort}`);
+        });
 } else {
-  /* eslint no-console: 0 */
-  console.log(`server is running at : http://localhost:${config.serverPort}`);
-  app.listen(config.serverPort);
+    /* eslint no-console: 0 */
+    console.log(`server is running at : http://localhost:${config.serverPort}`);
+    app.listen(config.serverPort);
 }
 
 

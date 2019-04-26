@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Notice from '../../../src/client/components/Notice';
 
 const setup = () => {
-  /* eslint-disable */
+    /* eslint-disable */
   const wrapper = mount(<Notice />);
   return {
     wrapper,

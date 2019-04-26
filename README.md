@@ -52,4 +52,6 @@ npm run dev
 - [x] antd icon 打包过大（官方还未提供按需加载，已使用替代方案优化）
 - [x] webpack 打包优化（持续）
 - [x] graphql 接口支持
+- [ ] typescript 支持
+- [ ] 错误日志记录完善
 - [ ] 页面性能优化（持续）

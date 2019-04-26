@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 

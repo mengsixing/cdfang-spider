@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "removeComments": true,
     "target": "es5",
     "jsx": "react"
-  }
+  },
+  "include": ["src/**/*", "__tests__/**/*"],
+  "exclude": ["node_modules"]
 }

@@ -6,55 +6,41 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: [
-    'eslint-config-airbnb',
-    'eslint-config-alloy/react',
-    'eslint-config-alloy/typescript',
-  ],
-  globals: {
-    // 这里填入你的项目需要的全局变量
-    // 这里值为 false 表示这个全局变量不允许被重新赋值，比如：
-    //
-    // jQuery: false,
-    // $: false
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "tsconfig.json",
   },
-  plugins: ['react'],
+  extends: [
+    "eslint-config-airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+  ],
+  plugins: ["@typescript-eslint", 'react'],
   rules: {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
-    // 这里填入你的项目需要的个性化配置，比如：
-    //
-    // // 一个缩进必须用两个空格替代
-    // 'indent': [
-    //     'error',
-    //     2,
-    //     {
-    //         SwitchCase: 1,
-    //         flatTernaryExpressions: true
-    //     }
-    // ]
-    // // 一个缩进必须用两个空格替代
-    // '@typescript-eslint/indent': [
-    //     'error',
-    //     2,
-    //     {
-    //         SwitchCase: 1,
-    //         flatTernaryExpressions: true
-    //     }
-    // ]
   },
   // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
-  "settings": {
+  settings: {
     "import/resolver": {
       "webpack": {
         "config": "build/webpack.base.config.js"
       }
     }
   },
-  "overrides": [
+  overrides: [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.ts"],
       "rules": {
         "@typescript-eslint/no-unused-vars": [2, { "args": "none" }]
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "react/prop-types": 0
       }
     }
   ]

@@ -4,7 +4,7 @@ import spider from '../utils/spiderHelper';
 
 
 function initGraphQL(app) {
-    const typeDefs = gql`
+  const typeDefs = gql`
     type House {
       _id: String
       area: String
@@ -26,19 +26,19 @@ function initGraphQL(app) {
     }
   `;
 
-    const resolvers = {
-        Query: {
-            // 和 type Query 中的 allHouses 对应
-            allHouses: async () => {
-                const allHouses = await houseModel.find();
-                return allHouses;
-            },
-            spiderPageOne: async () => spider.spiderPageOne(),
-        },
-    };
+  const resolvers = {
+    Query: {
+      // 和 type Query 中的 allHouses 对应
+      allHouses: async () => {
+        const allHouses = await houseModel.find();
+        return allHouses;
+      },
+      spiderPageOne: async () => spider.spiderPageOne(),
+    },
+  };
 
-    const server = new ApolloServer({ typeDefs, resolvers });
-    server.applyMiddleware({ app });
+  const server = new ApolloServer({ typeDefs, resolvers });
+  server.applyMiddleware({ app });
 }
 
 export default initGraphQL;

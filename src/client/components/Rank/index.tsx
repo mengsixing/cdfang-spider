@@ -1,9 +1,14 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as _ from 'lodash';
 import './styles.less';
+import Idata from '../../context/Idata';
 
-function Rank(props) {
+interface IProps {
+    data: Idata[];
+    title: string;
+}
+
+function Rank(props: IProps) {
     const { data, title } = props;
     const rankData = _.sortBy(data, item => -item.number);
     const rankTitle = title ? `楼盘排名：${title}` : '楼盘排名';
@@ -25,10 +30,5 @@ function Rank(props) {
         </div>
     );
 }
-
-Rank.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.any).isRequired,
-    title: PropTypes.string.isRequired,
-};
 
 export default Rank;

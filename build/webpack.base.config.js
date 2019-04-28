@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: './src/client/index.jsx',
+        index: './src/client/index.tsx',
     },
     module: {
         rules: [
@@ -13,7 +13,7 @@ module.exports = {
                 use: 'babel-loader',
             },
             {
-                test: /\.tsx$/,
+                test: /\.tsx?$/,
                 use: ['babel-loader', 'ts-loader'],
             },
             {
@@ -29,7 +29,7 @@ module.exports = {
         }),
     ],
     resolve: {
-        extensions: ['.jsx', '.tsx', '.js'],
+        extensions: ['.jsx', '.tsx', '.js', '.ts'],
         // antd icon 不支持按需加载，使用替代方案完成
         alias: {
             '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../src/client/icons.js'),

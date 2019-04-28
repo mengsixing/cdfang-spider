@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "lint": "eslint --ext jsx,js src build __tests__ --fix",
+    "lint": "eslint --ext tsx,ts,js src build __tests__ --fix",
     "dev:client": "cross-env BABEL_ENV=production webpack-dev-server --open",
     "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
     "prebuild": "npm run lint && rimraf ./dist",
@@ -55,7 +55,6 @@
     "mini-css-extract-plugin": "^0.5.0",
     "mongoose": "^5.4.19",
     "node-schedule": "^1.3.2",
-    "prop-types": "^15.7.2",
     "qiniu-upload-plugin": "^1.2.5",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

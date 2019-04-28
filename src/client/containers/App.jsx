@@ -1,11 +1,10 @@
-import React, {
-    lazy, Suspense, useEffect, useState,
-} from 'react';
-import _ from 'lodash';
+import * as React from 'react';
+import * as _ from 'lodash';
 import {
     Layout, Menu, Icon, Tabs, BackTop,
 } from 'antd';
-import gql from 'graphql-tag';
+
+import * as gql from 'graphql-tag';
 import util from '../utils';
 
 import ChartPanel from '../components/ChartPanel';
@@ -17,6 +16,11 @@ import Loading from '../components/Loading';
 import config from '../config';
 import { AppContext, globalData } from '../context/appContext';
 import './App.less';
+
+
+const {
+    lazy, Suspense, useEffect, useState,
+} = React;
 
 const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 const { Header, Footer, Content } = Layout;

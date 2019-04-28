@@ -8,19 +8,17 @@ import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
 import BarGraph from '../BarGraph';
 
+import Idata from '../../context/Idata';
+
 const { useState, useContext } = React;
 
 interface IProps {
-    data: object;
+    data: Idata[];
     panelIndex: number;
 }
 
-interface IContext {
-    activityKey: number;
-}
-
 function ChartPanel(props: IProps) {
-    const appState = useContext<IContext>(AppContext);
+    const appState = useContext(AppContext);
     const { panelIndex, data } = props;
     const initState = {
         rank: data,

@@ -1,14 +1,19 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
 import { Table } from 'antd';
-import PropTypes from 'prop-types';
 import { AppContext } from '../../context/appContext';
+import Idata from '../../context/Idata';
 
+const { useContext } = React;
 
-function CommonTable({ areaList }) {
+interface IProps {
+    areaList: string[];
+}
+
+function CommonTable({ areaList }: IProps) {
     const appState = useContext(AppContext);
     const nameFilter = areaList.map(item => ({
         text: item,
-        value: item,
+        value: item
     }));
     const columns = [
         {
@@ -17,30 +22,31 @@ function CommonTable({ areaList }) {
             key: 'area',
             filters: nameFilter,
             filterMultiple: true,
-            onFilter: (value, record) => record.area.indexOf(value) === 0,
+            onFilter: (value, record) => record.area.indexOf(value) === 0
         },
         {
             title: '项目名称',
             dataIndex: 'name',
-            key: 'name',
+            key: 'name'
         },
         {
             title: '住房套数',
             dataIndex: 'number',
             key: 'number',
-            sorter: (a, b) => a.number - b.number,
+            sorter: (a: Idata, b: Idata) => a.number - b.number
         },
         {
             title: '登记开始时间',
             dataIndex: 'beginTime',
             key: 'beginTime',
-            sorter: (a, b) => new Date(a.beginTime) - new Date(b.beginTime),
+            sorter: (a: Idata, b: Idata) => new Date(a.beginTime).getTime() -
+                new Date(b.beginTime).getTime()
         },
         {
             title: '登记结束时间',
             dataIndex: 'endTime',
             key: 'endTime',
-            sorter: (a, b) => new Date(a.endTime) - new Date(b.endTime),
+            sorter: (a: Idata, b: Idata) => new Date(a.endTime).getTime() - new Date(b.endTime).getTime()
         },
         {
             title: '报名状态',
@@ -49,26 +55,26 @@ function CommonTable({ areaList }) {
             filters: [
                 {
                     text: '未报名',
-                    value: '未报名',
+                    value: '未报名'
                 },
                 {
                     text: '正在报名',
-                    value: '正在报名',
+                    value: '正在报名'
                 },
                 {
                     text: '报名结束',
-                    value: '报名结束',
-                },
+                    value: '报名结束'
+                }
             ],
             filterMultiple: true,
             onFilter: (value, record) => record.status.indexOf(value) === 0,
-            render: (text) => {
+            render: text => {
                 if (text !== '报名结束') {
                     return <span style={{ color: 'green' }}>{text}</span>;
                 }
                 return text;
-            },
-        },
+            }
+        }
     ];
 
     const data = appState.allData.map(item => ({ key: item._id, ...item }));
@@ -83,15 +89,11 @@ function CommonTable({ areaList }) {
                     filterTitle: '筛选',
                     filterConfirm: '确定',
                     filterReset: '重置',
-                    emptyText: '暂无数据',
+                    emptyText: '暂无数据'
                 }}
             />
         </div>
     );
 }
-
-CommonTable.propTypes = {
-    areaList: PropTypes.arrayOf(PropTypes.any).isRequired,
-};
 
 export default CommonTable;

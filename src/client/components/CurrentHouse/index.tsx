@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
-import {
-    Collapse, List, Col, Row, Icon,
-} from 'antd';
+import * as React from 'react';
+import { Collapse, List, Col, Row, Icon } from 'antd';
 import './styles.less';
 import { AppContext } from '../../context/appContext';
 
+const { useContext } = React;
 const { Panel } = Collapse;
 
 function CurrentHouse() {
@@ -24,21 +23,17 @@ function CurrentHouse() {
                         {item.area}
                     </Col>
                     <Col span={8}>{item.name}</Col>
-                    <Col span={4}>
-                        {item.number}
-套
-                    </Col>
+                    <Col span={4}>{item.number + '套'}</Col>
                     <Col span={8}>
-            登记截止时间：
-                        {item.endTime}
-                        {' '}
+                        登记截止时间：
+                        {item.endTime + ' '}
                         <a
                             className="register-link"
                             rel="nofollow me noopener noreferrer"
                             target="_blank"
                             href="https://gfdj.cdfgj.gov.cn/lottery/accept/index"
                         >
-              登记
+                            登记
                         </a>
                     </Col>
                 </Row>

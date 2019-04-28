@@ -1,31 +1,34 @@
-import React from 'react';
-import _ from 'lodash';
-import dayjs from 'dayjs';
-import {
-    Chart, Geom, Axis, Tooltip, Coord, Label, Guide,
-} from 'bizcharts';
-import DataSet from '@antv/data-set';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as _ from 'lodash';
+import * as dayjs from 'dayjs';
+import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
+import * as DataSet from '@antv/data-set';
 import './styles.less';
+import Idata from '../../context/Idata';
 
 const { DataView } = DataSet;
 const { Html } = Guide;
 
+interface IProps {
+    isChangeTab: boolean;
+    data: Idata[];
+    changeMonth(monthString: string): void;
+}
 
-function CircleGraph({ data: array, changeMonth }) {
-    function selectMonth(item) {
-        changeMonth(item);
+function CircleGraph({ data: array, changeMonth }: IProps) {
+    function selectMonth(monthString) {
+        changeMonth(monthString);
     }
     const arrayByMonth = _.groupBy(array, item => dayjs(item.beginTime)
         .startOf('month')
         .format('YYYY-MM'));
     let cricleArray = [];
-    Object.keys(arrayByMonth).forEach((key) => {
+    Object.keys(arrayByMonth).forEach(key => {
         const houseNumber = _.sumBy(arrayByMonth[key], 'number');
         cricleArray.push({
             item: dayjs(key).format('YYYY年MM月'),
             number: houseNumber,
-            date: key,
+            date: key
         });
     });
     // 按日期排序
@@ -35,19 +38,25 @@ function CircleGraph({ data: array, changeMonth }) {
         type: 'percent',
         field: 'number',
         dimension: 'item',
-        as: 'percent',
+        as: 'percent'
     });
     const cols = {
         percent: {
-            formatter: val => `${(val * 100).toFixed(2)}%`,
-        },
+            formatter: val => `${(val * 100).toFixed(2)}%`
+        }
     };
     const houseNumber = _.sumBy(array, 'number');
     const guideHtml = `
   <div style="color:#8c8c8c;font-size:1em;text-align: center;width: 10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>
   `;
     return (
-        <Chart height={400} data={dv} scale={cols} forceFit onIntervalClick={selectMonth}>
+        <Chart
+            height={400}
+            data={dv}
+            scale={cols}
+            forceFit
+            onIntervalClick={selectMonth}
+        >
             <div className="chart-title">房源分部图</div>
             <Coord type="theta" radius={0.75} innerRadius={0.6} />
             <Axis name="percent" />
@@ -56,14 +65,19 @@ function CircleGraph({ data: array, changeMonth }) {
                 itemTpl='<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
             />
             <Guide>
-                <Html position={['50%', '50%']} html={guideHtml} alignX="middle" alignY="middle" />
+                <Html
+                    position={['50%', '50%']}
+                    html={guideHtml}
+                    alignX="middle"
+                    alignY="middle"
+                />
             </Guide>
             <Geom
                 select={[
                     true,
                     {
-                        animate: false,
-                    },
+                        animate: false
+                    }
                 ]}
                 type="intervalStack"
                 position="percent"
@@ -72,22 +86,19 @@ function CircleGraph({ data: array, changeMonth }) {
                     'item*percent',
                     (item, percent) => ({
                         name: item,
-                        value: `${(percent * 100).toFixed(2)}%`,
-                    }),
+                        value: `${(percent * 100).toFixed(2)}%`
+                    })
                 ]}
                 style={{ lineWidth: 1, stroke: '#fff' }}
             >
-                <Label content="percent" formatter={(val, item) => `${item.point.item}: ${val}`} />
+                <Label
+                    content="percent"
+                    formatter={(val, item) => `${item.point.item}: ${val}`}
+                />
             </Geom>
         </Chart>
     );
 }
-
-CircleGraph.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.any).isRequired,
-    changeMonth: PropTypes.func.isRequired,
-};
-
 
 function shouldComponentUpdate(prevProps, nextProps) {
     if (nextProps.data.length !== prevProps.data.length) {

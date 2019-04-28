@@ -3,7 +3,7 @@ import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import './styles.less';
 
-interface AreaBarProps {
+interface IProps {
     data: any;
     title: string;
     xAxis: string;
@@ -11,7 +11,7 @@ interface AreaBarProps {
     desc: boolean;
 }
 
-function AreaBar({ data, title, xAxis, yAxis, desc }: AreaBarProps) {
+function AreaBar({ data, title, xAxis, yAxis, desc }: IProps) {
     let chartData = [];
     if (desc) {
         chartData = data.sort((a, b) => b[yAxis] - a[yAxis]);
@@ -28,6 +28,6 @@ function AreaBar({ data, title, xAxis, yAxis, desc }: AreaBarProps) {
 }
 
 export default React.memo(
-    RenderNoEmptyComponent(AreaBar, ['data']),
+    RenderNoEmptyComponent(AreaBar as React.FunctionComponent, ['data']),
     () => false
 );

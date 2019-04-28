@@ -1,10 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Notice from '../../../src/client/components/Notice';
+import Notice from '../../../src/client/components/Notice/index.tsx';
 
 const setup = () => {
-  /* eslint-disable */
   const wrapper = mount(<Notice />);
   return {
     wrapper,

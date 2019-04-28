@@ -47,7 +47,7 @@ function CurrentHouse() {
           <List
             bordered
             dataSource={currentHouses}
-            renderItem={item => <List.Item>{item}</List.Item>}
+            renderItem={(item: JSX.Element) => <List.Item>{item}</List.Item>}
           />
         </Panel>
       </Collapse>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Idata from './Idata';
 
-interface IappContext {
+export interface IappContext {
   allData: Idata[];
   activityKey: number;
   changeData(data: Idata[]): void;

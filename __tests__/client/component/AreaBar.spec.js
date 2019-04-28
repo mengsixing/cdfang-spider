@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
 import AreaBar from '../../../src/client/components/AreaBar/index.tsx';
@@ -15,9 +15,7 @@ const setup = () => {
     yAxis: '房源',
     desc: true,
   };
-    /* eslint-disable */
   const wrapper = mount(<AreaBar {...props} />);
-  /* eslint-enable */
   return {
     props,
     wrapper,

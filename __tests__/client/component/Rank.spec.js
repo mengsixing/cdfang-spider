@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Rank from '../../../src/client/components/Rank';
+import Rank from '../../../src/client/components/Rank/index.tsx';
 
 const setup = () => {
   const props = {
@@ -17,9 +17,7 @@ const setup = () => {
       },
     ],
   };
-    /* eslint-disable */
   const wrapper = mount(<Rank {...props} />);
-  /* eslint-enable */
   return {
     props,
     wrapper,

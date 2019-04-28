@@ -9,25 +9,21 @@ interface Iprops {
   areaList: string[];
 }
 
-interface ItextValue {
-  text: string;
-  value: string;
-}
-
 function CommonTable({ areaList }: Iprops) {
   const appState = useContext(AppContext);
   const nameFilter = areaList.map(item => ({
     text: item,
     value: item
   }));
-  const columns = [
+  const columns: any[] = [
     {
       title: '区域',
       dataIndex: 'area',
       key: 'area',
       filters: nameFilter,
       filterMultiple: true,
-      onFilter: (value, record) => record.area.indexOf(value) === 0
+      onFilter: (value: string, datalist: Idata) =>
+        datalist.area.indexOf(value) === 0
     },
     {
       title: '项目名称',
@@ -73,8 +69,10 @@ function CommonTable({ areaList }: Iprops) {
         }
       ],
       filterMultiple: true,
-      onFilter: (value, record) => record.status.indexOf(value) === 0,
-      render: text => {
+      onFilter: (value: string, datalist: Idata) => {
+        return datalist.status.indexOf(value) === 0;
+      },
+      render: (text: string) => {
         if (text !== '报名结束') {
           return <span style={{ color: 'green' }}>{text}</span>;
         }

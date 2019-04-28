@@ -1,15 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Loading from '../../../src/client/components/Loading';
+import Loading from '../../../src/client/components/Loading/index.tsx';
 
 const setup = () => {
   const props = {
     tip: 'test',
   };
-    /* eslint-disable */
   const wrapper = mount(<Loading {...props} />);
-  /* eslint-enable */
   return {
     props,
     wrapper,

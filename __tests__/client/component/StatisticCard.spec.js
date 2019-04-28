@@ -1,17 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import StatisticCard from '../../../src/client/components/StatisticCard';
+import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
+import StatisticCard from '../../../src/client/components/StatisticCard/index.tsx';
 
 const setup = () => {
-  /* eslint-disable */
   const wrapper = mount(
     <AppContext.Provider value={globalData}>
       <StatisticCard />
     </AppContext.Provider>
     ,
   );
-  /* eslint-enable */
   return {
     wrapper,
   };

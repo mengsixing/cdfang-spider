@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "removeComments": true,
     "target": "es5",
     "jsx": "react"
   },
-  "include": ["src/**/*", "__tests__/**/*"],
+  "include": ["src/**/*", "__tests__/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

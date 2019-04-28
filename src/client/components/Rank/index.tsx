@@ -10,13 +10,13 @@ interface Iprops {
 
 function Rank(props: Iprops) {
   const { data, title } = props;
-  const rankData = _.sortBy(data, item => -item.number);
+  const rankData = _.sortBy(data, (item: Idata) => -item.number);
   const rankTitle = title ? `楼盘排名：${title}` : '楼盘排名';
   return (
     <div className="rank">
       <div className="rank-title">{rankTitle}</div>
       <ul className="rank-list">
-        {rankData.map((item, index) => {
+        {rankData.map((item: Idata, index: number) => {
           const istop3 = index < 3 ? 'top3' : '';
           return (
             // eslint-disable-next-line no-underscore-dangle

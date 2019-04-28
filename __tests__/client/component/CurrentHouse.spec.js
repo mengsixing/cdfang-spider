@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import CurrentHouse from '../../../src/client/components/CurrentHouse';
+import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
+import CurrentHouse from '../../../src/client/components/CurrentHouse/index.tsx';
 
 const setup = () => {
   const appState = {
@@ -18,13 +18,11 @@ const setup = () => {
     ],
     activityKey: 6,
   };
-    /* eslint-disable */
   const wrapper = mount(
     <AppContext.Provider value={appState}>
       <CurrentHouse />
     </AppContext.Provider>,
   );
-  /* eslint-enable */
   return {
     wrapper,
   };

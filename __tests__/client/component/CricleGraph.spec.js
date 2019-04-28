@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import CricleGraph from '../../../src/client/components/CricleGraph';
+import CricleGraph from '../../../src/client/components/CricleGraph/index.tsx';
 
 const setup = () => {
   const props = {
@@ -16,9 +16,7 @@ const setup = () => {
       },
     ],
   };
-    /* eslint-disable */
   const wrapper = mount(<CricleGraph {...props} />);
-  /* eslint-enable */
   return {
     props,
     wrapper,

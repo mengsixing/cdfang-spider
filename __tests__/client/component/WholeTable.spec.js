@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 
 import { render } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import WholeTable from '../../../src/client/components/WholeTable';
+import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
+import WholeTable from '../../../src/client/components/WholeTable/index.tsx';
 import { mockHouse, mockArea } from '../../../__mocks__/db';
 
 const setup = () => {
@@ -14,13 +14,11 @@ const setup = () => {
   const props = {
     areaList: mockArea,
   };
-    /* eslint-disable */
   const wrapper = render(
     <AppContext.Provider value={appState}>
       <WholeTable {...props} />
     </AppContext.Provider>,
   );
-  /* eslint-enable */
   return {
     props,
     wrapper,

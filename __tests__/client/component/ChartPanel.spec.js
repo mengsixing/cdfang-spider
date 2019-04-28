@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import ChartPanel from '../../../src/client/components/ChartPanel';
+import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
+import ChartPanel from '../../../src/client/components/ChartPanel/index.tsx';
 
 const setup = () => {
   const props = {
@@ -17,13 +17,11 @@ const setup = () => {
       },
     ],
   };
-    /* eslint-disable */
   const wrapper = mount(
     <AppContext.Provider value={globalData}>
       <ChartPanel {...props} />
     </AppContext.Provider>,
   );
-  /* eslint-enable */
   return {
     props,
     wrapper,

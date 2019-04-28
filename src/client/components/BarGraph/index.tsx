@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
-import * as DataSet from '@antv/data-set';
+import DataSet from '@antv/data-set';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
+import Idata from '../../context/Idata';
 
 interface Iprops {
-  data: object;
+  data: Idata[];
 }
 
 function BarGraph(props: Iprops) {
@@ -15,10 +17,10 @@ function BarGraph(props: Iprops) {
       .startOf('month')
       .format('YYYY-MM')
   );
-  const buildObj = { name: '楼盘' };
-  const houseObj = { name: '房源' };
+  const buildObj: any = { name: '楼盘' };
+  const houseObj: any = { name: '房源' };
   const cricleObj = [];
-  let fields = [];
+  let fields: string[] = [];
   Object.keys(arrayByMonth).forEach(key => {
     const houseNumber = _.sumBy(arrayByMonth[key], 'number');
     const buildNumber = arrayByMonth[key].length;
@@ -30,7 +32,7 @@ function BarGraph(props: Iprops) {
     });
     fields.push(key);
   });
-  fields = _.sortBy(fields, [o => dayjs(o)]);
+  fields = _.sortBy(fields, [(t: string) => dayjs(t)]);
   const data = [buildObj, houseObj];
   const ds = new DataSet();
   const dv = ds.createView().source(data);

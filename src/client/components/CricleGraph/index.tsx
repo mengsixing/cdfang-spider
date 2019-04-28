@@ -15,8 +15,14 @@ interface Iprops {
   changeMonth(monthString: string): void;
 }
 
+interface IcircleData {
+  item: string;
+  number: number;
+  date: string;
+}
+
 function CircleGraph({ data: array, changeMonth }: Iprops) {
-  function selectMonth(monthString) {
+  function selectMonth(monthString: string) {
     changeMonth(monthString);
   }
   const arrayByMonth = _.groupBy(array, item =>
@@ -24,7 +30,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
       .startOf('month')
       .format('YYYY-MM')
   );
-  let cricleArray = [];
+  let cricleArray: IcircleData[] = [];
   Object.keys(arrayByMonth).forEach(key => {
     const houseNumber = _.sumBy(arrayByMonth[key], 'number');
     cricleArray.push({
@@ -44,7 +50,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
   });
   const cols = {
     percent: {
-      formatter: val => `${(val * 100).toFixed(2)}%`
+      formatter: (val: number) => `${(val * 100).toFixed(2)}%`
     }
   };
   const houseNumber = _.sumBy(array, 'number');
@@ -102,7 +108,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
   );
 }
 
-function shouldComponentUpdate(prevProps, nextProps) {
+function shouldComponentUpdate(prevProps: Iprops, nextProps: Iprops) {
   if (nextProps.data.length !== prevProps.data.length) {
     return false;
   }

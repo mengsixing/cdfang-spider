@@ -15,6 +15,14 @@ const { useState, useContext } = React;
 interface Iprops {
   data: Idata[];
   panelIndex: number;
+  activityKey: number;
+}
+
+interface Istate {
+  isChangeTab: boolean;
+  isOpen: boolean;
+  rank: Idata[];
+  rankTitle: string;
 }
 
 function ChartPanel(props: Iprops) {
@@ -33,7 +41,8 @@ function ChartPanel(props: Iprops) {
 
   const [state, setState] = useState(initState);
 
-  function changeMonth(item, newState) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function changeMonth(item: any, newState: Istate) {
     const { rankTitle, isOpen } = newState;
     const { _origin } = item.data;
 

@@ -5,15 +5,15 @@ if (process.env.NODE_ENV === 'production') {
   serverDomain = 'https://yinhengli.com:8082';
 }
 
-function getGraphqlClient() {
+function getGraphqlClient(): ApolloClient<{}> {
   return new ApolloClient({
-    uri: `${serverDomain}/graphql`,
+    uri: `${serverDomain}/graphql`
   });
 }
 
 const config = {
   serverDomain,
-  getGraphqlClient,
+  getGraphqlClient
 };
 
 export default config;

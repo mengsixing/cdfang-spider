@@ -3,8 +3,8 @@ import { Spin } from 'antd';
 import './styles.less';
 
 interface Iprops {
-  height: string;
-  tip: string;
+  height?: string;
+  tip?: string;
 }
 
 function Loading(

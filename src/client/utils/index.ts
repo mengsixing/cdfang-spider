@@ -1,44 +1,59 @@
-import _ from 'lodash';
-import dayjs from 'dayjs';
+import * as _ from 'lodash';
+import * as dayjs from 'dayjs';
+import Idata from '../context/Idata';
+
+interface Iauarter {
+  thisQuarterStart: dayjs.ConfigType;
+  thisQuarterEnd: dayjs.ConfigType;
+}
+
+export interface IhouseInfo {
+  houseNumber: number;
+  buildNumber: number;
+  increaseHouseNumber?: number;
+  increaseBuildNumber?: number;
+  increaseHouseNumberString?: string;
+  increaseBuildNumberString?: string;
+}
 
 // 当前季度
-function getCurrentQuarter(dayjsObject = dayjs()) {
+function getCurrentQuarter(dayjsObject = dayjs()): Iauarter {
   switch (dayjsObject.month()) {
     case 0:
     case 1:
     case 2:
       return {
         thisQuarterStart: dayjsObject.set('month', 0).startOf('month'),
-        thisQuarterEnd: dayjsObject.set('month', 2).startOf('month'),
+        thisQuarterEnd: dayjsObject.set('month', 2).startOf('month')
       };
     case 3:
     case 4:
     case 5:
       return {
         thisQuarterStart: dayjsObject.set('month', 3).startOf('month'),
-        thisQuarterEnd: dayjsObject.set('month', 5).startOf('month'),
+        thisQuarterEnd: dayjsObject.set('month', 5).startOf('month')
       };
     case 6:
     case 7:
     case 8:
       return {
         thisQuarterStart: dayjsObject.set('month', 6).startOf('month'),
-        thisQuarterEnd: dayjsObject.set('month', 8).startOf('month'),
+        thisQuarterEnd: dayjsObject.set('month', 8).startOf('month')
       };
     case 9:
     case 10:
     case 11:
       return {
         thisQuarterStart: dayjsObject.set('month', 9).startOf('month'),
-        thisQuarterEnd: dayjsObject.set('month', 11).startOf('month'),
+        thisQuarterEnd: dayjsObject.set('month', 11).startOf('month')
       };
     default:
-      return {};
+      return null;
   }
 }
 
 // 获取增长量
-function getIncreaseNumber(number) {
+function getIncreaseNumber(number: number): string {
   if (number > 0) {
     return `${number}↑`;
   }
@@ -49,21 +64,24 @@ function getIncreaseNumber(number) {
 }
 
 const util = {
-  getAllInfo(allData) {
+  getAllInfo(allData: Idata[]): IhouseInfo {
     const houseNumber = _.sumBy(allData, 'number');
     const buildNumber = allData.length;
     return {
       houseNumber,
-      buildNumber,
+      buildNumber
     };
   },
-  getThisWeekInfo(allData) {
+  getThisWeekInfo(allData: Idata[]): IhouseInfo {
     const thisWeekStart = dayjs().set('day', 0);
     const thisWeekEnd = dayjs().set('day', 7);
-    const weekData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisWeekStart && beginTime < thisWeekEnd;
-    });
+    const weekData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisWeekStart && beginTime < thisWeekEnd;
+      }
+    );
     const houseNumber = _.sumBy(weekData, 'number');
     const buildNumber = weekData.length;
     const lastWeekInfo = this.getLastWeekInfo(allData);
@@ -75,16 +93,19 @@ const util = {
       increaseHouseNumber,
       increaseBuildNumber,
       increaseHouseNumberString: getIncreaseNumber(increaseHouseNumber),
-      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber),
+      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber)
     };
   },
-  getThisMonthInfo(allData) {
+  getThisMonthInfo(allData: Idata[]): IhouseInfo {
     const thisMonthStart = dayjs().startOf('month');
     const thisMonthEnd = dayjs().endOf('month');
-    const weekData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisMonthStart && beginTime < thisMonthEnd;
-    });
+    const weekData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisMonthStart && beginTime < thisMonthEnd;
+      }
+    );
     const houseNumber = _.sumBy(weekData, 'number');
     const buildNumber = weekData.length;
     const lastMonthInfo = this.getLastMonthInfo(allData);
@@ -96,16 +117,19 @@ const util = {
       increaseHouseNumber,
       increaseBuildNumber,
       increaseHouseNumberString: getIncreaseNumber(increaseHouseNumber),
-      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber),
+      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber)
     };
   },
-  getThisQuarterInfo(allData) {
+  getThisQuarterInfo(allData: Idata[]): IhouseInfo {
     const time = getCurrentQuarter();
     const { thisQuarterStart, thisQuarterEnd } = time;
-    const quarterData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisQuarterStart && beginTime < thisQuarterEnd;
-    });
+    const quarterData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisQuarterStart && beginTime < thisQuarterEnd;
+      }
+    );
     const houseNumber = _.sumBy(quarterData, 'number');
     const buildNumber = quarterData.length;
     const lastQuarterInfo = this.getLastQuarterInfo(allData);
@@ -117,66 +141,78 @@ const util = {
       increaseHouseNumber,
       increaseBuildNumber,
       increaseHouseNumberString: getIncreaseNumber(increaseHouseNumber),
-      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber),
+      increaseBuildNumberString: getIncreaseNumber(increaseBuildNumber)
     };
   },
-  getLastWeekInfo(allData) {
+  getLastWeekInfo(allData: Idata[]): IhouseInfo {
     const thisWeekStart = dayjs()
       .set('day', 0)
       .add(-7, 'day');
     const thisWeekEnd = dayjs()
       .set('day', 7)
       .add(-7, 'day');
-    const weekData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisWeekStart && beginTime < thisWeekEnd;
-    });
+    const weekData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisWeekStart && beginTime < thisWeekEnd;
+      }
+    );
     const houseNumber = _.sumBy(weekData, 'number');
     const buildNumber = weekData.length;
     return {
       houseNumber,
-      buildNumber,
+      buildNumber
     };
   },
-  getLastMonthInfo(allData) {
+  getLastMonthInfo(allData: Idata[]): IhouseInfo {
     const thisMonthStart = dayjs()
       .add(-1, 'month')
       .startOf('month');
     const thisMonthEnd = dayjs()
       .add(-1, 'month')
       .endOf('month');
-    const weekData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisMonthStart && beginTime < thisMonthEnd;
-    });
+    const weekData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisMonthStart && beginTime < thisMonthEnd;
+      }
+    );
     const houseNumber = _.sumBy(weekData, 'number');
     const buildNumber = weekData.length;
     return {
       houseNumber,
-      buildNumber,
+      buildNumber
     };
   },
-  getLastQuarterInfo(allData) {
+  getLastQuarterInfo(allData: Idata[]): IhouseInfo {
     const time = getCurrentQuarter(dayjs().add(-3, 'month'));
     const { thisQuarterStart, thisQuarterEnd } = time;
-    const quarterData = _.filter(allData, (item) => {
-      const beginTime = dayjs(item.beginTime);
-      return beginTime > thisQuarterStart && beginTime < thisQuarterEnd;
-    });
+    const quarterData = _.filter(
+      allData,
+      (item: Idata): boolean => {
+        const beginTime = dayjs(item.beginTime);
+        return beginTime > thisQuarterStart && beginTime < thisQuarterEnd;
+      }
+    );
     const houseNumber = _.sumBy(quarterData, 'number');
     const buildNumber = quarterData.length;
     return {
       houseNumber,
-      buildNumber,
+      buildNumber
     };
   },
-  sortArea(areaArray) {
+  sortArea(areaArray: string[]): string[] {
     // 把主城区排在前面
-    const mainArea = '天府新区,高新南区,龙泉驿区,金牛区,成华区,武侯区,青羊区,锦江区';
-    const newArray = _.sortBy(areaArray, [area => -mainArea.indexOf(area)]);
+    const mainArea =
+      '天府新区,高新南区,龙泉驿区,金牛区,成华区,武侯区,青羊区,锦江区';
+    const newArray = _.sortBy(areaArray, [
+      (area: string) => -mainArea.indexOf(area)
+    ]);
     return newArray;
   },
-  getCurrentQuarter,
+  getCurrentQuarter
 };
 
 export default util;

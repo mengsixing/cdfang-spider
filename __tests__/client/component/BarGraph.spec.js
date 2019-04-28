@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph from '../../../src/client/components/BarGraph';
+import BarGraph from '../../../src/client/components/BarGraph/index.tsx';
 
 const setup = () => {
   const props = {
@@ -17,9 +17,7 @@ const setup = () => {
       },
     ],
   };
-    /* eslint-disable */
   const wrapper = mount(<BarGraph {...props} />);
-  /* eslint-enable */
   return {
     props,
     wrapper,

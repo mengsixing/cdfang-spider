@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import https from 'https';
-import fs from 'fs';
+import * as https from 'https';
+import * as fs from 'fs';
 import Koa from 'koa';
 import serve from 'koa-static';
 import cors from 'koa2-cors';
@@ -18,15 +18,15 @@ log4js.configure({
   appenders: {
     globallog: {
       type: 'file',
-      filename: './logs/globallog.log',
-    },
+      filename: './logs/globallog.log'
+    }
   },
   categories: {
     default: {
       appenders: ['globallog'],
-      level: 'error',
-    },
-  },
+      level: 'error'
+    }
+  }
 });
 const logger = log4js.getLogger('globallog');
 ErrorHander.init(app, logger);
@@ -37,7 +37,6 @@ controller.init(app);
 // 静态资源目录
 app.use(serve('client'));
 
-
 // 服务器上的地址
 if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
   const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
@@ -46,20 +45,24 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
     .createServer(
       {
         key: fs.readFileSync(serverKey),
-        cert: fs.readFileSync(serverCert),
+        cert: fs.readFileSync(serverCert)
       },
-      app.callback(),
+      app.callback()
     )
-    .listen(config.serverPort, () => {
-      /* eslint no-console: 0 */
-      console.log(`server is running at : https://localhost:${config.serverPort}`);
-    });
+    .listen(
+      config.serverPort,
+      (): void => {
+        // eslint-disable-next-line no-console
+        console.log(
+          `server is running at : https://localhost:${config.serverPort}`
+        );
+      }
+    );
 } else {
-  /* eslint no-console: 0 */
+  // eslint-disable-next-line no-console
   console.log(`server is running at : http://localhost:${config.serverPort}`);
   app.listen(config.serverPort);
 }
-
 
 // export default app;
 module.exports = app;

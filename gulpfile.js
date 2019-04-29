@@ -1,13 +1,12 @@
 const gulp = require('gulp');
-
 const babel = require('gulp-babel');
 
+
 gulp.task('default', () => gulp
-  .src('./src/nodeuii/**/*.js')
+  .src('./src/nodeuii/**/*.ts')
   .pipe(
-    babel({
-      presets: ['@babel/preset-env'],
-    }),
+    // 使用 .babelrc 配置
+    babel({}),
   )
   .pipe(gulp.dest('./dist/')));
 

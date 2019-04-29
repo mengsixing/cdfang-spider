@@ -1,9 +1,9 @@
 import { ApolloServer, gql } from 'apollo-server-koa';
 import houseModel from '../models/houseModel';
 import spider from '../utils/spiderHelper';
+import Idata from '../utils/Idata';
 
-
-function initGraphQL(app) {
+function initGraphQL(app): void {
   const typeDefs = gql`
     type House {
       _id: String
@@ -16,25 +16,25 @@ function initGraphQL(app) {
     }
 
     type PageOneArray {
-      successArray:[House]
-      allLength:Int
+      successArray: [House]
+      allLength: Int
     }
 
     type Query {
       allHouses: [House]
-      spiderPageOne:PageOneArray
+      spiderPageOne: PageOneArray
     }
   `;
 
   const resolvers = {
     Query: {
       // 和 type Query 中的 allHouses 对应
-      allHouses: async () => {
+      allHouses: async (): Promise<Idata[]> => {
         const allHouses = await houseModel.find();
         return allHouses;
       },
-      spiderPageOne: async () => spider.spiderPageOne(),
-    },
+      spiderPageOne: async () => spider.spiderPageOne()
+    }
   };
 
   const server = new ApolloServer({ typeDefs, resolvers });

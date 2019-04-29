@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import * as https from 'https';
-import * as fs from 'fs';
+import https from 'https';
+import fs from 'fs';
 import Koa from 'koa';
 import serve from 'koa-static';
 import cors from 'koa2-cors';

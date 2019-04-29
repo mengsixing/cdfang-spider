@@ -1,24 +1,30 @@
 import dayjs from 'dayjs';
 import { mockHouse as mockData, mockArea } from '../../__mocks__/db';
-import util from '../../src/client/utils/index.ts';
+import util from '../../src/client/utils/index';
 
 const setup = () => ({
   currentQuarter: util.getCurrentQuarter(),
   allInfo: util.getAllInfo(mockData),
   thisWeekInfo: util.getThisWeekInfo(mockData),
   thisMonthInfo: util.getThisMonthInfo(mockData),
-  thisQuarterInfo: util.getThisQuarterInfo(mockData),
+  thisQuarterInfo: util.getThisQuarterInfo(mockData)
 });
 
 describe('client util测试', () => {
   const {
-    currentQuarter, allInfo, thisWeekInfo, thisMonthInfo, thisQuarterInfo,
+    currentQuarter,
+    allInfo,
+    thisWeekInfo,
+    thisMonthInfo,
+    thisQuarterInfo
   } = setup();
   it('getCurrentQuarter返回参数是否正确？', () => {
     expect(typeof util.getCurrentQuarter).toBe('function');
     const quarterMap = [0, 0, 0, 0, 3, 3, 3, 6, 6, 6, 9, 9, 9];
     for (let i = 1; i <= 12; i += 1) {
-      expect(util.getCurrentQuarter(dayjs(`2019-${i}-10`)).thisQuarterStart.month()).toBe(quarterMap[i]);
+      expect(
+        util.getCurrentQuarter(dayjs(`2019-${i}-10`)).thisQuarterStart.month()
+      ).toBe(quarterMap[i]);
     }
     expect([0, 3, 6, 9]).toContain(currentQuarter.thisQuarterStart.month());
   });

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph from '../../../src/client/components/BarGraph/index.tsx';
+import BarGraph from '../../../src/client/components/BarGraph/index';
 
 const setup = () => {
   const props = {
@@ -13,14 +13,14 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束',
-      },
-    ],
+        status: '报名结束'
+      }
+    ]
   };
   const wrapper = mount(<BarGraph {...props} />);
   return {
     props,
-    wrapper,
+    wrapper
   };
 };
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
-import CurrentHouse from '../../../src/client/components/CurrentHouse/index.tsx';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import CurrentHouse from '../../../src/client/components/CurrentHouse/index';
 
 const setup = () => {
   const appState = {
@@ -13,18 +13,18 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名中',
-      },
+        status: '报名中'
+      }
     ],
-    activityKey: 6,
+    activityKey: 6
   };
   const wrapper = mount(
     <AppContext.Provider value={appState}>
       <CurrentHouse />
-    </AppContext.Provider>,
+    </AppContext.Provider>
   );
   return {
-    wrapper,
+    wrapper
   };
 };
 

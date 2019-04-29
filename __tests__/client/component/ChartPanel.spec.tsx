@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
-import ChartPanel from '../../../src/client/components/ChartPanel/index.tsx';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import ChartPanel from '../../../src/client/components/ChartPanel/index';
 
 const setup = () => {
   const props = {
@@ -13,18 +13,18 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束',
-      },
-    ],
+        status: '报名结束'
+      }
+    ]
   };
   const wrapper = mount(
     <AppContext.Provider value={globalData}>
       <ChartPanel {...props} />
-    </AppContext.Provider>,
+    </AppContext.Provider>
   );
   return {
     props,
-    wrapper,
+    wrapper
   };
 };
 

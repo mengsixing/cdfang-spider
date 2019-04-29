@@ -2,7 +2,7 @@
 import * as util from '../../src/nodeuii/utils';
 
 const setup = () => ({
-  transformedArray: util.transformArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+  transformedArray: util.transformArray(new Array(12))
 });
 
 describe('transformArray测试', () => {
@@ -17,7 +17,7 @@ describe('transformArray测试', () => {
       number: NaN,
       beginTime: undefined,
       endTime: undefined,
-      status: undefined,
+      status: undefined
     });
   });
 });

@@ -1,11 +1,13 @@
+// https://www.tslang.cn/docs/handbook/compiler-options.html
 {
   "compilerOptions": {
     "baseUrl": ".",
     "noImplicitAny": false,
-    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
     "removeComments": true,
     "target": "es5",
-    "jsx": "react"
+    "jsx": "react",
+    "noImplicitReturns": true
   },
   "include": ["src/**/*", "__tests__/**/*", "types/**/*"],
   "exclude": ["node_modules"]

@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Loading from '../../../src/client/components/Loading/index.tsx';
+import Loading from '../../../src/client/components/Loading/index';
 
 const setup = () => {
   const props = {
-    tip: 'test',
+    tip: 'test'
   };
   const wrapper = mount(<Loading {...props} />);
   return {
     props,
-    wrapper,
+    wrapper
   };
 };
 

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Notice from '../../../src/client/components/Notice/index.tsx';
+import Notice from '../../../src/client/components/Notice/index';
 
 const setup = () => {
   const wrapper = mount(<Notice />);
   return {
-    wrapper,
+    wrapper
   };
 };
 
@@ -20,7 +20,9 @@ describe('Notice 组件', () => {
   });
 
   it('点击获取消息 ?', () => {
-    fetch.mockResponseOnce(JSON.stringify({ data: '12345',successArray:[1,2,3] }))
+    fetch.mockResponseOnce(
+      JSON.stringify({ data: '12345', successArray: [1, 2, 3] })
+    );
     wrapper.find('Icon').simulate('click');
     expect(cheerioWrapper.hasClass('notice-icon')).toBe(true);
   });

@@ -1,17 +1,16 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext.ts';
-import StatisticCard from '../../../src/client/components/StatisticCard/index.tsx';
+import { AppContext, globalData } from '../../../src/client/context/appContext';
+import StatisticCard from '../../../src/client/components/StatisticCard/index';
 
 const setup = () => {
   const wrapper = mount(
     <AppContext.Provider value={globalData}>
       <StatisticCard />
     </AppContext.Provider>
-    ,
   );
   return {
-    wrapper,
+    wrapper
   };
 };
 

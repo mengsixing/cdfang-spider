@@ -10,5 +10,5 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
     "^.+\\.tsx?$": "ts-jest",
   },
-  collectCoverageFrom: ['src/client/components/**/*.{js,jsx}', '!**/node_modules/**'],
+  collectCoverageFrom: ['src/client/components/**/*.{ts,tsx}', '!**/node_modules/**'],
 };

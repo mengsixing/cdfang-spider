@@ -7,22 +7,5 @@
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties"
-  ],
-  "env": {
-    // 开发环境按需打包
-    "production": {
-      "plugins": [
-        [
-          "import",
-          {
-            "libraryName": "antd",
-            "libraryDirectory": "es",
-            "style": true
-          }
-        ],
-        "@babel/plugin-syntax-dynamic-import",
-        "@babel/plugin-proposal-class-properties"
-      ]
-    }
-  }
+  ]
 }

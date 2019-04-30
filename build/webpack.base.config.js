@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin')
 
 module.exports = {
   entry: {
@@ -9,12 +10,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         use: 'babel-loader',
       },
       {
         test: /\.tsx?$/,
-        use: ['babel-loader', 'ts-loader'],
+        use: ['babel-loader', {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            getCustomTransformers: () => ({
+              before: [tsImportPluginFactory({
+                libraryName: 'antd',
+                libraryDirectory: 'lib',
+                style: true
+              })]
+            }),
+            compilerOptions: {
+              module: 'es2015'
+            }
+          }
+        }],
       },
       {
         test: /\.png$/,
@@ -29,7 +45,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.jsx', '.tsx', '.js', '.ts'],
+    extensions: ['.tsx', '.js', '.ts'],
     // antd icon 不支持按需加载，使用替代方案完成
     alias: {
       '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../src/client/icons.js'),

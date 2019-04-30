@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import { mockHouse as mockData, mockArea } from '../../__mocks__/db';
 import util from '../../src/client/utils/index';
 

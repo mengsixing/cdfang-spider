@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "lint": "eslint --ext tsx,ts src --fix",
+    "lint": "eslint --ext tsx,ts src __tests__ --fix",
     "dev:client": "cross-env BABEL_ENV=production webpack-dev-server --open",
     "sss": "cross-env NODE_ENV=development gulp",
     "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",

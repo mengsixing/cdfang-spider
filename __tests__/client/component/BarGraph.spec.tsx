@@ -1,11 +1,10 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph from '../../../src/client/components/BarGraph/index';
+import BarGraph, { Iprops } from '../../../src/client/components/BarGraph';
 
 const setup = () => {
-  const props = {
-    title: '月份统计图',
+  const props: Iprops = {
     data: [
       {
         area: '高新南区',
@@ -13,7 +12,8 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束'
+        status: '报名结束',
+        _id: ''
       }
     ]
   };
@@ -25,7 +25,7 @@ const setup = () => {
 };
 
 describe('BarGraph 组件', () => {
-  const { wrapper, props } = setup();
+  const { wrapper } = setup();
   const cheerioWrapper = wrapper.render();
 
   it('是否渲染成功 ?', () => {
@@ -34,6 +34,6 @@ describe('BarGraph 组件', () => {
   });
 
   it('title是否正确 ?', () => {
-    expect(wrapper.prop('title')).toEqual(props.title);
+    expect(wrapper.find('.chart-title').text()).toEqual('月份统计图');
   });
 });

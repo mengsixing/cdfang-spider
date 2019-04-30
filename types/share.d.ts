@@ -1,4 +1,4 @@
-export default interface Idata {
+interface Idata {
   area: string;
   beginTime: string;
   endTime: string;

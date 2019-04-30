@@ -9,7 +9,7 @@ import Idata from '../../context/Idata';
 const { DataView } = DataSet;
 const { Html } = Guide;
 
-interface Iprops {
+export interface Iprops {
   isChangeTab: boolean;
   data: Idata[];
   changeMonth(monthString: string): void;

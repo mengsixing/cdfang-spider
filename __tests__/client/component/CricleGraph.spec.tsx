@@ -1,12 +1,15 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import CricleGraph from '../../../src/client/components/CricleGraph/index';
+import CricleGraph, {
+  Iprops
+} from '../../../src/client/components/CricleGraph';
 
 const setup = () => {
-  const props = {
+  const props: Iprops = {
     data: [
       {
+        _id: '',
         area: '高新南区',
         beginTime: '2018-12-27 09:00:00',
         endTime: '2018-12-29 18:00:00',
@@ -14,7 +17,9 @@ const setup = () => {
         number: 56,
         status: '报名结束'
       }
-    ]
+    ],
+    isChangeTab: false,
+    changeMonth: () => {}
   };
   const wrapper = mount(<CricleGraph {...props} />);
   return {

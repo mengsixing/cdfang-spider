@@ -2,12 +2,13 @@ import * as React from 'react';
 
 import { mount } from 'enzyme';
 import { AppContext, globalData } from '../../../src/client/context/appContext';
-import ChartPanel from '../../../src/client/components/ChartPanel/index';
+import ChartPanel, { Iprops } from '../../../src/client/components/ChartPanel';
 
 const setup = () => {
-  const props = {
+  const props: Iprops = {
     data: [
       {
+        _id: '',
         area: '高新南区',
         beginTime: '2018-12-27 09:00:00',
         endTime: '2018-12-29 18:00:00',
@@ -15,7 +16,9 @@ const setup = () => {
         number: 56,
         status: '报名结束'
       }
-    ]
+    ],
+    panelIndex: 1,
+    activityKey: 1
   };
   const wrapper = mount(
     <AppContext.Provider value={globalData}>

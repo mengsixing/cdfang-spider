@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import CurrentHouse from '../../../src/client/components/CurrentHouse/index';
+import {
+  AppContext,
+  globalData,
+  IappContext
+} from '../../../src/client/context/appContext';
+import CurrentHouse from '../../../src/client/components/CurrentHouse';
 
 const setup = () => {
-  const appState = {
+  const appState: IappContext = {
     ...globalData,
     allData: [
       {
+        _id: '',
         area: '高新南区',
         beginTime: '2018-12-27 09:00:00',
         endTime: '2018-12-29 18:00:00',

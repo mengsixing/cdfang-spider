@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { render } from 'enzyme';
 import { AppContext, globalData } from '../../../src/client/context/appContext';
-import WholeTable from '../../../src/client/components/WholeTable/index';
+import WholeTable from '../../../src/client/components/WholeTable';
 import { mockHouse, mockArea } from '../../../__mocks__/db';
 
 const setup = () => {

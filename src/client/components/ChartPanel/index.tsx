@@ -12,7 +12,7 @@ import Idata from '../../context/Idata';
 
 const { useState, useContext } = React;
 
-interface Iprops {
+export interface Iprops {
   data: Idata[];
   panelIndex: number;
   activityKey: number;

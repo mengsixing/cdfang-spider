@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { AppContext, globalData } from '../../../src/client/context/appContext';
-import StatisticCard from '../../../src/client/components/StatisticCard/index';
+import StatisticCard from '../../../src/client/components/StatisticCard';
 
 const setup = () => {
   const wrapper = mount(

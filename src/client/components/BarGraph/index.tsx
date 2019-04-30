@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import Idata from '../../context/Idata';
 
-interface Iprops {
+export interface Iprops {
   data: Idata[];
 }
 
@@ -16,8 +16,8 @@ function BarGraph(props: Iprops) {
       .startOf('month')
       .format('YYYY-MM')
   );
-  const buildObj: any = { name: '楼盘' };
-  const houseObj: any = { name: '房源' };
+  const buildObj = { name: '楼盘' };
+  const houseObj = { name: '房源' };
   const cricleObj = [];
   let fields: string[] = [];
   Object.keys(arrayByMonth).forEach(key => {

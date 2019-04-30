@@ -1,17 +1,18 @@
 /*eslint-disable */
-import supertest from 'supertest';
-import app from '../../dist/app';
+import * as supertest from 'supertest';
+import * as app from '../../dist/app';
 
 var server = app.listen();
 
 describe('api 测试', () => {
-  function request(){
+  function request() {
     return supertest(server);
   }
 
-  it('api 返回数据格式是否正确？', (done) => {
+  it('api 返回数据格式是否正确？', done => {
     return request()
-      .get('/getMongoData').then(response=>{
+      .get('/getMongoData')
+      .then(response => {
         const item1 = JSON.parse(response.text)[0];
         expect(item1).toHaveProperty('_id');
         expect(item1).toHaveProperty('area');
@@ -24,5 +25,4 @@ describe('api 测试', () => {
         server.close();
       });
   });
-
 });

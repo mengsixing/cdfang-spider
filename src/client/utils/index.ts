@@ -3,8 +3,8 @@ import * as dayjs from 'dayjs';
 import Idata from '../context/Idata';
 
 interface Iauarter {
-  thisQuarterStart: dayjs.ConfigType;
-  thisQuarterEnd: dayjs.ConfigType;
+  thisQuarterStart: dayjs.Dayjs;
+  thisQuarterEnd: dayjs.Dayjs;
 }
 
 export interface IhouseInfo {

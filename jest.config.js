@@ -1,5 +1,5 @@
 module.exports = {
-  setupFiles: ['./__tests__/setup.js', 'jest-canvas-mock'],
+  setupFiles: ['./__tests__/setup.ts', 'jest-canvas-mock'],
   moduleFileExtensions: ['js', 'jsx','ts','tsx', 'json'],
   testMatch: ['**/__tests__/**/*.(test|spec).ts?(x)'],
   moduleNameMapper: {

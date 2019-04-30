@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Rank from '../../../src/client/components/Rank/index';
+import Rank, { Iprops } from '../../../src/client/components/Rank';
 
 const setup = () => {
-  const props = {
+  const props: Iprops = {
     title: '2018年06月',
     data: [
       {
+        _id: '',
         area: '高新南区',
         beginTime: '2018-12-27 09:00:00',
         endTime: '2018-12-29 18:00:00',

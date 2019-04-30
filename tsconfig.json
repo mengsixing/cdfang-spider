@@ -9,6 +9,7 @@
     "jsx": "react",
     "noImplicitReturns": true
   },
-  "include": ["src/**/*", "__tests__/**/*", "types/**/*"],
+  // 影响webpack构建
+  "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

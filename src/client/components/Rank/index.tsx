@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import './styles.less';
 import Idata from '../../context/Idata';
 
-interface Iprops {
+export interface Iprops {
   data: Idata[];
   title: string;
 }

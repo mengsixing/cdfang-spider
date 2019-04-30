@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -18,12 +17,6 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/client/index.html',
-      favicon: './src/client/favicon.ico',
-    }),
-  ],
   resolve: {
     extensions: ['.tsx', '.js', '.ts'],
     // antd icon 不支持按需加载，使用替代方案完成

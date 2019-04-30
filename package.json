@@ -1,6 +1,6 @@
 {
   "name": "cdfang-spider",
-  "version": "2.5.7",
+  "version": "2.5.8",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
@@ -41,6 +41,7 @@
     "cheerio": "^1.0.0-rc.2",
     "cssnano": "^4.1.10",
     "dayjs": "^1.8.13",
+    "ejs": "^2.6.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "graphql": "^14.2.1",
@@ -62,8 +63,8 @@
     "superagent": "^5.0.5",
     "supertest": "^4.0.2",
     "webpack": "^4.30.0",
-    "webpack-deep-scope-plugin": "^1.6.0",
     "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-deep-scope-plugin": "^1.6.0",
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {

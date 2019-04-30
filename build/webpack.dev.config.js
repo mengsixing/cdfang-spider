@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
 const devConfig = {
@@ -27,6 +28,13 @@ const devConfig = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './build/template/index.ejs',
+      favicon: './build/template/favicon.ico',
+      env: process.env.NODE_ENV,
+    }),
+  ],
 };
 
 module.exports = merge(baseConfig, devConfig);

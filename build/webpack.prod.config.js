@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const { default: WebpackDeepScopeAnalysisPlugin } = require('webpack-deep-scope-plugin');
 const QiniuUploadPlugin = require('qiniu-upload-plugin');
@@ -39,6 +40,11 @@ const prodConfig = {
     }),
     new WebpackDeepScopeAnalysisPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new HtmlWebpackPlugin({
+      template: './build/template/index.ejs',
+      favicon: './build/template/favicon.ico',
+      env: process.env.NODE_ENV,
+    }),
   ],
   optimization: {
     runtimeChunk: {

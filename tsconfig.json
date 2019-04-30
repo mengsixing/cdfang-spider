@@ -10,6 +10,6 @@
     "noImplicitReturns": true
   },
   // 影响webpack构建
-  "include": ["src/**/*", "types/**/*"],
+  "include": ["src/**/*", "build/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }

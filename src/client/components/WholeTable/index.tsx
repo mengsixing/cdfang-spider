@@ -15,6 +15,7 @@ function CommonTable({ areaList }: Iprops) {
     text: item,
     value: item
   }));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns: any[] = [
     {
       title: '区域',

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const tsImportPluginFactory = require('ts-import-plugin')
 
 module.exports = {
   entry: {
@@ -10,27 +9,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(j|t)sx?$/,
         use: 'babel-loader',
-      },
-      {
-        test: /\.tsx?$/,
-        use: ['babel-loader', {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-            getCustomTransformers: () => ({
-              before: [tsImportPluginFactory({
-                libraryName: 'antd',
-                libraryDirectory: 'lib',
-                style: true
-              })]
-            }),
-            compilerOptions: {
-              module: 'es2015'
-            }
-          }
-        }],
       },
       {
         test: /\.png$/,

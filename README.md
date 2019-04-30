@@ -21,18 +21,21 @@ npm run dev
 
 - 手动搭建 react 环境
 - 手动搭建 koa 环境
+- 支持 rest 和 graphql 接口
 - nodejs 爬虫
 - 可视化数据分析
 
 ## 客户端
 
 - react
+- less
 - bizcharts
-- antd-design
+- antd
 
 ## 服务器端
 
 - koa
+- graphql
 - mongoose
 - cheerio
 - node-schedule
@@ -42,9 +45,12 @@ npm run dev
 - webpack
 - eslint
 - gulp
+- jest
 
 ## TODOLIST
 
 - [x] antd icon 打包过大（官方还未提供按需加载，已使用替代方案优化）
-- [ ] webpack 打包优化
-- [ ] 页面性能优化
+- [x] webpack 打包优化（持续）
+- [x] graphql 接口支持
+- [x] typescript 支持
+- [ ] 页面性能优化（持续）

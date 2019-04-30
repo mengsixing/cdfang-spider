@@ -6,24 +6,43 @@ module.exports = {
     node: true,
     jest: true,
   },
-  parser: 'babel-eslint',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+    project: "tsconfig.json",
   },
-  extends: ['eslint-config-airbnb'],
-  plugins: ['react'],
+  extends: [
+    "eslint-config-airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+  ],
+  plugins: ["@typescript-eslint", 'react'],
   rules: {
-    'no-underscore-dangle': 'off',
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
   },
+  // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
   settings: {
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-      },
-    },
+    "import/resolver": {
+      "webpack": {
+        "config": "build/webpack.base.config.js"
+      }
+    }
   },
+  overrides: [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type":0,
+        "@typescript-eslint/no-unused-vars": [2, { "args": "none" }]
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "react/prop-types": 0
+      }
+    }
+  ]
 };

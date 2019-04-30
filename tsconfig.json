@@ -1,0 +1,15 @@
+// https://www.tslang.cn/docs/handbook/compiler-options.html
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": true,
+    "target": "es5",
+    "jsx": "react",
+    "noImplicitReturns": true
+  },
+  // 影响webpack构建
+  "include": ["src/**/*", "types/**/*"],
+  "exclude": ["node_modules"]
+}

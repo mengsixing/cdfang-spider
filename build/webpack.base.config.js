@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/client/index.jsx',
+    index: './src/client/index.tsx',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.png$/,
@@ -24,7 +29,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.jsx', '.js'],
+    extensions: ['.jsx', '.tsx', '.js', '.ts'],
     // antd icon 不支持按需加载，使用替代方案完成
     alias: {
       '@ant-design/icons/lib/dist$': path.resolve(__dirname, '../src/client/icons.js'),
@@ -36,7 +41,5 @@ module.exports = {
     'react-dom': 'ReactDOM',
     bizcharts: 'BizCharts',
     '@antv/data-set': 'DataSet',
-    mobx: 'mobx',
-    'mobx-react': 'mobxReact',
   },
 };

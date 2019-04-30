@@ -14,8 +14,10 @@ branches:
     - /^greenkeeper/.*$/
 jobs:
   include:
-    - stage: unit tests
-      script: npm run test
-      after_success: npm run coverage
-    - stage: build
-      script: npm run build
+  - stage: build
+    script:
+      - npm run build
+      - npm run test
+    after_success: npm run coverage
+
+

@@ -3,8 +3,8 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx','ts','tsx', 'json'],
   testMatch: ['**/__tests__/**/*.(test|spec).ts?(x)'],
   moduleNameMapper: {
-    '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/styleMock.ts',
+    '\\.(gif|ttf|eot|svg)$': '<rootDir>/__mocks__/fileMock.ts',
   },
   transform: {
     '^.+\\.jsx?$': 'babel-jest',

@@ -2,7 +2,7 @@ import Idata from './Idata';
 
 /* eslint-disable import/prefer-default-export */
 
-export function transformArray(array: string[]): Idata[] {
+export function transformArray(array: string[][]): Idata[] {
   const result = array.map(
     (item): Idata => ({
       _id: item[0],

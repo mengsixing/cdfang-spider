@@ -1,6 +1,6 @@
 {
   "name": "cdfang-spider",
-  "version": "2.5.6",
+  "version": "2.5.7",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "lint": "eslint --fix --ext tsx,ts src __tests__",
     "dev:client": "cross-env webpack-dev-server --open",
     "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js & wait",
+    "prebuild": "npm run lint && rimraf ./dist",
     "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
     "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
     "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",

@@ -62,7 +62,7 @@ function App() {
   }
 
   function changeTab(activityKey: string): void {
-    appState.changeActivityKey(Number.parseInt(activityKey, 10));
+    appState.changeActivityKey(activityKey);
   }
 
   const clickMenu = ({ key }) => {
@@ -95,7 +95,7 @@ function App() {
       <TabPane tab={item} key={item}>
         <ChartPanel
           data={areas[item]}
-          panelIndex={index}
+          panelKey={item}
           activityKey={appState.activityKey}
         />
       </TabPane>

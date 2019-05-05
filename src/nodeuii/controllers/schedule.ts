@@ -17,7 +17,7 @@ function grabPage(pageNo): Promise<cdFang.IhouseData[]> {
             if (err) {
               return;
             }
-            const $ = cheerio.load(result.res.text);
+            const $ = cheerio.load(result.text);
             const trList = [];
             $('#_projectInfo>tr').each(
               (i, tr): void => {

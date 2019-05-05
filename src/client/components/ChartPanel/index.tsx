@@ -12,8 +12,8 @@ const { useState, useContext } = React;
 
 export interface Iprops {
   data: cdFang.IhouseData[];
-  panelIndex: number;
-  activityKey: number;
+  panelKey: string;
+  activityKey: string;
 }
 
 interface Istate {
@@ -25,7 +25,7 @@ interface Istate {
 
 function ChartPanel(props: Iprops) {
   const appState = useContext(AppContext);
-  const { panelIndex, data } = props;
+  const { panelKey, data } = props;
   const initState = {
     rank: data,
     rankTitle: '',
@@ -33,14 +33,13 @@ function ChartPanel(props: Iprops) {
     isOpen: false
   };
 
-  if (panelIndex !== appState.activityKey) {
+  if (panelKey !== appState.activityKey) {
     initState.isChangeTab = true;
   }
 
   const [state, setState] = useState(initState);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeMonth(item: any, newState: Istate) {
+  function changeMonth(item, newState: Istate) {
     const { rankTitle, isOpen } = newState;
     const { _origin } = item.data;
 

@@ -18,7 +18,7 @@ const HouseSchema = mongoose.Schema({
 const HouseCol = mongoose.model('house', HouseSchema);
 
 const houseModel = {
-  async add(item): Promise<boolean | Idata> {
+  async add(item): Promise<boolean | cdFang.IhouseData> {
     const findItem = await this.find({ _id: item._id });
     if (findItem.length > 0) {
       // 如果状态变更执行更新操作
@@ -40,10 +40,10 @@ const houseModel = {
     );
     return item;
   },
-  async addMany(array: Idata[]): Promise<void> {
+  async addMany(array: cdFang.IhouseData[]): Promise<void> {
     const newArray = [];
     array.forEach(
-      async (item: Idata): Promise<void> => {
+      async (item: cdFang.IhouseData): Promise<void> => {
         const findItem = await this.find({ _id: item._id });
         if (findItem.length === 0) {
           newArray.push(item);
@@ -59,7 +59,7 @@ const houseModel = {
       }
     );
   },
-  update(item: Idata): void {
+  update(item: cdFang.IhouseData): void {
     HouseCol.findOneAndUpdate(
       { _id: item._id },
       item,

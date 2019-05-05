@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 export interface IappContext {
-  allData: Idata[];
+  allData: cdFang.IhouseData[];
   activityKey: number;
   selectedYear: number;
-  changeData(data: Idata[]): void;
+  changeData(data: cdFang.IhouseData[]): void;
   changeActivityKey(key: number): void;
   changeSelectedYear(key: number): void;
-  getCurrentHouse(): Idata[];
+  getCurrentHouse(): cdFang.IhouseData[];
 }
 
 export const globalData: IappContext = {
@@ -23,7 +23,7 @@ export const globalData: IappContext = {
   changeSelectedYear(key): void {
     this.selectedYear = key;
   },
-  getCurrentHouse(): Idata[] {
+  getCurrentHouse(): cdFang.IhouseData[] {
     return this.allData.filter(item => item.status !== '报名结束');
   }
 };

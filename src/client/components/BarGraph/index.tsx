@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 
 export interface Iprops {
-  data: Idata[];
+  data: cdFang.IhouseData[];
 }
 
 function BarGraph(props: Iprops) {

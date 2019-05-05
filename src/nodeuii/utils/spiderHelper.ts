@@ -4,7 +4,7 @@ import * as util from './index';
 import houseModel from '../models/houseModel';
 import config from '../config';
 
-const initspider = async (pageStart, pageEnd): Promise<Idata[]> => {
+const initspider = async (pageStart, pageEnd): Promise<cdFang.IhouseData[]> => {
   const allPromises = [];
   for (let i = pageStart; i <= pageEnd; i += 1) {
     const page = new Promise(
@@ -16,7 +16,7 @@ const initspider = async (pageStart, pageEnd): Promise<Idata[]> => {
               if (err) {
                 return;
               }
-              const $ = cheerio.load(result.res.text);
+              const $ = cheerio.load(result.text);
               const trList = [];
               $('#_projectInfo>tr').each(
                 (idx, tr): void => {
@@ -39,7 +39,7 @@ const initspider = async (pageStart, pageEnd): Promise<Idata[]> => {
     allPromises.push(page);
   }
   const result = await Promise.all(allPromises).then(
-    (posts): Idata[] => {
+    (posts): cdFang.IhouseData[] => {
       houseModel.addMany(posts[0]);
       return posts;
     }
@@ -48,19 +48,19 @@ const initspider = async (pageStart, pageEnd): Promise<Idata[]> => {
 };
 
 interface Ipage {
-  successArray: Idata[];
+  successArray: cdFang.IhouseData[];
   allLength: number;
 }
 
 const spiderPageOne = async (): Promise<Ipage> => {
-  const page: Idata[] = await new Promise(
+  const page: cdFang.IhouseData[] = await new Promise(
     (resolve): void => {
       request.post(`${config.spiderDomain}/lottery/accept/projectList`).end(
         (err, result): void => {
           if (err) {
             return;
           }
-          const $ = cheerio.load(result.res.text);
+          const $ = cheerio.load(result.text);
           const trList = [];
           $('#_projectInfo>tr').each(
             (idx, tr): void => {
@@ -82,7 +82,7 @@ const spiderPageOne = async (): Promise<Ipage> => {
   );
   // 生成一个Promise对象的数组
   const promises = page.map(
-    (item): Promise<Idata | boolean> =>
+    (item): Promise<cdFang.IhouseData | boolean> =>
       new Promise(
         (resolve): void => {
           resolve(houseModel.add(item));
@@ -90,8 +90,11 @@ const spiderPageOne = async (): Promise<Ipage> => {
       )
   );
   const successArray = await Promise.all(promises)
-    .then((posts: Idata[]): Idata[] => posts.filter((item): boolean => !!item))
-    .catch((): Idata[] => []);
+    .then(
+      (posts: cdFang.IhouseData[]): cdFang.IhouseData[] =>
+        posts.filter((item): boolean => !!item)
+    )
+    .catch((): cdFang.IhouseData[] => []);
   return {
     successArray,
     allLength: page.length

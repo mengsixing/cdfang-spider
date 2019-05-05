@@ -22,7 +22,7 @@ function CommonTable({ areaList }: Iprops) {
       key: 'area',
       filters: nameFilter,
       filterMultiple: true,
-      onFilter: (value: string, datalist: Idata) =>
+      onFilter: (value: string, datalist: cdFang.IhouseData) =>
         datalist.area.indexOf(value) === 0
     },
     {
@@ -34,20 +34,21 @@ function CommonTable({ areaList }: Iprops) {
       title: '住房套数',
       dataIndex: 'number',
       key: 'number',
-      sorter: (a: Idata, b: Idata): boolean => a.number > b.number
+      sorter: (a: cdFang.IhouseData, b: cdFang.IhouseData): boolean =>
+        a.number > b.number
     },
     {
       title: '登记开始时间',
       dataIndex: 'beginTime',
       key: 'beginTime',
-      sorter: (a: Idata, b: Idata) =>
+      sorter: (a: cdFang.IhouseData, b: cdFang.IhouseData) =>
         new Date(a.beginTime).getTime() - new Date(b.beginTime).getTime()
     },
     {
       title: '登记结束时间',
       dataIndex: 'endTime',
       key: 'endTime',
-      sorter: (a: Idata, b: Idata) =>
+      sorter: (a: cdFang.IhouseData, b: cdFang.IhouseData) =>
         new Date(a.endTime).getTime() - new Date(b.endTime).getTime()
     },
     {
@@ -69,7 +70,7 @@ function CommonTable({ areaList }: Iprops) {
         }
       ],
       filterMultiple: true,
-      onFilter: (value: string, datalist: Idata) => {
+      onFilter: (value: string, datalist: cdFang.IhouseData) => {
         return datalist.status.indexOf(value) === 0;
       },
       render: (text: string) => {

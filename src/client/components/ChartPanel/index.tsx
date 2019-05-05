@@ -11,7 +11,7 @@ import BarGraph from '../BarGraph';
 const { useState, useContext } = React;
 
 export interface Iprops {
-  data: Idata[];
+  data: cdFang.IhouseData[];
   panelIndex: number;
   activityKey: number;
 }
@@ -19,7 +19,7 @@ export interface Iprops {
 interface Istate {
   isChangeTab: boolean;
   isOpen: boolean;
-  rank: Idata[];
+  rank: cdFang.IhouseData[];
   rankTitle: string;
 }
 

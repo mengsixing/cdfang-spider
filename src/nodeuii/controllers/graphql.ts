@@ -32,7 +32,7 @@ function initGraphQL(app): void {
   const resolvers = {
     Query: {
       // 和 type Query 中的 allHouses 对应
-      allHouses: async (parent, args: Iyear): Promise<Idata[]> => {
+      allHouses: async (parent, args: Iyear): Promise<cdFang.IhouseData[]> => {
         let query = {};
         if (args.year !== 0) {
           const reg = new RegExp(`^${args.year}`);

@@ -5,7 +5,7 @@ import * as util from '../utils';
 import houseModel from '../models/houseModel';
 import config from '../config';
 
-function grabPage(pageNo): Promise<Idata[]> {
+function grabPage(pageNo): Promise<cdFang.IhouseData[]> {
   return new Promise(
     (resolve): void => {
       request

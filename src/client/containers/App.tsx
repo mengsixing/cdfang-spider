@@ -86,7 +86,7 @@ function App() {
   }, []);
 
   const { allData } = appState;
-  const areas = _.groupBy(allData, (item: Idata) => item.area);
+  const areas = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areas);
   /* eslint-disable react/no-array-index-key */
   const tabpanels = util

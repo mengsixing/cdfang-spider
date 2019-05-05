@@ -10,7 +10,7 @@ const { Html } = Guide;
 
 export interface Iprops {
   isChangeTab: boolean;
-  data: Idata[];
+  data: cdFang.IhouseData[];
   changeMonth(monthString: string): void;
 }
 

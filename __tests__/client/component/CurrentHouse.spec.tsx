@@ -21,7 +21,7 @@ const setup = () => {
         status: '报名中'
       }
     ],
-    activityKey: 6
+    activityKey: '高新南区'
   };
   const wrapper = mount(
     <AppContext.Provider value={appState}>

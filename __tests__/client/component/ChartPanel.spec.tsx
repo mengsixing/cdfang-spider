@@ -17,8 +17,8 @@ const setup = () => {
         status: '报名结束'
       }
     ],
-    panelIndex: 1,
-    activityKey: 1
+    panelKey: '高新南区',
+    activityKey: '高新南区'
   };
   const wrapper = mount(
     <AppContext.Provider value={globalData}>

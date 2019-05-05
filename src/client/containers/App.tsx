@@ -143,7 +143,7 @@ function App() {
           </Suspense>
           <StatisticCard />
           <div className="content-graph-bar">
-            <Tabs defaultActiveKey="6" onChange={changeTab}>
+            <Tabs defaultActiveKey={appState.activityKey} onChange={changeTab}>
               {tabpanels}
             </Tabs>
           </div>

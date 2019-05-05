@@ -9,7 +9,7 @@ const setup = () => {
   const appState = {
     ...globalData,
     allData: mockHouse,
-    activityKey: 6
+    activityKey: '高新南区'
   };
   const props = {
     areaList: mockArea

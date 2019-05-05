@@ -4,7 +4,6 @@ import * as dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
 import * as DataSet from '@antv/data-set';
 import './styles.less';
-import Idata from '../../context/Idata';
 
 const { DataView } = DataSet;
 const { Html } = Guide;

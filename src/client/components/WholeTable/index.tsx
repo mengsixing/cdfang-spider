@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Table } from 'antd';
 import { AppContext } from '../../context/appContext';
-import Idata from '../../context/Idata';
 
 const { useContext } = React;
 

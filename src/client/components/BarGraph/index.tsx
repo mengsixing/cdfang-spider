@@ -3,7 +3,6 @@ import * as DataSet from '@antv/data-set';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
-import Idata from '../../context/Idata';
 
 export interface Iprops {
   data: Idata[];

@@ -14,7 +14,6 @@ import Loading from '../components/Loading';
 import config from '../config';
 import { AppContext, globalData } from '../context/appContext';
 import './App.less';
-import Idata from '../context/Idata';
 
 interface IareaHouse {
   区域: string;
@@ -40,12 +39,12 @@ function App() {
     window.location.href = 'https://github.com/yhlben/cdfang-spider';
   }
 
-  function reloadData(): void {
+  function reloadData(year = 0): void {
     getGraphqlClient()
       .query({
         query: gql`
           {
-            allHouses {
+            allHouses(year: ${year}) {
               _id
               area
               name
@@ -65,6 +64,22 @@ function App() {
   function changeTab(activityKey: string): void {
     appState.changeActivityKey(Number.parseInt(activityKey, 10));
   }
+
+  const clickMenu = ({ key }) => {
+    switch (key) {
+      case '2':
+        appState.changeSelectedYear(2019);
+        reloadData(2019);
+        break;
+      case '3':
+        appState.changeSelectedYear(2018);
+        reloadData(2018);
+        break;
+      default:
+        appState.changeSelectedYear(0);
+        reloadData();
+    }
+  };
 
   useEffect(() => {
     reloadData();
@@ -105,11 +120,20 @@ function App() {
             theme="light"
             mode="horizontal"
             defaultSelectedKeys={['1']}
+            onClick={clickMenu}
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="1">
               <Icon type="home" />
               首页
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="calendar" />
+              2019年
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="calendar" />
+              2018年
             </Menu.Item>
           </Menu>
         </Header>

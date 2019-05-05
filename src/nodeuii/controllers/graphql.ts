@@ -1,12 +1,15 @@
 import { ApolloServer, gql } from 'apollo-server-koa';
 import houseModel from '../models/houseModel';
 import spider from '../utils/spiderHelper';
-import Idata from '../utils/Idata';
+
+interface Iyear {
+  year: number;
+}
 
 function initGraphQL(app): void {
   const typeDefs = gql`
     type House {
-      _id: String
+      _id: ID
       area: String
       name: String
       number: Int
@@ -21,7 +24,7 @@ function initGraphQL(app): void {
     }
 
     type Query {
-      allHouses: [House]
+      allHouses(year: Int): [House]
       spiderPageOne: PageOneArray
     }
   `;
@@ -29,8 +32,13 @@ function initGraphQL(app): void {
   const resolvers = {
     Query: {
       // 和 type Query 中的 allHouses 对应
-      allHouses: async (): Promise<Idata[]> => {
-        const allHouses = await houseModel.find();
+      allHouses: async (parent, args: Iyear): Promise<Idata[]> => {
+        let query = {};
+        if (args.year !== 0) {
+          const reg = new RegExp(`^${args.year}`);
+          query = { beginTime: reg };
+        }
+        const allHouses = await houseModel.find(query);
         return allHouses;
       },
       spiderPageOne: async () => spider.spiderPageOne()

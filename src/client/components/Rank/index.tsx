@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import './styles.less';
-import Idata from '../../context/Idata';
 
 export interface Iprops {
   data: Idata[];

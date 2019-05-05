@@ -11,5 +11,5 @@ gulp.task('default', () => gulp
   .pipe(gulp.dest('./dist/')));
 
 if (process.env.NODE_ENV !== 'production') {
-  gulp.watch('./src/nodeuii/**/*.js', gulp.series('default'));
+  gulp.watch('./src/nodeuii/**/*.ts', gulp.series('default'));
 }

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console,no-underscore-dangle */
 import DbHelper from '../utils/dbHelper';
-import Idata from '../utils/Idata';
 
 const mongoose = DbHelper.connect();
 
@@ -71,7 +70,7 @@ const houseModel = {
       }
     );
   },
-  find(query?: string): any {
+  find(query?: object): any {
     return HouseCol.find(
       query,
       (err, house): any | void => {

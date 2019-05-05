@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
-import Idata from '../context/Idata';
 
 interface Iauarter {
   thisQuarterStart: dayjs.Dayjs;

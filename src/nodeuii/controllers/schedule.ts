@@ -4,7 +4,6 @@ import * as cheerio from 'cheerio';
 import * as util from '../utils';
 import houseModel from '../models/houseModel';
 import config from '../config';
-import Idata from '../utils/Idata';
 
 function grabPage(pageNo): Promise<Idata[]> {
   return new Promise(

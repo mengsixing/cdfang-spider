@@ -1,5 +1,3 @@
-import Idata from './Idata';
-
 /* eslint-disable import/prefer-default-export */
 
 export function transformArray(array: string[][]): Idata[] {

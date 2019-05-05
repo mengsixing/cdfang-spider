@@ -3,7 +3,6 @@ import * as cheerio from 'cheerio';
 import * as util from './index';
 import houseModel from '../models/houseModel';
 import config from '../config';
-import Idata from './Idata';
 
 const initspider = async (pageStart, pageEnd): Promise<Idata[]> => {
   const allPromises = [];

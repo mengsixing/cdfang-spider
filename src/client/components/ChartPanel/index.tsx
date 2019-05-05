@@ -8,8 +8,6 @@ import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
 import BarGraph from '../BarGraph';
 
-import Idata from '../../context/Idata';
-
 const { useState, useContext } = React;
 
 export interface Iprops {

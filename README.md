@@ -21,9 +21,12 @@ npm run dev
 
 - 手动搭建 react 环境
 - 手动搭建 koa 环境
+- 手动搭建 typescript 环境
 - 支持 rest 和 graphql 接口
 - nodejs 爬虫
 - 可视化数据分析
+
+[项目选型与环境搭建](https://github.com/yhlben/cdfang-spider/blob/master/Introduction.md)
 
 ## 客户端
 

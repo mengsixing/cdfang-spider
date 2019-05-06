@@ -7,25 +7,16 @@ export interface IappContext {
   changeData(data: cdFang.IhouseData[]): void;
   changeActivityKey(key: string): void;
   changeSelectedYear(key: number): void;
-  getCurrentHouse(): cdFang.IhouseData[];
 }
 
+// 初始化context，具体的方法在provider中实现
 export const globalData: IappContext = {
   allData: [],
   activityKey: '天府新区',
   selectedYear: 0,
-  changeData(data): void {
-    this.allData = data;
-  },
-  changeActivityKey(key: string): void {
-    this.activityKey = key;
-  },
-  changeSelectedYear(key): void {
-    this.selectedYear = key;
-  },
-  getCurrentHouse(): cdFang.IhouseData[] {
-    return this.allData.filter(item => item.status !== '报名结束');
-  }
+  changeData(data): void {},
+  changeActivityKey(key: string): void {},
+  changeSelectedYear(key): void {}
 };
 
 export const AppContext = React.createContext<IappContext>(globalData);

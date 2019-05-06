@@ -37,13 +37,20 @@ function ChartPanel(props: Iprops) {
     initState.isChangeTab = true;
   }
 
+  // 只会执行一次
   const [state, setState] = useState(initState);
+  const [prevData, setPrevData] = useState(null);
 
-  function changeMonth(item, newState: Istate) {
+  // 模拟 getDerivedStateFromProps https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
+  if (data !== prevData) {
+    setState(initState);
+    setPrevData(data);
+  }
+
+  function changeMonth(origin, newState: Istate) {
     const { rankTitle, isOpen } = newState;
-    const { _origin } = item.data;
 
-    if (rankTitle === _origin.item && isOpen) {
+    if (rankTitle === origin.item && isOpen) {
       return {
         ...newState,
         rank: data,
@@ -52,8 +59,8 @@ function ChartPanel(props: Iprops) {
         isOpen: false
       };
     }
-    const selectMonth = _origin.date;
-    const selectMonthTitle = _origin.item;
+    const selectMonth = origin.date;
+    const selectMonthTitle = origin.item;
     const newRank = _.filter(
       data,
       dataItem =>
@@ -85,7 +92,7 @@ function ChartPanel(props: Iprops) {
         <CricleGraph
           data={data}
           changeMonth={item => {
-            // 由于circle组件使用React.memo 再不渲染时，不能获取到最新的属性，这里使用input来转换
+            // 由于 circle 组件使用 React.memo 再不渲染时，不能获取到最新的属性，这里使用 input 来转换
             const newState = JSON.parse(
               document
                 .getElementById(`ChartPanel${appState.activityKey}`)

@@ -9,10 +9,8 @@ import ChartPanel from '../components/ChartPanel';
 import Table from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import AreaBar from '../components/AreaBar';
-import Loading from '../components/Loading';
 import config from '../config';
 import { AppContext } from '../context/appContext';
-import './App.less';
 
 interface IareaHouse {
   区域: string;
@@ -28,9 +26,8 @@ interface IallHouses {
   allHouses: cdFang.IhouseData[];
 }
 
-const { lazy, Suspense, useEffect, useContext } = React;
+const { useEffect, useContext } = React;
 
-const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
@@ -91,9 +88,6 @@ function PastYear(props) {
 
   return (
     <Content className="content">
-      <Suspense fallback={<Loading />}>
-        <CurrentHouse />
-      </Suspense>
       <StatisticCard />
       <div className="content-graph-bar">
         <Tabs defaultActiveKey={appState.activityKey} onChange={changeTab}>

@@ -12,7 +12,6 @@ import AreaBar from '../components/AreaBar';
 import Loading from '../components/Loading';
 import config from '../config';
 import { AppContext } from '../context/appContext';
-import './App.less';
 
 interface IareaHouse {
   区域: string;

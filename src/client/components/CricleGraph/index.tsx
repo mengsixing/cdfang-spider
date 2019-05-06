@@ -11,7 +11,7 @@ const { Html } = Guide;
 export interface Iprops {
   isChangeTab: boolean;
   data: cdFang.IhouseData[];
-  changeMonth(monthString: string): void;
+  changeMonth(monthString): void;
 }
 
 interface IcircleData {
@@ -21,8 +21,9 @@ interface IcircleData {
 }
 
 function CircleGraph({ data: array, changeMonth }: Iprops) {
-  function selectMonth(monthString: string) {
-    changeMonth(monthString);
+  function selectMonth(circleObject) {
+    // eslint-disable-next-line no-underscore-dangle
+    changeMonth(circleObject.data._origin);
   }
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)

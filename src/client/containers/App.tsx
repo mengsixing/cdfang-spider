@@ -16,6 +16,7 @@ function App(props) {
 
   let defaltYear = ['home'];
 
+  // 根据理由选中对应 menu 项
   switch (props.location.pathname) {
     case '/2019':
       defaltYear = ['2019'];

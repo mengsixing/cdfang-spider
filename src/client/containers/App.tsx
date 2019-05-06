@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { withRouter } from 'react-router-dom';
 import renderRouters from '../router';
@@ -17,7 +16,6 @@ function App(props) {
 
   let defaltYear = ['home'];
 
-  console.log(props);
   switch (props.location.pathname) {
     case '/2019':
       defaltYear = ['2019'];

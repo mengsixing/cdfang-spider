@@ -31,13 +31,6 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  // const getCurrentHouse = (): cdFang.IhouseData[] => {
-  //   setTimeout(() => {
-  //     console.log(appState.allData);
-  //   }, 2000);
-  //   return appState.allData.filter(item => item.status !== '报名结束');
-  // };
-
   const initAppState = {
     allData: [],
     activityKey: '天府新区',

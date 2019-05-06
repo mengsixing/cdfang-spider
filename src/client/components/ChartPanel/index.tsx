@@ -10,6 +10,8 @@ import BarGraph from '../BarGraph';
 
 const { useState, useContext } = React;
 
+let currentState: Istate;
+
 export interface Iprops {
   data: cdFang.IhouseData[];
   panelKey: string;
@@ -78,27 +80,18 @@ function ChartPanel(props: Iprops) {
 
   const { isChangeTab, rank, rankTitle } = state;
 
+  currentState = state;
   return (
     <Row>
       <Col span={9}>
         <BarGraph data={data} />
       </Col>
       <Col span={9}>
-        <input
-          id={`ChartPanel${appState.activityKey}`}
-          type="hidden"
-          value={JSON.stringify(state)}
-        />
         <CricleGraph
           data={data}
           changeMonth={item => {
-            // 由于 circle 组件使用 React.memo 再不渲染时，不能获取到最新的属性，这里使用 input 来转换
-            const newState = JSON.parse(
-              document
-                .getElementById(`ChartPanel${appState.activityKey}`)
-                .getAttribute('value')
-            );
-            setState(changeMonth(item, newState));
+            // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用 局部变量来获取
+            setState(changeMonth(item, currentState));
           }}
           isChangeTab={isChangeTab}
         />

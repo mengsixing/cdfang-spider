@@ -13,6 +13,7 @@
     list-style: none;
     li{
       margin-top: 16px;
+      display: flex;
       span {
         color: rgba(0,0,0,.65);
         font-size: 14px;
@@ -29,8 +30,15 @@
           width: 20px;
           text-align: center;
         }
+        &:nth-child(2){
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
         &:last-child{
-          float: right;
+          width: 50px;
+          text-align: right;
         }
         &.top3 {
           background-color: #314659;

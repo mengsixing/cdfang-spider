@@ -2,13 +2,14 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PastYear from './containers/PastYear';
 import CurrentYear from './containers/CurrentYear';
+import Home from './containers/Home';
 
 const routes = [
   {
     path: '/',
     year: 0,
     exact: true,
-    component: CurrentYear
+    component: Home
   },
   {
     path: '/2019',

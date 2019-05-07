@@ -96,7 +96,9 @@ function ChartPanel(props: Iprops) {
           isChangeTab={isChangeTab}
         />
       </Col>
-      <Col span={6}>{rank ? <Rank data={rank} title={rankTitle} /> : ''}</Col>
+      <Col span={6}>
+        {rank ? <Rank data={rank} title={rankTitle} unit="套" /> : ''}
+      </Col>
     </Row>
   );
 }

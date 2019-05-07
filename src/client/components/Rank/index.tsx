@@ -2,15 +2,22 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import './styles.less';
 
+interface Irank {
+  _id: string;
+  name: string;
+  number: number;
+}
+
 export interface Iprops {
-  data: cdFang.IhouseData[];
+  data: Irank[];
   title: string;
+  unit: string;
 }
 
 function Rank(props: Iprops) {
   const { data, title } = props;
   const rankData = _.sortBy(data, (item: cdFang.IhouseData) => -item.number);
-  const rankTitle = title ? `楼盘排名：${title}` : '楼盘排名';
+  const rankTitle = title ? `排名：${title}` : '排名';
   return (
     <div className="rank">
       <div className="rank-title">{rankTitle}</div>
@@ -22,7 +29,7 @@ function Rank(props: Iprops) {
             <li key={item._id}>
               <span className={istop3}>{index + 1}</span>
               <span>{item.name}</span>
-              <span>{`${item.number}套`}</span>
+              <span>{item.number + props.unit}</span>
             </li>
           );
         })}

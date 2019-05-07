@@ -4,13 +4,11 @@ import { AppContext } from '../../context/appContext';
 
 const { useContext } = React;
 
-interface Iprops {
-  areaList: string[];
-}
-
-function CommonTable({ areaList }: Iprops) {
-  const appState = useContext(AppContext);
-  const nameFilter = areaList.map(item => ({
+function CommonTable() {
+  const { allData } = useContext(AppContext);
+  const areas = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
+  const areasList = Object.keys(areas);
+  const nameFilter = areasList.map(item => ({
     text: item,
     value: item
   }));
@@ -83,7 +81,7 @@ function CommonTable({ areaList }: Iprops) {
   ];
 
   // eslint-disable-next-line no-underscore-dangle
-  const data = appState.allData.map(item => ({ key: item._id, ...item }));
+  const data = allData.map(item => ({ key: item._id, ...item }));
 
   return (
     <div className="margin-white">

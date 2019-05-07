@@ -24,6 +24,9 @@ function App(props) {
     case '/2018':
       defaltYear = ['2018'];
       break;
+    case '/2017':
+      defaltYear = ['2017'];
+      break;
     default:
       defaltYear = ['home'];
   }
@@ -35,6 +38,9 @@ function App(props) {
         break;
       case '2018':
         props.history.push('/2018');
+        break;
+      case '2017':
+        props.history.push('/2017');
         break;
       default:
         props.history.push('/');
@@ -68,6 +74,10 @@ function App(props) {
             <Menu.Item key="2018">
               <Icon type="calendar" />
               2018 年
+            </Menu.Item>
+            <Menu.Item key="2017">
+              <Icon type="calendar" />
+              2017 年
             </Menu.Item>
           </Menu>
         </Header>

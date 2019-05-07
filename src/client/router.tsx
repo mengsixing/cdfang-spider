@@ -20,6 +20,11 @@ const routes = [
     path: '/2018',
     year: 2018,
     component: PastYear
+  },
+  {
+    path: '/2017',
+    year: 2017,
+    component: PastYear
   }
 ];
 

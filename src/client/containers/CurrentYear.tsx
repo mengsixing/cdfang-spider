@@ -6,27 +6,13 @@ import gql from 'graphql-tag';
 import util from '../utils/index';
 
 import ChartPanel from '../components/ChartPanel';
-import Table from '../components/WholeTable';
+import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import AreaBar from '../components/AreaBar';
 import config from '../config';
 import { AppContext } from '../context/appContext';
 
-interface IareaHouse {
-  区域: string;
-  房源: number;
-}
-
-interface IareaBuilder {
-  区域: string;
-  楼盘数: number;
-}
-
-interface IallHouses {
-  allHouses: cdFang.IhouseData[];
-}
-
-const { lazy, useEffect, useContext } = React;
+const { useEffect, useContext } = React;
 
 const { Content } = Layout;
 const { TabPane } = Tabs;
@@ -35,9 +21,9 @@ function CurrentYear(props) {
   const { getGraphqlClient } = config;
   const appState = useContext(AppContext);
 
-  function reloadData(year = 0): void {
+  const reloadData = (year = 0): void => {
     getGraphqlClient()
-      .query<IallHouses>({
+      .query<cdFang.IallHouses>({
         query: gql`
           {
             allHouses(year: ${year}) {
@@ -55,11 +41,11 @@ function CurrentYear(props) {
       .then(result => {
         appState.changeData(result.data.allHouses);
       });
-  }
+  };
 
-  function changeTab(activityKey: string): void {
+  const changeTab = (activityKey: string): void => {
     appState.changeActivityKey(activityKey);
-  }
+  };
 
   useEffect(() => {
     reloadData(props.year);
@@ -79,8 +65,8 @@ function CurrentYear(props) {
         />
       </TabPane>
     ));
-  const chartHouseData: IareaHouse[] = [];
-  const chartBuildData: IareaBuilder[] = [];
+  const chartHouseData: cdFang.IareaHouse[] = [];
+  const chartBuildData: cdFang.IareaBuilder[] = [];
   Object.keys(areas).forEach(key => {
     chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
     chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
@@ -112,7 +98,7 @@ function CurrentYear(props) {
         />
       </div>
       <div className="content-graph-table">
-        <Table areaList={areasList} />
+        <WholeTable />
       </div>
     </Content>
   );

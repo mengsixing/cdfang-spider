@@ -62,6 +62,16 @@ function getIncreaseNumber(number: number): string {
   return `${number}↓`;
 }
 
+// 获取长度为 10 的随机string
+function getRandomId(): string {
+  const str = 'abcdefghijklmnopqrstuvwxyz';
+  const newStrArray = [];
+  for (let i = 0; i < 10; i += 1) {
+    newStrArray.push(str[Math.floor(Math.random() * 26)]);
+  }
+  return newStrArray.join('');
+}
+
 const util = {
   getAllInfo(allData: cdFang.IhouseData[]): IhouseInfo {
     const houseNumber = _.sumBy(allData, 'number');
@@ -211,7 +221,8 @@ const util = {
     ]);
     return newArray;
   },
-  getCurrentQuarter
+  getCurrentQuarter,
+  getRandomId
 };
 
 export default util;

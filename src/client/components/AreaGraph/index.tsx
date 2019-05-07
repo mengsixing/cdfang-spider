@@ -1,5 +1,5 @@
-import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import * as React from 'react';
+import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import * as DataSet from '@antv/data-set';
 
 interface Iarea {
@@ -13,11 +13,11 @@ interface Iprops {
   data: Iarea[];
 }
 
-function AreaGraph(props: Iprops) {
-  const dv = new DataSet.View().source(props.data);
+function AreaGraph({ data, title }: Iprops) {
+  const dv = new DataSet.View().source(data);
   dv.transform({
     type: 'fold',
-    fields: [props.title],
+    fields: [title],
     key: 'type',
     value: 'value'
   });
@@ -31,7 +31,7 @@ function AreaGraph(props: Iprops) {
   };
   return (
     <Chart height={400} data={dv} scale={scale} forceFit>
-      <div className="chart-title">{`${props.title}(按月)`}</div>
+      <div className="chart-title">{`${title} / 月(统计图)`}</div>
       <Tooltip crosshairs />
       <Axis />
       <Legend />

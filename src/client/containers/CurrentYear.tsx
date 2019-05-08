@@ -2,53 +2,31 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
 
-import gql from 'graphql-tag';
-import util from '../utils/index';
-
+import util from '../utils';
 import ChartPanel from '../components/ChartPanel';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import AreaBar from '../components/AreaBar';
-import config from '../config';
 import { AppContext } from '../context/appContext';
+import * as constants from '../constants';
+import request from '../utils/request';
 
 const { useEffect, useContext } = React;
-
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
 function CurrentYear(props) {
-  const { getGraphqlClient } = config;
   const appState = useContext(AppContext);
-
-  const reloadData = (year = 0): void => {
-    getGraphqlClient()
-      .query<cdFang.IallHouses>({
-        query: gql`
-          {
-            allHouses(year: ${year}) {
-              _id
-              area
-              name
-              number
-              beginTime
-              endTime
-              status
-            }
-          }
-        `
-      })
-      .then(result => {
-        appState.changeData(result.data.allHouses);
-      });
-  };
 
   const changeTab = (activityKey: string): void => {
     appState.changeActivityKey(activityKey);
   };
 
   useEffect(() => {
-    reloadData(props.year);
+    const year = constants.tabKeyRouterMap[props.location.pathname];
+    request(year, allHouses => {
+      appState.changeData(allHouses);
+    });
   }, []);
 
   const { allData } = appState;

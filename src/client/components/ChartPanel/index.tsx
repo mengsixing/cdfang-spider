@@ -90,7 +90,7 @@ function ChartPanel(props: Iprops) {
         <CricleGraph
           data={data}
           changeMonth={item => {
-            // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用 局部变量来获取
+            // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用局部变量来获取
             setState(changeMonth(item, currentState));
           }}
           isChangeTab={isChangeTab}

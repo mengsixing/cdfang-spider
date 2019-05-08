@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { Card, Col, Row } from 'antd';
 import * as _ from 'lodash';
-import util, { IhouseInfo } from '../../utils/index';
+import util from '../../utils/index';
 import { AppContext } from '../../context/appContext';
 
 const { useContext } = React;
 
-function StatisticCard() {
+function StatisticCardPast() {
   const appState = useContext(AppContext);
   const { allData } = appState;
   const allInfo = util.getAllInfo(allData);
 
   // 年度房源
-  const maxHouse = _.maxBy(allData, function(house) {
+  const maxHouse = _.maxBy(allData, house => {
     return house.number;
   });
 
   // 年度楼盘
   const dataByName = _.groupBy(allData, item => item.name);
-  const maxBuildName = _.maxBy(Object.keys(dataByName), function(item) {
+  const maxBuildName = _.maxBy(Object.keys(dataByName), item => {
     return dataByName[item].length;
   });
   const maxBuildLength = dataByName[maxBuildName].length;
@@ -26,7 +26,7 @@ function StatisticCard() {
 
   // 年度区域
   const dataByArea = _.groupBy(allData, item => item.area);
-  const maxAreaName = _.maxBy(Object.keys(dataByArea), function(item) {
+  const maxAreaName = _.maxBy(Object.keys(dataByArea), item => {
     return dataByArea[item].length;
   });
   const maxAreaLength = dataByArea[maxAreaName].length;
@@ -76,4 +76,4 @@ function StatisticCard() {
   );
 }
 
-export default StatisticCard;
+export default StatisticCardPast;

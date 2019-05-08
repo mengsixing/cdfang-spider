@@ -1,5 +1,4 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-use-before-define, @typescript-eslint/no-use-before-define */
 import React, { useState } from 'react';
 import { AppContext } from './appContext';
 

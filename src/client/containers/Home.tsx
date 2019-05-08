@@ -1,56 +1,33 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Layout, Col, Row, Tabs } from 'antd';
 import * as dayjs from 'dayjs';
+import { Layout, Col, Row, Tabs } from 'antd';
 
-import gql from 'graphql-tag';
-
-import config from '../config';
-import { AppContext } from '../context/appContext';
+import utils from '../utils';
 import AreaGraph from '../components/AreaGraph';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import Rank from '../components/Rank';
-import './Home.less';
 import Loading from '../components/Loading';
 import AreaBar from '../components/AreaBar';
-import utils from '../utils';
-
-const { TabPane } = Tabs;
+import { AppContext } from '../context/appContext';
+import * as constants from '../constants';
+import request from '../utils/request';
+import './Home.less';
 
 const { lazy, Suspense, useEffect, useContext } = React;
+const { TabPane } = Tabs;
+const { Content } = Layout;
 const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 
-const { Content } = Layout;
-
 function Home(props) {
-  const { getGraphqlClient } = config;
   const appState = useContext(AppContext);
 
-  function reloadData(year = 0): void {
-    getGraphqlClient()
-      .query<cdFang.IallHouses>({
-        query: gql`
-          {
-            allHouses(year: ${year}) {
-              _id
-              area
-              name
-              number
-              beginTime
-              endTime
-              status
-            }
-          }
-        `
-      })
-      .then(result => {
-        appState.changeData(result.data.allHouses);
-      });
-  }
-
   useEffect(() => {
-    reloadData(props.year);
+    const year = constants.tabKeyRouterMap[props.location.pathname];
+    request(year, allHouses => {
+      appState.changeData(allHouses);
+    });
   }, []);
 
   // 构建区域图需要的数据
@@ -59,10 +36,10 @@ function Home(props) {
   });
 
   const houseData = [];
-  const buildData = [];
+  const builderData = [];
   Object.keys(arrayByDay).forEach(key => {
     const houseNumber = _.sumBy(arrayByDay[key], 'number');
-    buildData.push({
+    builderData.push({
       month: key,
       楼盘数: arrayByDay[key].length
     });
@@ -72,9 +49,8 @@ function Home(props) {
     });
   });
 
-  // 构建rank数据
-
-  const buildRankData = buildData.map(item => ({
+  // 构建排行数据
+  const builderRankData = builderData.map(item => ({
     _id: utils.getRandomId(),
     name: item.month,
     number: item['楼盘数']
@@ -91,10 +67,10 @@ function Home(props) {
     (item: cdFang.IhouseData) => item.area
   );
   const chartHouseData: cdFang.IareaHouse[] = [];
-  const chartBuildData: cdFang.IareaBuilder[] = [];
+  const chartBuilderData: cdFang.IareaBuilder[] = [];
   Object.keys(areas).forEach(key => {
     chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
-    chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
+    chartBuilderData.push({ 区域: key, 楼盘数: areas[key].length });
   });
 
   return (
@@ -125,15 +101,15 @@ function Home(props) {
           <TabPane tab="楼盘数" key="2">
             <Row>
               <Col span={18}>
-                <AreaGraph data={buildData} title="楼盘数" />
+                <AreaGraph data={builderData} title="楼盘数" />
               </Col>
               <Col span={6}>
-                <Rank data={buildRankData} title="月份" unit="个" />
+                <Rank data={builderRankData} title="月份" unit="个" />
               </Col>
             </Row>
             <AreaBar
               title="楼盘数 / 区域(统计图)"
-              data={chartBuildData}
+              data={chartBuilderData}
               xAxis="区域"
               yAxis="楼盘数"
               desc

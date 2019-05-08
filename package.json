@@ -1,6 +1,6 @@
 {
   "name": "cdfang-spider",
-  "version": "2.6.11",
+  "version": "2.7.11",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
@@ -83,6 +83,7 @@
     "@types/lodash": "^4.14.123",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
+    "@types/react-router": "^5.0.0",
     "@types/superagent": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",

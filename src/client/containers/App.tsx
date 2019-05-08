@@ -1,50 +1,25 @@
 import * as React from 'react';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { withRouter } from 'react-router-dom';
-import renderRouters from '../router';
 
+import renderRouters from '../router';
 import Notice from '../components/Notice';
-import './App.less';
 import AppContextProvider from '../context/appContextProvider';
+import { tabKeyRouterMap } from '../constants';
+import './App.less';
 
 const { Header, Footer } = Layout;
 
-function App(props) {
+function App({ history, location }) {
   function gotoGithub() {
     window.location.href = 'https://github.com/yhlben/cdfang-spider';
   }
 
-  let defaltYear = ['home'];
-
   // 根据理由选中对应 menu 项
-  switch (props.location.pathname) {
-    case '/2019':
-      defaltYear = ['2019'];
-      break;
-    case '/2018':
-      defaltYear = ['2018'];
-      break;
-    case '/2017':
-      defaltYear = ['2017'];
-      break;
-    default:
-      defaltYear = ['home'];
-  }
+  const defaltYear = [tabKeyRouterMap[location.pathname]];
 
   const clickMenu = ({ key }) => {
-    switch (key) {
-      case '2019':
-        props.history.push('/2019');
-        break;
-      case '2018':
-        props.history.push('/2018');
-        break;
-      case '2017':
-        props.history.push('/2017');
-        break;
-      default:
-        props.history.push('/');
-    }
+    history.push(tabKeyRouterMap[key]);
   };
 
   return (

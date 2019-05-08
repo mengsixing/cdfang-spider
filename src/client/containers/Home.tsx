@@ -37,17 +37,19 @@ function Home(props) {
 
   const houseData = [];
   const builderData = [];
-  Object.keys(arrayByDay).forEach(key => {
-    const houseNumber = _.sumBy(arrayByDay[key], 'number');
-    builderData.push({
-      month: key,
-      [constants.BUILDER_NUMBER]: arrayByDay[key].length
+  Object.keys(arrayByDay)
+    .sort()
+    .forEach(key => {
+      const houseNumber = _.sumBy(arrayByDay[key], 'number');
+      builderData.push({
+        month: key,
+        [constants.BUILDER_NUMBER]: arrayByDay[key].length
+      });
+      houseData.push({
+        month: key,
+        [constants.HOUSE_NUMBER]: houseNumber
+      });
     });
-    houseData.push({
-      month: key,
-      [constants.HOUSE_NUMBER]: houseNumber
-    });
-  });
 
   // 构建排行数据
   const builderRankData = builderData.map(item => ({

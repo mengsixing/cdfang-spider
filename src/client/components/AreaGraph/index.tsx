@@ -27,7 +27,8 @@ function AreaGraph({ data, title }: Iprops) {
       alias: '数量'
     },
     month: {
-      range: [0, 1]
+      range: [0.01, 0.99],
+      tickCount: 9
     }
   };
   return (

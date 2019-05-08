@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
 import * as DataSet from '@antv/data-set';
-import './styles.less';
 
 const { DataView } = DataSet;
 const { Html } = Guide;

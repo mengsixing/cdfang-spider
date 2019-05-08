@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
 
 import util from '../utils/index';
-import ChartPanel from '../components/ChartPanel';
+import ChartPanel from '../components/ChartPanel/index';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard/past';
 import AreaBar from '../components/AreaBar';
@@ -61,15 +61,15 @@ function PastYear(props) {
         <AreaBar
           title="房源数排序图"
           data={chartHouseData}
-          xAxis="区域"
-          yAxis="房源"
+          xAxis={constants.AREA}
+          yAxis={constants.HOUSE_NUMBER}
           desc
         />
         <AreaBar
           title="楼盘数排序图"
           data={chartBuilderData}
-          xAxis="区域"
-          yAxis="楼盘数"
+          xAxis={constants.AREA}
+          yAxis={constants.BUILDER_NUMBER}
           desc
         />
       </div>

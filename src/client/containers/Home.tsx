@@ -14,7 +14,6 @@ import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 import request from '../utils/request';
 import './Home.less';
-import util from '../utils';
 
 const { lazy, Suspense, useEffect, useContext } = React;
 const { TabPane } = Tabs;
@@ -42,7 +41,7 @@ function Home(props) {
     const houseNumber = _.sumBy(arrayByDay[key], 'number');
     builderData.push({
       month: key,
-      楼盘数: arrayByDay[key].length
+      [constants.BUILDER_NUMBER]: arrayByDay[key].length
     });
     houseData.push({
       month: key,
@@ -63,7 +62,7 @@ function Home(props) {
   }));
 
   // 柱状图数据
-  const { chartHouseData, chartBuilderData } = util.getAreaBarData(
+  const { chartHouseData, chartBuilderData } = utils.getAreaBarData(
     appState.allData
   );
 
@@ -87,8 +86,8 @@ function Home(props) {
             <AreaBar
               title="房源 / 区域(统计图)"
               data={chartHouseData}
-              xAxis="区域"
-              yAxis="房源"
+              xAxis={constants.AREA}
+              yAxis={constants.HOUSE_NUMBER}
               desc
             />
           </TabPane>
@@ -107,8 +106,8 @@ function Home(props) {
             <AreaBar
               title="楼盘数 / 区域(统计图)"
               data={chartBuilderData}
-              xAxis="区域"
-              yAxis="楼盘数"
+              xAxis={constants.AREA}
+              yAxis={constants.BUILDER_NUMBER}
               desc
             />
           </TabPane>

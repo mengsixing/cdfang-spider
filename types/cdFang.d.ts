@@ -10,9 +10,10 @@ declare namespace cdFang {
     status: string;
   }
 
+  // 和client constants 目录保持一致
   interface IareaHouse {
     区域: string;
-    房源: number;
+    房源数: number;
   }
 
   interface IareaBuilder {

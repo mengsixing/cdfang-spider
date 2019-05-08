@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
+import { HOUSE_NUMBER, BUILDER_NUMBER, AREA } from '../constants';
 
 interface Iauarter {
   thisQuarterStart: dayjs.Dayjs;
@@ -72,10 +73,10 @@ function getRandomId(): string {
   return newStrArray.join('');
 }
 
-function getAreas(data: cdFang.IhouseData[]): string[] {
-  const areasGroup = _.groupBy(data, (item: cdFang.IhouseData) => item.area);
-  return Object.keys(areasGroup);
-}
+// function getAreas(data: cdFang.IhouseData[]): string[] {
+//   const areasGroup = _.groupBy(data, (item: cdFang.IhouseData) => item.area);
+//   return Object.keys(areasGroup);
+// }
 
 function getAreaBarData(allData) {
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
@@ -83,10 +84,13 @@ function getAreaBarData(allData) {
   const chartBuilderData: cdFang.IareaBuilder[] = [];
   Object.keys(areasGroup).forEach(key => {
     chartHouseData.push({
-      区域: key,
-      房源: _.sumBy(areasGroup[key], 'number')
+      [AREA]: key,
+      [HOUSE_NUMBER]: _.sumBy(areasGroup[key], 'number')
     });
-    chartBuilderData.push({ 区域: key, 楼盘数: areasGroup[key].length });
+    chartBuilderData.push({
+      [AREA]: key,
+      [BUILDER_NUMBER]: areasGroup[key].length
+    });
   });
   return { chartHouseData, chartBuilderData };
 }

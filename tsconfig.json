@@ -1,11 +1,12 @@
 // https://www.tslang.cn/docs/handbook/compiler-options.html
 {
   "compilerOptions": {
-    "moduleResolution": "node",
+    "paths": { "*": ["types/*"] },
     "baseUrl": ".",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
+    "module": "esnext",
     "target": "esnext",
     "jsx": "react",
     "noImplicitReturns": true

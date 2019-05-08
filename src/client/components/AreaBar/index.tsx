@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
-import './styles.less';
 
 interface Iarea {
   区域: string;

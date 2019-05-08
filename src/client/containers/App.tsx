@@ -6,9 +6,8 @@ import renderRouters from '../router';
 import Notice from '../components/Notice';
 import AppContextProvider from '../context/appContextProvider';
 import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
-
+import util from '../utils';
 import './App.less';
-import util from '../utils/index';
 
 const { Header, Footer } = Layout;
 
@@ -18,7 +17,7 @@ function App({ history, location }) {
   }
 
   // 根据理由选中对应 menu 项
-  const defaltYear = [tabKeyRouterMap[location.pathname]];
+  const defaultYear = [tabKeyRouterMap[location.pathname]];
 
   const clickMenu = ({ key }) => {
     history.push(tabKeyRouterMap[key]);
@@ -39,7 +38,7 @@ function App({ history, location }) {
           <Menu
             theme="light"
             mode="horizontal"
-            selectedKeys={defaltYear}
+            selectedKeys={defaultYear}
             onClick={clickMenu}
             style={{ lineHeight: '64px' }}
           >

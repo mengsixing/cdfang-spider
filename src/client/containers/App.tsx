@@ -5,14 +5,16 @@ import { withRouter } from 'react-router-dom';
 import renderRouters from '../router';
 import Notice from '../components/Notice';
 import AppContextProvider from '../context/appContextProvider';
-import { tabKeyRouterMap } from '../constants';
+import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
+
 import './App.less';
+import util from '../utils/index';
 
 const { Header, Footer } = Layout;
 
 function App({ history, location }) {
   function gotoGithub() {
-    window.location.href = 'https://github.com/yhlben/cdfang-spider';
+    window.location.href = GITHUB_URL;
   }
 
   // 根据理由选中对应 menu 项
@@ -21,6 +23,9 @@ function App({ history, location }) {
   const clickMenu = ({ key }) => {
     history.push(tabKeyRouterMap[key]);
   };
+
+  // 获取年份列表
+  const yearList = util.getYearList();
 
   return (
     <AppContextProvider>
@@ -42,24 +47,18 @@ function App({ history, location }) {
               <Icon type="home" />
               首页
             </Menu.Item>
-            <Menu.Item key="2019">
-              <Icon type="calendar" />
-              2019 年
-            </Menu.Item>
-            <Menu.Item key="2018">
-              <Icon type="calendar" />
-              2018 年
-            </Menu.Item>
-            <Menu.Item key="2017">
-              <Icon type="calendar" />
-              2017 年
-            </Menu.Item>
+            {yearList.map(year => {
+              return (
+                <Menu.Item key={year}>
+                  <Icon type="calendar" />
+                  {`${year}年`}
+                </Menu.Item>
+              );
+            })}
           </Menu>
         </Header>
         {renderRouters()}
-        <Footer style={{ textAlign: 'center' }}>
-          Copyright 2018 - 2019 yhlben. All Rights Reserved
-        </Footer>
+        <Footer style={{ textAlign: 'center' }}>{COPYRIGHT}</Footer>
       </Layout>
     </AppContextProvider>
   );

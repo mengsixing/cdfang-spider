@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import * as DataSet from '@antv/data-set';
+import * as constants from '../../constants';
 
-interface Iarea {
+interface IareaGraphData {
   month: string;
-  楼盘数?: number;
-  房源数?: number;
+  [constants.HOUSE_NUMBER]?: number;
+  [constants.BUILDER_NUMBER]?: number;
 }
 
 interface Iprops {
   title: string;
-  data: Iarea[];
+  data: IareaGraphData[];
 }
 
 function AreaGraph({ data, title }: Iprops) {

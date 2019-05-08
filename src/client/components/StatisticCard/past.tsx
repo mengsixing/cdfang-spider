@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'antd';
 import * as _ from 'lodash';
 import util from '../../utils/index';
 import { AppContext } from '../../context/appContext';
+import * as constants from '../../constants';
 
 const { useContext } = React;
 
@@ -37,38 +38,30 @@ function StatisticCardPast() {
       <Row gutter={16}>
         <Col span={6}>
           <Card title="年度房源" bordered={false} extra={maxHouse.name}>
-            房源数：
-            {maxHouse.number}
+            {`${constants.HOUSE_NUMBER}：${maxHouse.number}`}
             <br />
-            区域：
-            {maxHouse.area}
+            {`${constants.AREA}：${maxHouse.area}`}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度楼盘" bordered={false} extra={maxBuildName}>
-            开盘数：
-            {maxBuildLength}
+            {`${constants.SALE_TIMES}：${maxBuildLength}`}
             <br />
-            房源数：
-            {maxBuild}
+            {`${constants.HOUSE_NUMBER}：${maxBuild}`}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度区域" bordered={false} extra={maxAreaName}>
-            开盘数：
-            {maxAreaLength}
+            {`${constants.SALE_TIMES}：${maxAreaLength}`}
             <br />
-            房源数：
-            {maxArea}
+            {`${constants.HOUSE_NUMBER}：${maxArea}`}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度开盘" bordered={false}>
-            楼盘数：
-            {allInfo.buildNumber}
+            {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
             <br />
-            房源数：
-            {allInfo.houseNumber}
+            {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
           </Card>
         </Col>
       </Row>

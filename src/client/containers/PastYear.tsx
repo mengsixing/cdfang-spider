@@ -18,6 +18,8 @@ const { TabPane } = Tabs;
 
 function PastYear(props) {
   const appState = useContext(AppContext);
+  const { allData } = appState;
+
   const changeTab = (activityKey: string): void => {
     appState.changeActivityKey(activityKey);
   };
@@ -29,26 +31,22 @@ function PastYear(props) {
     });
   }, []);
 
-  const { allData } = appState;
-  const areas = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
-  const areasList = Object.keys(areas);
-  const tabpanels = util
-    .sortArea(areasList)
-    .map((item: string, index: number) => (
-      <TabPane tab={item} key={item}>
-        <ChartPanel
-          data={areas[item]}
-          panelKey={item}
-          activityKey={appState.activityKey}
-        />
-      </TabPane>
-    ));
-  const chartHouseData: cdFang.IareaHouse[] = [];
-  const chartBuildData: cdFang.IareaBuilder[] = [];
-  Object.keys(areas).forEach(key => {
-    chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
-    chartBuildData.push({ 区域: key, 楼盘数: areas[key].length });
-  });
+  const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
+  const areasList = Object.keys(areasGroup);
+  const tabpanels = util.sortArea(areasList).map((item: string) => (
+    <TabPane tab={item} key={item}>
+      <ChartPanel
+        data={areasGroup[item]}
+        panelKey={item}
+        activityKey={appState.activityKey}
+      />
+    </TabPane>
+  ));
+
+  // 柱状图数据
+  const { chartHouseData, chartBuilderData } = util.getAreaBarData(
+    appState.allData
+  );
 
   return (
     <Content className="content">
@@ -69,7 +67,7 @@ function PastYear(props) {
         />
         <AreaBar
           title="楼盘数排序图"
-          data={chartBuildData}
+          data={chartBuilderData}
           xAxis="区域"
           yAxis="楼盘数"
           desc

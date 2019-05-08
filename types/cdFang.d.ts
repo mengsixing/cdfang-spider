@@ -19,8 +19,4 @@ declare namespace cdFang {
     区域: string;
     楼盘数: number;
   }
-
-  interface IallHouses {
-    allHouses: IhouseData[];
-  }
 }

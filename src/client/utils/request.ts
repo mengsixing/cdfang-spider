@@ -1,13 +1,17 @@
 import gql from 'graphql-tag';
 import config from '../config';
 
+interface IallHouses {
+  allHouses: cdFang.IhouseData[];
+}
+
 const { getGraphqlClient } = config;
 
 function requestData(year: string, callback: Function): void {
   const yearParam = year === 'home' ? '0' : year;
 
   getGraphqlClient()
-    .query<cdFang.IallHouses>({
+    .query<IallHouses>({
       query: gql`
         {
           allHouses(year: ${yearParam}) {

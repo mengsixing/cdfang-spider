@@ -72,6 +72,37 @@ function getRandomId(): string {
   return newStrArray.join('');
 }
 
+function getAreas(data: cdFang.IhouseData[]): string[] {
+  const areasGroup = _.groupBy(data, (item: cdFang.IhouseData) => item.area);
+  return Object.keys(areasGroup);
+}
+
+function getAreaBarData(allData) {
+  const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
+  const chartHouseData: cdFang.IareaHouse[] = [];
+  const chartBuilderData: cdFang.IareaBuilder[] = [];
+  Object.keys(areasGroup).forEach(key => {
+    chartHouseData.push({
+      区域: key,
+      房源: _.sumBy(areasGroup[key], 'number')
+    });
+    chartBuilderData.push({ 区域: key, 楼盘数: areasGroup[key].length });
+  });
+  return { chartHouseData, chartBuilderData };
+}
+
+function getYearList(): number[] {
+  let currentYear = new Date().getFullYear();
+  const startYear = 2017;
+  const yearList = [];
+
+  while (currentYear >= startYear) {
+    yearList.push(currentYear);
+    currentYear -= 1;
+  }
+  return yearList;
+}
+
 const util = {
   getAllInfo(allData: cdFang.IhouseData[]): IhouseInfo {
     const houseNumber = _.sumBy(allData, 'number');
@@ -222,7 +253,9 @@ const util = {
     return newArray;
   },
   getCurrentQuarter,
-  getRandomId
+  getRandomId,
+  getAreaBarData,
+  getYearList
 };
 
 export default util;

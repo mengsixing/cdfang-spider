@@ -14,6 +14,7 @@ import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 import request from '../utils/request';
 import './Home.less';
+import util from '../utils';
 
 const { lazy, Suspense, useEffect, useContext } = React;
 const { TabPane } = Tabs;
@@ -45,7 +46,7 @@ function Home(props) {
     });
     houseData.push({
       month: key,
-      房源数: houseNumber
+      [constants.HOUSE_NUMBER]: houseNumber
     });
   });
 
@@ -53,25 +54,18 @@ function Home(props) {
   const builderRankData = builderData.map(item => ({
     _id: utils.getRandomId(),
     name: item.month,
-    number: item['楼盘数']
+    number: item[constants.BUILDER_NUMBER]
   }));
   const houseRankData = houseData.map(item => ({
     _id: utils.getRandomId(),
     name: item.month,
-    number: item['房源数']
+    number: item[constants.HOUSE_NUMBER]
   }));
 
   // 柱状图数据
-  const areas = _.groupBy(
-    appState.allData,
-    (item: cdFang.IhouseData) => item.area
+  const { chartHouseData, chartBuilderData } = util.getAreaBarData(
+    appState.allData
   );
-  const chartHouseData: cdFang.IareaHouse[] = [];
-  const chartBuilderData: cdFang.IareaBuilder[] = [];
-  Object.keys(areas).forEach(key => {
-    chartHouseData.push({ 区域: key, 房源: _.sumBy(areas[key], 'number') });
-    chartBuilderData.push({ 区域: key, 楼盘数: areas[key].length });
-  });
 
   return (
     <Content className="content">
@@ -81,10 +75,10 @@ function Home(props) {
       <StatisticCard />
       <div className="home-content-houses">
         <Tabs type="card">
-          <TabPane tab="房源数" key="1">
+          <TabPane tab={constants.HOUSE_NUMBER} key="1">
             <Row>
               <Col span={18}>
-                <AreaGraph data={houseData} title="房源数" />
+                <AreaGraph data={houseData} title={constants.HOUSE_NUMBER} />
               </Col>
               <Col span={6}>
                 <Rank data={houseRankData} title="月份" unit="套" />
@@ -98,10 +92,13 @@ function Home(props) {
               desc
             />
           </TabPane>
-          <TabPane tab="楼盘数" key="2">
+          <TabPane tab={constants.BUILDER_NUMBER} key="2">
             <Row>
               <Col span={18}>
-                <AreaGraph data={builderData} title="楼盘数" />
+                <AreaGraph
+                  data={builderData}
+                  title={constants.BUILDER_NUMBER}
+                />
               </Col>
               <Col span={6}>
                 <Rank data={builderRankData} title="月份" unit="个" />

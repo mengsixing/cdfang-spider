@@ -1,6 +1,7 @@
 // https://www.tslang.cn/docs/handbook/compiler-options.html
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "baseUrl": ".",
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,

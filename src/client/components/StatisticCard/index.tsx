@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Card, Col, Row } from 'antd';
 import util, { IhouseInfo } from '../../utils/index';
 import { AppContext } from '../../context/appContext';
+import * as constants from '../../constants';
 
 const { useContext } = React;
 
@@ -17,10 +18,7 @@ function StatisticCard() {
     return (
       <div>
         <div className="content-card-text">
-          <span>
-            楼盘数：
-            {info.buildNumber}
-          </span>
+          <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
           <span
             style={{
               color: info.increaseBuildNumber > 0 ? '#5eba00' : '#cd201f'
@@ -30,10 +28,7 @@ function StatisticCard() {
           </span>
         </div>
         <div className="content-card-text">
-          <span>
-            房源数：
-            {info.houseNumber}
-          </span>
+          <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
           <span
             style={{
               color: info.increaseHouseNumber > 0 ? '#5eba00' : '#cd201f'
@@ -66,11 +61,9 @@ function StatisticCard() {
         </Col>
         <Col span={6}>
           <Card title="总开盘" bordered={false}>
-            楼盘数：
-            {allInfo.buildNumber}
+            {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
             <br />
-            房源数：
-            {allInfo.houseNumber}
+            {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
           </Card>
         </Col>
       </Row>

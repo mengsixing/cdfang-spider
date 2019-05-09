@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import * as Koa from 'koa';
 import houseModel from '../models/houseModel';
 import initGraphQL from './graphql';
 import spider from '../utils/spiderHelper';
@@ -48,7 +49,7 @@ router
   );
 
 export default {
-  init(app): void {
+  init(app: Koa): void {
     app.use(router.routes()).use(router.allowedMethods());
     initGraphQL(app);
   }

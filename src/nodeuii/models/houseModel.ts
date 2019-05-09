@@ -5,7 +5,7 @@ import DbHelper from '../utils/dbHelper';
 const mongoose = DbHelper.connect();
 
 // 创建数据库
-const HouseSchema = mongoose.Schema({
+const HouseSchema = new mongoose.Schema({
   _id: String,
   area: String,
   name: String,
@@ -18,7 +18,7 @@ const HouseSchema = mongoose.Schema({
 const HouseCol = mongoose.model('house', HouseSchema);
 
 const houseModel = {
-  async add(item): Promise<boolean | cdFang.IhouseData> {
+  async add(item: cdFang.IhouseData): Promise<boolean | cdFang.IhouseData> {
     const findItem = await this.find({ _id: item._id });
     if (findItem.length > 0) {
       // 如果状态变更执行更新操作
@@ -41,7 +41,7 @@ const houseModel = {
     return item;
   },
   async addMany(array: cdFang.IhouseData[]): Promise<void> {
-    const newArray = [];
+    const newArray: cdFang.IhouseData[] = [];
     array.forEach(
       async (item: cdFang.IhouseData): Promise<void> => {
         const findItem = await this.find({ _id: item._id });

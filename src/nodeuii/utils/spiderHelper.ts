@@ -4,7 +4,7 @@ import * as util from './index';
 import houseModel from '../models/houseModel';
 import config from '../config';
 
-const initspider = async (pageStart, pageEnd): Promise<cdFang.IhouseData[]> => {
+const initspider = async (pageStart: number, pageEnd: number) => {
   const allPromises = [];
   for (let i = pageStart; i <= pageEnd; i += 1) {
     const page = new Promise(
@@ -17,10 +17,10 @@ const initspider = async (pageStart, pageEnd): Promise<cdFang.IhouseData[]> => {
                 return;
               }
               const $ = cheerio.load(result.text);
-              const trList = [];
+              const trList: string[][] = [];
               $('#_projectInfo>tr').each(
                 (idx, tr): void => {
-                  const tdList = [];
+                  const tdList: string[] = [];
                   $(tr)
                     .find('td')
                     .each(
@@ -39,9 +39,9 @@ const initspider = async (pageStart, pageEnd): Promise<cdFang.IhouseData[]> => {
     allPromises.push(page);
   }
   const result = await Promise.all(allPromises).then(
-    (posts): cdFang.IhouseData[] => {
+    (posts: cdFang.IhouseData[][]): cdFang.IhouseData[] => {
       houseModel.addMany(posts[0]);
-      return posts;
+      return posts[0];
     }
   );
   return result;
@@ -61,10 +61,10 @@ const spiderPageOne = async (): Promise<Ipage> => {
             return;
           }
           const $ = cheerio.load(result.text);
-          const trList = [];
+          const trList: string[][] = [];
           $('#_projectInfo>tr').each(
             (idx, tr): void => {
-              const tdList = [];
+              const tdList: string[] = [];
               $(tr)
                 .find('td')
                 .each(

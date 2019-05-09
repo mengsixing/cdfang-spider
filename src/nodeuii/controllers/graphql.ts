@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-koa';
+import * as Koa from 'koa';
 import houseModel from '../models/houseModel';
 import spider from '../utils/spiderHelper';
 
@@ -6,7 +7,7 @@ interface Iyear {
   year: number;
 }
 
-function initGraphQL(app): void {
+function initGraphQL(app: Koa): void {
   const typeDefs = gql`
     type House {
       _id: ID
@@ -32,7 +33,10 @@ function initGraphQL(app): void {
   const resolvers = {
     Query: {
       // 和 type Query 中的 allHouses 对应
-      allHouses: async (parent, args: Iyear): Promise<cdFang.IhouseData[]> => {
+      allHouses: async (
+        _parent: never, // 不使用第一个变量
+        args: Iyear
+      ): Promise<cdFang.IhouseData[]> => {
         let query = {};
         if (args.year !== 0) {
           const reg = new RegExp(`^${args.year}`);

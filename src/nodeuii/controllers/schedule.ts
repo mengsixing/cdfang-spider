@@ -5,7 +5,7 @@ import * as util from '../utils';
 import houseModel from '../models/houseModel';
 import config from '../config';
 
-function grabPage(pageNo): Promise<cdFang.IhouseData[]> {
+function grabPage(pageNo: number): Promise<cdFang.IhouseData[]> {
   return new Promise(
     (resolve): void => {
       request
@@ -18,10 +18,10 @@ function grabPage(pageNo): Promise<cdFang.IhouseData[]> {
               return;
             }
             const $ = cheerio.load(result.text);
-            const trList = [];
+            const trList: string[][] = [];
             $('#_projectInfo>tr').each(
               (i, tr): void => {
-                const tdList = [];
+                const tdList: string[] = [];
                 $(tr)
                   .find('td')
                   .each(

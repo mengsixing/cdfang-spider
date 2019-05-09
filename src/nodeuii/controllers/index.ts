@@ -13,7 +13,10 @@ router
       const {
         query: { pageStart, pageEnd }
       } = ctx.request;
-      const result = await spider.initspider(pageStart, pageEnd);
+
+      const pageStartNumber = Number.parseInt(pageStart, 10);
+      const pageEndNumber = Number.parseInt(pageEnd, 10);
+      const result = await spider.initspider(pageStartNumber, pageEndNumber);
       ctx.body = result;
     }
   )

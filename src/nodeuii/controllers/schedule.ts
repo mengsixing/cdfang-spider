@@ -1,43 +1,6 @@
 import * as schedule from 'node-schedule';
-import * as request from 'superagent';
-import * as cheerio from 'cheerio';
-import * as util from '../utils';
 import houseModel from '../models/houseModel';
-import config from '../config';
-
-function grabPage(pageNo: number): Promise<cdFang.IhouseData[]> {
-  return new Promise(
-    (resolve): void => {
-      request
-        .post(
-          `${config.spiderDomain}/lottery/accept/projectList?pageNo=${pageNo}`
-        )
-        .end(
-          (err, result): void => {
-            if (err) {
-              return;
-            }
-            const $ = cheerio.load(result.text);
-            const trList: string[][] = [];
-            $('#_projectInfo>tr').each(
-              (i, tr): void => {
-                const tdList: string[] = [];
-                $(tr)
-                  .find('td')
-                  .each(
-                    (j, td): void => {
-                      tdList.push($(td).text());
-                    }
-                  );
-                trList.push(tdList);
-              }
-            );
-            resolve(util.transformArray(trList));
-          }
-        );
-    }
-  );
-}
+import { createRequestPromise } from '../utils/spiderHelper';
 
 // 定时器middleware,每隔15分钟爬一次
 const runEvery15Minute = async (): Promise<void> => {
@@ -45,9 +8,9 @@ const runEvery15Minute = async (): Promise<void> => {
     '*/15 * * * *',
     async (): Promise<void> => {
       const pageList = await Promise.all([
-        grabPage(1),
-        grabPage(2),
-        grabPage(3)
+        createRequestPromise(1),
+        createRequestPromise(2),
+        createRequestPromise(3)
       ]);
       const page = [...pageList[0], ...pageList[1], ...pageList[2]];
       const newNumber = await new Promise(

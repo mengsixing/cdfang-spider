@@ -20,10 +20,10 @@ interface IcircleData {
 }
 
 function CircleGraph({ data: array, changeMonth }: Iprops) {
-  function selectMonth(circleObject) {
+  const selectMonth = circleObject => {
     // eslint-disable-next-line no-underscore-dangle
     changeMonth(circleObject.data._origin);
-  }
+  };
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)
       .startOf('month')
@@ -33,7 +33,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
   Object.keys(arrayByMonth).forEach(key => {
     const houseNumber = _.sumBy(arrayByMonth[key], 'number');
     cricleArray.push({
-      item: dayjs(key).format('YYYY年MM月'),
+      item: dayjs(key).format('M月'),
       number: houseNumber,
       date: key
     });
@@ -47,20 +47,18 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
     dimension: 'item',
     as: 'percent'
   });
-  const cols = {
+  const scales = {
     percent: {
       formatter: (val: number) => `${(val * 100).toFixed(2)}%`
     }
   };
   const houseNumber = _.sumBy(array, 'number');
-  const guideHtml = `
-  <div style="color:#8c8c8c;font-size:1em;text-align: center;width: 10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>
-  `;
+  const guideHtml = `<div style="color:#8c8c8c;font-size:1em;text-align: center;width: 10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>`;
   return (
     <Chart
       height={400}
       data={dv}
-      scale={cols}
+      scale={scales}
       forceFit
       onIntervalClick={selectMonth}
     >

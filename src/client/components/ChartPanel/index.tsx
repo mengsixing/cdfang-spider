@@ -6,7 +6,7 @@ import { AppContext } from '../../context/appContext';
 
 import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
-import BarGraph from '../BarGraph';
+import DoubleAxisGraph from '../DoubleAxisGraph';
 
 const { useState, useContext } = React;
 
@@ -41,7 +41,7 @@ function ChartPanel(props: Iprops) {
 
   // 只会执行一次
   const [state, setState] = useState(initState);
-  const [prevData, setPrevData] = useState(null);
+  const [prevData, setPrevData] = useState();
 
   // 模拟 getDerivedStateFromProps https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
   if (data !== prevData) {
@@ -81,10 +81,11 @@ function ChartPanel(props: Iprops) {
   const { isChangeTab, rank, rankTitle } = state;
 
   currentState = state;
+
   return (
     <Row>
       <Col span={9}>
-        <BarGraph data={data} />
+        <DoubleAxisGraph data={data} />
       </Col>
       <Col span={9}>
         <CricleGraph

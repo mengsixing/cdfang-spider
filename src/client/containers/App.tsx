@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { withRouter } from 'react-router-dom';
 
+import { RouteChildrenProps } from 'react-router';
 import renderRouters from '../router';
 import Notice from '../components/Notice';
 import AppContextProvider from '../context/appContextProvider';
@@ -10,8 +11,7 @@ import util from '../utils';
 import './App.less';
 
 const { Header, Footer } = Layout;
-
-function App({ history, location }) {
+function App({ history, location }: RouteChildrenProps) {
   function gotoGithub() {
     window.location.href = GITHUB_URL;
   }

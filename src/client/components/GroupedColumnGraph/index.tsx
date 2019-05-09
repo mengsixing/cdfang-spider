@@ -8,7 +8,8 @@ export interface Iprops {
   data: cdFang.IhouseData[];
 }
 
-function BarGraph(props: Iprops) {
+// 分组柱状图 https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
+function GroupedColumnGraph(props: Iprops) {
   const { data: array } = props;
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)
@@ -59,4 +60,4 @@ function BarGraph(props: Iprops) {
   );
 }
 
-export default React.memo(BarGraph);
+export default React.memo(GroupedColumnGraph);

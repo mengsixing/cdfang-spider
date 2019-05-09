@@ -3,7 +3,7 @@ import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 import * as DataSet from '@antv/data-set';
 import * as constants from '../../constants';
 
-interface IareaGraphData {
+interface IbasicAreaGraphData {
   month: string;
   [constants.HOUSE_NUMBER]?: number;
   [constants.BUILDER_NUMBER]?: number;
@@ -11,10 +11,11 @@ interface IareaGraphData {
 
 interface Iprops {
   title: string;
-  data: IareaGraphData[];
+  data: IbasicAreaGraphData[];
 }
 
-function AreaGraph({ data, title }: Iprops) {
+// 基础面积图 https://bizcharts.net/products/bizCharts/demo/detail?id=area-basic&selectedKey=%E9%9D%A2%E7%A7%AF%E5%9B%BE
+function BasicAreaGraph({ data, title }: Iprops) {
   const dv = new DataSet.View().source(data);
   dv.transform({
     type: 'fold',
@@ -43,4 +44,4 @@ function AreaGraph({ data, title }: Iprops) {
   );
 }
 
-export default AreaGraph;
+export default BasicAreaGraph;

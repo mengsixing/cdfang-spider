@@ -41,7 +41,7 @@ describe('ChartPanel 组件', () => {
   });
 
   // it('子组件是否渲染 ?', () => {
-  //   expect(wrapper.find('BarGraph').length).toBe(1);
+  //   expect(wrapper.find('GroupedColumnGraph').length).toBe(1);
   //   expect(wrapper.find('CircleGraph').length).toBe(1);
   // });
 });

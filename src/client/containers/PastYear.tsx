@@ -2,11 +2,12 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
 
+import { RouteChildrenProps } from 'react-router';
 import util from '../utils/index';
 import ChartPanel from '../components/ChartPanel/index';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard/past';
-import AreaBar from '../components/AreaBar';
+import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 import request from '../utils/request';
@@ -16,7 +17,7 @@ const { useEffect, useContext } = React;
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-function PastYear(props) {
+function PastYear(props: RouteChildrenProps) {
   const appState = useContext(AppContext);
   const { allData } = appState;
 
@@ -26,7 +27,7 @@ function PastYear(props) {
 
   useEffect(() => {
     const year = constants.tabKeyRouterMap[props.location.pathname];
-    request(year, allHouses => {
+    request(year, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
     });
   }, []);
@@ -44,7 +45,7 @@ function PastYear(props) {
   ));
 
   // 柱状图数据
-  const { chartHouseData, chartBuilderData } = util.getAreaBarData(
+  const { chartHouseData, chartBuilderData } = util.getBasicColumnGraphData(
     appState.allData
   );
 
@@ -56,16 +57,16 @@ function PastYear(props) {
           {tabpanels}
         </Tabs>
       </div>
-      <div className="content-areabar">
-        <div className="content-areabar-title">整体统计</div>
-        <AreaBar
+      <div className="content-basic-column">
+        <div className="content-basic-column-title">整体统计</div>
+        <BasicColumnGraph
           title="房源数排序图"
           data={chartHouseData}
           xAxis={constants.AREA}
           yAxis={constants.HOUSE_NUMBER}
           desc
         />
-        <AreaBar
+        <BasicColumnGraph
           title="楼盘数排序图"
           data={chartBuilderData}
           xAxis={constants.AREA}

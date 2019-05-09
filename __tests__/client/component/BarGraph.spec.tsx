@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph, { Iprops } from '../../../src/client/components/BarGraph';
+import GroupedColumnGraph, {
+  Iprops
+} from '../../../src/client/components/GroupedColumnGraph';
 
 const setup = () => {
   const props: Iprops = {
@@ -17,14 +19,14 @@ const setup = () => {
       }
     ]
   };
-  const wrapper = mount(<BarGraph {...props} />);
+  const wrapper = mount(<GroupedColumnGraph {...props} />);
   return {
     props,
     wrapper
   };
 };
 
-describe('BarGraph 组件', () => {
+describe('GroupedColumnGraph 组件', () => {
   const { wrapper } = setup();
   const cheerioWrapper = wrapper.render();
 

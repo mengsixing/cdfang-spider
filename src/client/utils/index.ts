@@ -73,12 +73,8 @@ function getRandomId(): string {
   return newStrArray.join('');
 }
 
-// function getAreas(data: cdFang.IhouseData[]): string[] {
-//   const areasGroup = _.groupBy(data, (item: cdFang.IhouseData) => item.area);
-//   return Object.keys(areasGroup);
-// }
-
-function getAreaBarData(allData) {
+// 获取基础柱状图数据
+function getBasicColumnGraphData(allData) {
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const chartHouseData: cdFang.IareaHouse[] = [];
   const chartBuilderData: cdFang.IareaBuilder[] = [];
@@ -258,7 +254,7 @@ const util = {
   },
   getCurrentQuarter,
   getRandomId,
-  getAreaBarData,
+  getBasicColumnGraphData,
   getYearList
 };
 

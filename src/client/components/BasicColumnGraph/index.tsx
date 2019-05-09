@@ -18,7 +18,7 @@ interface Iprops {
   desc?: boolean;
 }
 
-function AreaBar({ data, title, xAxis, yAxis, desc }: Iprops) {
+function BasicColumnGraph({ data, title, xAxis, yAxis, desc }: Iprops) {
   let chartData: Iarea[] = [];
   if (desc) {
     chartData = data.sort((a, b): any => b[yAxis] - a[yAxis]);
@@ -34,9 +34,9 @@ function AreaBar({ data, title, xAxis, yAxis, desc }: Iprops) {
   );
 }
 
-const AreaBarMemo = React.memo<Iprops>(
-  RenderNoEmptyComponent(AreaBar, ['data']),
+const BasicColumnGraphMemo = React.memo<Iprops>(
+  RenderNoEmptyComponent(BasicColumnGraph, ['data']),
   (): boolean => false
 );
 
-export default AreaBarMemo;
+export default BasicColumnGraphMemo;

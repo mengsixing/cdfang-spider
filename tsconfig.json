@@ -3,13 +3,16 @@
   "compilerOptions": {
     "paths": { "*": ["types/*"] },
     "baseUrl": ".",
-    "noImplicitAny": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
-    "module": "esnext",
-    "target": "esnext",
+    "module": "ESNext",
+    "target": "ESNext",
     "jsx": "react",
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    //https://github.com/ant-design/ant-design/issues/8642
+    "moduleResolution": "node"
   },
   // 影响webpack构建
   "include": ["src/**/*", "build/**/*", "types/**/*"],

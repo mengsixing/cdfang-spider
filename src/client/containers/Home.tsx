@@ -3,13 +3,14 @@ import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
 
+import { RouteChildrenProps } from 'react-router';
 import utils from '../utils';
-import AreaGraph from '../components/AreaGraph';
+import BasicAreaGraph from '../components/BasicAreaGraph';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import Rank from '../components/Rank';
 import Loading from '../components/Loading';
-import AreaBar from '../components/AreaBar';
+import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 import request from '../utils/request';
@@ -20,12 +21,18 @@ const { TabPane } = Tabs;
 const { Content } = Layout;
 const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 
-function Home(props) {
+interface ImonthHouse {
+  month: string;
+  [constants.BUILDER_NUMBER]?: number;
+  [constants.HOUSE_NUMBER]?: number;
+}
+
+function Home(props: RouteChildrenProps) {
   const appState = useContext(AppContext);
 
   useEffect(() => {
     const year = constants.tabKeyRouterMap[props.location.pathname];
-    request(year, allHouses => {
+    request(year, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
     });
   }, []);
@@ -35,8 +42,8 @@ function Home(props) {
     return dayjs(item.beginTime).format('YYYY-MM');
   });
 
-  const houseData = [];
-  const builderData = [];
+  const houseData: ImonthHouse[] = [];
+  const builderData: ImonthHouse[] = [];
   Object.keys(arrayByDay)
     .sort()
     .forEach(key => {
@@ -64,7 +71,7 @@ function Home(props) {
   }));
 
   // 柱状图数据
-  const { chartHouseData, chartBuilderData } = utils.getAreaBarData(
+  const { chartHouseData, chartBuilderData } = utils.getBasicColumnGraphData(
     appState.allData
   );
 
@@ -79,13 +86,16 @@ function Home(props) {
           <TabPane tab={constants.HOUSE_NUMBER} key="1">
             <Row>
               <Col span={18}>
-                <AreaGraph data={houseData} title={constants.HOUSE_NUMBER} />
+                <BasicAreaGraph
+                  data={houseData}
+                  title={constants.HOUSE_NUMBER}
+                />
               </Col>
               <Col span={6}>
                 <Rank data={houseRankData} title="月份" unit="套" />
               </Col>
             </Row>
-            <AreaBar
+            <BasicColumnGraph
               title="房源 / 区域(统计图)"
               data={chartHouseData}
               xAxis={constants.AREA}
@@ -96,7 +106,7 @@ function Home(props) {
           <TabPane tab={constants.BUILDER_NUMBER} key="2">
             <Row>
               <Col span={18}>
-                <AreaGraph
+                <BasicAreaGraph
                   data={builderData}
                   title={constants.BUILDER_NUMBER}
                 />
@@ -105,7 +115,7 @@ function Home(props) {
                 <Rank data={builderRankData} title="月份" unit="个" />
               </Col>
             </Row>
-            <AreaBar
+            <BasicColumnGraph
               title="楼盘数 / 区域(统计图)"
               data={chartBuilderData}
               xAxis={constants.AREA}

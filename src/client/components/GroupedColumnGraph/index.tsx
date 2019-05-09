@@ -1,14 +1,21 @@
 import * as React from 'react';
+// @ts-ignore
 import * as DataSet from '@antv/data-set';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 
+// 导出给 test 文件使用
 export interface Iprops {
   data: cdFang.IhouseData[];
 }
 
-// 分组柱状图 https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
+interface ImonthMap {
+  name: string;
+  [x: string]: string | number;
+}
+
+// 分组柱状图(暂未使用) https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
 function GroupedColumnGraph(props: Iprops) {
   const { data: array } = props;
   const arrayByMonth = _.groupBy(array, item =>
@@ -16,8 +23,8 @@ function GroupedColumnGraph(props: Iprops) {
       .startOf('month')
       .format('YYYY-MM')
   );
-  const buildObj = { name: '楼盘' };
-  const houseObj = { name: '房源' };
+  const buildObj: ImonthMap = { name: '楼盘' };
+  const houseObj: ImonthMap = { name: '房源' };
   const cricleObj = [];
   let fields: string[] = [];
   Object.keys(arrayByMonth).forEach(key => {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
+// @ts-ignore
 import * as DataSet from '@antv/data-set';
 import * as constants from '../../constants';
 
@@ -9,7 +10,7 @@ interface IbasicAreaGraphData {
   [constants.BUILDER_NUMBER]?: number;
 }
 
-interface Iprops {
+export interface Iprops {
   title: string;
   data: IbasicAreaGraphData[];
 }

@@ -1,6 +1,6 @@
 /*eslint-disable */
 import * as supertest from 'supertest';
-import * as app from '../../dist/app';
+const app = require('../../dist/app.js');
 
 var server = app.listen();
 

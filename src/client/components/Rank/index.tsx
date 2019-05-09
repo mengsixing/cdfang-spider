@@ -8,6 +8,7 @@ interface Irank {
   number: number;
 }
 
+// 导出给 test 文件使用
 export interface Iprops {
   data: Irank[];
   title: string;

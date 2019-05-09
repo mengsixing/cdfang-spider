@@ -14,7 +14,7 @@ const setup = () => {
   };
 };
 
-describe('Todo', () => {
+describe('Loading 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否存在跟元素 ?', () => {

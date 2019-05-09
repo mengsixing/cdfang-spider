@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
+// @ts-ignore
 import * as DataSet from '@antv/data-set';
 
 const { DataView } = DataSet;
@@ -10,7 +11,7 @@ const { Html } = Guide;
 export interface Iprops {
   isChangeTab: boolean;
   data: cdFang.IhouseData[];
-  changeMonth(monthString): void;
+  changeMonth(origin: cdFang.IcircleItem): void;
 }
 
 interface IcircleData {
@@ -20,7 +21,9 @@ interface IcircleData {
 }
 
 function CircleGraph({ data: array, changeMonth }: Iprops) {
-  const selectMonth = circleObject => {
+  const selectMonth = (circleObject: {
+    data: { _origin: cdFang.IcircleItem };
+  }) => {
     // eslint-disable-next-line no-underscore-dangle
     changeMonth(circleObject.data._origin);
   };

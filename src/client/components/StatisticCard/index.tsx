@@ -21,7 +21,7 @@ function StatisticCard() {
           <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
           <span
             style={{
-              color: info.increaseBuildNumber > 0 ? '#5eba00' : '#cd201f'
+              color: info.increaseBuildNumber ? '#5eba00' : '#cd201f'
             }}
           >
             {info.increaseBuildNumberString}
@@ -31,7 +31,7 @@ function StatisticCard() {
           <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
           <span
             style={{
-              color: info.increaseHouseNumber > 0 ? '#5eba00' : '#cd201f'
+              color: info.increaseHouseNumber ? '#5eba00' : '#cd201f'
             }}
           >
             {info.increaseHouseNumberString}

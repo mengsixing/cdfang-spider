@@ -49,7 +49,7 @@ function ChartPanel(props: Iprops) {
     setPrevData(data);
   }
 
-  function changeMonth(origin, newState: Istate) {
+  function changeMonth(origin: cdFang.IcircleItem, newState: Istate) {
     const { rankTitle, isOpen } = newState;
 
     if (rankTitle === origin.item && isOpen) {

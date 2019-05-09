@@ -48,7 +48,11 @@ function getCurrentQuarter(dayjsObject = dayjs()): Iauarter {
         thisQuarterEnd: dayjsObject.set('month', 11).startOf('month')
       };
     default:
-      return null;
+      // 默认返回第一季度
+      return {
+        thisQuarterStart: dayjsObject.set('month', 0).startOf('month'),
+        thisQuarterEnd: dayjsObject.set('month', 2).startOf('month')
+      };
   }
 }
 
@@ -74,7 +78,7 @@ function getRandomId(): string {
 }
 
 // 获取基础柱状图数据
-function getBasicColumnGraphData(allData) {
+function getBasicColumnGraphData(allData: cdFang.IhouseData[]) {
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const chartHouseData: cdFang.IareaHouse[] = [];
   const chartBuilderData: cdFang.IareaBuilder[] = [];

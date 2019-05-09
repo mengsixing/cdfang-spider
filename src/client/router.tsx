@@ -4,7 +4,14 @@ import PastYear from './containers/PastYear';
 import CurrentYear from './containers/CurrentYear';
 import Home from './containers/Home';
 
-const routes = [
+interface Iroutes {
+  path: string;
+  exact?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: any;
+}
+
+const routes: Iroutes[] = [
   {
     path: '/',
     exact: true,
@@ -24,14 +31,14 @@ const routes = [
   }
 ];
 
-function RouteWithSubRoutes(route) {
+function RouteWithSubRoutes(route: Iroutes) {
   return (
     <Route
       path={route.path}
       render={props => {
         // 中间组件，防止router配置2个相同的compoment，切换时不会渲染。
         function NOOP() {
-          return <route.component {...props} routes={route.routes} />;
+          return <route.component {...props} />;
         }
         return <NOOP />;
       }}

@@ -20,4 +20,11 @@ declare namespace cdFang {
     区域: string;
     楼盘数: number;
   }
+
+  interface IcircleItem {
+    date: string;
+    item: string;
+    number: number;
+    percent: number;
+  }
 }

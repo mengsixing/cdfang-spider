@@ -23,8 +23,12 @@ const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
 
 interface ImonthHouse {
   month: string;
-  [constants.BUILDER_NUMBER]?: number;
-  [constants.HOUSE_NUMBER]?: number;
+  [constants.HOUSE_NUMBER]: number;
+}
+
+interface ImonthBuilder {
+  month: string;
+  [constants.BUILDER_NUMBER]: number;
 }
 
 function Home(props: RouteChildrenProps) {
@@ -43,7 +47,7 @@ function Home(props: RouteChildrenProps) {
   });
 
   const houseData: ImonthHouse[] = [];
-  const builderData: ImonthHouse[] = [];
+  const builderData: ImonthBuilder[] = [];
   Object.keys(arrayByDay)
     .sort()
     .forEach(key => {

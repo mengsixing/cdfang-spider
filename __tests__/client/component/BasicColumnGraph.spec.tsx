@@ -22,7 +22,7 @@ const setup = () => {
   };
 };
 
-describe('Todo', () => {
+describe('BasicColumnGraph 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否渲染成功 ?', () => {

@@ -11,7 +11,7 @@ import util from '../utils';
 import './App.less';
 
 const { Header, Footer } = Layout;
-function App({ history, location }: RouteChildrenProps) {
+function App({ history, location }: RouteChildrenProps): JSX.Element {
   function gotoGithub() {
     window.location.href = GITHUB_URL;
   }
@@ -19,7 +19,7 @@ function App({ history, location }: RouteChildrenProps) {
   // 根据理由选中对应 menu 项
   const defaultYear = [tabKeyRouterMap[location.pathname]];
 
-  const clickMenu = ({ key }) => {
+  const clickMenu = ({ key }: { key: string }) => {
     history.push(tabKeyRouterMap[key]);
   };
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
-import dayjs from 'dayjs';
-import _ from 'lodash';
+import * as dayjs from 'dayjs';
+import * as _ from 'lodash';
 import { HOUSE_NUMBER, BUILDER_NUMBER } from '../../constants';
 
-interface Iprops {
+// 导出给 test 文件
+export interface Iprops {
   data: cdFang.IhouseData[];
 }
 

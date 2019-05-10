@@ -1,12 +1,13 @@
 # 项目介绍
 
-本项目属于个人学习实战项目，使用项目来整理平时所学。
-
 ## 项目选型
 
 1. 三大框架里选哪个？
 
-   - react。个人爱好，也比较看好。
+   - react 个人爱好。
+   - react-router 定义路由。
+   - react context 状态管理。
+   - react hooks 组件化。
 
 2. 引入强类型语言？
 
@@ -27,7 +28,7 @@
 
 5. js 代码规范？
 
-   - 使用 eslint。辅助编码规范执行，有效控制代码质量。同时支持 typescript。
+   - 使用 eslint。辅助编码规范执行，有效控制代码质量。同时也支持 typescript。
 
 6. 测试框架选型？
 
@@ -39,11 +40,15 @@
 
 8. 数据库选型？
 
-   - mongodb，类 json 的存错格式，方便存储，简单易用。
+   - mongodb，类 json 的存错格式，方便存储，前端友好。
 
 9. 接口方式选型？
 
    - graphql。根据需要格式获取对应数据，减少接口冗余数据。
+   - graphql schema 定义了后端接口的参数，操作和返回类型，从此不需要提供接口文档。
+   - 前端可以在 schema 定义后开始开发，数据格式自己掌握。
+   - schema 可拼接。可以组合和连接多个 graphql api，进行级联查询等。
+   - 社区友好，有很多优秀的库可以直接使用： apollo，relay 等。
 
 基本框架选型完毕，接下来就开始搭建项目环境。
 
@@ -90,12 +95,12 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 
 ## 搭建 React 环境
 
-react 是一个库，基于组件式开发，开发时常常需要用到以下语法：
+React 是一个库，基于组件式开发，开发时常常需要用到以下语法：
 
-- es6 模块化
-- jsx 语法
-- typescript 语法
-- css 预处理器
+- es6 模块化。
+- jsx 语法。
+- typescript 语法。
+- css 预处理器。
 
 这些语法在目前浏览器中并不能直接执行，需要进行打包编译，这也是搭建 React 环境的主要工作。
 
@@ -112,6 +117,7 @@ react 是一个库，基于组件式开发，开发时常常需要用到以下�
 - context 目录，存放公用的 react context。
 - config 目录，存放公共配置文件。
 - utils 目录，公用的函数组件库。
+- constants 目录，存放静态变量。
 
 4、配置 webpack，以 index.tsx 为入口文件，进行打包编译。
 
@@ -120,6 +126,7 @@ react 是一个库，基于组件式开发，开发时常常需要用到以下�
 - 配置 ts 编译器，使用 babel-loader。
 - 配置 url-loader，打包项目中的图片资源。
 - 配置 html-webpack-plugin 将最后生成的 js，css，注入第 1 步的 html 中。
+  - 使用 ejs 模板配置开发环境和线上环境引入的 cdn。
 - 热启动配置，使用开箱即用的 webpack-dev-server。
 
 > webpack 打包原理
@@ -130,43 +137,83 @@ react 是一个库，基于组件式开发，开发时常常需要用到以下�
 
 ## 搭建 NodeJs 环境
 
-这里是基于 web 服务器，这里选择使用精简的 koa 框架。
+由于 node 端使用了 typescript 和最新的 es 语法，所以需要进行打包编译。
 
-1、建立 model 层，负责链接数据库，获取和更新数据。
+- 配置 gulp，遍历每一个 ts 文件，调用 gulp-babel，将 ts 代码转换成 js 代码。
+- 配置 supervisor 自动重启 node 服务（nodemon 对于不存在的目录不能进行监控）。
 
-- 使用 mongoose 更方便的对 mongodb 数据库进行读写操作。
-- 封装好处理数据的方法，提供给 controller 层使用。
+### 层次结构划分
 
-2、建立 controller 层，控制 web 层路由，根据前端请求，调用 model 层获取数据。
+项目采用传统的 mvc 模式进行搭建。
 
-- 根据前端请求，处理对应的业务逻辑，需要对数据进行操作，就调用 model 层提供的方法。
+#### Model 层
+
+Model 层的主要工作：连接数据库，获取和更新数据。
+
+- 新建 model 文件夹，目录下的每一个文件对应数据库的一个表。
+- model 文件中包含对一个数据表的增删改查操作。
+  - 使用 mongoose 更方便地对 mongodb 数据库进行读写操作。
+- model 文件返回封装好的对象，提供给 service 层使用。
+
+#### Controller 层
+
+Controller 层的主要工作：接收和发送 http 请求。根据前端请求，调用 model 层获取数据，再返回给前端。
+
+> 传统的后端一般还包含 service 层，专门用来处理业务逻辑。
+
+- 根据前端请求，找到对应的 model 层获取数据，经过加工处理后，返回给前端。
 - 编写中间件，记录系统日志，错误处理，404 页面等。
 
-3、建立 views 层，由于本项目前端使用 react 渲染，所以这一块由前端打包生成。
+#### View 层
 
-- node 层提供一个静态文件服务器，用来访问前端打包后生成的 html 文件。
+View 层的主要工作：提供前端页面模板。如果是服务器端渲染，是将 model 层的数据注入到 view 层中，最后通过 controller 层返回给客户端。由于本项目前端使用 react 渲染，所以 view 层直接是经过 webpack 打包后的页面。
 
-4、配置 gulp，让 node 端支持新的 es 语法、编译后端 ts 文件。
+- 使用 koa-static 提供一个静态文件服务器，用来访问前端打包后生成的 html 文件。
 
-- 配置 gulp，遍历每一个 ts 文件，调用 babel，输出编译后的 js 文件。
+### 搭建 GraphQL 环境
+
+GraphQL 是一种用于 api 的查询语言，需要服务器端配置 graphql 支持，同时也需要客户端使用 graphql 语法的格式进行请求。
+
+使用 apllo 更快的支持 graphql。
+
+- 服务器端配置 apollo-server。
+  - 使用 schema，定义请求的类型，返回的格式。
+  - 使用 resolvers 来处理对应的 schema。
+- 客户端配置 apollo-client。
+  - 按照 apollo-server 定义的 schema，来请求数据。
+
+### 搭建 MongoDB 环境
+
+MongoDB 是一个面向文档存储的数据库，操作起来比较简单和容易。
+
+Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你的数据模型。它内置数据验证，查询构建，业务逻辑钩子等，开箱即用。
+
+- 使用 mongoose 建立和本地 mongodb 的连接。
+- 创建 model 模型，一个模型对应 mongodb 里的一张表。
+- 根据 model 封装增删改查功能，并返回给 controller 层使用。
 
 ## 搭建测试环境
+
+本项目使用 jest 作为测试框架，jest 包含了断言库、测试框架、mock 数据等功能，是一个大而全的测试库。由于前端使用了 react 项目，这里也引入了 enzyme 库。
 
 1、新建 jest.config.js 文件。
 
 - 配置初始化 setup.ts 文件。
-- 配置测试匹配的测试文件。
+  - 根据 react 版本配置对应的 enzyme-adapter。
+  - mock 全局变量，如 fech，canvas 等。
+- 配置需要测试的文件。
 - 配置 mock 数据文件。
 - 配置测试文件的编译方式。
+  - ts 代码使用 ts-jest 编译。
 - 配置代码覆盖率文件。
 
-2、新建\_\_mocks\_\_，\_\_tests\_\_目录，存放测试文件和 mock 数据。
+2、编写测试文件。
 
+- 新建\_\_mocks\_\_，\_\_tests\_\_目录，存放测试文件和 mock 数据文件。
 - 按照 src 中的目录，建立相应的测试文件目录。
-
-3、新建 setup.ts ，该文件会在运行时首先执行，在这里统一注入测试框架，全局变量等。
 
 ## 参考链接
 
 - [TypeScript 和 Babel](https://juejin.im/post/5c822e426fb9a04a0a5ffb49)
+- [GraphQL schema stitching](https://blog.apollographql.com/graphql-schema-stitching-8af23354ac37)
 - [前端决策树](https://github.com/sorrycc/f2e-decision-tree)

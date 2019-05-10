@@ -64,5 +64,5 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
   app.listen(config.serverPort);
 }
 
-// export default app;
+// 导出给 jest 测试
 module.exports = app;

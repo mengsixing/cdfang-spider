@@ -6,7 +6,26 @@
 
 > 成都房协网数据分析
 
-每 15 分钟爬取房协网数据，保存到数据库，前端读取元数据，用可视化图表框架渲染。
+统计成都自摇号以来所有的房源信息，通过图表的形式展示出来。
+
+## 特点
+
+- 动态获取最新数据
+- 支持当前房源统计
+- 支持周，月季度，年统计
+- 支持房源数和楼盘数统计
+- 支持区域分类统计
+- 排名统计结果
+
+## 项目选型
+
+项目没有使用脚手架工具搭建，都是一步一步配置而成。搭建时主观使用作者最感兴趣的技术点：typescript，react hooks，graphql 等。具体的搭建流程在这里：[项目选型与环境搭建](https://github.com/yhlben/cdfang-spider/blob/master/Introduction.md)。
+
+前端选型：react，react-router，bizchats，less 等。
+
+后端选型：koa，koa-router，koa-static，cheerio，node-schedule，mongoose，graphql，log4js 等。
+
+工程化选型：webpack，typescript，eslint，gulp，jest，travis 等。
 
 ## 使用
 
@@ -17,38 +36,11 @@ npm i
 npm run dev
 ```
 
-## 特点
+## 预览
 
-- 手动搭建 react 环境
-- 手动搭建 koa 环境
-- 手动搭建 typescript 环境
-- 支持 rest 和 graphql 接口
-- nodejs 爬虫
-- 可视化数据分析
+![PREVIEW](https://github.com/yhlben/cdfang-spider/blob/dev/screenshots/home.png?raw=true)
 
-[项目选型与环境搭建](https://github.com/yhlben/cdfang-spider/blob/master/Introduction.md)
-
-## 客户端
-
-- react
-- less
-- bizcharts
-- antd
-
-## 服务器端
-
-- koa
-- graphql
-- mongoose
-- cheerio
-- node-schedule
-
-## 工程化
-
-- webpack
-- eslint
-- gulp
-- jest
+![PREVIEW](https://github.com/yhlben/cdfang-spider/blob/dev/screenshots/past.png?raw=true)
 
 ## TODOLIST
 
@@ -57,3 +49,5 @@ npm run dev
 - [x] graphql 接口支持
 - [x] typescript 支持
 - [ ] 页面性能优化（持续）
+
+项目需要改进的有很多，请大家多提提意见。后续我也会不断改进，谢谢大家支持！

@@ -7,7 +7,7 @@ import * as constants from '../../constants';
 
 const { useContext } = React;
 
-function StatisticCardPast() {
+const StatisticCardPast: React.FunctionComponent = () => {
   const appState = useContext(AppContext);
   const { allData } = appState;
   const allInfo = util.getAllInfo(allData);
@@ -69,6 +69,6 @@ function StatisticCardPast() {
       </Row>
     </div>
   );
-}
+};
 
 export default StatisticCardPast;

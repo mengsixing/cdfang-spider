@@ -15,15 +15,15 @@ export interface Iprops {
   unit: string;
 }
 
-function Rank(props: Iprops) {
+const Rank: React.FunctionComponent<Iprops> = props => {
   const { data, title } = props;
-  const rankData = _.sortBy(data, (item: cdFang.IhouseData) => -item.number);
+  const rankData = _.sortBy(data, (item: Irank) => -item.number);
   const rankTitle = title ? `排名：${title}` : '排名';
   return (
     <div className="rank">
       <div className="rank-title">{rankTitle}</div>
       <ul className="rank-list">
-        {rankData.map((item: cdFang.IhouseData, index: number) => {
+        {rankData.map((item: Irank, index: number) => {
           const istop3 = index < 3 ? 'top3' : '';
           return (
             // eslint-disable-next-line no-underscore-dangle
@@ -37,6 +37,6 @@ function Rank(props: Iprops) {
       </ul>
     </div>
   );
-}
+};
 
 export default Rank;

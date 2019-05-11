@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
 
-import { RouteChildrenProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import utils from '../utils';
 import BasicAreaGraph from '../components/BasicAreaGraph';
 import WholeTable from '../components/WholeTable';
@@ -31,7 +31,7 @@ interface ImonthBuilder {
   [constants.BUILDER_NUMBER]: number;
 }
 
-function Home(props: RouteChildrenProps) {
+const Home: React.FunctionComponent<RouteComponentProps> = props => {
   const appState = useContext(AppContext);
 
   useEffect(() => {
@@ -134,6 +134,6 @@ function Home(props: RouteChildrenProps) {
       </div>
     </Content>
   );
-}
+};
 
 export default Home;

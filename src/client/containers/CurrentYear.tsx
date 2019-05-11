@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
 
-import { RouteChildrenProps } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import util from '../utils';
 import ChartPanel from '../components/ChartPanel';
 import WholeTable from '../components/WholeTable';
@@ -16,7 +16,7 @@ const { useEffect, useContext } = React;
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-function CurrentYear(props: RouteChildrenProps) {
+const CurrentYear: React.FunctionComponent<RouteComponentProps> = props => {
   const appState = useContext(AppContext);
   const { allData } = appState;
 
@@ -77,6 +77,6 @@ function CurrentYear(props: RouteChildrenProps) {
       </div>
     </Content>
   );
-}
+};
 
 export default CurrentYear;

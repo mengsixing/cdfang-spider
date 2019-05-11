@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define, @typescript-eslint/no-use-before-define */
 import React, { useState } from 'react';
-import { AppContext } from './appContext';
+import { AppContext, IappContext } from './appContext';
 
-const AppProvider = ({ children }) => {
-  const changeData = data => {
+const AppProvider = ({ children }: React.Props<{ value: IappContext }>) => {
+  const changeData = (data: cdFang.IhouseData[]) => {
     changeAppState(prevState => {
       return {
         ...prevState,
@@ -30,7 +30,7 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  const initAppState = {
+  const initAppState: IappContext = {
     allData: [],
     activityKey: '天府新区',
     selectedYear: 0,

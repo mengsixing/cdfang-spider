@@ -16,7 +16,7 @@ export interface Iprops {
 }
 
 // 基础面积图 https://bizcharts.net/products/bizCharts/demo/detail?id=area-basic&selectedKey=%E9%9D%A2%E7%A7%AF%E5%9B%BE
-function BasicAreaGraph({ data, title }: Iprops) {
+const BasicAreaGraph: React.FunctionComponent<Iprops> = ({ data, title }) => {
   const dv = new DataSet.View().source(data);
   dv.transform({
     type: 'fold',
@@ -43,6 +43,6 @@ function BasicAreaGraph({ data, title }: Iprops) {
       <Geom type="line" position="month*value" color="type" shape="smooth" />
     </Chart>
   );
-}
+};
 
 export default BasicAreaGraph;

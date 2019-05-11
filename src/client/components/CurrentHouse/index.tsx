@@ -6,7 +6,7 @@ import { AppContext } from '../../context/appContext';
 const { useContext } = React;
 const { Panel } = Collapse;
 
-function CurrentHouse() {
+const CurrentHouse: React.FunctionComponent = () => {
   const { allData } = useContext(AppContext);
   const currentHouses = allData
     .filter(item => item.status !== '报名结束')
@@ -55,6 +55,6 @@ function CurrentHouse() {
   ) : (
     <div />
   );
-}
+};
 
 export default CurrentHouse;

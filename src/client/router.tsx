@@ -8,7 +8,7 @@ interface Iroutes {
   path: string;
   exact?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component: any;
+  component: React.FunctionComponent<any>;
 }
 
 const routes: Iroutes[] = [
@@ -36,7 +36,7 @@ function RouteWithSubRoutes(route: Iroutes) {
     <Route
       path={route.path}
       render={props => {
-        // 中间组件，防止router配置2个相同的compoment，切换时不会渲染。
+        // 中间组件，防止 router 配置 2 个相同的 compoment，切换时不会渲染。
         function NOOP() {
           return <route.component {...props} />;
         }
@@ -49,7 +49,7 @@ function RouteWithSubRoutes(route: Iroutes) {
 function renderRouters() {
   return (
     <Switch>
-      {routes.map((route, i) => (
+      {routes.map(route => (
         <RouteWithSubRoutes key={route.path} {...route} />
       ))}
     </Switch>

@@ -16,7 +16,7 @@ interface ImonthMap {
 }
 
 // 分组柱状图(暂未使用) https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
-function GroupedColumnGraph(props: Iprops) {
+const GroupedColumnGraph: React.FunctionComponent<Iprops> = props => {
   const { data: array } = props;
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)
@@ -65,6 +65,6 @@ function GroupedColumnGraph(props: Iprops) {
       />
     </Chart>
   );
-}
+};
 
 export default React.memo(GroupedColumnGraph);

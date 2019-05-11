@@ -25,7 +25,7 @@ interface Istate {
   rankTitle: string;
 }
 
-function ChartPanel(props: Iprops) {
+const ChartPanel: React.FunctionComponent<Iprops> = props => {
   const appState = useContext(AppContext);
   const { panelKey, data } = props;
   const initState = {
@@ -102,6 +102,6 @@ function ChartPanel(props: Iprops) {
       </Col>
     </Row>
   );
-}
+};
 
 export default ChartPanel;

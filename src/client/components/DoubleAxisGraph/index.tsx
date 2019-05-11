@@ -9,7 +9,7 @@ export interface Iprops {
   data: cdFang.IhouseData[];
 }
 
-function DoubleAxisGraph({ data }: Iprops) {
+const DoubleAxisGraph: React.FunctionComponent<Iprops> = ({ data }) => {
   const dataGroupByMonth = _.groupBy(data, item =>
     dayjs(item.beginTime).format('M月')
   );
@@ -47,6 +47,6 @@ function DoubleAxisGraph({ data }: Iprops) {
       />
     </Chart>
   );
-}
+};
 
 export default DoubleAxisGraph;

@@ -33,13 +33,11 @@ module.exports = {
       "files": ["*.ts"],
       "rules": {
         "@typescript-eslint/explicit-function-return-type":0,
-        "@typescript-eslint/no-unused-vars": [2, { "args": "none" }]
       }
     },
     {
       "files": ["*.tsx"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": [2, { "args": "none" }],
         "@typescript-eslint/explicit-function-return-type": 0,
         "react/prop-types": 0
       }

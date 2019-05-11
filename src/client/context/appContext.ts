@@ -14,9 +14,9 @@ export const globalData: IappContext = {
   allData: [],
   activityKey: '天府新区',
   selectedYear: 0,
-  changeData(data): void {},
-  changeActivityKey(key: string): void {},
-  changeSelectedYear(key): void {}
+  changeData() {},
+  changeActivityKey() {},
+  changeSelectedYear() {}
 };
 
 export const AppContext = React.createContext<IappContext>(globalData);

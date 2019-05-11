@@ -45,7 +45,7 @@ function openNotification(setLoading: Function, appState: IappContext) {
     });
 }
 
-function Notice() {
+const Notice: React.FunctionComponent = () => {
   const [isLoading, setLoading] = useState(false);
   const appState = useContext(AppContext);
   return (
@@ -58,6 +58,6 @@ function Notice() {
       />
     </span>
   );
-}
+};
 
 export default Notice;

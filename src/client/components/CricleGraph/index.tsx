@@ -20,7 +20,10 @@ interface IcircleData {
   date: string;
 }
 
-function CircleGraph({ data: array, changeMonth }: Iprops) {
+const CircleGraph: React.FunctionComponent<Iprops> = ({
+  data: array,
+  changeMonth
+}) => {
   const selectMonth = (circleObject: {
     data: { _origin: cdFang.IcircleItem };
   }) => {
@@ -106,7 +109,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
       </Geom>
     </Chart>
   );
-}
+};
 
 function shouldComponentUpdate(prevProps: Iprops, nextProps: Iprops) {
   if (nextProps.data.length !== prevProps.data.length) {

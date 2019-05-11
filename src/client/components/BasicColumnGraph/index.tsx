@@ -18,7 +18,13 @@ interface Iprops {
   desc?: boolean;
 }
 
-function BasicColumnGraph({ data, title, xAxis, yAxis, desc }: Iprops) {
+const BasicColumnGraph: React.FunctionComponent<Iprops> = ({
+  data,
+  title,
+  xAxis,
+  yAxis,
+  desc
+}) => {
   let chartData: Iarea[] = [];
   if (desc) {
     chartData = data.sort((a, b): any => b[yAxis] - a[yAxis]);
@@ -32,7 +38,7 @@ function BasicColumnGraph({ data, title, xAxis, yAxis, desc }: Iprops) {
       <Geom type="interval" position={`${xAxis}*${yAxis}`} />
     </Chart>
   );
-}
+};
 
 const BasicColumnGraphMemo = React.memo<Iprops>(
   RenderNoEmptyComponent(BasicColumnGraph, ['data']),

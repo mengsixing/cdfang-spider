@@ -5,7 +5,7 @@ import { AppContext } from '../../context/appContext';
 
 const { useContext } = React;
 
-function CommonTable() {
+const CommonTable: React.FunctionComponent = () => {
   const { allData } = useContext(AppContext);
   const areas = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areas);
@@ -99,6 +99,6 @@ function CommonTable() {
       />
     </div>
   );
-}
+};
 
 export default CommonTable;

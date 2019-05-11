@@ -3,6 +3,7 @@
   "compilerOptions": {
     "paths": { "*": ["types/*"] },
     "baseUrl": ".",
+    "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,

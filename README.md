@@ -38,9 +38,7 @@ npm run dev
 
 ## 预览
 
-![PREVIEW](https://github.com/yhlben/cdfang-spider/blob/master/screenshots/home.png?raw=true)
-
-![PREVIEW](https://github.com/yhlben/cdfang-spider/blob/master/screenshots/past.png?raw=true)
+> ![PREVIEW](https://github.com/yhlben/cdfang-spider/blob/master/screenshots/screenshots.gif?raw=true)
 
 ## TODOLIST
 

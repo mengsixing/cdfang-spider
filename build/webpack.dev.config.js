@@ -8,7 +8,7 @@ const devConfig = {
   mode: 'development',
   output: {
     path: path.resolve('./dist/client'),
-    filename: '[name].js',
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -21,20 +21,20 @@ const devConfig = {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-            },
-          },
-        ],
-      },
-    ],
+              javascriptEnabled: true
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',
-      env: process.env.NODE_ENV,
-    }),
-  ],
+      env: process.env.NODE_ENV
+    })
+  ]
 };
 
 module.exports = merge(baseConfig, devConfig);

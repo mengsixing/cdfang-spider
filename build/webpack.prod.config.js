@@ -4,7 +4,9 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
-const { default: WebpackDeepScopeAnalysisPlugin } = require('webpack-deep-scope-plugin');
+const {
+  default: WebpackDeepScopeAnalysisPlugin
+} = require('webpack-deep-scope-plugin');
 const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
 const baseConfig = require('./webpack.base.config');
@@ -14,7 +16,7 @@ const prodConfig = {
   output: {
     publicPath: qiniuConfig.publicPath,
     path: path.resolve('./dist/client'),
-    filename: 'cdfang-spider-[name]-[contenthash:8].js',
+    filename: 'cdfang-spider-[name]-[contenthash:8].js'
   },
   module: {
     rules: [
@@ -27,39 +29,39 @@ const prodConfig = {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true,
-            },
-          },
-        ],
-      },
-    ],
+              javascriptEnabled: true
+            }
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'cdfang-spider-[name].[hash:8].css',
+      filename: 'cdfang-spider-[name].[hash:8].css'
     }),
     new WebpackDeepScopeAnalysisPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',
-      env: process.env.NODE_ENV,
-    }),
+      env: process.env.NODE_ENV
+    })
   ],
   optimization: {
     runtimeChunk: {
-      name: 'runtime',
+      name: 'runtime'
     },
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-        },
-      },
-    },
-  },
+          name: 'vendors'
+        }
+      }
+    }
+  }
 };
 
 // ci 环境不上传cdn

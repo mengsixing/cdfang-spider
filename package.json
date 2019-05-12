@@ -1,6 +1,6 @@
 {
   "name": "cdfang-spider",
-  "version": "2.8.15",
+  "version": "2.8.16",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,12 @@
     "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
     "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
     "coverage": "codecov",
-    "commit": "npx git-cz"
+    "commit": "npx git-cz",
+    "prettier": "prettier --check ./**/*.{ts,tsx}"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run prettier",
       "pre-push": "eslint --fix --ext tsx,ts src __tests__"
     }
   },
@@ -108,6 +110,7 @@
     "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.12.4",
     "gulp": "^4.0.1",
     "gulp-babel": "^8.0.0",
@@ -119,6 +122,7 @@
     "less-loader": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.17.0",
     "rimraf": "^2.6.3",
     "style-loader": "^0.23.1",
     "supervisor": "^0.12.0",

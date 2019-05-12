@@ -19,8 +19,7 @@ const CurrentHouse: React.FunctionComponent = () => {
             <span className="notification-icon">
               <Icon type="notification" />
             </span>
-            {' '}
-            {item.area}
+            {` ${item.area}`}
           </Col>
           <Col span={8}>{item.name}</Col>
           <Col span={4}>{`${item.number}套`}</Col>

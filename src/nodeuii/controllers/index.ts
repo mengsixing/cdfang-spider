@@ -1,5 +1,7 @@
 import Router from 'koa-router';
 import * as Koa from 'koa';
+import fs from 'fs';
+import path from 'path';
 import houseModel from '../models/houseModel';
 import initGraphQL from './graphql';
 import spider from '../utils/spiderHelper';
@@ -49,7 +51,13 @@ router
       const result = await spider.spiderPageOne();
       ctx.body = result;
     }
-  );
+  )
+  // 支持 browserRouter
+  .get(/\/20[1-9][0-9]/, ctx => {
+    const file = fs.readFileSync(path.join('client/index.html'));
+    ctx.set('Content-Type', 'text/html; charset=utf-8');
+    ctx.body = file;
+  });
 
 export default {
   init(app: Koa): void {

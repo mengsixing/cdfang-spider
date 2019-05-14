@@ -51,7 +51,7 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = props => {
 
   return (
     <Content className="content">
-      <StatisticCard />
+      {appState.allData.length > 0 ? <StatisticCard /> : ''}
       <div className="content-graph-bar">
         <Tabs defaultActiveKey={appState.activityKey} onChange={changeTab}>
           {tabpanels}

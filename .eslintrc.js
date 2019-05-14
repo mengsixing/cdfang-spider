@@ -13,12 +13,13 @@ module.exports = {
   extends: [
     "eslint-config-airbnb",
     "plugin:@typescript-eslint/recommended",
+    // 关闭可能与 prettier 有冲突的规则
     "prettier",
     "prettier/@typescript-eslint",
   ],
-  plugins: ["@typescript-eslint", 'react',"prettier"],
+  plugins: ["@typescript-eslint", 'react', "prettier"],
   rules: {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
   },
   // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
   settings: {
@@ -32,7 +33,7 @@ module.exports = {
     {
       "files": ["*.ts"],
       "rules": {
-        "@typescript-eslint/explicit-function-return-type":0,
+        "@typescript-eslint/explicit-function-return-type": 0,
       }
     },
     {

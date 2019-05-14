@@ -11,36 +11,44 @@
 
 2. 引入强类型语言？
 
-   - 使用 typescript，为 js 提供类型支持，编辑器友好，增加代码可维护性，使用起来心里踏实。
-   - 在使用第三方库时，可以写出更加符合规范的代码，避免 api 滥用等。
+   - typescript。为 js 提供类型支持，编辑器友好，增加代码可维护性，使用起来心里踏实。
+   - 在使用第三方库时，可以写出更加符合规范的代码，避免 api 乱用等。
    - 项目中依赖了大量 @types/xxx 包，无形中增加了项目体积。
    - 编辑器对 ts 文件进行类型检查，需要遍历 node_modules 目录下所有的 @types 文件，会造成编辑器卡顿现象。
    - 目前仍然存在很多库没有 @types 支持，使用起来并不方便。
 
 3. css 选型？
 
-   - 预编译器 less，项目中只使用了选择器嵌套，选择器复用等，less 够用了。
+   - 预编译器 less。项目中只使用了选择器嵌套，选择器复用等，less 够用了。
    - 解决命名冲突可以使用 css modules，暂未考虑 css in js。
+   - 使用 bem 命名规范。
+   - postcss autoprefixer 后处理器，增加 css 兼容性。
 
 4. 构建工具选哪个？
 
    - webpack。内置 tree shaking，scope hosting 等，打包效率高，社区活跃。
+   - webpack-merge 合并不同环境配置文件。
+   - 配置 externals。引入 cdn 代替 node_modules 中体积较大的包。
 
-5. js 代码规范？
+5. 代码规范检查？
 
-   - 使用 eslint。辅助编码规范执行，有效控制代码质量。同时也支持 typescript。
+   - eslint。辅助编码规范执行，有效控制代码质量。同时也支持 typescript。
+   - 配置 eslint-config-airbnb 规则。
+   - 配置 eslint-config-prettier 关闭和 prettier 冲突的规则。
 
 6. 测试框架选型？
 
-   - jest，大而全，包含：测试框架，断言库，mock 数据，覆盖率等。
+   - jest。大而全，包含：测试框架，断言库，mock 数据，覆盖率等。
+   - enzyme。测试 react 组件。
 
 7. 后端框架选型？
 
-   - koa，精简好用，中间件机制强大。
+   - koa。精简好用，中间件机制强大。
 
 8. 数据库选型？
 
-   - mongodb，类 json 的存错格式，方便存储，前端友好。
+   - mongodb。类 json 的存错格式，方便存储，前端友好。
+   - 配置 mongoose，方便给 mongodb 数据库建模。
 
 9. 接口方式选型？
 
@@ -58,9 +66,11 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 
 1、 新建 tsconfig.json 文件。
 
-- tsc 命令会根据此文件配置的规则，将 ts 代码转换为 js 代码。
-- tslint 会读取该文件中的规则，辅助编码规范校验。
-  - tslint 官宣会被废弃，eslint 将代替 tslint 检查 ts 文件。
+- tsc -init 生成初始化 tsconfig.json 文件。
+- vscode 会根据 tsconfig.json 文件，进行动态类型检查，语法错误提示等。
+- tsc 命令会根据 tsconfig.json 文件配置的规则，将 ts 代码转换为 js 代码。
+- tslint 会读取 tsconfig.json 文件中的规则，辅助编码规范校验。
+  - tslint 官宣会被废弃，后将被 eslint 代替。
   - eslint 同样会用到 tsconfig.json 文件中的内容。
 
 2、 配置 eslint。
@@ -72,7 +82,7 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 
 3、 选择一个 typescript 编译器，tsc 还是 babel？
 
-使用 babel，好处如下：
+使用 babel。好处如下：
 
 - babel 社区有许多非常好的插件，babel-preset-env 可以支持到具体兼容浏览器的版本号，而 tsc 编译器没这个功能。
 - babel 可以同时支持编译 js 和 ts，所以没必要在引入 tsc 编译 ts 文件，只管理一个编译器，可维护性更高。
@@ -83,13 +93,13 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 > babel 是一个 js 语法编译器，在编译时分为 3 个阶段：解析、转换、输出。
 >
 > - 解析阶段：将 js 代码解析为抽象语法树（ast）。
-> - 转换阶段：对 ast 进行修改，产生一个新的 ast。
-> - 输出阶段：将新的 ast 输出成 js 文件。
+> - 转换阶段：对 ast 进行修改，产生一个转换后的 ast。
+> - 输出阶段：将转换后的 ast 输出成 js 文件。
 >
 > **plugin 和 preset**
 >
-> - plugin: 是包括：解析，转换，输入在一起的东西。
-> - preset: 是一组组合好的 plugin 集合。
+> - plugin: 是包括：解析，转换，输入在一起的东西，例如：@babel/plugin-proposal-object-rest-spread 让代码支持`{...}`解构语法。
+> - preset: 是一组组合好的 plugin 集合。例如：@babel/preset-env 让代码支持最新的 es 语法，自动引入需要支持新特性的 plugin。
 
 4、搜集所有的 ts，tsx 页面（前端环境使用 webpack，node 项目使用 gulp），然后通过 babel 编译成 js 文件。
 
@@ -124,6 +134,9 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 - 由于不同环境的打包方式并不相同，这里抽象出 3 个环境的配置文件，使用 webpack-merge 合并配置文件。
 - 配置 css 预处理器，使用 less-loader。
 - 配置 ts 编译器，使用 babel-loader。
+  - @babel/preset-env：编译最新的 es 语法。
+  - @babel/preset-react：编译 react 语法。
+  - @babel/preset-typescript：转换 typescript 语法。
 - 配置 url-loader，打包项目中的图片资源。
 - 配置 html-webpack-plugin 将最后生成的 js，css，注入第 1 步的 html 中。
   - 使用 ejs 模板配置开发环境和线上环境引入的 cdn。
@@ -133,7 +146,7 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 >
 > webpack 打包过程就像是一条流水线，从入口文件开始，搜集项目中所有文件的依赖关系，如果遇到不能够识别的模块，就使用对应的 loader 转换成能够识别的模块。webpack 还能使用 plugin 在流水线生命周期中挂载自定义事件，来控制输出。
 
-经过以上的配置，React 的环境就已经搭建完毕了。
+经过以上的配置，react 的环境就已经搭建完毕了。
 
 ## 搭建 NodeJs 环境
 
@@ -148,7 +161,7 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 
 #### Model 层
 
-Model 层的主要工作：连接数据库，获取和更新数据。
+Model 层的主要工作：连接数据库，封装数据库操作，例如：新增数据、删除数据、查询数据、更新数据等。
 
 - 新建 model 文件夹，目录下的每一个文件对应数据库的一个表。
 - model 文件中包含对一个数据表的增删改查操作。
@@ -174,7 +187,7 @@ View 层的主要工作：提供前端页面模板。如果是服务器端渲染
 
 GraphQL 是一种用于 api 的查询语言，需要服务器端配置 graphql 支持，同时也需要客户端使用 graphql 语法的格式进行请求。
 
-使用 apllo 更快的支持 graphql。
+使用 apllo 更快的搭建 graphql 环境。
 
 - 服务器端配置 apollo-server。
   - 使用 schema，定义请求的类型，返回的格式。
@@ -184,7 +197,7 @@ GraphQL 是一种用于 api 的查询语言，需要服务器端配置 graphql �
 
 ### 搭建 MongoDB 环境
 
-MongoDB 是一个面向文档存储的数据库，操作起来比较简单和容易。
+MongoDB 是一个面向文档存储的数据库，操作起来十分简单。
 
 Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你的数据模型。它内置数据验证，查询构建，业务逻辑钩子等，开箱即用。
 
@@ -211,6 +224,41 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 
 - 新建\_\_mocks\_\_，\_\_tests\_\_目录，存放测试文件和 mock 数据文件。
 - 按照 src 中的目录，建立相应的测试文件目录。
+
+## 配置上线环境
+
+安装好各种环境之后，接下来需要思考项目上线的问题了。
+
+### 配置服务器环境
+
+- 安装 nodejs 环境。[nvm 安装 node](https://github.com/nvm-sh/nvm)
+- 安装 pm2 进程守护。`npm i pm2 -g`
+- 安装 mongodb。[mongodb 官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
+- 安装免费 https 证书。[letsencrypt 官网](https://letsencrypt.org/)
+
+### 代码发布
+
+本项目发布非常简单，只需要一步操作就搞定了，这些都是经过持续集成配置后的结果。
+
+```zsh
+git clone https://github.com/yhlben/cdfang-spider.git
+npm i
+npm run build
+cd dist
+pm2 start app.js
+```
+
+所有的事情都在 build 命令下完成了，我们分析一下 npm run build 命令做的事情。
+
+- eslint 语法错误检查。
+- 单元测试。
+  - 上传测试覆盖率。
+- 打包客户端代码。
+  - 打包后生成 html 文件作为 node 端的 view 层，和后端绑定在一起。
+  - 其他静态资源，直接上传到七牛 cdn，使用 qiniu-upload-plugin 来进行一键上传。
+- 打包服务器端代码。
+
+上述事情通过创建 npm script 就可以了完成需求了，但这些命令也不应该每次都由手工敲一遍，通过配置 travisCI，每一次 master 分支提交代码时，自动运行上述命令就行了。真正上线时，先查看 ci 状态，如果已通过所有的步骤，那就不用担心发布的代码有问题了。
 
 ## 参考链接
 

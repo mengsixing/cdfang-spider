@@ -9,11 +9,13 @@ module.exports = {
     rules: [
       {
         test: /\.(j|t)sx?$/,
-        use: 'babel-loader'
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.png$/,
-        use: 'url-loader'
+        use: 'url-loader',
+        exclude: /node_modules/
       }
     ]
   },

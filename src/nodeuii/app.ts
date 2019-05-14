@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import https from 'https';
 import fs from 'fs';
 import Koa from 'koa';

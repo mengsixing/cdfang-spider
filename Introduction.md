@@ -236,6 +236,7 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 安装 pm2 进程守护。`npm i pm2 -g`
 - 安装 mongodb。[mongodb 官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 - 安装免费 https 证书。[letsencrypt 官网](https://letsencrypt.org/)
+  - 域名需要先进行备案
 
 ### 代码发布
 

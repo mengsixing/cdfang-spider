@@ -46,6 +46,12 @@ const prodConfig = {
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',
       env: process.env.NODE_ENV
+    }),
+    // 公益 404
+    new HtmlWebpackPlugin({
+      filename:'404.html',
+      template: './build/template/404.ejs',
+      favicon: './build/template/favicon.ico'
     })
   ],
   optimization: {
@@ -64,7 +70,7 @@ const prodConfig = {
   }
 };
 
-// ci 环境不上传cdn
+// ci 环境不上传 cdn
 if (process.env.BUILD_ENV !== 'ci' && process.env.BUILD_ENV !== 'analysis') {
   prodConfig.plugins.push(new QiniuUploadPlugin(qiniuConfig));
 }

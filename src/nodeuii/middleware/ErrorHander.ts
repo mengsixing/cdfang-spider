@@ -13,11 +13,11 @@ const ErrorHander = {
         ctx.body = '内部错误';
       }
     });
-    // 捕获404错误
+    // 捕获 404 错误
     app.use(async (ctx: Koa.Context, next: Function) => {
       await next();
       if (ctx.status === 404) {
-        ctx.body = '没有找到页面😰...';
+        ctx.redirect('/404.html');
       }
     });
   }

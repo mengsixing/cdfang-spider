@@ -49,9 +49,10 @@ const prodConfig = {
     }),
     // 公益 404
     new HtmlWebpackPlugin({
-      filename:'404.html',
+      filename: '404.html',
       template: './build/template/404.ejs',
-      favicon: './build/template/favicon.ico'
+      favicon: './build/template/favicon.ico',
+      inject: false
     })
   ],
   optimization: {

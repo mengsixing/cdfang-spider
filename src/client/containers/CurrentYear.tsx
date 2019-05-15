@@ -10,7 +10,7 @@ import StatisticCard from '../components/StatisticCard';
 import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
-import request from '../utils/request';
+import { requestData } from '../utils/request';
 
 const { useEffect, useContext } = React;
 const { Content } = Layout;
@@ -26,7 +26,7 @@ const CurrentYear: React.FunctionComponent<RouteComponentProps> = props => {
 
   useEffect(() => {
     const year = constants.tabKeyRouterMap[props.location.pathname];
-    request(year, (allHouses: cdFang.IhouseData[]) => {
+    requestData(year, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
     });
   }, []);

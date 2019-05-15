@@ -1,6 +1,7 @@
 import { ApolloServer, gql } from 'apollo-server-koa';
 import * as Koa from 'koa';
 import houseModel from '../models/houseModel';
+import analyticsModel from '../models/analyticsModel';
 import spider from '../utils/spiderHelper';
 
 interface Iyear {
@@ -27,6 +28,7 @@ function initGraphQL(app: Koa): void {
     type Query {
       allHouses(year: Int): [House]
       spiderPageOne: PageOneArray
+      pvs: Int
     }
   `;
 
@@ -45,7 +47,11 @@ function initGraphQL(app: Koa): void {
         const allHouses = await houseModel.find(query);
         return allHouses;
       },
-      spiderPageOne: async () => spider.spiderPageOne()
+      spiderPageOne: async () => spider.spiderPageOne(),
+      pvs: async (): Promise<number> => {
+        const analytics = await analyticsModel.find();
+        return analytics.length;
+      }
     }
   };
 

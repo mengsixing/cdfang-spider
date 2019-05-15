@@ -10,6 +10,11 @@ declare namespace cdFang {
     status: string;
   }
 
+  interface Ianalytics {
+    ip: string;
+    createdTime?: Date;
+  }
+
   // 和client constants 目录保持一致
   interface IareaHouse {
     区域: string;

@@ -7,6 +7,7 @@ import cors from 'koa2-cors';
 import log4js from 'log4js';
 
 import ErrorHander from './middleware/ErrorHander';
+import AnalysicsHander from './middleware/AnalysicsHander';
 import controller from './controllers';
 import config from './config';
 import './controllers/schedule';
@@ -29,7 +30,9 @@ log4js.configure({
   }
 });
 const logger = log4js.getLogger('globallog');
+
 ErrorHander.init(app, logger);
+AnalysicsHander.init(app);
 
 // 允许跨域
 app.use(cors());
@@ -63,6 +66,11 @@ if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
   console.log(`server is running at : http://localhost:${config.serverPort}`);
   app.listen(config.serverPort);
 }
+
+// 全局异常捕获
+process.on('uncaughtException', err => {
+  logger.error(JSON.stringify(err));
+});
 
 // 导出给 jest 测试
 module.exports = app;

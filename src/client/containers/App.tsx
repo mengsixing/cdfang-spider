@@ -9,16 +9,28 @@ import AppContextProvider from '../context/appContextProvider';
 import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
 import util from '../utils';
 import './App.less';
+import { requestPvs } from '../utils/request';
 
 const { Header, Footer } = Layout;
+
+const { useState, useEffect } = React;
 
 const App: React.FunctionComponent<RouteComponentProps> = ({
   history,
   location
 }) => {
-  function gotoGithub() {
+  const gotoGithub = () => {
     window.location.href = GITHUB_URL;
-  }
+  };
+  const [pvs, changePvs] = useState(0);
+
+  useEffect(() => {
+    requestPvs(
+      (pvNumber: number): void => {
+        changePvs(pvNumber);
+      }
+    );
+  }, []);
 
   // 根据理由选中对应 menu 项
   const defaultYear = [tabKeyRouterMap[location.pathname]];
@@ -29,6 +41,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
 
   // 获取年份列表
   const yearList = util.getYearList();
+  console.warn(location, history);
 
   return (
     <AppContextProvider>
@@ -36,6 +49,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
       <Layout>
         <Header style={{ backgroundColor: 'white' }}>
           <div className="header-item">
+            <span className="header-item-pv">{`累计查询：${pvs}次`}</span>
             <Notice />
             <Icon type="github" onClick={gotoGithub} />
           </div>

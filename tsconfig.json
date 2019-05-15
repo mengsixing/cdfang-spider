@@ -10,6 +10,7 @@
     "target": "ESNext",
     "jsx": "react",
     "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
     //https://github.com/ant-design/ant-design/issues/8642
     "moduleResolution": "node"
   },

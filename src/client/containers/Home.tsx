@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
-import request from '../utils/request';
+import { requestData } from '../utils/request';
 import './Home.less';
 
 const { lazy, Suspense, useEffect, useContext } = React;
@@ -36,7 +36,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = props => {
 
   useEffect(() => {
     const year = constants.tabKeyRouterMap[props.location.pathname];
-    request(year, (allHouses: cdFang.IhouseData[]) => {
+    requestData(year, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
     });
   }, []);

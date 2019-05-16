@@ -25,6 +25,11 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
+
+  // 选中的 key 不在区域列表中
+  if (!areasList.includes(appState.activityKey)) {
+    appState.changeActivityKey(areasList[0]);
+  }
   const tabpanels = util.sortArea(areasList).map((item: string) => (
     <TabPane tab={item} key={item}>
       <ChartPanel

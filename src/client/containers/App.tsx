@@ -44,6 +44,9 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
 
   const clickMenu = ({ key }: { key: string }) => {
     history.push(tabKeyRouterMap[key]);
+    requestData(key, (allHouses: cdFang.IhouseData[]) => {
+      appState.changeData(allHouses);
+    });
   };
 
   // 获取年份列表

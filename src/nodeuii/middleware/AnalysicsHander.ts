@@ -1,10 +1,14 @@
 import * as Koa from 'koa';
+import log4js from 'log4js';
 import analyticsModel from '../models/analyticsModel';
 
-const ErrorHander = {
+const logger = log4js.getLogger('globallog');
+
+const analyticsHander = {
   init(app: Koa): void {
     // 捕获 请求
     app.use(async (ctx: Koa.Context, next: Function) => {
+      logger.info(ctx.req.url);
       if (ctx.method !== 'OPTIONS') {
         // graphql 请求
         if (ctx.request.url === '/graphql' && ctx.request.body.query) {
@@ -24,4 +28,4 @@ const ErrorHander = {
   }
 };
 
-export default ErrorHander;
+export default analyticsHander;

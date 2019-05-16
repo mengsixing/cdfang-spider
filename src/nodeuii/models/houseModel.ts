@@ -32,8 +32,7 @@ const houseModel = {
     house.save(
       (err): boolean => {
         if (err) {
-          console.error(err);
-          return false;
+          throw err;
         }
         return true;
       }
@@ -54,7 +53,7 @@ const houseModel = {
       newArray,
       (err): void => {
         if (err) {
-          console.log(err, '批量插入失败。');
+          throw err;
         }
       }
     );
@@ -65,7 +64,7 @@ const houseModel = {
       item,
       (err): void => {
         if (err) {
-          console.log(err);
+          throw err;
         }
       }
     );
@@ -74,7 +73,9 @@ const houseModel = {
     return HouseCol.find(
       query,
       (err, house): any | void => {
-        if (err) console.error(err);
+        if (err) {
+          throw err;
+        }
         return house;
       }
     );

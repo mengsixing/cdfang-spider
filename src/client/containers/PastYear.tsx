@@ -12,7 +12,6 @@ import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 
 const { useContext } = React;
-
 const { Content } = Layout;
 const { TabPane } = Tabs;
 

@@ -1,6 +1,9 @@
 import * as schedule from 'node-schedule';
+import log4js from 'log4js';
 import houseModel from '../models/houseModel';
 import { createRequestPromise } from '../utils/spiderHelper';
+
+const logger = log4js.getLogger('globallog');
 
 // 定时器middleware,每隔15分钟爬一次
 const runEvery15Minute = async (): Promise<void> => {
@@ -34,8 +37,7 @@ const runEvery15Minute = async (): Promise<void> => {
           );
         }
       );
-      /* eslint-disable no-console */
-      console.log(`抓取数据${page.length}条，新数据${newNumber}条。`);
+      logger.info(`抓取数据${page.length}条，新数据${newNumber}条。`);
     }
   );
 };

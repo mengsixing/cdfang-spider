@@ -13,10 +13,7 @@ import controller from './controllers';
 import config from './config';
 import './controllers/schedule';
 
-
-
 const app = new Koa();
-
 app.use(koaBody());
 
 // 错误日志记录
@@ -30,7 +27,7 @@ log4js.configure({
   categories: {
     default: {
       appenders: ['globallog'],
-      level: 'error'
+      level: 'debug'
     }
   }
 });

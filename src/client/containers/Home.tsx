@@ -13,10 +13,9 @@ import Loading from '../components/Loading';
 import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
-import { requestData } from '../utils/request';
 import './Home.less';
 
-const { lazy, Suspense, useEffect, useContext } = React;
+const { lazy, Suspense, useContext } = React;
 const { TabPane } = Tabs;
 const { Content } = Layout;
 const CurrentHouse = lazy(() => import('../components/CurrentHouse'));

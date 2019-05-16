@@ -8,6 +8,10 @@ interface Iyear {
   year: number;
 }
 
+interface Ipvs {
+  routerName: string;
+}
+
 function initGraphQL(app: Koa): void {
   const typeDefs = gql`
     type House {
@@ -50,7 +54,7 @@ function initGraphQL(app: Koa): void {
       spiderPageOne: async () => spider.spiderPageOne(),
       pvs: async (
         _parent: never, // 不使用第一个变量
-        args: string
+        args: Ipvs
       ): Promise<number> => {
         const analytics = await analyticsModel.find(args);
         return analytics.length;

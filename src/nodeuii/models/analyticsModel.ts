@@ -16,7 +16,7 @@ const analyticsModel = {
     house.save(
       (err): boolean => {
         if (err) {
-          throw new Error(err);
+          throw err;
         }
         return true;
       }
@@ -27,7 +27,7 @@ const analyticsModel = {
   find(query: object) {
     return AnalyticsCol.find(query, (err, analytics: cdFang.Ianalytics[]) => {
       if (err) {
-        throw new Error(err);
+        throw err;
       }
       return analytics;
     });

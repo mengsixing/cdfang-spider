@@ -28,7 +28,7 @@ function initGraphQL(app: Koa): void {
     type Query {
       allHouses(year: Int): [House]
       spiderPageOne: PageOneArray
-      pvs: Int
+      pvs(routerName: String): Int
     }
   `;
 
@@ -48,8 +48,11 @@ function initGraphQL(app: Koa): void {
         return allHouses;
       },
       spiderPageOne: async () => spider.spiderPageOne(),
-      pvs: async (): Promise<number> => {
-        const analytics = await analyticsModel.find();
+      pvs: async (
+        _parent: never, // 不使用第一个变量
+        args: string
+      ): Promise<number> => {
+        const analytics = await analyticsModel.find(args);
         return analytics.length;
       }
     }

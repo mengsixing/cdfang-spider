@@ -31,15 +31,8 @@ interface ImonthBuilder {
   [constants.BUILDER_NUMBER]: number;
 }
 
-const Home: React.FunctionComponent<RouteComponentProps> = props => {
+const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const appState = useContext(AppContext);
-
-  useEffect(() => {
-    const year = constants.tabKeyRouterMap[props.location.pathname];
-    requestData(year, (allHouses: cdFang.IhouseData[]) => {
-      appState.changeData(allHouses);
-    });
-  }, []);
 
   // 构建区域图需要的数据
   const arrayByDay = _.groupBy(appState.allData, item => {

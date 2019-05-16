@@ -40,7 +40,7 @@ export function requestPvs(callback: Function): void {
     .query<Ipvs>({
       query: gql`
         {
-          pvs
+          pvs(routerName: "allHouses")
         }
       `
     })

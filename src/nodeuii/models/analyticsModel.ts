@@ -4,7 +4,7 @@ const mongoose = DbHelper.connect();
 
 // 创建数据库
 const analyticsSchema = new mongoose.Schema({
-  ip: String,
+  routerName: String,
   createdTime: { type: Date, default: Date.now }
 });
 // 创建表
@@ -24,8 +24,8 @@ const analyticsModel = {
     return item;
   },
 
-  find() {
-    return AnalyticsCol.find({}, (err, analytics: cdFang.Ianalytics[]) => {
+  find(query: object) {
+    return AnalyticsCol.find(query, (err, analytics: cdFang.Ianalytics[]) => {
       if (err) {
         throw new Error(err);
       }

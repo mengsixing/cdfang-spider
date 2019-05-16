@@ -5,8 +5,19 @@ const ErrorHander = {
   init(app: Koa): void {
     // 捕获 请求
     app.use(async (ctx: Koa.Context, next: Function) => {
-      if (ctx.request.method !== 'OPTIONS') {
-        analyticsModel.add({ ip: ctx.request.ip });
+      if (ctx.method !== 'OPTIONS') {
+        // graphql 请求
+        if (ctx.request.url === '/graphql' && ctx.request.body.query) {
+          const queryString: string = ctx.request.body.query.replace(
+            /[\s|\n]/g,
+            ''
+          );
+          const matchedArray = queryString.match(/(?<={)\w+/);
+          const routerName = matchedArray == null ? '' : matchedArray[0];
+          analyticsModel.add({ routerName });
+        } else {
+          analyticsModel.add({ routerName: ctx.request.path.substr(1) });
+        }
       }
       await next();
     });

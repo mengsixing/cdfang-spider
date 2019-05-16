@@ -5,6 +5,7 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import cors from 'koa2-cors';
 import log4js from 'log4js';
+import koaBody from 'koa-body';
 
 import ErrorHander from './middleware/ErrorHander';
 import AnalysicsHander from './middleware/AnalysicsHander';
@@ -12,7 +13,11 @@ import controller from './controllers';
 import config from './config';
 import './controllers/schedule';
 
+
+
 const app = new Koa();
+
+app.use(koaBody());
 
 // 错误日志记录
 log4js.configure({

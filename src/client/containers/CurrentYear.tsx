@@ -10,26 +10,18 @@ import StatisticCard from '../components/StatisticCard';
 import BasicColumnGraph from '../components/BasicColumnGraph';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
-import { requestData } from '../utils/request';
 
-const { useEffect, useContext } = React;
+const { useContext } = React;
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-const CurrentYear: React.FunctionComponent<RouteComponentProps> = props => {
+const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
   const appState = useContext(AppContext);
   const { allData } = appState;
 
   const changeTab = (activityKey: string): void => {
     appState.changeActivityKey(activityKey);
   };
-
-  useEffect(() => {
-    const year = constants.tabKeyRouterMap[props.location.pathname];
-    requestData(year, (allHouses: cdFang.IhouseData[]) => {
-      appState.changeData(allHouses);
-    });
-  }, []);
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);

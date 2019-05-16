@@ -11,7 +11,7 @@ declare namespace cdFang {
   }
 
   interface Ianalytics {
-    ip: string;
+    routerName: string;
     createdTime?: Date;
   }
 

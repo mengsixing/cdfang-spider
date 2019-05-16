@@ -5,15 +5,15 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import renderRouters from '../router';
 import Notice from '../components/Notice';
-import AppContextProvider from '../context/appContextProvider';
 import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
 import util from '../utils';
 import './App.less';
-import { requestPvs } from '../utils/request';
+import { requestPvs, requestData } from '../utils/request';
+import { AppContext } from '../context/appContext';
 
 const { Header, Footer } = Layout;
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useContext } = React;
 
 const App: React.FunctionComponent<RouteComponentProps> = ({
   history,
@@ -22,14 +22,21 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   const gotoGithub = () => {
     window.location.href = GITHUB_URL;
   };
+  const appState = useContext(AppContext);
   const [pvs, changePvs] = useState(0);
 
   useEffect(() => {
+    // 获取 pv
     requestPvs(
       (pvNumber: number): void => {
         changePvs(pvNumber);
       }
     );
+    // 获取房源信息
+    const year = tabKeyRouterMap[location.pathname];
+    requestData(year, (allHouses: cdFang.IhouseData[]) => {
+      appState.changeData(allHouses);
+    });
   }, []);
 
   // 根据理由选中对应 menu 项
@@ -41,10 +48,8 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
 
   // 获取年份列表
   const yearList = util.getYearList();
-  console.warn(location, history);
-
   return (
-    <AppContextProvider>
+    <div>
       <BackTop />
       <Layout>
         <Header style={{ backgroundColor: 'white' }}>
@@ -77,7 +82,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
         {renderRouters()}
         <Footer style={{ textAlign: 'center' }}>{COPYRIGHT}</Footer>
       </Layout>
-    </AppContextProvider>
+    </div>
   );
 };
 

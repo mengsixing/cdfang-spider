@@ -16,6 +16,10 @@ const DbHelper = {
         console.warn('连接mongodb成功。');
       }
     );
+    // 单例模式
+    DbHelper.connect = () => {
+      return mongoose;
+    };
     return mongoose;
   }
 };

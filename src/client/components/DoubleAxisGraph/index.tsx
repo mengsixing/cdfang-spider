@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
-import { HOUSE_NUMBER, BUILDER_NUMBER } from '../../constants';
+import { HOUSE_NUMBER, BUILDER_NUMBER, RISE_COLOR } from '../../constants';
 
 // 导出给 test 文件
 export interface Iprops {
@@ -37,11 +37,11 @@ const DoubleAxisGraph: React.FunctionComponent<Iprops> = ({ data }) => {
     <Chart height={400} scale={scale} forceFit data={chartData}>
       <Axis />
       <Tooltip />
-      <Geom type="interval" position="date*houseNumber" color="#3182bd" />
+      <Geom type="interval" position="date*houseNumber" />
       <Geom
         type="line"
         position="date*builderBumber"
-        color="#fdae6b"
+        color={RISE_COLOR}
         size={3}
         shape="smooth"
       />

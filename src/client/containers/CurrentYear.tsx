@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
-
 import { RouteComponentProps } from 'react-router';
+
 import util from '../utils';
 import ChartPanel from '../components/ChartPanel';
 import WholeTable from '../components/WholeTable';
@@ -16,12 +16,7 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 
 const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
-  const appState = useContext(AppContext);
-  const { allData } = appState;
-
-  const changeTab = (activityKey: string): void => {
-    appState.changeActivityKey(activityKey);
-  };
+  const { allData, activityKey, changeActivityKey } = useContext(AppContext);
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
@@ -30,20 +25,19 @@ const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
       <ChartPanel
         data={areasGroup[item]}
         panelKey={item}
-        activityKey={appState.activityKey}
+        activityKey={activityKey}
       />
     </TabPane>
   ));
   // 柱状图数据
   const { chartHouseData, chartBuilderData } = util.getBasicColumnGraphData(
-    appState.allData
+    allData
   );
-
   return (
     <Content className="content">
       <StatisticCard />
       <div className="content-graph-bar">
-        <Tabs defaultActiveKey={appState.activityKey} onChange={changeTab}>
+        <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
           {tabpanels}
         </Tabs>
       </div>

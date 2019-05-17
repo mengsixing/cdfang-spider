@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { withRouter } from 'react-router-dom';
-
 import { RouteComponentProps } from 'react-router';
+
 import renderRouters from '../router';
 import Notice from '../components/Notice';
 import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
 import util from '../utils';
-import './App.less';
 import { requestPvs, requestData } from '../utils/request';
 import { AppContext } from '../context/appContext';
-
-const { Header, Footer } = Layout;
+import './App.less';
 
 const { useState, useEffect, useContext } = React;
+const { Header, Footer } = Layout;
 
 const App: React.FunctionComponent<RouteComponentProps> = ({
   history,
@@ -25,6 +24,8 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   const appState = useContext(AppContext);
   const [pvs, changePvs] = useState(0);
 
+  const selectedYear = tabKeyRouterMap[location.pathname];
+
   useEffect(() => {
     // 获取 pv
     requestPvs(
@@ -32,21 +33,24 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
         changePvs(pvNumber);
       }
     );
+
     // 获取房源信息
-    const year = tabKeyRouterMap[location.pathname];
-    requestData(year, (allHouses: cdFang.IhouseData[]) => {
+    requestData(selectedYear, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
     });
   }, []);
 
   // 根据理由选中对应 menu 项
-  const defaultYear = [tabKeyRouterMap[location.pathname]];
+  const defaultYear = [selectedYear];
 
+  // 路由切换
   const clickMenu = ({ key }: { key: string }) => {
-    history.push(tabKeyRouterMap[key]);
-    requestData(key, (allHouses: cdFang.IhouseData[]) => {
-      appState.changeData(allHouses);
-    });
+    if (key !== selectedYear) {
+      requestData(key, (allHouses: cdFang.IhouseData[]) => {
+        appState.changeData(allHouses);
+        history.push(tabKeyRouterMap[key]);
+      });
+    }
   };
 
   // 获取年份列表

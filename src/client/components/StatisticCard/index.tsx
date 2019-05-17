@@ -21,7 +21,9 @@ const StatisticCard: React.FunctionComponent = () => {
           <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
           <span
             style={{
-              color: info.increaseBuildNumber ? '#5eba00' : '#cd201f'
+              color: info.increaseBuildNumber
+                ? constants.RISE_COLOR
+                : constants.DECLINE_COLOR
             }}
           >
             {info.increaseBuildNumberString}
@@ -31,7 +33,9 @@ const StatisticCard: React.FunctionComponent = () => {
           <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
           <span
             style={{
-              color: info.increaseHouseNumber ? '#5eba00' : '#cd201f'
+              color: info.increaseHouseNumber
+                ? constants.RISE_COLOR
+                : constants.DECLINE_COLOR
             }}
           >
             {info.increaseHouseNumberString}

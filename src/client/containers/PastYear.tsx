@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
-
 import { RouteComponentProps } from 'react-router';
+
 import util from '../utils/index';
 import ChartPanel from '../components/ChartPanel/index';
 import WholeTable from '../components/WholeTable';
@@ -16,40 +16,35 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 
 const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
-  const appState = useContext(AppContext);
-  const { allData } = appState;
-
-  const changeTab = (activityKey: string): void => {
-    appState.changeActivityKey(activityKey);
-  };
+  const { allData, activityKey, changeActivityKey } = useContext(AppContext);
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
 
   // 选中的 key 不在区域列表中
-  if (!areasList.includes(appState.activityKey)) {
-    appState.changeActivityKey(areasList[0]);
+  if (!areasList.includes(activityKey)) {
+    changeActivityKey(areasList[0]);
   }
   const tabpanels = util.sortArea(areasList).map((item: string) => (
     <TabPane tab={item} key={item}>
       <ChartPanel
         data={areasGroup[item]}
         panelKey={item}
-        activityKey={appState.activityKey}
+        activityKey={activityKey}
       />
     </TabPane>
   ));
 
   // 柱状图数据
   const { chartHouseData, chartBuilderData } = util.getBasicColumnGraphData(
-    appState.allData
+    allData
   );
 
   return (
     <Content className="content">
-      {appState.allData.length > 0 ? <StatisticCard /> : ''}
+      {allData.length > 0 ? <StatisticCard /> : ''}
       <div className="content-graph-bar">
-        <Tabs defaultActiveKey={appState.activityKey} onChange={changeTab}>
+        <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
           {tabpanels}
         </Tabs>
       </div>

@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
-
 import { RouteComponentProps } from 'react-router';
+
 import utils from '../utils';
 import BasicAreaGraph from '../components/BasicAreaGraph';
 import WholeTable from '../components/WholeTable';
@@ -31,10 +31,10 @@ interface ImonthBuilder {
 }
 
 const Home: React.FunctionComponent<RouteComponentProps> = () => {
-  const appState = useContext(AppContext);
+  const { allData } = useContext(AppContext);
 
   // 构建区域图需要的数据
-  const arrayByDay = _.groupBy(appState.allData, item => {
+  const arrayByDay = _.groupBy(allData, item => {
     return dayjs(item.beginTime).format('YYYY-MM');
   });
 
@@ -68,7 +68,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
 
   // 柱状图数据
   const { chartHouseData, chartBuilderData } = utils.getBasicColumnGraphData(
-    appState.allData
+    allData
   );
 
   return (

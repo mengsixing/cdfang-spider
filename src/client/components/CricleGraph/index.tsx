@@ -59,7 +59,7 @@ const CircleGraph: React.FunctionComponent<Iprops> = ({
     }
   };
   const houseNumber = _.sumBy(array, 'number');
-  const guideHtml = `<div style="color:#8c8c8c;font-size:1em;text-align: center;width: 10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>`;
+  const guideHtml = `<div style="color:#8c8c8c;font-size:1em;text-align:center;width:10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>`;
   return (
     <Chart
       height={400}

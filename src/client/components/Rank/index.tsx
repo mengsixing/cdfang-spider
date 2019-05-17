@@ -15,10 +15,10 @@ export interface Iprops {
   unit: string;
 }
 
-const Rank: React.FunctionComponent<Iprops> = props => {
-  const { data, title } = props;
+const Rank: React.FunctionComponent<Iprops> = ({ data, title, unit }) => {
   const rankData = _.sortBy(data, (item: Irank) => -item.number);
   const rankTitle = title ? `排名：${title}` : '排名';
+
   return (
     <div className="rank">
       <div className="rank-title">{rankTitle}</div>
@@ -30,7 +30,7 @@ const Rank: React.FunctionComponent<Iprops> = props => {
             <li key={item._id}>
               <span className={istop3}>{index + 1}</span>
               <span>{item.name}</span>
-              <span>{item.number + props.unit}</span>
+              <span>{item.number + unit}</span>
             </li>
           );
         })}

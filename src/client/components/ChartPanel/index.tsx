@@ -2,14 +2,13 @@ import * as React from 'react';
 import { Col, Row } from 'antd';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
-import { AppContext } from '../../context/appContext';
 
+import { AppContext } from '../../context/appContext';
 import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
 import DoubleAxisGraph from '../DoubleAxisGraph';
 
 const { useState, useContext } = React;
-
 let currentState: Istate;
 
 export interface Iprops {
@@ -49,12 +48,12 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
     setPrevData(data);
   }
 
-  function changeMonth(origin: cdFang.IcircleItem, newState: Istate) {
-    const { rankTitle, isOpen } = newState;
+  function changeMonth(origin: cdFang.IcircleItem) {
+    const { rankTitle, isOpen } = currentState;
 
     if (rankTitle === origin.item && isOpen) {
       return {
-        ...newState,
+        ...currentState,
         rank: data,
         rankTitle: '',
         isChangeTab: false,
@@ -70,7 +69,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
         dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month')
     );
     return {
-      ...newState,
+      ...currentState,
       rank: newRank,
       rankTitle: selectMonthTitle,
       isChangeTab: false,
@@ -92,7 +91,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
           data={data}
           changeMonth={item => {
             // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用局部变量来获取
-            setState(changeMonth(item, currentState));
+            setState(changeMonth(item));
           }}
           isChangeTab={isChangeTab}
         />

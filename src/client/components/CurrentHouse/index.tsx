@@ -15,17 +15,15 @@ const CurrentHouse: React.FunctionComponent = () => {
       <div className="current-house-list" key={item._id}>
         <Row>
           <Col span={4}>
-            {' '}
             <span className="notification-icon">
               <Icon type="notification" />
             </span>
-            {` ${item.area}`}
+            {`${item.area}`}
           </Col>
           <Col span={8}>{item.name}</Col>
           <Col span={4}>{`${item.number}套`}</Col>
           <Col span={8}>
-            登记截止时间：
-            {`${item.endTime} `}
+            {`登记截止时间：${item.endTime} `}
             <a
               className="register-link"
               rel="nofollow me noopener noreferrer"
@@ -42,7 +40,7 @@ const CurrentHouse: React.FunctionComponent = () => {
   return currentHouses.length > 0 ? (
     <div className="content-card">
       <Collapse defaultActiveKey={['1']}>
-        <Panel header="正在登记" key="1">
+        <Panel header="正在登记" key="1" extra={<Icon type="notification" />}>
           <List
             bordered
             dataSource={currentHouses}

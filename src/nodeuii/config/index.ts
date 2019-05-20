@@ -1,4 +1,4 @@
 export default {
-  spiderDomain: 'https://gfdj.cdfgj.gov.cn',
+  spiderDomain: 'http://zw.cdzj.chengdu.gov.cn',
   serverPort: 8082
 };

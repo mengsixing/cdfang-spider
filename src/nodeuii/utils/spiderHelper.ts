@@ -60,8 +60,8 @@ const initspider = async (pageStart: number, pageEnd: number) => {
   return result;
 };
 
-const spiderPageOne = async (): Promise<Ipage> => {
-  const page: cdFang.IhouseData[] = await createRequestPromise(1);
+const spiderPage = async (pageNo: number = 1): Promise<Ipage> => {
+  const page: cdFang.IhouseData[] = await createRequestPromise(pageNo);
   const promises = page.map(
     (item): Promise<cdFang.IhouseData | boolean> =>
       new Promise(
@@ -72,10 +72,9 @@ const spiderPageOne = async (): Promise<Ipage> => {
   );
   const successArray = await Promise.all(promises)
     .then(
-      (posts: cdFang.IhouseData[]): cdFang.IhouseData[] =>
-        posts.filter((item): boolean => !!item)
+      posts => posts.filter((item): boolean => !!item) as cdFang.IhouseData[]
     )
-    .catch((): cdFang.IhouseData[] => []);
+    .catch(() => []);
   return {
     successArray,
     allLength: page.length
@@ -84,5 +83,5 @@ const spiderPageOne = async (): Promise<Ipage> => {
 
 export default {
   initspider,
-  spiderPageOne
+  spiderPage
 };

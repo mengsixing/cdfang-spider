@@ -51,7 +51,7 @@ function initGraphQL(app: Koa): void {
         const allHouses = await houseModel.find(query);
         return allHouses;
       },
-      spiderPageOne: async () => spider.spiderPageOne(),
+      spiderPageOne: async () => spider.spiderPage(),
       pvs: async (
         _parent: never, // 不使用第一个变量
         args: Ipvs

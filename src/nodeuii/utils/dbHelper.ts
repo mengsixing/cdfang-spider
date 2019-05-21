@@ -10,12 +10,9 @@ const DbHelper = {
     });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, '连接mongodb失败。'));
-    db.once(
-      'open',
-      (): void => {
-        console.warn('连接mongodb成功。');
-      }
-    );
+    db.once('open', () => {
+      console.warn('连接mongodb成功。');
+    });
     // 单例模式
     DbHelper.connect = () => {
       return mongoose;

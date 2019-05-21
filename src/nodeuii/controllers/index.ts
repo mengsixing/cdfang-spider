@@ -46,9 +46,12 @@ router
     }
   )
   .get(
-    '/spiderPageOne',
+    '/spiderPage',
     async (ctx): Promise<void> => {
-      const result = await spider.spiderPageOne();
+      const {
+        query: { pageNo }
+      } = ctx.request;
+      const result = await spider.spiderPage(pageNo);
       ctx.body = result;
     }
   )

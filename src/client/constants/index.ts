@@ -6,6 +6,7 @@ export const GITHUB_URL = 'https://github.com/yhlben/cdfang-spider';
 export const COPYRIGHT = 'Copyright 2018 - 2019 yhlben. All Rights Reserved';
 export const RISE_COLOR = '#5eba00';
 export const DECLINE_COLOR = '#cd201f';
+export const LOADING_TIP = '页面加载中...';
 
 export const tabKeyRouterMap: { [x: string]: string } = {
   '2019': '/2019',

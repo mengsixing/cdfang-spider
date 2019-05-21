@@ -5,7 +5,13 @@ import { RouteComponentProps } from 'react-router';
 
 import renderRouters from '../router';
 import Notice from '../components/Notice';
-import { tabKeyRouterMap, GITHUB_URL, COPYRIGHT } from '../constants';
+import Loading from '../components/Loading';
+import {
+  tabKeyRouterMap,
+  GITHUB_URL,
+  COPYRIGHT,
+  LOADING_TIP
+} from '../constants';
 import util from '../utils';
 import { requestPvs, requestData } from '../utils/request';
 import { AppContext } from '../context/appContext';
@@ -23,6 +29,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   };
   const appState = useContext(AppContext);
   const [pvs, changePvs] = useState(0);
+  const [isLoading, changeLoading] = useState(false);
 
   const selectedYear = tabKeyRouterMap[location.pathname];
 
@@ -46,9 +53,11 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   // 路由切换
   const clickMenu = ({ key }: { key: string }) => {
     if (key !== selectedYear) {
+      changeLoading(true);
       requestData(key, (allHouses: cdFang.IhouseData[]) => {
         appState.changeData(allHouses);
         history.push(tabKeyRouterMap[key]);
+        changeLoading(false);
       });
     }
   };
@@ -86,7 +95,12 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
             })}
           </Menu>
         </Header>
-        {renderRouters()}
+
+        {isLoading ? (
+          <Loading tip={LOADING_TIP} height={`${window.innerHeight - 65}px`} />
+        ) : (
+          renderRouters()
+        )}
         <Footer style={{ textAlign: 'center' }}>{COPYRIGHT}</Footer>
       </Layout>
     </div>

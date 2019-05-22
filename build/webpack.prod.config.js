@@ -60,8 +60,8 @@ const prodConfig = {
       clientsClaim: true, // 让浏览器立即 servece worker 被接管
       skipWaiting: true,  // 更新 sw 文件后，立即插队到最前面
       importWorkboxFrom: 'cdn',
-      include: [/\.js$/, /\.css$/,/\.ico$/],
-  }),
+      include: [/\.js$/, /\.css$/, /\.ico$/],
+    }),
   ],
   optimization: {
     runtimeChunk: {
@@ -76,6 +76,9 @@ const prodConfig = {
         }
       }
     }
+  },
+  externals: {
+    'react-dom': 'ReactDOM',
   }
 };
 

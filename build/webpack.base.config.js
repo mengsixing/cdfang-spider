@@ -32,7 +32,6 @@ module.exports = {
   externals: {
     lodash: '_',
     react: 'React',
-    'react-dom': 'ReactDOM',
     bizcharts: 'BizCharts',
     '@antv/data-set': 'DataSet'
   }

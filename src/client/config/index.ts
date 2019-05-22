@@ -1,6 +1,7 @@
 import ApolloClient from 'apollo-boost';
 
-let serverDomain = 'http://localhost:8082';
+// 默认为当前域名
+let serverDomain = '';
 if (process.env.NODE_ENV === 'production') {
   serverDomain = 'https://yinhengli.com:8082';
 }

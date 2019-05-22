@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
+import { hot } from 'react-hot-loader/root';
 
 import renderRouters from '../router';
 import Notice from '../components/Notice';
@@ -107,4 +108,4 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   );
 };
 
-export default withRouter(App);
+export default hot(withRouter(App));

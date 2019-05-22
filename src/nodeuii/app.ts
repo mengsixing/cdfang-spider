@@ -3,7 +3,6 @@ import https from 'https';
 import fs from 'fs';
 import Koa from 'koa';
 import serve from 'koa-static';
-import cors from 'koa2-cors';
 import log4js from 'log4js';
 import koaBody from 'koa-body';
 
@@ -36,8 +35,7 @@ const logger = log4js.getLogger('globallog');
 ErrorHander.init(app, logger);
 AnalysicsHander.init(app);
 
-// 允许跨域
-app.use(cors());
+// 初始化路由
 controller.init(app);
 // 静态资源目录
 app.use(serve('client'));

@@ -22,7 +22,7 @@
    - 预编译器 less。项目中只使用了选择器嵌套，选择器复用等，less 够用了。
    - 解决命名冲突可以使用 css modules，暂未考虑 css in js。
    - 使用 bem 命名规范。
-   - postcss autoprefixer 后处理器，增加 css 兼容性。
+   - 使用 postcss 插件 autoprefixer，增加 css 兼容性。
 
 4. 构建工具选哪个？
 
@@ -32,7 +32,7 @@
 
 5. 代码规范检查？
 
-   - eslint。辅助编码规范执行，有效控制代码质量。同时也支持 typescript。
+   - eslint。辅助编码规范执行，有效控制代码质量。同时也支持校验 typescript 语法。
    - 配置 eslint-config-airbnb 规则。
    - 配置 eslint-config-prettier 关闭和 prettier 冲突的规则。
 
@@ -44,6 +44,7 @@
 7. 后端框架选型？
 
    - koa。精简好用，中间件机制强大。
+   - apollo-server。帮助搭建 graphQL 后端环境。
 
 8. 数据库选型？
 
@@ -75,7 +76,7 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 
 2、 配置 eslint。
 
-根据 typescript-eslint 引导，配置 eslint 对 typescript 的支持。
+根据 [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) 引导，配置 eslint 对 typescript 的支持。
 
 - @typescript-eslint/parser 解析 ts 语法。
 - @typescript-eslint/eslint-plugin 为 ts 文件应用 eslint 和 tslint 规则。
@@ -86,7 +87,7 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 
 - babel 社区有许多非常好的插件，babel-preset-env 可以支持到具体兼容浏览器的版本号，而 tsc 编译器没这个功能。
 - babel 可以同时支持编译 js 和 ts，所以没必要在引入 tsc 编译 ts 文件，只管理一个编译器，可维护性更高。
-- 更快的编译速度。tsc 编译器做的工作很多，它会扫描类型定义文件（\*.d.ts），包括 node_modules 里的，以确保你的代码里正确地使用，所以速度很慢。
+- babel 编译速度更快。tsc 编译器需要遍历所有类型定义文件（\*.d.ts），包括 node_modules 里的，以确保代码中正确地使用，type 太多会造成卡顿。
 
 > **babel 流程分析**
 >
@@ -140,13 +141,23 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 - 配置 url-loader，打包项目中的图片资源。
 - 配置 html-webpack-plugin 将最后生成的 js，css，注入第 1 步的 html 中。
   - 使用 ejs 模板配置开发环境和线上环境引入的 cdn。
-- 热启动配置，使用开箱即用的 webpack-dev-server。
+- 开发环境配置，使用开箱即用的 webpack-dev-server。
+  - webpack-dev-server 可以自动监听文件修改，自动刷新页面，以及默认 source-map 等功能。
+  - 配置热模块替换，react-hot-loader。
 
 > webpack 打包原理
 >
 > webpack 打包过程就像是一条流水线，从入口文件开始，搜集项目中所有文件的依赖关系，如果遇到不能够识别的模块，就使用对应的 loader 转换成能够识别的模块。webpack 还能使用 plugin 在流水线生命周期中挂载自定义事件，来控制输出。
 
-经过以上的配置，react 的环境就已经搭建完毕了。
+5、编写 npm script，一键开启开发模式。
+
+```json
+"scripts": {
+  "dev:client": "cross-env NODE_ENV=development webpack-dev-server --open"
+}
+```
+
+6、现在运行 `npm run dev:server` 就可以愉快地编写客户端代码了。
 
 ## 搭建 NodeJs 环境
 
@@ -154,10 +165,17 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 
 - 配置 gulp，遍历每一个 ts 文件，调用 gulp-babel，将 ts 代码转换成 js 代码。
 - 配置 supervisor 自动重启 node 服务（nodemon 对于不存在的目录不能进行监控）。
+- 编写 npm script 一键启动 node 端开发环境。
+
+```json
+"scripts": {
+  "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js",
+}
+```
 
 ### 层次结构划分
 
-项目采用传统的 mvc 模式进行搭建。
+项目采用传统的 mvc 模式进行层次划分。
 
 #### Model 层
 
@@ -166,7 +184,7 @@ Model 层的主要工作：连接数据库，封装数据库操作，例如：�
 - 新建 model 文件夹，目录下的每一个文件对应数据库的一个表。
 - model 文件中包含对一个数据表的增删改查操作。
   - 使用 mongoose 更方便地对 mongodb 数据库进行读写操作。
-- model 文件返回封装好的对象，提供给 service 层使用。
+- model 文件返回封装好的对象，提供给 controller 层使用。
 
 #### Controller 层
 
@@ -188,7 +206,7 @@ View 层的主要工作：提供前端页面模板。如果是服务器端渲染
 
 GraphQL 是一种用于 api 的查询语言，需要服务器端配置 graphql 支持，同时也需要客户端使用 graphql 语法的格式进行请求。
 
-使用 apllo 更快的搭建 graphql 环境。
+使用 apollo 更快的搭建 graphql 环境。
 
 - 服务器端配置 apollo-server。
   - 使用 schema，定义请求的类型，返回的格式。
@@ -205,6 +223,8 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 使用 mongoose 建立和本地 mongodb 的连接。
 - 创建 model 模型，一个模型对应 mongodb 里的一张表。
 - 根据 model 封装增删改查功能，并返回给 controller 层使用。
+
+接下来的步骤就是安装 mongodb，启动服务，就可以了。
 
 ## 搭建测试环境
 
@@ -228,7 +248,7 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 
 ## 配置上线环境
 
-安装好各种环境之后，接下来需要思考项目上线的问题了。
+安装好各种环境之后，接下来就要考虑项目上线了。
 
 ### 配置服务器环境
 
@@ -236,18 +256,24 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 安装 pm2 进程守护。`npm i pm2 -g`
 - 安装 mongodb。[mongodb 官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 - 安装免费 https 证书。[letsencrypt 官网](https://letsencrypt.org/)
-  - 域名需要先进行备案
+  - 域名需要先进行备案。
 
 ### 代码发布
 
 本项目发布非常简单，只需要一步操作就搞定了，这些都是经过持续集成配置后的结果。
 
 ```zsh
+# clone with Git Bash
 git clone https://github.com/yhlben/cdfang-spider.git
+
+# change directory
+cd cdfang-spider
+
+# install dependencies
 npm i
+
+# build for production with minification
 npm run build
-cd dist
-pm2 start app.js
 ```
 
 所有的事情都在 build 命令下完成了，我们分析一下 npm run build 命令做的事情。
@@ -257,10 +283,26 @@ pm2 start app.js
   - 上传测试覆盖率。
 - 打包客户端代码。
   - 打包后生成 html 文件作为 node 端的 view 层，和后端绑定在一起。
-  - 其他静态资源，直接上传到七牛 cdn，使用 qiniu-upload-plugin 来进行一键上传。
+  - 其他静态资源，在 webpack 打包后自动上传到七牛 cdn，使用 [qiniu-upload-plugin](https://www.npmjs.com/package/qiniu-upload-plugin) 来进行一键上传。
 - 打包服务器端代码。
 
-上述事情通过创建 npm script 就可以了完成需求了，但这些命令也不应该每次都由手工敲一遍，通过配置 travisCI，每一次 master 分支提交代码时，自动运行上述命令就行了。真正上线时，先查看 ci 状态，如果已通过所有的步骤，那就不用担心发布的代码有问题了。
+上述事情通过创建 npm script 就可以了完成需求了，但这些命令也不应该每次都由手工敲一遍，通过配置 travisCI，每一次 master 分支提交代码时，自动运行上述命令就行了。
+
+#### travisCI 配置
+
+travisCI 是一个持续集成平台，每当 github 提交代码时，travisCI 就会得到通知，然后根据 travisCI 中的配置信息执行相应的操作，并及时把运行结果反馈给用户。travisCI 配置文件可以参考项目根目录下的 `.travis.yml` 文件。配置文件核心在于 job 的配置。
+
+```yml
+jobs:
+  include:
+    - stage: build
+      script:
+        - npm run build
+        - npm run test
+      after_success: npm run coverage
+```
+
+可以看到，每一次 github 提交后，travisCI 就会执行 名称为 build 的任务，任务分为 2 个步骤，首先执行 build 命令，然后执行 test 命令，当命令都执行完成后，执行 coverage 命令。如果执行命令期间出现任何错误，travisCI 会通过邮件及时通知我们。真正要上线时，先查看 ci 状态，如果已通过所有的步骤，那就不用担心发布的代码有问题了。
 
 ## 参考链接
 

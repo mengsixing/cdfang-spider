@@ -3,7 +3,7 @@ import ApolloClient from 'apollo-boost';
 // 默认为当前域名
 let serverDomain = '';
 if (process.env.NODE_ENV === 'production') {
-  serverDomain = 'https://yinhengli.com:8082';
+  serverDomain = 'https://cdfangyuan.cn';
 }
 
 function getGraphqlClient(): ApolloClient<{}> {

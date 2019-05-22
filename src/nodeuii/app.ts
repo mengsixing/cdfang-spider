@@ -1,6 +1,3 @@
-// import 'babel-polyfill';
-import https from 'https';
-import fs from 'fs';
 import Koa from 'koa';
 import serve from 'koa-static';
 import log4js from 'log4js';
@@ -40,32 +37,9 @@ controller.init(app);
 // 静态资源目录
 app.use(serve('client'));
 
-// 服务器上的地址
-if (fs.existsSync('/etc/letsencrypt/live/yinhengli.com/privkey.pem')) {
-  const serverKey = '/etc/letsencrypt/live/yinhengli.com/privkey.pem';
-  const serverCert = '/etc/letsencrypt/live/yinhengli.com/fullchain.pem';
-  https
-    .createServer(
-      {
-        key: fs.readFileSync(serverKey),
-        cert: fs.readFileSync(serverCert)
-      },
-      app.callback()
-    )
-    .listen(
-      config.serverPort,
-      (): void => {
-        // eslint-disable-next-line no-console
-        console.log(
-          `server is running at : https://localhost:${config.serverPort}`
-        );
-      }
-    );
-} else {
-  // eslint-disable-next-line no-console
-  console.log(`server is running at : http://localhost:${config.serverPort}`);
-  app.listen(config.serverPort);
-}
+// eslint-disable-next-line no-console
+console.log(`server is running at : http://localhost:${config.serverPort}`);
+app.listen(config.serverPort);
 
 // 全局异常捕获
 process.on('uncaughtException', err => {

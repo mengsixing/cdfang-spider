@@ -14,7 +14,6 @@ const devConfig = {
   devServer: {
     hot: true,
     inline: true,
-    hotOnly: true,
     // 代理服务器端域名
     proxy: {
       '/': 'http://localhost:8082'

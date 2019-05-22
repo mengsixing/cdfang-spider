@@ -10,7 +10,7 @@
 
 ## Preview
 
-在线预览：[https://yinhengli.com:8082](https://yinhengli.com:8082)
+在线预览：[https://cdfangyuan.cn](https://cdfangyuan.cn)
 
 源代码：[https://github.com/yhlben/cdfang-spider](https://github.com/yhlben/cdfang-spider)
 

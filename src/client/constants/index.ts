@@ -4,6 +4,7 @@ export const SALE_TIMES = '开盘数';
 export const AREA = '区域';
 export const GITHUB_URL = 'https://github.com/yhlben/cdfang-spider';
 export const COPYRIGHT = 'Copyright 2018 - 2019 yhlben. All Rights Reserved';
+export const BEIAN_ICP = '蜀ICP备17036475号-2';
 export const RISE_COLOR = '#5eba00';
 export const DECLINE_COLOR = '#cd201f';
 export const LOADING_TIP = '页面加载中...';

@@ -11,7 +11,8 @@ import {
   tabKeyRouterMap,
   GITHUB_URL,
   COPYRIGHT,
-  LOADING_TIP
+  LOADING_TIP,
+  BEIAN_ICP
 } from '../constants';
 import util from '../utils';
 import { requestPvs, requestData } from '../utils/request';
@@ -102,7 +103,10 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
         ) : (
           renderRouters()
         )}
-        <Footer style={{ textAlign: 'center' }}>{COPYRIGHT}</Footer>
+        <Footer style={{ textAlign: 'center' }}>
+          <div>{BEIAN_ICP}</div>
+          <div>{COPYRIGHT}</div>
+        </Footer>
       </Layout>
     </div>
   );

@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="dns-prefetch" href="//unpkg.com" />
+    <link rel="dns-prefetch" href="//cdn.yinhengli.com" />
+    <link rel="dns-prefetch" href="//package.cdfangyuan.cn" />
     <meta
       name="viewport"
       content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
@@ -24,11 +25,11 @@
     <div id="root"></div>
     <!-- 根据不同的环境，引入不同的cdn -->
     <% if (htmlWebpackPlugin.options.env !== 'production') { %>
-    <script src="https://unpkg.com/react@16.8.4/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.development.js"></script>
+    <script src="https://package.cdfangyuan.cn/react@16.8.6.development.js"></script>
+    <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.development.js"></script>
     <% } else { %>
-    <script src="https://unpkg.com/react@16.8.4/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@16.8.4/umd/react-dom.production.min.js"></script>
+    <script src="https://package.cdfangyuan.cn/react@16.8.6.production.min.js"></script>
+    <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.production.min.js"></script>
     <script
       src="https://js.fundebug.cn/fundebug.1.7.3.min.js"
       apikey="7db5b4b694c5c2e25fec43e5daf924d64f6b087378c775207d6920944a88094c"
@@ -41,7 +42,7 @@
       }
     </script>
     <% } %>
-    <script src="https://unpkg.com/bizcharts@3.2.2/umd/BizCharts.min.js"></script>
-    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.8.9/dist/data-set.min.js"></script>
+    <script src="https://package.cdfangyuan.cn/bizcharts@3.2.2.min.js"></script>
+    <script src="https://package.cdfangyuan.cn/data-set@0.8.9.min.js"></script>
   </body>
 </html>

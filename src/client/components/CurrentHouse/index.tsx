@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Collapse, List, Col, Row, Icon } from 'antd';
 import './styles.less';
+import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
 
 const { useContext } = React;
@@ -28,7 +29,7 @@ const CurrentHouse: React.FunctionComponent = () => {
               className="register-link"
               rel="nofollow me noopener noreferrer"
               target="_blank"
-              href="https://gfdj.cdfgj.gov.cn/lottery/accept/index"
+              href={HOUSE_PURCHASE_REGISTRATION}
             >
               登记
             </a>

@@ -68,4 +68,4 @@ npm run build
 
 [MIT](https://github.com/yhlben/cdfang-spider/blob/master/LICENSE)
 
-Copyright (c) 2019 yhlben
+Copyright (c) 2018-present yhlben

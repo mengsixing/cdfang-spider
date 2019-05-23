@@ -98,7 +98,11 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
         </Header>
         {renderRouters()}
         <Footer style={{ textAlign: 'center' }}>
-          <div>{BEIAN_ICP}</div>
+          <div>
+            <a href="http://www.beian.miit.gov.cn/" target="blank">
+              {BEIAN_ICP}
+            </a>
+          </div>
           <div>{COPYRIGHT}</div>
         </Footer>
       </Layout>

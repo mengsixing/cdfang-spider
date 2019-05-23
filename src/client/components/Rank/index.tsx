@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import './styles.less';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 interface Irank {
   _id: string;
@@ -39,4 +40,4 @@ const Rank: React.FunctionComponent<Iprops> = ({ data, title, unit }) => {
   );
 };
 
-export default Rank;
+export default RenderLoadingComponent(Rank);

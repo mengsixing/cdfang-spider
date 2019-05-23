@@ -7,6 +7,7 @@ import { AppContext } from '../../context/appContext';
 import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
 import DoubleAxisGraph from '../DoubleAxisGraph';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 const { useState, useContext } = React;
 let currentState: Istate;
@@ -103,4 +104,4 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
   );
 };
 
-export default ChartPanel;
+export default RenderLoadingComponent(ChartPanel);

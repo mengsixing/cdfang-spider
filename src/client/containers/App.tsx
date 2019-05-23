@@ -44,8 +44,10 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
     );
 
     // 获取房源信息
+    appState.changeLoading(true);
     requestData(selectedYear, (allHouses: cdFang.IhouseData[]) => {
       appState.changeData(allHouses);
+      appState.changeLoading(false);
     });
   }, []);
 

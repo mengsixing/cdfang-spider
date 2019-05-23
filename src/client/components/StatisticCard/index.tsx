@@ -4,11 +4,13 @@ import util, { IhouseInfo } from '../../utils/index';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
 
+import { RenderLoadingJSX } from '../HOC/RenderLoadingComponent';
+
 const { useContext } = React;
 
 const StatisticCard: React.FunctionComponent = () => {
   const appState = useContext(AppContext);
-  const { allData } = appState;
+  const { allData, isLoading } = appState;
   const allInfo = util.getAllInfo(allData);
   const thisWeekInfo = util.getThisWeekInfo(allData);
   const thisMonthInfo = util.getThisMonthInfo(allData);
@@ -50,24 +52,29 @@ const StatisticCard: React.FunctionComponent = () => {
       <Row gutter={16}>
         <Col span={6}>
           <Card title="本周开盘" bordered={false} extra="相比上周">
-            {renderCard(thisWeekInfo)}
+            {RenderLoadingJSX(renderCard(thisWeekInfo), isLoading)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="本月开盘" bordered={false} extra="相比上月">
-            {renderCard(thisMonthInfo)}
+            {RenderLoadingJSX(renderCard(thisMonthInfo), isLoading)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="本季度开盘" bordered={false} extra="相比上季">
-            {renderCard(thisQuarterInfo)}
+            {RenderLoadingJSX(renderCard(thisQuarterInfo), isLoading)}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="总开盘" bordered={false}>
-            {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
-            <br />
-            {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+            {RenderLoadingJSX(
+              <div>
+                {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
+                <br />
+                {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+              </div>,
+              isLoading
+            )}
           </Card>
         </Col>
       </Row>

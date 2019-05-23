@@ -30,13 +30,24 @@ const AppProvider = ({ children }: React.Props<{ value: IappContext }>) => {
     });
   };
 
+  const changeLoading = (isLoading: boolean) => {
+    changeAppState(prevState => {
+      return {
+        ...prevState,
+        isLoading
+      };
+    });
+  };
+
   const initAppState: IappContext = {
     allData: [],
     activityKey: '天府新区',
     selectedYear: 0,
+    isLoading: false,
     changeData,
     changeActivityKey,
-    changeSelectedYear
+    changeSelectedYear,
+    changeLoading
   };
 
   const [appState, changeAppState] = useState(initAppState);

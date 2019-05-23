@@ -3,6 +3,7 @@ import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 // @ts-ignore
 import * as DataSet from '@antv/data-set';
 import * as constants from '../../constants';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 interface IbasicAreaGraphData {
   month: string;
@@ -45,4 +46,4 @@ const BasicAreaGraph: React.FunctionComponent<Iprops> = ({ data, title }) => {
   );
 };
 
-export default BasicAreaGraph;
+export default RenderLoadingComponent(BasicAreaGraph);

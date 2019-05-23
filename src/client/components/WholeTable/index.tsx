@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Table } from 'antd';
 import { AppContext } from '../../context/appContext';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 const { useContext } = React;
 
@@ -101,4 +102,4 @@ const CommonTable: React.FunctionComponent = () => {
   );
 };
 
-export default CommonTable;
+export default RenderLoadingComponent(CommonTable);

@@ -8,6 +8,7 @@ import ChartPanel from '../components/ChartPanel/index';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard/past';
 import BasicColumnGraph from '../components/BasicColumnGraph';
+import { RenderLoadingJSX } from '../components/HOC/RenderLoadingComponent';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 
@@ -16,15 +17,18 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 
 const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
-  const { allData, activityKey, changeActivityKey } = useContext(AppContext);
+  const { allData, activityKey, changeActivityKey, isLoading } = useContext(
+    AppContext
+  );
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
 
   // 选中的 key 不在区域列表中
-  if (!areasList.includes(activityKey)) {
+  if (!areasList.includes(activityKey) && areasList.length > 0) {
     changeActivityKey(areasList[0]);
   }
+
   const tabpanels = util.sortArea(areasList).map((item: string) => (
     <TabPane tab={item} key={item}>
       <ChartPanel
@@ -42,11 +46,14 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
 
   return (
     <Content className="content">
-      {allData.length > 0 ? <StatisticCard /> : ''}
+      <StatisticCard />
       <div className="content-graph-bar">
-        <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
-          {tabpanels}
-        </Tabs>
+        {RenderLoadingJSX(
+          <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
+            {tabpanels}
+          </Tabs>,
+          isLoading
+        )}
       </div>
       <div className="content-basic-column">
         <div className="content-basic-column-title">整体统计</div>

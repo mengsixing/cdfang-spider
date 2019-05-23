@@ -3,7 +3,6 @@ import { Card, Col, Row } from 'antd';
 import util, { IhouseInfo } from '../../utils/index';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
-
 import { RenderLoadingJSX } from '../HOC/RenderLoadingComponent';
 
 const { useContext } = React;

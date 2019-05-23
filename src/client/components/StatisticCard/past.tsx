@@ -4,12 +4,13 @@ import * as _ from 'lodash';
 import util from '../../utils';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
+import { RenderLoadingJSX } from '../HOC/RenderLoadingComponent';
 
 const { useContext } = React;
 
 const StatisticCardPast: React.FunctionComponent = () => {
   const appState = useContext(AppContext);
-  const { allData } = appState;
+  const { allData, isLoading } = appState;
   const allInfo = util.getAllInfo(allData);
 
   // 年度房源
@@ -22,48 +23,81 @@ const StatisticCardPast: React.FunctionComponent = () => {
   const maxBuilderName =
     _.maxBy(Object.keys(dataByName), item => {
       return dataByName[item].length;
-    }) || 'Not Found Builder';
-  const maxBuildLength = dataByName[maxBuilderName].length;
-  const maxBuild = _.sumBy(dataByName[maxBuilderName], item => item.number);
+    }) || '';
+
+  let maxBuildLength = 0;
+  let maxBuild = 0;
+  if (dataByName[maxBuilderName]) {
+    maxBuildLength = dataByName[maxBuilderName].length;
+    maxBuild = _.sumBy(dataByName[maxBuilderName], item => item.number);
+  }
 
   // 年度区域
   const dataByArea = _.groupBy(allData, item => item.area);
   const maxAreaName =
     _.maxBy(Object.keys(dataByArea), item => {
       return dataByArea[item].length;
-    }) || 'Not Found Area';
-  const maxAreaLength = dataByArea[maxAreaName].length;
-  const maxArea = _.sumBy(dataByArea[maxAreaName], item => item.number);
+    }) || '';
+  let maxAreaLength = 0;
+  let maxArea = 0;
+  if (dataByArea[maxAreaName]) {
+    maxAreaLength = dataByArea[maxAreaName].length;
+    maxArea = _.sumBy(dataByArea[maxAreaName], item => item.number);
+  }
 
   return (
     <div className="content-card">
       <Row gutter={16}>
         <Col span={6}>
-          <Card title="年度房源" bordered={false} extra={maxHouse.name}>
-            {`${constants.HOUSE_NUMBER}：${maxHouse.number}`}
-            <br />
-            {`${constants.AREA}：${maxHouse.area}`}
+          <Card
+            title="年度房源"
+            bordered={false}
+            extra={maxHouse && maxHouse.name}
+          >
+            {RenderLoadingJSX(
+              <div>
+                {`${constants.HOUSE_NUMBER}：${maxHouse && maxHouse.number}`}
+                <br />
+                {`${constants.AREA}：${maxHouse && maxHouse.area}`}
+              </div>,
+              isLoading
+            )}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度楼盘" bordered={false} extra={maxBuilderName}>
-            {`${constants.SALE_TIMES}：${maxBuildLength}`}
-            <br />
-            {`${constants.HOUSE_NUMBER}：${maxBuild}`}
+            {RenderLoadingJSX(
+              <div>
+                {`${constants.SALE_TIMES}：${maxBuildLength}`}
+                <br />
+                {`${constants.HOUSE_NUMBER}：${maxBuild}`}
+              </div>,
+              isLoading
+            )}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度区域" bordered={false} extra={maxAreaName}>
-            {`${constants.SALE_TIMES}：${maxAreaLength}`}
-            <br />
-            {`${constants.HOUSE_NUMBER}：${maxArea}`}
+            {RenderLoadingJSX(
+              <div>
+                {`${constants.SALE_TIMES}：${maxAreaLength}`}
+                <br />
+                {`${constants.HOUSE_NUMBER}：${maxArea}`}
+              </div>,
+              isLoading
+            )}
           </Card>
         </Col>
         <Col span={6}>
           <Card title="年度开盘" bordered={false}>
-            {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
-            <br />
-            {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+            {RenderLoadingJSX(
+              <div>
+                {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
+                <br />
+                {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+              </div>,
+              isLoading
+            )}
           </Card>
         </Col>
       </Row>

@@ -6,12 +6,10 @@ import { hot } from 'react-hot-loader/root';
 
 import renderRouters from '../router';
 import Notice from '../components/Notice';
-import Loading from '../components/Loading';
 import {
   tabKeyRouterMap,
   GITHUB_URL,
   COPYRIGHT,
-  LOADING_TIP,
   BEIAN_ICP
 } from '../constants';
 import util from '../utils';
@@ -31,9 +29,16 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   };
   const appState = useContext(AppContext);
   const [pvs, changePvs] = useState(0);
-  const [isLoading, changeLoading] = useState(false);
 
   const selectedYear = tabKeyRouterMap[location.pathname];
+
+  const requestDataWrapper = (year: string) => {
+    appState.changeLoading(true);
+    requestData(year, (allHouses: cdFang.IhouseData[]) => {
+      appState.changeData(allHouses);
+      appState.changeLoading(false);
+    });
+  };
 
   useEffect(() => {
     // 获取 pv
@@ -44,11 +49,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
     );
 
     // 获取房源信息
-    appState.changeLoading(true);
-    requestData(selectedYear, (allHouses: cdFang.IhouseData[]) => {
-      appState.changeData(allHouses);
-      appState.changeLoading(false);
-    });
+    requestDataWrapper(selectedYear);
   }, []);
 
   // 根据理由选中对应 menu 项
@@ -57,12 +58,8 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
   // 路由切换
   const clickMenu = ({ key }: { key: string }) => {
     if (key !== selectedYear) {
-      changeLoading(true);
-      requestData(key, (allHouses: cdFang.IhouseData[]) => {
-        appState.changeData(allHouses);
-        history.push(tabKeyRouterMap[key]);
-        changeLoading(false);
-      });
+      history.push(tabKeyRouterMap[key]);
+      requestDataWrapper(key);
     }
   };
 
@@ -99,12 +96,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({
             })}
           </Menu>
         </Header>
-
-        {isLoading ? (
-          <Loading tip={LOADING_TIP} height={`${window.innerHeight - 65}px`} />
-        ) : (
-          renderRouters()
-        )}
+        {renderRouters()}
         <Footer style={{ textAlign: 'center' }}>
           <div>{BEIAN_ICP}</div>
           <div>{COPYRIGHT}</div>

@@ -8,6 +8,7 @@ import ChartPanel from '../components/ChartPanel';
 import WholeTable from '../components/WholeTable';
 import StatisticCard from '../components/StatisticCard';
 import BasicColumnGraph from '../components/BasicColumnGraph';
+import { RenderLoadingJSX } from '../components/HOC/RenderLoadingComponent';
 import { AppContext } from '../context/appContext';
 import * as constants from '../constants';
 
@@ -16,7 +17,9 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 
 const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
-  const { allData, activityKey, changeActivityKey } = useContext(AppContext);
+  const { allData, activityKey, changeActivityKey, isLoading } = useContext(
+    AppContext
+  );
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
@@ -37,9 +40,12 @@ const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
     <Content className="content">
       <StatisticCard />
       <div className="content-graph-bar">
-        <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
-          {tabpanels}
-        </Tabs>
+        {RenderLoadingJSX(
+          <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>
+            {tabpanels}
+          </Tabs>,
+          isLoading
+        )}
       </div>
       <div className="content-basic-column">
         <div className="content-basic-column-title">整体统计</div>

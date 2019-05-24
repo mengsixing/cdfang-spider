@@ -17,7 +17,7 @@ module.exports = {
     "prettier",
     "prettier/@typescript-eslint",
   ],
-  plugins: ["@typescript-eslint", 'react', "react-hooks", "prettier"],
+  plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
   rules: {
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
   },

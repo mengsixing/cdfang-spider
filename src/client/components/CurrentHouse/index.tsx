@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Collapse, List, Col, Row, Icon } from 'antd';
-import './styles.less';
+
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
+import './styles.less';
 
 const { useContext } = React;
 const { Panel } = Collapse;
@@ -38,21 +40,17 @@ const CurrentHouse: React.FunctionComponent = () => {
       </div>
     ));
 
-  return currentHouses.length > 0 ? (
-    <div className="content-card">
-      <Collapse defaultActiveKey={['1']}>
-        <Panel header="正在登记" key="1" extra={<Icon type="notification" />}>
-          <List
-            bordered
-            dataSource={currentHouses}
-            renderItem={(item: JSX.Element) => <List.Item>{item}</List.Item>}
-          />
-        </Panel>
-      </Collapse>
-    </div>
-  ) : (
-    <div />
+  return (
+    <Collapse defaultActiveKey={['1']}>
+      <Panel header="正在登记" key="1" extra={<Icon type="notification" />}>
+        <List
+          bordered
+          dataSource={currentHouses}
+          renderItem={(item: JSX.Element) => <List.Item>{item}</List.Item>}
+        />
+      </Panel>
+    </Collapse>
   );
 };
 
-export default CurrentHouse;
+export default RenderLoadingComponent(CurrentHouse, '50px');

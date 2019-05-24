@@ -4,21 +4,20 @@ import * as dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
 import { RouteComponentProps } from 'react-router';
 
-import utils from '../utils';
-import BasicAreaGraph from '../components/BasicAreaGraph';
-import WholeTable from '../components/WholeTable';
-import StatisticCard from '../components/StatisticCard';
-import Rank from '../components/Rank';
-import Loading from '../components/Loading';
-import BasicColumnGraph from '../components/BasicColumnGraph';
-import { AppContext } from '../context/appContext';
-import * as constants from '../constants';
-import './Home.less';
+import utils from '../../utils';
+import BasicAreaGraph from '../../components/BasicAreaGraph';
+import WholeTable from '../../components/WholeTable';
+import StatisticCard from '../../components/StatisticCard';
+import Rank from '../../components/Rank';
+import BasicColumnGraph from '../../components/BasicColumnGraph';
+import { AppContext } from '../../context/appContext';
+import * as constants from '../../constants';
+import './styles.less';
 
-const { lazy, Suspense, useContext } = React;
+const { lazy, useContext } = React;
 const { TabPane } = Tabs;
 const { Content } = Layout;
-const CurrentHouse = lazy(() => import('../components/CurrentHouse'));
+const CurrentHouse = lazy(() => import('../../components/CurrentHouse'));
 
 interface ImonthHouse {
   month: string;
@@ -73,9 +72,10 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
 
   return (
     <Content className="content">
-      <Suspense fallback={<Loading />}>
+      <div className="content-card">
         <CurrentHouse />
-      </Suspense>
+      </div>
+
       <StatisticCard />
       <div className="home-content-houses">
         <Tabs type="card">

@@ -3,32 +3,26 @@ import * as _ from 'lodash';
 import { Layout, Tabs } from 'antd';
 import { RouteComponentProps } from 'react-router';
 
-import util from '../utils/index';
-import ChartPanel from '../components/ChartPanel/index';
-import WholeTable from '../components/WholeTable';
-import StatisticCard from '../components/StatisticCard/past';
-import BasicColumnGraph from '../components/BasicColumnGraph';
-import { RenderLoadingJSX } from '../components/HOC/RenderLoadingComponent';
-import { AppContext } from '../context/appContext';
-import * as constants from '../constants';
+import util from '../../utils';
+import ChartPanel from '../../components/ChartPanel';
+import WholeTable from '../../components/WholeTable';
+import StatisticCard from '../../components/StatisticCard';
+import BasicColumnGraph from '../../components/BasicColumnGraph';
+import { RenderLoadingJSX } from '../../components/HOC/RenderLoadingComponent';
+import { AppContext } from '../../context/appContext';
+import * as constants from '../../constants';
 
 const { useContext } = React;
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
+const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
   const { allData, activityKey, changeActivityKey, isLoading } = useContext(
     AppContext
   );
 
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const areasList = Object.keys(areasGroup);
-
-  // 选中的 key 不在区域列表中
-  if (!areasList.includes(activityKey) && areasList.length > 0) {
-    changeActivityKey(areasList[0]);
-  }
-
   const tabpanels = util.sortArea(areasList).map((item: string) => (
     <TabPane tab={item} key={item}>
       <ChartPanel
@@ -38,12 +32,10 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
       />
     </TabPane>
   ));
-
   // 柱状图数据
   const { chartHouseData, chartBuilderData } = util.getBasicColumnGraphData(
     allData
   );
-
   return (
     <Content className="content">
       <StatisticCard />
@@ -79,4 +71,4 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
   );
 };
 
-export default PastYear;
+export default CurrentYear;

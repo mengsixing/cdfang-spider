@@ -14,7 +14,7 @@
     "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
     "coverage": "codecov",
     "commit": "npx git-cz",
-    "prettier": "prettier --check ./**/*.{ts,tsx}"
+    "prettier": "prettier --write --check ./**/*.{ts,tsx}"
   },
   "husky": {
     "hooks": {

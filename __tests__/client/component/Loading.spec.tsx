@@ -18,7 +18,7 @@ describe('Loading 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否存在跟元素 ?', () => {
-    expect(wrapper.exists('.myloading')).toBe(true);
+    expect(wrapper.exists('.common-loading')).toBe(true);
   });
 
   it('是否接收到正确的tip属性 ?', () => {

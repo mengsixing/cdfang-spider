@@ -19,7 +19,7 @@ describe('Header 组件', () => {
   const { wrapper } = setup();
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('.header-item')).toBe(true);
+    expect(wrapper.exists('.cdfang-header-item')).toBe(true);
   });
 
   it('title是否正确 ?', () => {

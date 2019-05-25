@@ -86,19 +86,17 @@ const CommonTable: React.FunctionComponent = () => {
   const data = allData.map(item => ({ key: item._id, ...item }));
 
   return (
-    <div className="margin-white">
-      <Table
-        title={() => '汇总表'}
-        columns={columns}
-        dataSource={data}
-        locale={{
-          filterTitle: '筛选',
-          filterConfirm: '确定',
-          filterReset: '重置',
-          emptyText: '暂无数据'
-        }}
-      />
-    </div>
+    <Table
+      title={() => '汇总表'}
+      columns={columns}
+      dataSource={data}
+      locale={{
+        filterTitle: '筛选',
+        filterConfirm: '确定',
+        filterReset: '重置',
+        emptyText: '暂无数据'
+      }}
+    />
   );
 };
 

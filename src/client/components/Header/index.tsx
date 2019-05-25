@@ -54,9 +54,9 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
   };
 
   return (
-    <>
-      <div className="header-item">
-        <span className="header-item-pv">{`累计查询：${pvs}次`}</span>
+    <div className="cdfang-header">
+      <div className="cdfang-header-item">
+        <span className="cdfang-header-item-pv">{`累计查询：${pvs}次`}</span>
         <Notice />
         <Icon type="github" onClick={gotoGithub} />
       </div>
@@ -84,7 +84,7 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
           2017年
         </Menu.Item>
       </Menu>
-    </>
+    </div>
   );
 };
 

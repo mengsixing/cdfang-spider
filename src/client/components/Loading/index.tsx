@@ -12,7 +12,7 @@ const Loading: React.FunctionComponent<Iprops> = ({
   tip = ''
 }) => {
   return (
-    <div className="myloading" style={{ lineHeight: height, height }}>
+    <div className="common-loading" style={{ lineHeight: height, height }}>
       <Spin tip={tip} />
     </div>
   );

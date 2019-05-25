@@ -1,84 +1,53 @@
+@import '../../theme/reset.less';
+@import '../../theme/const.less';
 
-//全局样式
-.margin-white {
-  background-color: white;
+// 全局样式
+
+.common-margin {
   margin: 24px;
 }
 
-.chart-title{
+.common-background {
+  background-color: @bg-color;
+}
+
+.main-background {
+  background-color: @main-color;
+}
+
+.margin-white {
+  .main-background();
+  .common-margin();
+}
+
+.chart-title {
   text-align: center;
   margin: 0 16px;
   font-weight: bold;
 }
 
-
-
-.header-item {
-  width: 220px;
-  line-height: 31px;
-  background: rgba(255,255,255,.2);
-  margin: 16px 28px 16px 0;
-  float: right;
-  text-align: right;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content:space-around;
-  *{
-    cursor: pointer;
+.content {
+  .common-background();
+  .content-section {
+    .common-margin();
+    .main-background();
   }
-  > .header-item-pv {
-    cursor: default;
-    font-size: 14px;
+  .content-statistic-card {
+    .common-margin();
+    .common-background();
   }
-}
-
-.content{
-  background-color: rgb(240, 242, 245);
-  .content-card {
-    .margin-white();
-    background-color: rgb(240, 242, 245);
-    .content-card-text{
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-  .content-graph-bar{
-    background-color: white;
+  .content-graph-bar {
+    .main-background();
     margin: 0 24px;
     padding-top: 16px;
     padding-bottom: 24px;
   }
-  .content-basic-column{
-    background-color: white;
-    margin: 24px;
+  .content-basic-column {
+    .margin-white();
     .content-basic-column-title {
-      color: #1890ff;
+      color: @title-color;
       font-weight: 500;
       padding: 16px;
     }
   }
-  .content-graph-table{
-    background-color: white;
-    margin: 24px;
-  }
-
 }
-
-// antd 样式修改
-
-.ant-table-title {
-  color:#1890ff;
-  font-weight: 500;
-  padding: 16px;
-}
-
-.ant-collapse-header{
-  background-color: white;
-}
-
-.ant-layout-footer a {
-  color: inherit;
-}
-
-

@@ -1,19 +1,14 @@
-  .current-house-list{
-    width: 75%;
-    .notification-icon{
-      display: inline-block;
-      margin-right: 10px;
-      transform: rotateY(180deg);
-      color: #1890ff;
-    }
-    .register-link{
-      margin-left: 20px;
-    }
-  }
+@import '../../theme/const.less';
 
-  // 重写 antd 样式
-  .ant-collapse-header{
-    font-weight: 500;
-    color:#1890ff!important;
+.current-house-list {
+  width: 75%;
+  .current-house-list-notification-icon {
+    display: inline-block;
+    margin-right: 10px;
+    transform: rotateY(180deg);
+    color: @title-color;
   }
-
+  .current-house-list-register-link {
+    margin-left: 20px;
+  }
+}

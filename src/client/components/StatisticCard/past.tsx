@@ -46,62 +46,60 @@ const StatisticCardPast: React.FunctionComponent = () => {
   }
 
   return (
-    <div className="content-card">
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card
-            title="年度房源"
-            bordered={false}
-            extra={maxHouse && maxHouse.name}
-          >
-            {RenderLoadingJSX(
-              <div>
-                {`${constants.HOUSE_NUMBER}：${maxHouse && maxHouse.number}`}
-                <br />
-                {`${constants.AREA}：${maxHouse && maxHouse.area}`}
-              </div>,
-              isLoading
-            )}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="年度楼盘" bordered={false} extra={maxBuilderName}>
-            {RenderLoadingJSX(
-              <div>
-                {`${constants.SALE_TIMES}：${maxBuildLength}`}
-                <br />
-                {`${constants.HOUSE_NUMBER}：${maxBuild}`}
-              </div>,
-              isLoading
-            )}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="年度区域" bordered={false} extra={maxAreaName}>
-            {RenderLoadingJSX(
-              <div>
-                {`${constants.SALE_TIMES}：${maxAreaLength}`}
-                <br />
-                {`${constants.HOUSE_NUMBER}：${maxArea}`}
-              </div>,
-              isLoading
-            )}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="年度开盘" bordered={false}>
-            {RenderLoadingJSX(
-              <div>
-                {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
-                <br />
-                {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
-              </div>,
-              isLoading
-            )}
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <Row gutter={16}>
+      <Col span={6}>
+        <Card
+          title="年度房源"
+          bordered={false}
+          extra={maxHouse && maxHouse.name}
+        >
+          {RenderLoadingJSX(
+            <div>
+              {`${constants.HOUSE_NUMBER}：${maxHouse && maxHouse.number}`}
+              <br />
+              {`${constants.AREA}：${maxHouse && maxHouse.area}`}
+            </div>,
+            isLoading
+          )}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="年度楼盘" bordered={false} extra={maxBuilderName}>
+          {RenderLoadingJSX(
+            <div>
+              {`${constants.SALE_TIMES}：${maxBuildLength}`}
+              <br />
+              {`${constants.HOUSE_NUMBER}：${maxBuild}`}
+            </div>,
+            isLoading
+          )}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="年度区域" bordered={false} extra={maxAreaName}>
+          {RenderLoadingJSX(
+            <div>
+              {`${constants.SALE_TIMES}：${maxAreaLength}`}
+              <br />
+              {`${constants.HOUSE_NUMBER}：${maxArea}`}
+            </div>,
+            isLoading
+          )}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="年度开盘" bordered={false}>
+          {RenderLoadingJSX(
+            <div>
+              {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
+              <br />
+              {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+            </div>,
+            isLoading
+          )}
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

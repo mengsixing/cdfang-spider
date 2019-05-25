@@ -72,11 +72,13 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
 
   return (
     <Content className="content">
-      <div className="content-card">
+      <div className="content-section">
         <CurrentHouse />
       </div>
 
-      <StatisticCard />
+      <div className="content-statistic-card">
+        <StatisticCard />
+      </div>
       <div className="home-content-houses">
         <Tabs type="card">
           <TabPane tab={constants.HOUSE_NUMBER} key="1">
@@ -121,7 +123,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
           </TabPane>
         </Tabs>
       </div>
-      <div className="content-graph-table">
+      <div className="content-section">
         <WholeTable />
       </div>
     </Content>

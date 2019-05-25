@@ -18,7 +18,7 @@ const CurrentHouse: React.FunctionComponent = () => {
       <div className="current-house-list" key={item._id}>
         <Row>
           <Col span={4}>
-            <span className="notification-icon">
+            <span className="current-house-list-notification-icon">
               <Icon type="notification" />
             </span>
             {`${item.area}`}
@@ -28,7 +28,7 @@ const CurrentHouse: React.FunctionComponent = () => {
           <Col span={8}>
             {`登记截止时间：${item.endTime} `}
             <a
-              className="register-link"
+              className="current-house-list-register-link"
               rel="nofollow me noopener noreferrer"
               target="_blank"
               href={HOUSE_PURCHASE_REGISTRATION}

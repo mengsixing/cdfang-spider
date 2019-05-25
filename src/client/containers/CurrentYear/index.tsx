@@ -38,7 +38,9 @@ const CurrentYear: React.FunctionComponent<RouteComponentProps> = () => {
   );
   return (
     <Content className="content">
-      <StatisticCard />
+      <div className="content-statistic-card">
+        <StatisticCard />
+      </div>
       <div className="content-graph-bar">
         {RenderLoadingJSX(
           <Tabs defaultActiveKey={activityKey} onChange={changeActivityKey}>

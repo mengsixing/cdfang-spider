@@ -4,6 +4,7 @@ import util, { IhouseInfo } from '../../utils/index';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
 import { RenderLoadingJSX } from '../HOC/RenderLoadingComponent';
+import './styles.less';
 
 const { useContext } = React;
 
@@ -18,7 +19,7 @@ const StatisticCard: React.FunctionComponent = () => {
   const renderCard = (info: IhouseInfo) => {
     return (
       <div>
-        <div className="content-card-text">
+        <div className="statistic-card-text">
           <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
           <span
             style={{
@@ -30,7 +31,7 @@ const StatisticCard: React.FunctionComponent = () => {
             {info.increaseBuildNumberString}
           </span>
         </div>
-        <div className="content-card-text">
+        <div className="statistic-card-text">
           <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
           <span
             style={{
@@ -47,37 +48,35 @@ const StatisticCard: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="content-card">
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card title="本周开盘" bordered={false} extra="相比上周">
-            {RenderLoadingJSX(renderCard(thisWeekInfo), isLoading)}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="本月开盘" bordered={false} extra="相比上月">
-            {RenderLoadingJSX(renderCard(thisMonthInfo), isLoading)}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="本季度开盘" bordered={false} extra="相比上季">
-            {RenderLoadingJSX(renderCard(thisQuarterInfo), isLoading)}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="总开盘" bordered={false}>
-            {RenderLoadingJSX(
-              <div>
-                {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
-                <br />
-                {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
-              </div>,
-              isLoading
-            )}
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <Row gutter={16}>
+      <Col span={6}>
+        <Card title="本周开盘" bordered={false} extra="相比上周">
+          {RenderLoadingJSX(renderCard(thisWeekInfo), isLoading)}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="本月开盘" bordered={false} extra="相比上月">
+          {RenderLoadingJSX(renderCard(thisMonthInfo), isLoading)}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="本季度开盘" bordered={false} extra="相比上季">
+          {RenderLoadingJSX(renderCard(thisQuarterInfo), isLoading)}
+        </Card>
+      </Col>
+      <Col span={6}>
+        <Card title="总开盘" bordered={false}>
+          {RenderLoadingJSX(
+            <div>
+              {`${constants.BUILDER_NUMBER}：${allInfo.buildNumber}`}
+              <br />
+              {`${constants.HOUSE_NUMBER}：${allInfo.houseNumber}`}
+            </div>,
+            isLoading
+          )}
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

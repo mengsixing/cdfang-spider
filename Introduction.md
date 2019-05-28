@@ -251,13 +251,12 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 新建\_\_mocks\_\_，\_\_tests\_\_目录，存放测试文件和 mock 数据文件。
 - 按照 src 中的目录，建立相应的测试文件目录。
 
-3、编写 npm script 脚本。
+3、编写测试脚本和上传覆盖率脚本。
 
 ```json
 "scripts": {
   "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
-  // 将测试覆盖率上传到 codecov 网站上。
-  "coverage": "codecov",
+  "coverage": "codecov"
 }
 ```
 

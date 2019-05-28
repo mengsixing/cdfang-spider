@@ -19,7 +19,7 @@
 
 3. css 选型？
 
-   - 预编译器 less。项目中只使用了选择器嵌套，选择器复用等，less 够用了。
+   - 预编译器 less。项目中使用了变量定义，选择器嵌套，选择器复用等，less 够用了。
    - 解决命名冲突可以使用 css modules，暂未考虑 css in js。
    - 使用 bem 命名规范。
    - 使用 postcss 插件 autoprefixer，增加 css 兼容性。
@@ -29,6 +29,7 @@
    - webpack。内置 tree shaking，scope hosting 等，打包效率高，社区活跃。
    - webpack-merge 合并不同环境配置文件。
    - 配置 externals。引入 cdn 代替 node_modules 中体积较大的包。
+   - gulp。用来打包 node 端代码。
 
 5. 代码规范检查？
 
@@ -53,7 +54,7 @@
 
 9. 接口方式选型？
 
-   - graphql。根据需要格式获取对应数据，减少接口冗余数据。
+   - graphql。可以根据需要格式获取对应数据，减少接口冗余数据。
    - graphql schema 定义了后端接口的参数，操作和返回类型，从此不需要提供接口文档。
    - 前端可以在 schema 定义后开始开发，数据格式自己掌握。
    - schema 可拼接。可以组合和连接多个 graphql api，进行级联查询等。
@@ -99,7 +100,7 @@ TypeScript 是 JavaScript 的超集，意味着可以完全兼容 JavaScript 文
 >
 > **plugin 和 preset**
 >
-> - plugin: 是包括：解析，转换，输入在一起的东西，例如：@babel/plugin-proposal-object-rest-spread 让代码支持`{...}`解构语法。
+> - plugin: 解析，转换，并输出转换后的 js 文件。例如：@babel/plugin-proposal-object-rest-spread 会输出支持`{...}`解构语法的 js 文件。
 > - preset: 是一组组合好的 plugin 集合。例如：@babel/preset-env 让代码支持最新的 es 语法，自动引入需要支持新特性的 plugin。
 
 4、搜集所有的 ts，tsx 页面（前端环境使用 webpack，node 项目使用 gulp），然后通过 babel 编译成 js 文件。
@@ -132,7 +133,7 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 
 4、配置 webpack，以 index.tsx 为入口文件，进行打包编译。
 
-- 由于不同环境的打包方式并不相同，这里抽象出 3 个环境的配置文件，使用 webpack-merge 合并配置文件。
+- 由于不同环境的打包方式并不相同，这里抽象出开发环境、上线环境、优化环境的配置文件，使用 webpack-merge 合并配置文件。
 - 配置 css 预处理器，使用 less-loader。
 - 配置 ts 编译器，使用 babel-loader。
   - @babel/preset-env：编译最新的 es 语法。
@@ -147,17 +148,18 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
 
 > webpack 打包原理
 >
-> webpack 打包过程就像是一条流水线，从入口文件开始，搜集项目中所有文件的依赖关系，如果遇到不能够识别的模块，就使用对应的 loader 转换成能够识别的模块。webpack 还能使用 plugin 在流水线生命周期中挂载自定义事件，来控制输出。
+> webpack 打包过程就像是一条流水线，从入口文件开始，搜集项目中所有文件的依赖关系，如果遇到不能够识别的模块，就使用对应的 loader 转换成能够识别的模块。webpack 还能使用 plugin 在流水线生命周期中挂载自定义事件，来控制 webpack 输出结果。
 
 5、编写 npm script，一键开启开发模式。
 
 ```json
+// cross-env 用来跨环境设置环境变量
 "scripts": {
   "dev:client": "cross-env NODE_ENV=development webpack-dev-server --open"
 }
 ```
 
-6、现在运行 `npm run dev:server` 就可以愉快地编写客户端代码了。
+6、现在运行 `npm run dev:client` 就可以愉快地编写客户端代码了。
 
 ## 搭建 NodeJs 环境
 
@@ -172,6 +174,8 @@ React 是一个库，基于组件式开发，开发时常常需要用到以下�
   "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js",
 }
 ```
+
+配置好 gulp 后，就可以运行 `npm run dev:server` 一键启动服务器端开发环境。
 
 ### 层次结构划分
 
@@ -195,6 +199,7 @@ Controller 层的主要工作：接收和发送 http 请求。根据前端请求
 - 根据前端请求，找到对应的 model 层获取数据，经过加工处理后，返回给前端。
 - 编写中间件，记录系统日志，错误处理，404 页面等。
 - 支持前端 react-router 中的 BrowserRouter。根据前端路由，后端配置对应的路由，匹配结果为 index.html 文件。
+- 项目中使用的 graphql 比较基础，也直接放在了 controller 层进行处理。
 
 #### View 层
 
@@ -228,7 +233,7 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 
 ## 搭建测试环境
 
-本项目使用 jest 作为测试框架，jest 包含了断言库、测试框架、mock 数据等功能，是一个大而全的测试库。由于前端使用了 react 项目，这里也引入了 enzyme 库。
+本项目使用 jest 作为测试框架，jest 包含了断言库、测试框架、mock 数据等功能，是一个大而全的测试库。由于前端使用了 react 项目，这里引入了专门用来测试 react 的 enzyme 库。
 
 1、新建 jest.config.js 文件。
 
@@ -246,6 +251,16 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 新建\_\_mocks\_\_，\_\_tests\_\_目录，存放测试文件和 mock 数据文件。
 - 按照 src 中的目录，建立相应的测试文件目录。
 
+3、编写 npm script 脚本。
+
+```json
+"scripts": {
+  "test": "jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
+  // 将测试覆盖率上传到 codecov 网站上。
+  "coverage": "codecov",
+}
+```
+
 ## 配置上线环境
 
 安装好各种环境之后，接下来就要考虑项目上线了。
@@ -256,7 +271,7 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 - 安装 pm2 进程守护。`npm i pm2 -g`
 - 安装 mongodb。[mongodb 官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 - 安装免费 https 证书。[letsencrypt 官网](https://letsencrypt.org/)
-  - 域名需要先进行备案。
+  - 域名需要先进行备案（使用阿里云备案，资料准备齐全的话 10 天左右就可以批下来）。
 
 ### 代码发布
 
@@ -290,22 +305,31 @@ npm run build
 
 #### travisCI 配置
 
-travisCI 是一个持续集成平台，每当 github 提交代码时，travisCI 就会得到通知，然后根据 travisCI 中的配置信息执行相应的操作，并及时把运行结果反馈给用户。travisCI 配置文件可以参考项目根目录下的 `.travis.yml` 文件。配置文件核心在于 job 的配置。
+travisCI 是一个持续集成平台，每当 github 提交代码时，travisCI 就会得到通知，然后根据 travisCI 中的配置信息执行相应的操作，并及时把运行结果反馈给用户。travisCI 配置文件可以参考项目根目录下的 `.travis.yml` 文件。配置文件核心在于 script 的配置。
 
 ```yml
-jobs:
-  include:
-    - stage: build
-      script:
-        - npm run build
-        - npm run test
-      after_success: npm run coverage
+script:
+  - npm run build
+  - npm run test
+after_success: npm run coverage
 ```
 
 可以看到，每一次 github 提交后，travisCI 就会执行 名称为 build 的任务，任务分为 2 个步骤，首先执行 build 命令，然后执行 test 命令，当命令都执行完成后，执行 coverage 命令。如果执行命令期间出现任何错误，travisCI 会通过邮件及时通知我们。真正要上线时，先查看 ci 状态，如果已通过所有的步骤，那就不用担心发布的代码有问题了。
 
+## 总结
+
+至此，整个项目选型与搭建流程已经介绍完毕了，当然还有一些很细节的地方没有写进去，如果有不太明白的地方，可以提 issue，或者加我微信 yhl2016226。
+
+接下来对以下 4 个方面写个小总结。
+
+- 开发方面：项目将前端、后端、数据库端连通起来，组合成了一个小全栈的项目，加深了我对整个开发环节的理解。
+- 测试方面：通过编写单元测试，ui 测试，api 测试，积累了自动化测试方面的经验。
+- 运维方面：通过配置持续集成，守护进程，nginx，https 等，让我有能力实现小型项目的部署。
+- 技术方面：项目中使用了一些比较新的技术，如：hooks api，graphql 等，但用的都很基础，主要是为了练手，后续还得深入学习。
+
+对于项目后期更新，主要是基于以下几个方面：graphql，docker，k8s，微服务，serverless 等，东西太多，还得加油学习啊，😂
+
 ## 参考链接
 
 - [TypeScript 和 Babel](https://juejin.im/post/5c822e426fb9a04a0a5ffb49)
-- [GraphQL schema stitching](https://blog.apollographql.com/graphql-schema-stitching-8af23354ac37)
 - [前端决策树](https://github.com/sorrycc/f2e-decision-tree)

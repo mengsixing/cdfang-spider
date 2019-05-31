@@ -74,7 +74,7 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
           desc
         />
       </div>
-      <div className="content-graph-table">
+      <div className="content-section">
         <WholeTable />
       </div>
     </Content>

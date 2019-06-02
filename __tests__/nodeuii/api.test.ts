@@ -13,16 +13,19 @@ describe('api 测试', () => {
     return request()
       .get('/getMongoData')
       .then(response => {
-        const item1 = JSON.parse(response.text)[0];
-        expect(item1).toHaveProperty('_id');
-        expect(item1).toHaveProperty('area');
-        expect(item1).toHaveProperty('name');
-        expect(item1).toHaveProperty('number');
-        expect(item1).toHaveProperty('beginTime');
-        expect(item1).toHaveProperty('endTime');
-        expect(item1).toHaveProperty('status');
+        const house = JSON.parse(response.text)[0];
+        expect(house).toHaveProperty('_id');
+        expect(house).toHaveProperty('area');
+        expect(house).toHaveProperty('name');
+        expect(house).toHaveProperty('number');
+        expect(house).toHaveProperty('beginTime');
+        expect(house).toHaveProperty('endTime');
+        expect(house).toHaveProperty('status');
         done();
-        server.close();
       });
+  });
+
+  afterAll(() => {
+    server.close();
   });
 });

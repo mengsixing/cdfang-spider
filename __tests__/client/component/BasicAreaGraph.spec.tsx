@@ -25,10 +25,11 @@ describe('BasicAreaGraph 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('canvas')).toBe(false);
+    const subtree = wrapper.render();
+    expect(subtree.find('canvas').length).toBe(1);
   });
 
-  it('title是否正确 ?', () => {
+  it('title 是否正确 ?', () => {
     expect(wrapper.prop('title')).toEqual(props.title);
     expect(wrapper.find('.chart-title').text()).toEqual(
       `${props.title} / 月(统计图)`

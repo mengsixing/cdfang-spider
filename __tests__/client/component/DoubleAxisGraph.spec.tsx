@@ -28,9 +28,9 @@ const setup = () => {
 
 describe('DoubleAxisGraph 组件', () => {
   const { wrapper } = setup();
-  const cheerioWrapper = wrapper.render();
+  const subtree = wrapper.render();
 
   it('是否渲染成功 ?', () => {
-    expect(cheerioWrapper.find('canvas').length).toBe(1);
+    expect(subtree.find('canvas').length).toBe(1);
   });
 });

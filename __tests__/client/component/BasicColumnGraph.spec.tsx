@@ -26,7 +26,8 @@ describe('BasicColumnGraph 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('canvas')).toBe(false);
+    const subtree = wrapper.render();
+    expect(subtree.find('canvas').length).toBe(1);
   });
 
   it('title是否正确 ?', () => {

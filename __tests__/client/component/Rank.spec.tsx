@@ -24,13 +24,11 @@ const setup = () => {
 
 describe('Rank 组件', () => {
   const { wrapper, props } = setup();
-  const cheerioWrapper = wrapper.render();
+  const subtree = wrapper.render();
   it('title 是否正确 ?', () => {
-    expect(cheerioWrapper.find('.rank-title').text()).toBe(
-      `排名：${props.title}`
-    );
+    expect(subtree.find('.rank-title').text()).toBe(`排名：${props.title}`);
   });
   it('渲染列表是否正确 ?', () => {
-    expect(cheerioWrapper.find('.rank-list>li').length).toBe(props.data.length);
+    expect(subtree.find('.rank-list>li').length).toBe(props.data.length);
   });
 });

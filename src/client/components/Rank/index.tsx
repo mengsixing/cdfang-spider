@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import './styles.less';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
+import LinkToMap from '../LinkToMap';
 
 interface Irank {
   _id: string;
@@ -14,9 +15,15 @@ export interface Iprops {
   data: Irank[];
   title: string;
   unit: string;
+  isLink?: boolean;
 }
 
-const Rank: React.FunctionComponent<Iprops> = ({ data, title, unit }) => {
+const Rank: React.FunctionComponent<Iprops> = ({
+  data,
+  title,
+  unit,
+  isLink
+}) => {
   const rankData = _.sortBy(data, (item: Irank) => -item.number);
   const rankTitle = title ? `排名：${title}` : '排名';
 
@@ -30,7 +37,7 @@ const Rank: React.FunctionComponent<Iprops> = ({ data, title, unit }) => {
             // eslint-disable-next-line no-underscore-dangle
             <li key={item._id}>
               <span className={istop3}>{index + 1}</span>
-              <span>{item.name}</span>
+              <span>{isLink ? <LinkToMap name={item.name} /> : item.name}</span>
               <span>{item.number + unit}</span>
             </li>
           );

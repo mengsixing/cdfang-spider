@@ -4,6 +4,7 @@ import { Collapse, List, Col, Row, Icon } from 'antd';
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
+import LinkToMap from '../LinkToMap';
 import './styles.less';
 
 const { useContext } = React;
@@ -21,9 +22,11 @@ const CurrentHouse: React.FunctionComponent = () => {
             <span className="current-house-list-notification-icon">
               <Icon type="notification" />
             </span>
-            {`${item.area}`}
+            {item.area}
           </Col>
-          <Col span={8}>{item.name}</Col>
+          <Col span={8}>
+            <LinkToMap name={item.name} />
+          </Col>
           <Col span={4}>{`${item.number}套`}</Col>
           <Col span={8}>
             {`登记截止时间：${item.endTime} `}

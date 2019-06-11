@@ -98,7 +98,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
         />
       </Col>
       <Col span={6}>
-        {rank ? <Rank data={rank} title={rankTitle} unit="套" /> : ''}
+        {rank ? <Rank data={rank} title={rankTitle} unit="套" isLink /> : ''}
       </Col>
     </Row>
   );

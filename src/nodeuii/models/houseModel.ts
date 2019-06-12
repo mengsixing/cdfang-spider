@@ -57,14 +57,14 @@ const houseModel = {
    */
   async addMany(array: cdFang.IhouseData[]): Promise<void> {
     const newArray: cdFang.IhouseData[] = [];
-    array.forEach(
-      async (item: cdFang.IhouseData): Promise<void> => {
-        const findItem = await this.find({ _id: item._id });
-        if (findItem.length === 0) {
-          newArray.push(item);
-        }
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const item of array) {
+      const findItem = await this.find({ _id: item._id });
+      if (findItem.length === 0) {
+        newArray.push(item);
       }
-    );
+    }
+
     HouseCol.create(
       newArray,
       (err): void => {

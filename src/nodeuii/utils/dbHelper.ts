@@ -1,23 +1,43 @@
 /* eslint-disable no-console */
 import mongoose from 'mongoose';
+import config from '../config/index';
+
+let connectTimeOut: NodeJS.Timeout;
 
 const DbHelper = {
+  connectTimes: 8,
   connect(): mongoose.Mongoose {
-    mongoose.connect('mongodb://localhost/test', {
-      useNewUrlParser: true,
-      // 弃用警告 https://mongoosejs.com/docs/deprecations.html#-findandmodify-
-      useFindAndModify: false
-    });
+    DbHelper.mongooseConnect();
     const db = mongoose.connection;
-    db.on('error', console.error.bind(console, '连接mongodb失败。'));
-    db.once('open', () => {
-      console.warn('连接mongodb成功。');
+    db.once('error', () => {
+      console.error('连接 mongodb 失败。');
+      connectTimeOut = setInterval(() => {
+        if (DbHelper.connectTimes > 0) {
+          console.log(`正在重连 mongodb，剩余次数 ${DbHelper.connectTimes}。`);
+          DbHelper.connectTimes -= 1;
+          DbHelper.mongooseConnect();
+        } else {
+          console.log('重连 mongodb 失败。');
+          clearTimeout(connectTimeOut);
+        }
+      }, 8000);
+    });
+    db.on('open', () => {
+      console.log('连接 mongodb 成功。');
+      clearTimeout(connectTimeOut);
     });
     // 单例模式
     DbHelper.connect = () => {
       return mongoose;
     };
     return mongoose;
+  },
+  mongooseConnect(): void {
+    mongoose.connect(config.databaseUrl, {
+      useNewUrlParser: true,
+      // 弃用警告 https://mongoosejs.com/docs/deprecations.html#-findandmodify-
+      useFindAndModify: false
+    });
   }
 };
 

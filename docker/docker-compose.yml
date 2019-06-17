@@ -11,6 +11,7 @@ services:
 
   web:
     image: yhlben/cdfang-spider
+    restart: always
     depends_on:
       - database
     ports:

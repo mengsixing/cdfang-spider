@@ -315,6 +315,25 @@ after_success: npm run coverage
 
 可以看到，每一次 github 提交后，travisCI 就会执行 名称为 build 的任务，任务分为 2 个步骤，首先执行 build 命令，然后执行 test 命令，当命令都执行完成后，执行 coverage 命令。如果执行命令期间出现任何错误，travisCI 会通过邮件及时通知我们。真正要上线时，先查看 ci 状态，如果已通过所有的步骤，那就不用担心发布的代码有问题了。
 
+### Docker 自动部署
+
+最新的项目采用 Docker 进行部署，大大降低了部署的难度，只要安装 Docker 和 Docker Compose ，运行一行命令就可以部署好本项目。具体的步骤：
+
+```shell
+# clone with Git Bash
+git clone https://github.com/yhlben/cdfang-spider.git
+
+# change directory
+cd cdfang-spider/docker
+
+# run docker containers. It may take a long time.
+docker-compose up -d
+
+# server running at localhost:8082
+```
+
+Docker 部署项目原理可以参考[Docker 使用总结](https://yhlben.github.io/blog/project-docker.html)。
+
 ## 总结
 
 至此，整个项目选型与搭建流程已经介绍完毕了，当然还有一些很细节的地方没有写进去，如果有不太明白的地方，可以提 issue，或者加我微信 yhl2016226。

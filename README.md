@@ -64,6 +64,21 @@ npm run dev
 npm run build
 ```
 
+## Deploy
+
+```shell
+# clone with Git Bash
+git clone https://github.com/yhlben/cdfang-spider.git
+
+# change directory
+cd cdfang-spider/docker
+
+# run docker containers. It may take a long time.
+docker-compose up -d
+
+# server running at localhost:8082
+```
+
 ## License
 
 [MIT](https://github.com/yhlben/cdfang-spider/blob/master/LICENSE)

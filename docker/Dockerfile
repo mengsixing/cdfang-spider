@@ -1,4 +1,5 @@
-FROM node
+# 小体积的 node 镜像
+FROM mhart/alpine-node
 
 LABEL maintainer = "yhlben <yinhengliben@gmail.com>"
 

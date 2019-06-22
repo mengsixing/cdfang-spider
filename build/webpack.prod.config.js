@@ -42,7 +42,8 @@ const prodConfig = {
       filename: 'cdfang-spider-[name].[hash:8].css'
     }),
     new WebpackDeepScopeAnalysisPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    // 开启 scope hosting，production 默认是开启状态
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',

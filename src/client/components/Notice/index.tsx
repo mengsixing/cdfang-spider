@@ -34,9 +34,7 @@ function openNotification(setLoading: Function, appState: IappContext) {
       const data = result.data.spiderPageOne;
       notification.open({
         message: '消息提醒',
-        description: `成功更新数据${data.allLength}条，新数据${
-          data.successArray.length
-        }条。`
+        description: `成功更新数据${data.allLength}条，新数据${data.successArray.length}条。`
       });
       setLoading(false);
       if (data.successArray.length > 0) {

@@ -32,11 +32,9 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
 
   useEffect(() => {
     // 获取 pv
-    requestPvs(
-      (pvNumber: number): void => {
-        changePvs(pvNumber);
-      }
-    );
+    requestPvs((pvNumber: number): void => {
+      changePvs(pvNumber);
+    });
 
     // 获取房源信息
     requestDataWrapper(selectedYear);

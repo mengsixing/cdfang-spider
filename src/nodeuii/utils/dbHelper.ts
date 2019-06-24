@@ -7,7 +7,10 @@ let connectTimeOut: NodeJS.Timeout;
 const DbHelper = {
   connectTimes: 8,
   connect(): mongoose.Mongoose {
-    DbHelper.mongooseConnect();
+    if (process.env.NODE_ENV !== 'test') {
+      DbHelper.mongooseConnect();
+    }
+
     const db = mongoose.connection;
     db.once('error', () => {
       console.error('连接 mongodb 失败。');

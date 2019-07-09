@@ -55,9 +55,10 @@ const StatisticCardPast: React.FunctionComponent = () => {
         >
           {RenderLoadingJSX(
             <div>
-              {`${constants.HOUSE_NUMBER}：${maxHouse && maxHouse.number || 0}`}
+              {`${constants.HOUSE_NUMBER}：${(maxHouse && maxHouse.number) ||
+                0}`}
               <br />
-              {`${constants.AREA}：${maxHouse && maxHouse.area || '暂无'}`}
+              {`${constants.AREA}：${(maxHouse && maxHouse.area) || '暂无'}`}
             </div>,
             isLoading
           )}

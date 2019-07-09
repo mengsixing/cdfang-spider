@@ -14,7 +14,7 @@
     //https://github.com/ant-design/ant-design/issues/8642
     "moduleResolution": "node"
   },
-  // 影响webpack构建
-  "include": ["src/**/*", "build/**/*", "types/**/*"],
-  "exclude": ["node_modules", "__tests__"]
+  // 影响 webpack 构建
+  "include": ["./src", "./build", "./types"],
+  "exclude": ["./node_modules", "./__tests__"]
 }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import DoubleAxisGraph, {
   Iprops
-} from '../../../src/client/components/DoubleAxisGraph';
+} from '../../src/client/components/DoubleAxisGraph';
 
 const setup = () => {
   const props: Iprops = {

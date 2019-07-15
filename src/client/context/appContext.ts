@@ -11,7 +11,7 @@ export interface IappContext {
   changeLoading(isLoading: boolean): void;
 }
 
-// 初始化context，具体的方法在provider中实现
+// 初始化 context，具体的方法在 provider 中实现
 export const globalData: IappContext = {
   allData: [],
   activityKey: '天府新区',

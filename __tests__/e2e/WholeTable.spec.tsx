@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { render } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import WholeTable from '../../../src/client/components/WholeTable';
-import { mockHouse } from '../../../__mocks__/db';
+import { AppContext, globalData } from '../../src/client/context/appContext';
+import WholeTable from '../../src/client/components/WholeTable';
+import { mockHouse } from '../../__mocks__/db';
 
 const setup = () => {
   const appState = {

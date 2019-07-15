@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import ChartPanel, { Iprops } from '../../../src/client/components/ChartPanel';
+import { AppContext, globalData } from '../../src/client/context/appContext';
+import ChartPanel, { Iprops } from '../../src/client/components/ChartPanel';
 
 const setup = () => {
   const props: Iprops = {

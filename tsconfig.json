@@ -16,5 +16,5 @@
   },
   // 影响 webpack 构建
   "include": ["./src", "./build", "./types"],
-  "exclude": ["./node_modules", "./__tests__"]
+  "exclude": ["./node_modules", "./__tests__", "./__mocks__"]
 }

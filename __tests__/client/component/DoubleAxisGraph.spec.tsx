@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BarGraph, { Iprops } from '../../../src/client/components/BarGraph';
+import DoubleAxisGraph, {
+  Iprops
+} from '../../../src/client/components/DoubleAxisGraph';
 
 const setup = () => {
   const props: Iprops = {
@@ -17,23 +19,18 @@ const setup = () => {
       }
     ]
   };
-  const wrapper = mount(<BarGraph {...props} />);
+  const wrapper = mount(<DoubleAxisGraph {...props} />);
   return {
     props,
     wrapper
   };
 };
 
-describe('BarGraph 组件', () => {
+describe('DoubleAxisGraph 组件', () => {
   const { wrapper } = setup();
-  const cheerioWrapper = wrapper.render();
+  const subtree = wrapper.render();
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('.chart-title')).toBe(true);
-    expect(cheerioWrapper.find('canvas').length).toBe(1);
-  });
-
-  it('title是否正确 ?', () => {
-    expect(wrapper.find('.chart-title').text()).toEqual('月份统计图');
+    expect(subtree.find('canvas').length).toBe(1);
   });
 });

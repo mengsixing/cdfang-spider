@@ -5,23 +5,16 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
+    "react-hot-loader/babel",
+    "@babel/plugin-transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties"
-  ],
-  "env": {
-    "production": {
-      "plugins": [
-        [
-          "import",
-          {
-            "libraryName": "antd",
-            "libraryDirectory": "es",
-            "style": true
-          }
-        ],
-        "@babel/plugin-syntax-dynamic-import",
-        "@babel/plugin-proposal-class-properties"
-      ]
-    }
-  }
+    "@babel/plugin-proposal-class-properties",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ]
+  ]
 }

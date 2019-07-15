@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  database:
+    image: mongo
+    restart: always
+    volumes:
+      - ~/data/db:/data/db
+    networks:
+      - webapp-network
+
+  web:
+    image: yhlben/cdfang-spider
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - 8082:8082
+    networks:
+      - webapp-network
+
+networks:
+  webapp-network:
+    driver: bridge

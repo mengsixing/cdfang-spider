@@ -34,9 +34,7 @@ function openNotification(setLoading: Function, appState: IappContext) {
       const data = result.data.spiderPageOne;
       notification.open({
         message: '消息提醒',
-        description: `成功更新数据${data.allLength}条，新数据${
-          data.successArray.length
-        }条。`
+        description: `成功更新数据${data.allLength}条，新数据${data.successArray.length}条。`
       });
       setLoading(false);
       if (data.successArray.length > 0) {
@@ -45,7 +43,7 @@ function openNotification(setLoading: Function, appState: IappContext) {
     });
 }
 
-function Notice() {
+const Notice: React.FunctionComponent = () => {
   const [isLoading, setLoading] = useState(false);
   const appState = useContext(AppContext);
   return (
@@ -58,6 +56,6 @@ function Notice() {
       />
     </span>
   );
-}
+};
 
 export default Notice;

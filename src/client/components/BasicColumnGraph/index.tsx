@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
-import './styles.less';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 interface Iarea {
   区域: string;
@@ -19,7 +19,13 @@ interface Iprops {
   desc?: boolean;
 }
 
-function AreaBar({ data, title, xAxis, yAxis, desc }: Iprops) {
+const BasicColumnGraph: React.FunctionComponent<Iprops> = ({
+  data,
+  title,
+  xAxis,
+  yAxis,
+  desc
+}) => {
   let chartData: Iarea[] = [];
   if (desc) {
     chartData = data.sort((a, b): any => b[yAxis] - a[yAxis]);
@@ -33,11 +39,11 @@ function AreaBar({ data, title, xAxis, yAxis, desc }: Iprops) {
       <Geom type="interval" position={`${xAxis}*${yAxis}`} />
     </Chart>
   );
-}
+};
 
-const AreaBarMemo = React.memo<Iprops>(
-  RenderNoEmptyComponent(AreaBar, ['data']),
+const BasicColumnGraphMemo = React.memo<Iprops>(
+  RenderNoEmptyComponent(RenderLoadingComponent(BasicColumnGraph), ['data']),
   (): boolean => false
 );
 
-export default AreaBarMemo;
+export default BasicColumnGraphMemo;

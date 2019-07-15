@@ -2,17 +2,16 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import * as dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
+// @ts-ignore
 import * as DataSet from '@antv/data-set';
-import './styles.less';
-import Idata from '../../context/Idata';
 
 const { DataView } = DataSet;
 const { Html } = Guide;
 
 export interface Iprops {
   isChangeTab: boolean;
-  data: Idata[];
-  changeMonth(monthString: string): void;
+  data: cdFang.IhouseData[];
+  changeMonth(origin: cdFang.IcircleItem): void;
 }
 
 interface IcircleData {
@@ -21,10 +20,16 @@ interface IcircleData {
   date: string;
 }
 
-function CircleGraph({ data: array, changeMonth }: Iprops) {
-  function selectMonth(monthString: string) {
-    changeMonth(monthString);
-  }
+const CircleGraph: React.FunctionComponent<Iprops> = ({
+  data: array,
+  changeMonth
+}) => {
+  const selectMonth = (circleObject: {
+    data: { _origin: cdFang.IcircleItem };
+  }) => {
+    // eslint-disable-next-line no-underscore-dangle
+    changeMonth(circleObject.data._origin);
+  };
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)
       .startOf('month')
@@ -34,7 +39,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
   Object.keys(arrayByMonth).forEach(key => {
     const houseNumber = _.sumBy(arrayByMonth[key], 'number');
     cricleArray.push({
-      item: dayjs(key).format('YYYY年MM月'),
+      item: dayjs(key).format('M月'),
       number: houseNumber,
       date: key
     });
@@ -48,20 +53,18 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
     dimension: 'item',
     as: 'percent'
   });
-  const cols = {
+  const scales = {
     percent: {
       formatter: (val: number) => `${(val * 100).toFixed(2)}%`
     }
   };
   const houseNumber = _.sumBy(array, 'number');
-  const guideHtml = `
-  <div style="color:#8c8c8c;font-size:1em;text-align: center;width: 10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>
-  `;
+  const guideHtml = `<div style="color:#8c8c8c;font-size:1em;text-align:center;width:10em;">总计<br><span style="color:#262626;font-size:1.5em">${houseNumber}</span>套</div>`;
   return (
     <Chart
       height={400}
       data={dv}
-      scale={cols}
+      scale={scales}
       forceFit
       onIntervalClick={selectMonth}
     >
@@ -106,7 +109,7 @@ function CircleGraph({ data: array, changeMonth }: Iprops) {
       </Geom>
     </Chart>
   );
-}
+};
 
 function shouldComponentUpdate(prevProps: Iprops, nextProps: Iprops) {
   if (nextProps.data.length !== prevProps.data.length) {

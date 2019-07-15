@@ -5,4 +5,5 @@ module.exports = {
   secretKey: 'Ff0Ggl7l8XK2Ysm33pWKfHF0IZWqdVL1uHVl6Mge',
   bucket: 'mygithub',
   zone: 'Zone_z2',
+  cover: true
 };

@@ -21,7 +21,7 @@ const setup = () => {
         status: '报名中'
       }
     ],
-    activityKey: 6
+    activityKey: '高新南区'
   };
   const wrapper = mount(
     <AppContext.Provider value={appState}>
@@ -35,9 +35,10 @@ const setup = () => {
 
 describe('CurrentHouse 组件', () => {
   const { wrapper } = setup();
-  const cheerioWrapper = wrapper.render();
+  const subtree = wrapper.render();
 
   it('是否渲染成功 ?', () => {
-    expect(cheerioWrapper.find('.ant-list-item').length).toBe(1);
+    expect(subtree.find('.ant-collapse-header').text()).toBe('正在登记');
+    expect(subtree.find('.ant-list-item').length).toBe(1);
   });
 });

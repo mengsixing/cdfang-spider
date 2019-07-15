@@ -1,0 +1,53 @@
+@import '../../theme/reset.less';
+@import '../../theme/const.less';
+
+// 全局样式
+
+.common-margin {
+  margin: 24px;
+}
+
+.common-background {
+  background-color: @bg-color;
+}
+
+.main-background {
+  background-color: @main-color;
+}
+
+.margin-white {
+  .main-background();
+  .common-margin();
+}
+
+.chart-title {
+  text-align: center;
+  margin: 0 16px;
+  font-weight: bold;
+}
+
+.content {
+  .common-background();
+  .content-section {
+    .common-margin();
+    .main-background();
+  }
+  .content-statistic-card {
+    .common-margin();
+    .common-background();
+  }
+  .content-graph-bar {
+    .main-background();
+    margin: 0 24px;
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+  .content-basic-column {
+    .margin-white();
+    .content-basic-column-title {
+      color: @title-color;
+      font-weight: 500;
+      padding: 16px;
+    }
+  }
+}

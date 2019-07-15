@@ -2,32 +2,32 @@ import * as React from 'react';
 import { Col, Row } from 'antd';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
-import { AppContext } from '../../context/appContext';
 
+import { AppContext } from '../../context/appContext';
 import CricleGraph from '../CricleGraph';
 import Rank from '../Rank';
-import BarGraph from '../BarGraph';
-
-import Idata from '../../context/Idata';
+import DoubleAxisGraph from '../DoubleAxisGraph';
+import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 
 const { useState, useContext } = React;
+let currentState: Istate;
 
 export interface Iprops {
-  data: Idata[];
-  panelIndex: number;
-  activityKey: number;
+  data: cdFang.IhouseData[];
+  panelKey: string;
+  activityKey: string;
 }
 
 interface Istate {
   isChangeTab: boolean;
   isOpen: boolean;
-  rank: Idata[];
+  rank: cdFang.IhouseData[];
   rankTitle: string;
 }
 
-function ChartPanel(props: Iprops) {
+const ChartPanel: React.FunctionComponent<Iprops> = props => {
   const appState = useContext(AppContext);
-  const { panelIndex, data } = props;
+  const { panelKey, data } = props;
   const initState = {
     rank: data,
     rankTitle: '',
@@ -35,28 +35,34 @@ function ChartPanel(props: Iprops) {
     isOpen: false
   };
 
-  if (panelIndex !== appState.activityKey) {
+  if (panelKey !== appState.activityKey) {
     initState.isChangeTab = true;
   }
 
+  // 只会执行一次
   const [state, setState] = useState(initState);
+  const [prevData, setPrevData] = useState();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function changeMonth(item: any, newState: Istate) {
-    const { rankTitle, isOpen } = newState;
-    const { _origin } = item.data;
+  // 模拟 getDerivedStateFromProps https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
+  if (data !== prevData) {
+    setState(initState);
+    setPrevData(data);
+  }
 
-    if (rankTitle === _origin.item && isOpen) {
+  function changeMonth(origin: cdFang.IcircleItem) {
+    const { rankTitle, isOpen } = currentState;
+
+    if (rankTitle === origin.item && isOpen) {
       return {
-        ...newState,
+        ...currentState,
         rank: data,
         rankTitle: '',
         isChangeTab: false,
         isOpen: false
       };
     }
-    const selectMonth = _origin.date;
-    const selectMonthTitle = _origin.item;
+    const selectMonth = origin.date;
+    const selectMonthTitle = origin.item;
     const newRank = _.filter(
       data,
       dataItem =>
@@ -64,7 +70,7 @@ function ChartPanel(props: Iprops) {
         dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month')
     );
     return {
-      ...newState,
+      ...currentState,
       rank: newRank,
       rankTitle: selectMonthTitle,
       isChangeTab: false,
@@ -74,34 +80,28 @@ function ChartPanel(props: Iprops) {
 
   const { isChangeTab, rank, rankTitle } = state;
 
+  currentState = state;
+
   return (
     <Row>
       <Col span={9}>
-        <BarGraph data={data} />
+        <DoubleAxisGraph data={data} />
       </Col>
       <Col span={9}>
-        <input
-          id={`ChartPanel${appState.activityKey}`}
-          type="hidden"
-          value={JSON.stringify(state)}
-        />
         <CricleGraph
           data={data}
           changeMonth={item => {
-            // 由于circle组件使用React.memo 再不渲染时，不能获取到最新的属性，这里使用input来转换
-            const newState = JSON.parse(
-              document
-                .getElementById(`ChartPanel${appState.activityKey}`)
-                .getAttribute('value')
-            );
-            setState(changeMonth(item, newState));
+            // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用局部变量来获取
+            setState(changeMonth(item));
           }}
           isChangeTab={isChangeTab}
         />
       </Col>
-      <Col span={6}>{rank ? <Rank data={rank} title={rankTitle} /> : ''}</Col>
+      <Col span={6}>
+        {rank ? <Rank data={rank} title={rankTitle} unit="套" isLink /> : ''}
+      </Col>
     </Row>
   );
-}
+};
 
-export default ChartPanel;
+export default RenderLoadingComponent(ChartPanel);

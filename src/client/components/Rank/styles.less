@@ -1,24 +1,26 @@
-.rank{
+@import '../../theme/const.less';
+
+.rank {
   padding: 0 32px;
   height: 400px;
   overflow-y: scroll;
-  .rank-title{
-    margin-bottom: .5em;
-    color: rgba(0,0,0,.85);
+  .rank-title {
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
   }
   .rank-list {
     margin: 25px 0 0;
     padding: 0;
     list-style: none;
-    li{
+    li {
       margin-top: 16px;
+      display: flex;
       span {
-        color: rgba(0,0,0,.65);
         font-size: 14px;
         line-height: 22px;
-        &:first-child{
-          background-color: #f5f5f5;
+        &:first-child {
+          background-color: @bg-color;
           border-radius: 20px;
           display: inline-block;
           font-size: 12px;
@@ -29,12 +31,19 @@
           width: 20px;
           text-align: center;
         }
-        &:last-child{
-          float: right;
+        &:nth-child(2) {
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        &:last-child {
+          width: 60px;
+          text-align: right;
         }
         &.top3 {
-          background-color: #314659;
-          color: #fff;
+          background-color: @title-color;
+          color: @main-color;
         }
       }
     }

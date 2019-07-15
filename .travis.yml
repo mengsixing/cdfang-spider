@@ -1,23 +1,29 @@
-sudo: required
 language: node_js
+
+node_js:
+  - 'node'
+
+cache: npm
+
+os:
+  - windows
+  - linux
+  - osx
+
 env:
   - BUILD_ENV=ci
-install:
-  - npm i
-cache: npm
-node_js:
-  - "node"
+
 branches:
   only:
     - master
     - test
     - /^greenkeeper/.*$/
-jobs:
-  include:
-  - stage: build
-    script:
-      - npm run build
-      - npm run test
-    after_success: npm run coverage
 
+install:
+  - npm install
 
+script:
+  - npm run build
+  - npm run test
+
+after_success: npm run coverage

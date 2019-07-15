@@ -6,10 +6,10 @@ gulp.task('default', () => gulp
   .src('./src/nodeuii/**/*.ts')
   .pipe(
     // 使用 .babelrc 配置
-    babel({}),
+    babel()
   )
   .pipe(gulp.dest('./dist/')));
 
 if (process.env.NODE_ENV !== 'production') {
-  gulp.watch('./src/nodeuii/**/*.js', gulp.series('default'));
+  gulp.watch('./src/nodeuii/**/*.ts', gulp.series('default'));
 }

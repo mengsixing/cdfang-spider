@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import AreaBar from '../../../src/client/components/AreaBar';
+import BasicColumnGraph from '../../../src/client/components/BasicColumnGraph';
 
 const setup = () => {
   const props = {
@@ -15,18 +15,19 @@ const setup = () => {
     yAxis: '房源',
     desc: true
   };
-  const wrapper = mount(<AreaBar {...props} />);
+  const wrapper = mount(<BasicColumnGraph {...props} />);
   return {
     props,
     wrapper
   };
 };
 
-describe('Todo', () => {
+describe('BasicColumnGraph 组件', () => {
   const { wrapper, props } = setup();
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('canvas')).toBe(false);
+    const subtree = wrapper.render();
+    expect(subtree.find('canvas').length).toBe(1);
   });
 
   it('title是否正确 ?', () => {

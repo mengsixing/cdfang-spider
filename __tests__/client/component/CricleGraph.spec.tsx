@@ -30,11 +30,11 @@ const setup = () => {
 
 describe('CricleGraph 组件', () => {
   const { wrapper } = setup();
-  const cheerioWrapper = wrapper.render();
+  const subtree = wrapper.render();
 
   it('是否渲染成功 ?', () => {
     expect(wrapper.exists('.chart-title')).toBe(true);
-    expect(cheerioWrapper.find('canvas').length).toBe(1);
+    expect(subtree.find('canvas').length).toBe(1);
   });
 
   it('shouldComponentUpdate ?', () => {

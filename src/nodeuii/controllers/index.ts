@@ -1,4 +1,8 @@
 import Router from 'koa-router';
+import * as Koa from 'koa';
+import fs from 'fs';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import path from "path";
 import houseModel from '../models/houseModel';
 import initGraphQL from './graphql';
 import spider from '../utils/spiderHelper';
@@ -12,7 +16,10 @@ router
       const {
         query: { pageStart, pageEnd }
       } = ctx.request;
-      const result = await spider.initspider(pageStart, pageEnd);
+
+      const pageStartNumber = Number.parseInt(pageStart, 10);
+      const pageEndNumber = Number.parseInt(pageEnd, 10);
+      const result = await spider.initspider(pageStartNumber, pageEndNumber);
       ctx.body = result;
     }
   )
@@ -40,15 +47,24 @@ router
     }
   )
   .get(
-    '/spiderPageOne',
+    '/spiderPage',
     async (ctx): Promise<void> => {
-      const result = await spider.spiderPageOne();
+      const {
+        query: { pageNo }
+      } = ctx.request;
+      const result = await spider.spiderPage(pageNo);
       ctx.body = result;
     }
-  );
+  )
+  // 支持 browserRouter
+  .get(/\/20[1-9][0-9]/, ctx => {
+    const file = fs.readFileSync(path.join('client/index.html'));
+    ctx.set('Content-Type', 'text/html; charset=utf-8');
+    ctx.body = file;
+  });
 
 export default {
-  init(app): void {
+  init(app: Koa): void {
     app.use(router.routes()).use(router.allowedMethods());
     initGraphQL(app);
   }

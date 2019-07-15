@@ -1,23 +1,30 @@
 import * as React from 'react';
+// @ts-ignore
 import * as DataSet from '@antv/data-set';
 import * as dayjs from 'dayjs';
 import * as _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
-import Idata from '../../context/Idata';
 
+// 导出给 test 文件使用
 export interface Iprops {
-  data: Idata[];
+  data: cdFang.IhouseData[];
 }
 
-function BarGraph(props: Iprops) {
+interface ImonthMap {
+  name: string;
+  [x: string]: string | number;
+}
+
+// 分组柱状图(暂未使用) https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
+const GroupedColumnGraph: React.FunctionComponent<Iprops> = props => {
   const { data: array } = props;
   const arrayByMonth = _.groupBy(array, item =>
     dayjs(item.beginTime)
       .startOf('month')
       .format('YYYY-MM')
   );
-  const buildObj = { name: '楼盘' };
-  const houseObj = { name: '房源' };
+  const buildObj: ImonthMap = { name: '楼盘' };
+  const houseObj: ImonthMap = { name: '房源' };
   const cricleObj = [];
   let fields: string[] = [];
   Object.keys(arrayByMonth).forEach(key => {
@@ -58,6 +65,6 @@ function BarGraph(props: Iprops) {
       />
     </Chart>
   );
-}
+};
 
-export default React.memo(BarGraph);
+export default React.memo(GroupedColumnGraph);

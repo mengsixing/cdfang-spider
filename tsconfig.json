@@ -1,15 +1,20 @@
 // https://www.tslang.cn/docs/handbook/compiler-options.html
 {
   "compilerOptions": {
+    "paths": { "*": ["types/*"] },
     "baseUrl": ".",
-    "noImplicitAny": false,
-    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "alwaysStrict": true,
     "removeComments": true,
-    "target": "es5",
+    "module": "ESNext",
+    "target": "ESNext",
     "jsx": "react",
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    //https://github.com/ant-design/ant-design/issues/8642
+    "moduleResolution": "node"
   },
-  // 影响webpack构建
-  "include": ["src/**/*", "types/**/*"],
-  "exclude": ["node_modules"]
+  // 影响 webpack 构建
+  "include": ["./src", "./build", "./types"],
+  "exclude": ["./node_modules", "./__tests__"]
 }

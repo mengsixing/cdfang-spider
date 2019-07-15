@@ -7,18 +7,15 @@ interface Iprops {
   tip?: string;
 }
 
-function Loading(
-  props: Iprops = {
-    height: '50px',
-    tip: ''
-  }
-) {
-  const { height, tip } = props;
+const Loading: React.FunctionComponent<Iprops> = ({
+  height = '50px',
+  tip = ''
+}) => {
   return (
-    <div className="myloading" style={{ lineHeight: height, height }}>
+    <div className="common-loading" style={{ lineHeight: height, height }}>
       <Spin tip={tip} />
     </div>
   );
-}
+};
 
 export default Loading;

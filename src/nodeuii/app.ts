@@ -39,7 +39,6 @@ app.use(serve('client'));
 
 // eslint-disable-next-line no-console
 console.log(`server is running at : http://localhost:${config.serverPort}`);
-app.listen(config.serverPort);
 
 // 全局异常捕获
 process.on('uncaughtException', err => {
@@ -48,4 +47,4 @@ process.on('uncaughtException', err => {
 
 
 // 导出给 jest 测试
-module.exports = app;
+module.exports = app.listen(config.serverPort);

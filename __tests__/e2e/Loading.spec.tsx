@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Loading from '../../../src/client/components/Loading';
+import Loading from '../../src/client/components/Loading';
 
 const setup = () => {
   const props = {

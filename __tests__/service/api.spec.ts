@@ -1,8 +1,6 @@
 /*eslint-disable */
 import * as supertest from 'supertest';
-const app = require('../../dist/app.js');
-
-var server = app.listen();
+const server = require('../../dist/app.js');
 
 describe('api 测试', () => {
   function request() {

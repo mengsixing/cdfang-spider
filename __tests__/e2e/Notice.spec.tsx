@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { mount } from 'enzyme';
 import { GlobalWithFetchMock } from 'jest-fetch-mock';
-import Notice from '../../../src/client/components/Notice';
+import Notice from '../../src/client/components/Notice';
 
 const customGlobal: GlobalWithFetchMock = global as GlobalWithFetchMock;
 

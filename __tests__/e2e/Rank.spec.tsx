@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import Rank, { Iprops } from '../../../src/client/components/Rank';
+import Rank, { Iprops } from '../../src/client/components/Rank';
 
 const setup = () => {
   const props: Iprops = {

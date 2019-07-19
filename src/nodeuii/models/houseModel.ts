@@ -1,4 +1,4 @@
-/* eslint-disable no-console,no-underscore-dangle */
+/* eslint-disable no-underscore-dangle */
 import log4js from 'log4js';
 import DbHelper from '../utils/dbHelper';
 

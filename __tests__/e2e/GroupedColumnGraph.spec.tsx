@@ -3,7 +3,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import GroupedColumnGraph, {
   Iprops
-} from '../../../src/client/components/GroupedColumnGraph';
+} from '../../src/client/components/GroupedColumnGraph';
 
 const setup = () => {
   const props: Iprops = {

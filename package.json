@@ -1,20 +1,26 @@
 {
   "name": "cdfang-spider",
-  "version": "2.11.18",
+  "version": "2.11.19",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "lint": "eslint --fix --ext tsx,ts src __tests__",
-    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --open",
-    "dev:server": "cross-env NODE_ENV=development gulp & cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js",
+    "dev": "npm-run-all --parallel client:dev server:dev server:start",
+    "server:start": "cross-env NODE_ENV=development supervisor -i ./dist/client/ -w ./dist/ ./dist/app.js",
+    "server:dev": "cross-env NODE_ENV=development gulp",
+    "server:prod": "cross-env NODE_ENV=production gulp",
+    "client:dev": "cross-env NODE_ENV=development webpack-dev-server --open",
+    "client:prod": "cross-env NODE_ENV=production webpack",
+    "client:profile": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
     "prebuild": "npm run lint && rimraf ./dist",
-    "build": "cross-env NODE_ENV=production gulp & cross-env NODE_ENV=production webpack",
-    "analysis": "cross-env NODE_ENV=production BUILD_ENV=analysis webpack",
+    "build": "npm-run-all --parallel client:prod server:prod",
+    "test:unit": "cd ./__tests__/unit;check_file=`ls  | grep '.test.ts' |  tr -s '\n'`;jest --findRelatedTests $check_file",
+    "test:e2e": "cd ./__tests__/e2e;check_file=`ls  | grep '.spec.ts' |  tr -s '\n'`;jest --findRelatedTests $check_file",
+    "test:service": "cd ./__tests__/service;check_file=`ls  | grep '.spec.ts' |  tr -s '\n'`;jest --detectOpenHandles --findRelatedTests $check_file",
     "test": "cross-env NODE_ENV=test jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
+    "lint": "eslint --fix --ext tsx,ts src __tests__",
+    "prettier": "prettier --write --check ./**/*.{ts,tsx,less}",
     "coverage": "codecov",
-    "commit": "npx git-cz",
-    "prettier": "prettier --write --check ./**/*.{ts,tsx,less}"
+    "commit": "npx git-cz"
   },
   "husky": {
     "hooks": {

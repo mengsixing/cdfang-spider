@@ -3,7 +3,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import BasicAreaGraph, {
   Iprops
-} from '../../../src/client/components/BasicAreaGraph';
+} from '../../src/client/components/BasicAreaGraph';
 
 const setup = () => {
   const props: Iprops = {

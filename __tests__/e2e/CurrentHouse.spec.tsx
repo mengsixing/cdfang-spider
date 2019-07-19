@@ -4,8 +4,8 @@ import {
   AppContext,
   globalData,
   IappContext
-} from '../../../src/client/context/appContext';
-import CurrentHouse from '../../../src/client/components/CurrentHouse';
+} from '../../src/client/context/appContext';
+import CurrentHouse from '../../src/client/components/CurrentHouse';
 
 const setup = () => {
   const appState: IappContext = {

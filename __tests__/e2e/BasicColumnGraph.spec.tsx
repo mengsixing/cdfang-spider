@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { mount } from 'enzyme';
-import BasicColumnGraph from '../../../src/client/components/BasicColumnGraph';
+import BasicColumnGraph from '../../src/client/components/BasicColumnGraph';
 
 const setup = () => {
   const props = {

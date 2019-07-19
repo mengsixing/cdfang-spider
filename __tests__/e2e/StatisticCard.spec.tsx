@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { AppContext, globalData } from '../../../src/client/context/appContext';
-import StatisticCard from '../../../src/client/components/StatisticCard';
-import StatisticCardPast from '../../../src/client/components/StatisticCard/past';
-import { mockHouse } from '../../../__mocks__/db';
+import { AppContext, globalData } from '../../src/client/context/appContext';
+import StatisticCard from '../../src/client/components/StatisticCard';
+import StatisticCardPast from '../../src/client/components/StatisticCard/past';
+import { mockHouse } from '../../__mocks__/db';
 
 const data = { ...globalData, allData: mockHouse };
 

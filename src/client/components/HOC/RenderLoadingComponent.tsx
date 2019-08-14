@@ -7,7 +7,7 @@ const { useContext } = React;
 
 export const RenderLoadingComponent = (
   WrapperedComponent: React.FunctionComponent<any>,
-  LoadingHeight: string = '300px'
+  LoadingHeight = '300px'
 ) => {
   function Temp(props: any) {
     const { isLoading } = useContext(AppContext);

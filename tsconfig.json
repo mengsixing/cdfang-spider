@@ -4,17 +4,21 @@
     "paths": { "*": ["types/*"] },
     "baseUrl": ".",
     "strict": true,
+    "strictNullChecks": true,
     "alwaysStrict": true,
     "removeComments": true,
+    // 配置编译目标使用的模块化标准
     "module": "ESNext",
+    // 配置编译目标代码的版本标准
     "target": "ESNext",
     "jsx": "react",
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
-    //https://github.com/ant-design/ant-design/issues/8642
+    //https://github.com/ant-design/ant-design/issues/8642 配置解析模块的模式
     "moduleResolution": "node"
+    // "esModuleInterop": true 设置es模块化导出commonjs模块化代码
   },
   // 影响 webpack 构建
-  "include": ["./src", "./build", "./types"],
-  "exclude": ["./node_modules", "./__tests__", "./__mocks__"]
+  "include": ["./src", "./build", "./types", "./__tests__"],
+  "exclude": ["./node_modules", "./__mocks__"]
 }

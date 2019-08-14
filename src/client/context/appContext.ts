@@ -17,10 +17,10 @@ export const globalData: IappContext = {
   activityKey: '天府新区',
   selectedYear: 0,
   isLoading: false,
-  changeData() {},
-  changeActivityKey() {},
-  changeSelectedYear() {},
-  changeLoading() {}
+  changeData:()=>{},
+  changeActivityKey:()=>{},
+  changeSelectedYear:()=>{},
+  changeLoading:()=>{}
 };
 
 export const AppContext = React.createContext<IappContext>(globalData);

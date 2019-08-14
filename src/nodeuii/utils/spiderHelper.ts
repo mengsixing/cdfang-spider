@@ -60,7 +60,7 @@ const initspider = async (pageStart: number, pageEnd: number) => {
   return result;
 };
 
-const spiderPage = async (pageNo: number = 1): Promise<Ipage> => {
+const spiderPage = async (pageNo = 1): Promise<Ipage> => {
   const page: cdFang.IhouseData[] = await createRequestPromise(pageNo);
   const promises = page.map(
     (item): Promise<cdFang.IhouseData | boolean> =>

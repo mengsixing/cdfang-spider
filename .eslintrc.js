@@ -8,7 +8,7 @@ module.exports = {
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "tsconfig.json",
+    project: "./tsconfig.json",
   },
   extends: [
     "eslint-config-airbnb",
@@ -19,7 +19,9 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint", "react", "react-hooks", "prettier"],
   rules: {
-    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/ban-ts-ignore":0
   },
   // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
   settings: {

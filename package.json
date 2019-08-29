@@ -1,6 +1,6 @@
 {
   "name": "cdfang-spider",
-  "version": "2.11.20",
+  "version": "2.12.1",
   "description": "成都房协网爬虫，定时爬取最新房源，可视化数据分析。",
   "main": "index.js",
   "scripts": {

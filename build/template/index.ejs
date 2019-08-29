@@ -9,7 +9,7 @@
       content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="成都房源分析 -基于房协网最新数据" />
+    <meta name="description" content="成都房源分析 - 基于房协网最新数据" />
     <title>成都房源分析</title>
     <script>
       var _hmt = _hmt || [];
@@ -43,16 +43,22 @@
     <% } else { %>
     <script src="https://package.cdfangyuan.cn/react@16.8.6.production.min.js"></script>
     <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.production.min.js"></script>
+    <script src="https://package.cdfangyuan.cn/quicklink@1.0.1.min.js"></script>
     <script
       src="https://js.fundebug.cn/fundebug.1.7.3.min.js"
       apikey="7db5b4b694c5c2e25fec43e5daf924d64f6b087378c775207d6920944a88094c"
     ></script>
     <script>
+      // 注册 serviceWorker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js');
         });
       }
+      // 开启 quicklink
+      window.addEventListener('load', () => {
+        quicklink();
+      });
     </script>
     <% } %>
     <script src="https://package.cdfangyuan.cn/bizcharts@3.2.2.min.js"></script>

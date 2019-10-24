@@ -281,7 +281,7 @@ Mongoose 为 mongodb 提供了一种直接的，基于 scheme 结构去定义你
 
 ```zsh
 # clone with Git Bash
-git clone https://github.com/yhlben/cdfang-spider.git
+git clone https://github.com/lmjben/cdfang-spider.git
 
 # change directory
 cd cdfang-spider
@@ -324,7 +324,7 @@ after_success: npm run coverage
 
 ```shell
 # clone with Git Bash
-git clone https://github.com/yhlben/cdfang-spider.git
+git clone https://github.com/lmjben/cdfang-spider.git
 
 # change directory
 cd cdfang-spider/docker
@@ -335,7 +335,7 @@ docker-compose up -d
 # server running at localhost:8082
 ```
 
-Docker 部署项目原理可以参考[Docker 使用总结](https://yhlben.github.io/blog/project-docker.html)。
+Docker 部署项目原理可以参考[Docker 使用总结](https://lmjben.github.io/blog/project-docker.html)。
 
 ## 总结
 

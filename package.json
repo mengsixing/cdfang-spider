@@ -30,14 +30,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yhlben/cdfang-spider.git"
+    "url": "git+https://github.com/lmjben/cdfang-spider.git"
   },
-  "author": "yhlben",
+  "author": "lmjben",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yhlben/cdfang-spider/issues"
+    "url": "https://github.com/lmjben/cdfang-spider/issues"
   },
-  "homepage": "https://github.com/yhlben/cdfang-spider#readme",
+  "homepage": "https://github.com/lmjben/cdfang-spider#readme",
   "dependencies": {
     "@antv/data-set": "^0.10.2",
     "antd": "^3.24.1",

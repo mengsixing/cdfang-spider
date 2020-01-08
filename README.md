@@ -83,4 +83,4 @@ docker-compose up -d
 
 [MIT](https://github.com/lmjben/cdfang-spider/blob/master/LICENSE)
 
-Copyright (c) 2018-present lmjben
+Copyright (c) 2020 lmjben

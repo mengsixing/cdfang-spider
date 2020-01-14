@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin')
@@ -42,8 +40,6 @@ const prodConfig = {
       filename: 'cdfang-spider-[name].[hash:8].css'
     }),
     new WebpackDeepScopeAnalysisPlugin(),
-    // 开启 scope hosting，production 默认是开启状态
-    // new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',

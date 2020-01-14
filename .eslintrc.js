@@ -21,7 +21,18 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/jsx-props-no-spreading": 0,
-    "@typescript-eslint/ban-ts-ignore":0
+    "@typescript-eslint/ban-ts-ignore":0,
+    "@typescript-eslint/no-empty-function":0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   },
   // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
   settings: {

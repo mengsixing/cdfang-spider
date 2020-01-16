@@ -11,12 +11,12 @@ function RenderNoEmptyComponent(
   checkProps: string[]
 ): React.FunctionComponent {
   const newComponent: React.FunctionComponent = (props: Iprops) => {
-    const hasEmpty = checkProps.some(propName=>{
-      if(Array.isArray(props[propName])){
-        return props[propName].length ===0
+    const hasEmpty = checkProps.some(propName => {
+      if (Array.isArray(props[propName])) {
+        return props[propName].length === 0;
       }
-      return !!props[propName]
-    })
+      return !!props[propName];
+    });
     return hasEmpty ? <WrapperedComponent {...props} /> : <span />;
   };
   return newComponent;

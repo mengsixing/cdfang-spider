@@ -43,7 +43,8 @@ const CurrentHouse: React.FunctionComponent = () => {
       </div>
     ));
 
-    const result = currentHouses.length>0?(
+  const result =
+    currentHouses.length > 0 ? (
       <Collapse defaultActiveKey={['1']}>
         <Panel header="正在登记" key="1" extra={<Icon type="notification" />}>
           <List
@@ -53,9 +54,11 @@ const CurrentHouse: React.FunctionComponent = () => {
           />
         </Panel>
       </Collapse>
-    ):<span />
+    ) : (
+      <span />
+    );
 
-  return result
+  return result;
 };
 
 export default RenderLoadingComponent(CurrentHouse, '50px');

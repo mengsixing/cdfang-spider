@@ -11,11 +11,13 @@ function RenderNoEmptyComponent(
   checkProps: string[]
 ): React.FunctionComponent {
   const newComponent: React.FunctionComponent = (props: Iprops) => {
-    let checkValue = props;
-    checkProps.forEach(item => {
-      checkValue = checkValue[item];
-    });
-    return checkValue != null ? <WrapperedComponent {...props} /> : <span />;
+    const hasEmpty = checkProps.some(propName=>{
+      if(Array.isArray(props[propName])){
+        return props[propName].length ===0
+      }
+      return !!props[propName]
+    })
+    return hasEmpty ? <WrapperedComponent {...props} /> : <span />;
   };
   return newComponent;
 }

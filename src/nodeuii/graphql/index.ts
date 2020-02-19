@@ -1,6 +1,7 @@
 import { ApolloServer } from 'apollo-server-koa';
 import * as Koa from 'koa';
 import {readFileSync} from 'fs'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { join } from "path";
 import resolvers from "./resolvers";
 

@@ -17,7 +17,7 @@ function RenderNoEmptyComponent(
       }
       return !!props[propName];
     });
-    return hasEmpty ?  <span />: <WrapperedComponent {...props} />;
+    return hasEmpty ? <span /> : <WrapperedComponent {...props} />;
   };
   return newComponent;
 }

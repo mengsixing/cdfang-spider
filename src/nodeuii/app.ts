@@ -8,6 +8,7 @@ import AnalysicsHander from './middleware/AnalysicsHander';
 import controller from './controllers';
 import config from './config';
 import './controllers/schedule';
+import initGraphQL from "./graphql";
 
 const app = new Koa();
 app.use(koaBody());
@@ -34,6 +35,8 @@ AnalysicsHander.init(app);
 
 // 初始化路由
 controller.init(app);
+// 初始化 graphql
+initGraphQL(app)
 // 静态资源目录
 app.use(serve('client'));
 

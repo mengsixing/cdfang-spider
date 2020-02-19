@@ -4,7 +4,6 @@ import fs from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import path from "path";
 import houseModel from '../models/houseModel';
-import initGraphQL from './graphql';
 import spider from '../utils/spiderHelper';
 
 const router = new Router();
@@ -66,6 +65,5 @@ router
 export default {
   init(app: Koa): void {
     app.use(router.routes()).use(router.allowedMethods());
-    initGraphQL(app);
   }
 };

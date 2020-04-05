@@ -14,11 +14,11 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束'
-      }
+        status: '报名结束',
+      },
     ],
     panelKey: '高新南区',
-    activityKey: '高新南区'
+    activityKey: '高新南区',
   };
   const wrapper = mount(
     <AppContext.Provider value={globalData}>
@@ -27,7 +27,7 @@ const setup = () => {
   );
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

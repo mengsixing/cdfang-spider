@@ -23,16 +23,16 @@ const BasicAreaGraph: React.FunctionComponent<Iprops> = ({ data, title }) => {
     type: 'fold',
     fields: [title],
     key: 'type',
-    value: 'value'
+    value: 'value',
   });
   const scale = {
     value: {
-      alias: '数量'
+      alias: '数量',
     },
     month: {
       range: [0.01, 0.99],
-      tickCount: 9
-    }
+      tickCount: 9,
+    },
   };
   return (
     <Chart height={400} data={dv} scale={scale} forceFit>

@@ -25,14 +25,14 @@ interface Istate {
   rankTitle: string;
 }
 
-const ChartPanel: React.FunctionComponent<Iprops> = props => {
+const ChartPanel: React.FunctionComponent<Iprops> = (props) => {
   const appState = useContext(AppContext);
   const { panelKey, data } = props;
   const initState = {
     rank: data,
     rankTitle: '',
     isChangeTab: false,
-    isOpen: false
+    isOpen: false,
   };
 
   if (panelKey !== appState.activityKey) {
@@ -58,14 +58,14 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
         rank: data,
         rankTitle: '',
         isChangeTab: false,
-        isOpen: false
+        isOpen: false,
       };
     }
     const selectMonth = origin.date;
     const selectMonthTitle = origin.item;
     const newRank = _.filter(
       data,
-      dataItem =>
+      (dataItem) =>
         dayjs(dataItem.beginTime) > dayjs(selectMonth) &&
         dayjs(dataItem.beginTime) < dayjs(selectMonth).endOf('month')
     );
@@ -74,7 +74,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
       rank: newRank,
       rankTitle: selectMonthTitle,
       isChangeTab: false,
-      isOpen: true
+      isOpen: true,
     };
   }
 
@@ -90,7 +90,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
       <Col span={9}>
         <CricleGraph
           data={data}
-          changeMonth={item => {
+          changeMonth={(item) => {
             // 由于 circle 组件使用 React.memo 在不渲染时，不能获取到最新的属性，这里使用局部变量来获取
             setState(changeMonth(item));
           }}

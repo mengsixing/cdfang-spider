@@ -33,7 +33,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const { allData } = useContext(AppContext);
 
   // 构建区域图需要的数据
-  const arrayByDay = _.groupBy(allData, item => {
+  const arrayByDay = _.groupBy(allData, (item) => {
     return dayjs(item.beginTime).format('YYYY-MM');
   });
 
@@ -41,28 +41,28 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const builderData: ImonthBuilder[] = [];
   Object.keys(arrayByDay)
     .sort()
-    .forEach(key => {
+    .forEach((key) => {
       const houseNumber = _.sumBy(arrayByDay[key], 'number');
       builderData.push({
         month: key,
-        [constants.BUILDER_NUMBER]: arrayByDay[key].length
+        [constants.BUILDER_NUMBER]: arrayByDay[key].length,
       });
       houseData.push({
         month: key,
-        [constants.HOUSE_NUMBER]: houseNumber
+        [constants.HOUSE_NUMBER]: houseNumber,
       });
     });
 
   // 构建排行数据
-  const builderRankData = builderData.map(item => ({
+  const builderRankData = builderData.map((item) => ({
     _id: utils.getRandomId(),
     name: item.month,
-    number: item[constants.BUILDER_NUMBER]
+    number: item[constants.BUILDER_NUMBER],
   }));
-  const houseRankData = houseData.map(item => ({
+  const houseRankData = houseData.map((item) => ({
     _id: utils.getRandomId(),
     name: item.month,
-    number: item[constants.HOUSE_NUMBER]
+    number: item[constants.HOUSE_NUMBER],
   }));
 
   // 柱状图数据

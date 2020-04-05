@@ -5,12 +5,12 @@ import Loading from '../../src/client/components/Loading';
 
 const setup = () => {
   const props = {
-    tip: 'test'
+    tip: 'test',
   };
   const wrapper = mount(<Loading {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

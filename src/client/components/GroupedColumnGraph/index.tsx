@@ -16,25 +16,23 @@ interface ImonthMap {
 }
 
 // 分组柱状图(暂未使用) https://bizcharts.net/products/bizCharts/demo/detail?id=bar-grouped-column&selectedKey=%E6%9F%B1%E7%8A%B6%E5%9B%BE
-const GroupedColumnGraph: React.FunctionComponent<Iprops> = props => {
+const GroupedColumnGraph: React.FunctionComponent<Iprops> = (props) => {
   const { data: array } = props;
-  const arrayByMonth = _.groupBy(array, item =>
-    dayjs(item.beginTime)
-      .startOf('month')
-      .format('YYYY-MM')
+  const arrayByMonth = _.groupBy(array, (item) =>
+    dayjs(item.beginTime).startOf('month').format('YYYY-MM')
   );
   const buildObj: ImonthMap = { name: '楼盘' };
   const houseObj: ImonthMap = { name: '房源' };
   const cricleObj = [];
   let fields: string[] = [];
-  Object.keys(arrayByMonth).forEach(key => {
+  Object.keys(arrayByMonth).forEach((key) => {
     const houseNumber = _.sumBy(arrayByMonth[key], 'number');
     const buildNumber = arrayByMonth[key].length;
     buildObj[key] = buildNumber;
     houseObj[key] = houseNumber;
     cricleObj.push({
       item: key,
-      number: houseNumber
+      number: houseNumber,
     });
     fields.push(key);
   });
@@ -46,7 +44,7 @@ const GroupedColumnGraph: React.FunctionComponent<Iprops> = props => {
     type: 'fold',
     fields,
     key: '月份',
-    value: '数量'
+    value: '数量',
   });
 
   return (

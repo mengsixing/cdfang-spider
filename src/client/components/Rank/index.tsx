@@ -22,7 +22,7 @@ const Rank: React.FunctionComponent<Iprops> = ({
   data,
   title,
   unit,
-  isLink
+  isLink,
 }) => {
   const rankData = _.sortBy(data, (item: Irank) => -item.number);
   const rankTitle = title ? `排名：${title}` : '排名';

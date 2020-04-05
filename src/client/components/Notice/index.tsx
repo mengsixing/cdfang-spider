@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { notification } from 'antd';
-import {
-  SyncOutlined
-} from '@ant-design/icons';
+import { SyncOutlined } from '@ant-design/icons';
 import gql from 'graphql-tag';
 import config from '../../config';
 import './styles.less';
@@ -31,13 +29,13 @@ function openNotification(setLoading: Function, appState: IappContext) {
             }
           }
         }
-      `
+      `,
     })
-    .then(result => {
+    .then((result) => {
       const data = result.data.spiderPageOne;
       notification.open({
         message: '消息提醒',
-        description: `成功更新数据${data.allLength}条，新数据${data.successArray.length}条。`
+        description: `成功更新数据${data.allLength}条，新数据${data.successArray.length}条。`,
       });
       setLoading(false);
       if (data.successArray.length > 0) {

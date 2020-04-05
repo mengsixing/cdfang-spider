@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Collapse, List, Col, Row } from 'antd';
-import {
-  NotificationOutlined
-} from '@ant-design/icons';
+import { NotificationOutlined } from '@ant-design/icons';
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
@@ -15,8 +13,8 @@ const { Panel } = Collapse;
 const CurrentHouse: React.FunctionComponent = () => {
   const { allData } = useContext(AppContext);
   const currentHouses = allData
-    .filter(item => item.status !== '报名结束')
-    .map(item => (
+    .filter((item) => item.status !== '报名结束')
+    .map((item) => (
       // eslint-disable-next-line no-underscore-dangle
       <div className="current-house-list" key={item._id}>
         <Row>

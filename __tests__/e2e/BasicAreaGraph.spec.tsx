@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { mount } from 'enzyme';
 import BasicAreaGraph, {
-  Iprops
+  Iprops,
 } from '../../src/client/components/BasicAreaGraph';
 
 const setup = () => {
@@ -11,13 +11,13 @@ const setup = () => {
     data: [
       { month: '2018-08-08', 楼盘数: 8 },
       { month: '2018-08-09', 楼盘数: 9 },
-      { month: '2018-08-10', 楼盘数: 10 }
-    ]
+      { month: '2018-08-10', 楼盘数: 10 },
+    ],
   };
   const wrapper = mount(<BasicAreaGraph {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

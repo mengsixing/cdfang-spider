@@ -9,7 +9,7 @@ const setup = () => {
   const appState = {
     ...globalData,
     allData: mockHouse,
-    activityKey: '高新南区'
+    activityKey: '高新南区',
   };
 
   const wrapper = render(
@@ -18,7 +18,7 @@ const setup = () => {
     </AppContext.Provider>
   );
   return {
-    wrapper
+    wrapper,
   };
 };
 

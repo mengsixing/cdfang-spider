@@ -11,14 +11,14 @@ const setup = () => {
       {
         _id: '',
         name: '融创香璟台西苑',
-        number: 56
-      }
-    ]
+        number: 56,
+      },
+    ],
   };
   const wrapper = mount(<Rank {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

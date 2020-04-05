@@ -14,14 +14,14 @@ const StatisticCardPast: React.FunctionComponent = () => {
   const allInfo = util.getAllInfo(allData);
 
   // 年度房源
-  const maxHouse = _.maxBy(allData, house => {
+  const maxHouse = _.maxBy(allData, (house) => {
     return house.number;
   }) as cdFang.IhouseData;
 
   // 年度楼盘
-  const dataByName = _.groupBy(allData, item => item.name);
+  const dataByName = _.groupBy(allData, (item) => item.name);
   const maxBuilderName =
-    _.maxBy(Object.keys(dataByName), item => {
+    _.maxBy(Object.keys(dataByName), (item) => {
       return dataByName[item].length;
     }) || '';
 
@@ -29,20 +29,20 @@ const StatisticCardPast: React.FunctionComponent = () => {
   let maxBuild = 0;
   if (dataByName[maxBuilderName]) {
     maxBuildLength = dataByName[maxBuilderName].length;
-    maxBuild = _.sumBy(dataByName[maxBuilderName], item => item.number);
+    maxBuild = _.sumBy(dataByName[maxBuilderName], (item) => item.number);
   }
 
   // 年度区域
-  const dataByArea = _.groupBy(allData, item => item.area);
+  const dataByArea = _.groupBy(allData, (item) => item.area);
   const maxAreaName =
-    _.maxBy(Object.keys(dataByArea), item => {
+    _.maxBy(Object.keys(dataByArea), (item) => {
       return dataByArea[item].length;
     }) || '';
   let maxAreaLength = 0;
   let maxArea = 0;
   if (dataByArea[maxAreaName]) {
     maxAreaLength = dataByArea[maxAreaName].length;
-    maxArea = _.sumBy(dataByArea[maxAreaName], item => item.number);
+    maxArea = _.sumBy(dataByArea[maxAreaName], (item) => item.number);
   }
 
   return (
@@ -55,8 +55,9 @@ const StatisticCardPast: React.FunctionComponent = () => {
         >
           {RenderLoadingJSX(
             <div>
-              {`${constants.HOUSE_NUMBER}：${(maxHouse && maxHouse.number) ||
-                0}`}
+              {`${constants.HOUSE_NUMBER}：${
+                (maxHouse && maxHouse.number) || 0
+              }`}
               <br />
               {`${constants.AREA}：${(maxHouse && maxHouse.area) || '暂无'}`}
             </div>,

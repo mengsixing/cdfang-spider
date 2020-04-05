@@ -25,7 +25,7 @@ const StatisticCard: React.FunctionComponent = () => {
             style={{
               color: info.increaseBuildNumber
                 ? constants.RISE_COLOR
-                : constants.DECLINE_COLOR
+                : constants.DECLINE_COLOR,
             }}
           >
             {info.increaseBuildNumberString}
@@ -37,7 +37,7 @@ const StatisticCard: React.FunctionComponent = () => {
             style={{
               color: info.increaseHouseNumber
                 ? constants.RISE_COLOR
-                : constants.DECLINE_COLOR
+                : constants.DECLINE_COLOR,
             }}
           >
             {info.increaseHouseNumberString}

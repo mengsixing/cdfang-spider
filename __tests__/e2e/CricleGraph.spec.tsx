@@ -13,16 +13,16 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名结束'
-      }
+        status: '报名结束',
+      },
     ],
     isChangeTab: false,
-    changeMonth: () => {}
+    changeMonth: () => {},
   };
   const wrapper = mount(<CricleGraph {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 
@@ -44,9 +44,9 @@ describe('CricleGraph 组件', () => {
           endTime: '2018-12-29 18:00:00',
           name: '花样年家天下',
           number: 22,
-          status: '报名结束'
-        }
-      ]
+          status: '报名结束',
+        },
+      ],
     });
     expect(reMount.exists('.chart-title')).toBe(true);
     expect(reMount.render().find('canvas').length).toBe(1);

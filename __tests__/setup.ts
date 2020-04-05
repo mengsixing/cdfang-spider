@@ -10,7 +10,7 @@ customGlobal.fetchMock = customGlobal.fetch;
 
 Object.defineProperty(customGlobal, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -28,5 +28,5 @@ customGlobal.console.warn = () => {};
 
 configure({
   adapter: new Adapter(),
-  disableLifecycleMethods: false
+  disableLifecycleMethods: false,
 });

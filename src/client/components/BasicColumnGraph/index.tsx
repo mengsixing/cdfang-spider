@@ -24,7 +24,7 @@ const BasicColumnGraph: React.FunctionComponent<Iprops> = ({
   title,
   xAxis,
   yAxis,
-  desc
+  desc,
 }) => {
   let chartData: Iarea[] = [];
   if (desc) {

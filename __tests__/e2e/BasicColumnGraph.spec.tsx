@@ -9,16 +9,16 @@ const setup = () => {
     data: [
       { 区域: '新津县', 楼盘数: 8 },
       { 区域: '金堂县', 楼盘数: 7 },
-      { 区域: '双流区', 楼盘数: 7 }
+      { 区域: '双流区', 楼盘数: 7 },
     ],
     xAxis: '区域',
     yAxis: '房源',
-    desc: true
+    desc: true,
   };
   const wrapper = mount(<BasicColumnGraph {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

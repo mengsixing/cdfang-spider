@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SyncOutlined} from '@ant-design/icons'
+import { SyncOutlined } from '@ant-design/icons';
 
 import { mount } from 'enzyme';
 import { GlobalWithFetchMock } from 'jest-fetch-mock';
@@ -10,7 +10,7 @@ const customGlobal: GlobalWithFetchMock = global as GlobalWithFetchMock;
 const setup = () => {
   const wrapper = mount(<Notice />);
   return {
-    wrapper
+    wrapper,
   };
 };
 

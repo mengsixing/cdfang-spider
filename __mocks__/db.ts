@@ -7,7 +7,7 @@ const mockHouse = [
     beginTime: '2018-06-02 09:00:00',
     endTime: '2018-06-04 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6D3C13A6D47B01E4E053AC1D15D70D6C',
@@ -17,7 +17,7 @@ const mockHouse = [
     beginTime: '2018-05-30 09:00:00',
     endTime: '2018-06-01 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6CAF9D0A9C370496E053AC1D15D7073A',
@@ -27,7 +27,7 @@ const mockHouse = [
     beginTime: '2018-05-22 09:00:00',
     endTime: '2018-05-24 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6AB7339BCA5A02CAE053AC1D15D7E9B2',
@@ -37,7 +37,7 @@ const mockHouse = [
     beginTime: '2018-05-02 09:00:00',
     endTime: '2018-05-04 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '69EF4AA5EC790050E053AC1D15D7C87F',
@@ -47,7 +47,7 @@ const mockHouse = [
     beginTime: '2018-04-18 09:00:00',
     endTime: '2018-04-20 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '689AE95ED49702A8E053AC1D15D7181F',
@@ -57,7 +57,7 @@ const mockHouse = [
     beginTime: '2018-03-31 09:00:00',
     endTime: '2018-04-02 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6720BEA70C7D0080E053AC1D15D960D8',
@@ -67,7 +67,7 @@ const mockHouse = [
     beginTime: '2018-03-15 09:00:00',
     endTime: '2018-03-17 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '648314368A520094E053AC1D15D70466',
@@ -77,7 +77,7 @@ const mockHouse = [
     beginTime: '2018-02-24 09:00:00',
     endTime: '2018-02-26 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6420CDD67BDC0084E053AC1D15D98475',
@@ -87,7 +87,7 @@ const mockHouse = [
     beginTime: '2018-02-02 09:00:00',
     endTime: '2018-02-04 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6395DB1F8C4A00C2E053AC1D15D95E3D',
@@ -97,7 +97,7 @@ const mockHouse = [
     beginTime: '2018-01-26 09:00:00',
     endTime: '2018-01-28 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '61F2AFCA0E90028EE053AC1D15D775B3',
@@ -107,7 +107,7 @@ const mockHouse = [
     beginTime: '2018-01-06 09:00:00',
     endTime: '2018-01-08 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6D166490F6B0004AE053AC1D15D9C457',
@@ -117,7 +117,7 @@ const mockHouse = [
     beginTime: '2018-05-31 09:00:00',
     endTime: '2018-06-02 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6CC8C09CA0A50310E053AC1D15D71897',
@@ -127,7 +127,7 @@ const mockHouse = [
     beginTime: '2018-05-23 09:00:00',
     endTime: '2018-05-25 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6ACB430C1E300212E053AC1D15D71A80',
@@ -137,7 +137,7 @@ const mockHouse = [
     beginTime: '2018-05-03 09:00:00',
     endTime: '2018-05-05 18:00:00',
     status: '报名结束',
-    __v: 0
+    __v: 0,
   },
   {
     _id: '6A2B04B6AAFA017EE053AC1D15D7DB63',
@@ -147,8 +147,8 @@ const mockHouse = [
     beginTime: '2018-04-20 09:00:00',
     endTime: '2018-04-22 18:00:00',
     status: '报名结束',
-    __v: 0
-  }
+    __v: 0,
+  },
 ];
 
 const mockArea = [
@@ -173,7 +173,7 @@ const mockArea = [
   '崇州市',
   '蒲江县',
   '彭州市',
-  '简阳市'
+  '简阳市',
 ];
 
 export { mockHouse, mockArea };

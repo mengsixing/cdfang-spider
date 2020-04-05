@@ -9,7 +9,7 @@ interface Iprops {
 
 const Loading: React.FunctionComponent<Iprops> = ({
   height = '50px',
-  tip = ''
+  tip = '',
 }) => {
   return (
     <div className="common-loading" style={{ lineHeight: height, height }}>

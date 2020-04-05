@@ -11,7 +11,7 @@ const setup = () => {
     </BrowserRouter>
   );
   return {
-    wrapper
+    wrapper,
   };
 };
 

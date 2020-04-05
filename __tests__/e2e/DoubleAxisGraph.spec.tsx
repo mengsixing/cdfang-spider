@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { mount } from 'enzyme';
 import DoubleAxisGraph, {
-  Iprops
+  Iprops,
 } from '../../src/client/components/DoubleAxisGraph';
 
 const setup = () => {
@@ -15,14 +15,14 @@ const setup = () => {
         name: '融创香璟台西苑',
         number: 56,
         status: '报名结束',
-        _id: ''
-      }
-    ]
+        _id: '',
+      },
+    ],
   };
   const wrapper = mount(<DoubleAxisGraph {...props} />);
   return {
     props,
-    wrapper
+    wrapper,
   };
 };
 

@@ -11,7 +11,7 @@ function RenderNoEmptyComponent(
   checkProps: string[]
 ): React.FunctionComponent {
   const newComponent: React.FunctionComponent = (props: Iprops) => {
-    const hasEmpty = checkProps.some(propName => {
+    const hasEmpty = checkProps.some((propName) => {
       if (Array.isArray(props[propName])) {
         return props[propName].length === 0;
       }

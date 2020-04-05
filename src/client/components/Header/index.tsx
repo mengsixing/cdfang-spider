@@ -3,7 +3,7 @@ import { Menu } from 'antd';
 import {
   HomeOutlined,
   GithubFilled,
-  CalendarOutlined
+  CalendarOutlined,
 } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
@@ -17,7 +17,7 @@ const { useState, useEffect, useContext } = React;
 
 const Header: React.FunctionComponent<RouteComponentProps> = ({
   history,
-  location
+  location,
 }) => {
   const gotoGithub = () => {
     window.location.href = GITHUB_URL;

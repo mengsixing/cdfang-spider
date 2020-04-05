@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import {
   AppContext,
   globalData,
-  IappContext
+  IappContext,
 } from '../../src/client/context/appContext';
 import CurrentHouse from '../../src/client/components/CurrentHouse';
 
@@ -18,10 +18,10 @@ const setup = () => {
         endTime: '2018-12-29 18:00:00',
         name: '融创香璟台西苑',
         number: 56,
-        status: '报名中'
-      }
+        status: '报名中',
+      },
     ],
-    activityKey: '高新南区'
+    activityKey: '高新南区',
   };
   const wrapper = mount(
     <AppContext.Provider value={appState}>
@@ -29,7 +29,7 @@ const setup = () => {
     </AppContext.Provider>
   );
   return {
-    wrapper
+    wrapper,
   };
 };
 

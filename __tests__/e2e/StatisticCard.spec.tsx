@@ -17,7 +17,7 @@ const setup = () => {
     </AppContext.Provider>
   );
   return {
-    wrapper
+    wrapper,
   };
 };
 

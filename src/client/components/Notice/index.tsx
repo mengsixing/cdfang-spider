@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { Icon, notification } from 'antd';
+import { notification } from 'antd';
+import {
+  SyncOutlined
+} from '@ant-design/icons';
 import gql from 'graphql-tag';
 import config from '../../config';
 import './styles.less';
@@ -48,8 +51,7 @@ const Notice: React.FunctionComponent = () => {
   const appState = useContext(AppContext);
   return (
     <span className={isLoading ? 'loading notice-icon' : 'notice-icon'}>
-      <Icon
-        type="sync"
+      <SyncOutlined
         onClick={() => {
           openNotification(setLoading, appState);
         }}

@@ -41,7 +41,7 @@ const ChartPanel: React.FunctionComponent<Iprops> = props => {
 
   // 只会执行一次
   const [state, setState] = useState(initState);
-  const [prevData, setPrevData] = useState();
+  const [prevData, setPrevData] = useState<cdFang.IhouseData[]>();
 
   // 模拟 getDerivedStateFromProps https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
   if (data !== prevData) {

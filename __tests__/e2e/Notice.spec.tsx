@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {SyncOutlined} from '@ant-design/icons'
 
 import { mount } from 'enzyme';
 import { GlobalWithFetchMock } from 'jest-fetch-mock';
@@ -26,7 +27,7 @@ describe('Notice 组件', () => {
     customGlobal.fetch.mockResponseOnce(
       JSON.stringify({ data: '12345', successArray: [1, 2, 3] })
     );
-    wrapper.find('Icon').simulate('click');
+    wrapper.find(SyncOutlined).simulate('click');
     expect(subtree.hasClass('notice-icon')).toBe(true);
   });
 });

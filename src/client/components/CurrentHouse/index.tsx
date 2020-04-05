@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Collapse, List, Col, Row, Icon } from 'antd';
-
+import { Collapse, List, Col, Row } from 'antd';
+import {
+  NotificationOutlined
+} from '@ant-design/icons';
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
@@ -20,7 +22,7 @@ const CurrentHouse: React.FunctionComponent = () => {
         <Row>
           <Col span={4}>
             <span className="current-house-list-notification-icon">
-              <Icon type="notification" />
+              <NotificationOutlined />
             </span>
             {item.area}
           </Col>
@@ -46,7 +48,7 @@ const CurrentHouse: React.FunctionComponent = () => {
   const result =
     currentHouses.length > 0 ? (
       <Collapse defaultActiveKey={['1']}>
-        <Panel header="正在登记" key="1" extra={<Icon type="notification" />}>
+        <Panel header="正在登记" key="1" extra={<NotificationOutlined />}>
           <List
             bordered
             dataSource={currentHouses}

@@ -11,7 +11,7 @@ interface Iarea {
   [yAxis: string]: any;
 }
 
-interface Iprops {
+export interface Iprops {
   data: Iarea[];
   title: string;
   xAxis: string;

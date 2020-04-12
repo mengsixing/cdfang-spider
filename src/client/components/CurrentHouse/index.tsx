@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{ useContext } from 'react';
 import { Collapse, List, Col, Row } from 'antd';
 import { NotificationOutlined } from '@ant-design/icons';
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
@@ -7,8 +7,6 @@ import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 import LinkToMap from '../LinkToMap';
 import './styles.less';
 
-const { useContext } = React;
-const { Panel } = Collapse;
 
 const CurrentHouse: React.FunctionComponent = () => {
   const { allData } = useContext(AppContext);
@@ -46,13 +44,13 @@ const CurrentHouse: React.FunctionComponent = () => {
   const result =
     currentHouses.length > 0 ? (
       <Collapse defaultActiveKey={['1']}>
-        <Panel header="正在登记" key="1" extra={<NotificationOutlined />}>
+        <Collapse.Panel header="正在登记" key="1" extra={<NotificationOutlined />}>
           <List
             bordered
             dataSource={currentHouses}
             renderItem={(item: JSX.Element) => <List.Item>{item}</List.Item>}
           />
-        </Panel>
+        </Collapse.Panel>
       </Collapse>
     ) : (
       <span />

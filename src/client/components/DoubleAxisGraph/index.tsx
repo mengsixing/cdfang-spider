@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
-import * as dayjs from 'dayjs';
-import * as _ from 'lodash';
+import dayjs from 'dayjs';
+import _ from 'lodash';
 import { HOUSE_NUMBER, BUILDER_NUMBER, RISE_COLOR } from '../../constants';
 
 // 导出给 test 文件

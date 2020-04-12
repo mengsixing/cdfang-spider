@@ -1,28 +1,25 @@
-import * as React from 'react';
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, RenderResult } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { mount } from 'enzyme';
 import Header from '../../src/client/components/Header';
 
-const setup = () => {
-  const wrapper = mount(
-    <BrowserRouter>
-      <Header />
-    </BrowserRouter>
-  );
-  return {
-    wrapper,
-  };
-};
-
+let wrapper: RenderResult;
 describe('Header 组件', () => {
-  const { wrapper } = setup();
+  beforeEach(() => {
+    wrapper = render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+  });
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.exists('.cdfang-header-item')).toBe(true);
+    expect(wrapper.container.querySelector('.cdfang-header-item')).toBeInTheDocument()
   });
 
   it('title是否正确 ?', () => {
-    expect(wrapper.find('.ant-menu-item-selected').text()).toEqual('首页');
+    expect(wrapper.container.querySelector('.ant-menu-item-selected')?.TEXT_NODE).toEqual('首页');
   });
 });

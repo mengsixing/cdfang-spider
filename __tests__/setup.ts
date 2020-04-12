@@ -1,12 +1,23 @@
-import * as Adapter from 'enzyme-adapter-react-16';
-import { configure } from 'enzyme';
-import { GlobalWithFetchMock } from 'jest-fetch-mock';
+// import * as Adapter from 'enzyme-adapter-react-16';
+// import { configure } from 'enzyme';
+// import { GlobalWithFetchMock } from 'jest-fetch-mock';
 
-const customGlobal: GlobalWithFetchMock = global as GlobalWithFetchMock;
+// // 处理 jsdom canvas 报错
+// customGlobal.console.error = () => {};
+// customGlobal.console.warn = () => {};
 
-customGlobal.fetch = require('jest-fetch-mock');
+// configure({
+//   adapter: new Adapter(),
+//   disableLifecycleMethods: false,
+// });
+// import '@testing-library/jest-dom/extend-expect';
+// import * as dayjs from 'dayjs'
 
-customGlobal.fetchMock = customGlobal.fetch;
+const customGlobal = global;
+
+// customGlobal.fetch = require('jest-fetch-mock');
+
+// customGlobal.fetchMock = customGlobal.fetch;
 
 Object.defineProperty(customGlobal, 'matchMedia', {
   writable: true,
@@ -22,11 +33,4 @@ Object.defineProperty(customGlobal, 'matchMedia', {
   })),
 });
 
-// 处理 jsdom canvas 报错
-customGlobal.console.error = () => {};
-customGlobal.console.warn = () => {};
-
-configure({
-  adapter: new Adapter(),
-  disableLifecycleMethods: false,
-});
+jest.mock("dayjs")

@@ -1,31 +1,25 @@
-import * as React from 'react';
-
-import { mount } from 'enzyme';
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, RenderResult } from '@testing-library/react';
 import Loading from '../../src/client/components/Loading';
 
-const setup = () => {
-  const props = {
-    tip: 'test',
-  };
-  const wrapper = mount(<Loading {...props} />);
-  return {
-    props,
-    wrapper,
-  };
+const props = {
+  tip: 'test',
 };
 
+let wrapper: RenderResult;
 describe('Loading 组件', () => {
-  const { wrapper, props } = setup();
-
-  it('是否存在根元素?', () => {
-    expect(wrapper.exists('.common-loading')).toBe(true);
+  beforeEach(() => {
+    wrapper = render(<Loading {...props} />);
   });
 
-  it('是否接收到正确的 tip 属性 ?', () => {
-    expect(wrapper.find('Spin').prop('tip')).toEqual('test');
+  it('是否存在根元素?', () => {
+    expect(wrapper.container.querySelector('.common-loading')).toBeInTheDocument()
   });
 
   it('是否渲染 tip 成功 ?', () => {
-    expect(wrapper.find('.ant-spin-text').text()).toBe(props.tip);
+    expect(wrapper.container.querySelector('.common-loading')).toBeInTheDocument()
+    expect(wrapper.getByText('test')).toBeInTheDocument()
+    expect(wrapper.container.querySelector('.ant-spin-text')?.TEXT_NODE).toBe(props.tip);
   });
 });

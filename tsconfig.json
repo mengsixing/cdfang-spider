@@ -1,22 +1,18 @@
 // https://www.tslang.cn/docs/handbook/compiler-options.html
 {
   "compilerOptions": {
-    "paths": { "*": ["types/*"] },
-    "baseUrl": ".",
-    "strict": true,
-    "strictNullChecks": true,
-    "alwaysStrict": true,
-    "removeComments": true,
-    // 配置编译目标使用的模块化标准
-    "module": "esnext",
     // 配置编译目标代码的版本标准
     "target": "es5",
-    "jsx": "react",
-    "noImplicitReturns": true,
+    "paths": { "*": ["types/*"] },
+    "allowJs": true,
+    "esModuleInterop": true, //设置es模块化导出commonjs模块化代码
     "allowSyntheticDefaultImports": true,
+    "strict": true,
+    // 配置编译目标使用的模块化标准
+    "module": "esnext",
     //https://github.com/ant-design/ant-design/issues/8642 配置解析模块的模式
     "moduleResolution": "node",
-    "esModuleInterop": true //设置es模块化导出commonjs模块化代码
+    "jsx": "react"
   },
   // 影响 webpack 构建
   "include": ["./src", "./build", "./types", "./__tests__"],

@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
-import * as dayjs from 'dayjs';
+import _ from 'lodash';
+import dayjs from 'dayjs';
 import { HOUSE_NUMBER, BUILDER_NUMBER, AREA } from '../constants';
 
 interface Iauarter {

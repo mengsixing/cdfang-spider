@@ -35,7 +35,9 @@ describe('CurrentHouse 组件', () => {
   });
 
   it('是否正确渲染', () => {
-    expect(wrapper.getByText('正在登记')).toBeInTheDocument()
-    expect(wrapper.container.querySelector('.ant-list-item')).toBeInTheDocument()
+    expect(wrapper.getByText('正在登记')).toBeInTheDocument();
+    expect(
+      wrapper.container.querySelector('.ant-list-item')
+    ).toBeInTheDocument();
   });
 });

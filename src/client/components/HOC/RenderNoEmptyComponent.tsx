@@ -1,5 +1,5 @@
 // 拒绝渲染属性为空的组件
-import * as React from 'react';
+import React from 'react';
 
 interface Iprops {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

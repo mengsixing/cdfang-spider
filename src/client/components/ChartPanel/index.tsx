@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Col, Row } from 'antd';
-import * as dayjs from 'dayjs';
-import * as _ from 'lodash';
+import dayjs from 'dayjs';
+import _ from 'lodash';
 
 import { AppContext } from '../../context/appContext';
 import CricleGraph from '../CricleGraph';

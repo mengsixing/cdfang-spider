@@ -16,10 +16,14 @@ describe('Header 组件', () => {
   });
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.container.querySelector('.cdfang-header-item')).toBeInTheDocument()
+    expect(
+      wrapper.container.querySelector('.cdfang-header-item')
+    ).toBeInTheDocument();
   });
 
   it('title是否正确 ?', () => {
-    expect(wrapper.container.querySelector('.ant-menu-item-selected')?.TEXT_NODE).toEqual('首页');
+    expect(
+      wrapper.container.querySelector('.ant-menu-item-selected')?.TEXT_NODE
+    ).toEqual('首页');
   });
 });

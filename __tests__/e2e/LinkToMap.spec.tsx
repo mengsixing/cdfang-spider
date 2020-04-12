@@ -16,6 +16,6 @@ describe('LinkToMap 组件', () => {
   });
 
   it('是否渲染成功 ?', () => {
-    expect(wrapper.getByText('保利天空之城')).toBeInTheDocument()
+    expect(wrapper.getByText('保利天空之城')).toBeInTheDocument();
   });
 });

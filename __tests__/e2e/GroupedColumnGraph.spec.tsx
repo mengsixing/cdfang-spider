@@ -29,5 +29,4 @@ describe('GroupedColumnGraph 组件', () => {
     expect(wrapper.getByText('月份统计图')).toBeInTheDocument();
     expect(wrapper.container.querySelector('canvas')).toBeInTheDocument();
   });
-
 });

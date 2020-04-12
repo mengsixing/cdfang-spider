@@ -22,6 +22,6 @@ describe('WholeTable 组件', () => {
     );
   });
   it('是否渲染成功 ?', () => {
-    expect(wrapper.container.querySelector('table')).toBeInTheDocument()
+    expect(wrapper.container.querySelector('table')).toBeInTheDocument();
   });
 });

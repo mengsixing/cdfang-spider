@@ -1,9 +1,8 @@
-import * as React from 'react';
-import * as _ from 'lodash';
-import * as dayjs from 'dayjs';
+import React from 'react';
+import _ from 'lodash';
+import dayjs from 'dayjs';
 import { Chart, Geom, Axis, Tooltip, Coord, Label, Guide } from 'bizcharts';
-// @ts-ignore
-import * as DataSet from '@antv/data-set';
+import DataSet from '@antv/data-set';
 
 const { DataView } = DataSet;
 const { Html } = Guide;

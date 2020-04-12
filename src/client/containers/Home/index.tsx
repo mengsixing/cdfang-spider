@@ -1,6 +1,6 @@
-import * as React from 'react';
-import * as _ from 'lodash';
-import * as dayjs from 'dayjs';
+import React from 'react';
+import _ from 'lodash';
+import dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
 import { RouteComponentProps } from 'react-router';
 

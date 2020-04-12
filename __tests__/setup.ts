@@ -33,4 +33,4 @@ Object.defineProperty(customGlobal, 'matchMedia', {
   })),
 });
 
-jest.mock("dayjs")
+jest.mock('dayjs');

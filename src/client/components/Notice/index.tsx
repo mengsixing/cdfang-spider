@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { notification } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import gql from 'graphql-tag';

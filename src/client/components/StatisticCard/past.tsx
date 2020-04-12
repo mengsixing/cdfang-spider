@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Card, Col, Row } from 'antd';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import util from '../../utils';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';

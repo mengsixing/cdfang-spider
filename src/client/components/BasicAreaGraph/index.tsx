@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
-// @ts-ignore
-import * as DataSet from '@antv/data-set';
+import DataSet from '@antv/data-set';
 import * as constants from '../../constants';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 

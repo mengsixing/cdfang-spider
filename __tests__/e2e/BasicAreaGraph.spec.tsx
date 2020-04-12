@@ -29,6 +29,6 @@ describe('BasicAreaGraph 组件', () => {
   });
 
   it('图表是否正确渲染', () => {
-    expect(wrapper.container.querySelector('canvas')).toBeInTheDocument()
+    expect(wrapper.container.querySelector('canvas')).toBeInTheDocument();
   });
 });

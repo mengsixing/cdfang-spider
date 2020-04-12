@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 // @ts-ignore
-import * as DataSet from '@antv/data-set';
-import * as dayjs from 'dayjs';
-import * as _ from 'lodash';
+import DataSet from '@antv/data-set';
+import dayjs from 'dayjs';
+import _ from 'lodash';
 import { Chart, Geom, Axis, Tooltip, Legend } from 'bizcharts';
 
 // 导出给 test 文件使用

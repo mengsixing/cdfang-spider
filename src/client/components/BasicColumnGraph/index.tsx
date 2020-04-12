@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as React from 'react';
+import React from 'react';
 import { Chart, Geom, Axis, Tooltip } from 'bizcharts';
 import RenderNoEmptyComponent from '../HOC/RenderNoEmptyComponent';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';

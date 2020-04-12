@@ -32,6 +32,6 @@ describe('ChartPanel 组件', () => {
 
   it('子图表是否渲染正确渲染', () => {
     expect(wrapper.container.querySelectorAll('canvas').length).toBe(2);
-    expect(wrapper.container.querySelector('.rank')).toBeInTheDocument()
+    expect(wrapper.container.querySelector('.rank')).toBeInTheDocument();
   });
 });

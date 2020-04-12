@@ -22,9 +22,13 @@ describe('Rank 组件', () => {
     wrapper = render(<Rank {...props} />);
   });
   it('title 是否正确 ?', () => {
-    expect(wrapper.container.querySelector('.rank-title')?.textContent).toBe(`排名：${props.title}`);
+    expect(wrapper.container.querySelector('.rank-title')?.textContent).toBe(
+      `排名：${props.title}`
+    );
   });
   it('渲染列表是否正确 ?', () => {
-    expect(wrapper.container.querySelectorAll('.rank-list>li').length).toBe(props.data.length);
+    expect(wrapper.container.querySelectorAll('.rank-list>li').length).toBe(
+      props.data.length
+    );
   });
 });

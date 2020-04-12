@@ -107,6 +107,7 @@
     "@typescript-eslint/parser": "^2.26.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.3.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-import": "^1.13.0",
     "codecov": "^3.6.5",
@@ -145,16 +146,19 @@
       "**/__tests__/**/*.(test|spec).ts?(x)"
     ],
     "setupFiles": [
-      "./__tests__/setup.ts",
+      "./__tests__/setupTests.ts",
       "jest-canvas-mock"
     ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "./node_modules/babel-jest"
+    },
     "moduleFileExtensions": [
       "js",
       "ts",
       "tsx",
       "json"
     ],
-    "collectCoverage": true,
+    "collectCoverage": false,
     "collectCoverageFrom": [
       "src/client/components/**/*.{ts,tsx}"
     ],

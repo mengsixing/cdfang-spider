@@ -16,15 +16,18 @@ const props: Iprops = {
 
 let wrapper: RenderResult;
 describe('BasicAreaGraph 组件', () => {
-  it('默认 title 是否正确渲染', () => {
+  beforeEach(() => {
     wrapper = render(<BasicAreaGraph {...props} />);
+  });
+
+  it('默认 title 是否正确渲染', () => {
     expect(
       wrapper.getByText(`${props.title} / 月(统计图)`)
     ).toBeInTheDocument();
   });
 
   it('自定义 title 是否正确渲染', () => {
-    wrapper = render(<BasicAreaGraph {...props} title="楼盘数" />);
+    wrapper.rerender(<BasicAreaGraph {...props} title="楼盘数" />)
     expect(wrapper.getByText(`楼盘数 / 月(统计图)`)).toBeInTheDocument();
   });
 

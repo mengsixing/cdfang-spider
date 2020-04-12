@@ -24,7 +24,7 @@ describe('Loading 组件', () => {
       wrapper.container.querySelector('.common-loading')
     ).toBeInTheDocument();
     expect(wrapper.getByText('test')).toBeInTheDocument();
-    expect(wrapper.container.querySelector('.ant-spin-text')?.TEXT_NODE).toBe(
+    expect(wrapper.container.querySelector('.ant-spin-text')?.textContent).toBe(
       props.tip
     );
   });

@@ -1,5 +1,5 @@
 /*eslint-disable */
-import * as supertest from 'supertest';
+import supertest from 'supertest';
 const server = require('../../dist/app.js');
 
 describe('api 测试', () => {

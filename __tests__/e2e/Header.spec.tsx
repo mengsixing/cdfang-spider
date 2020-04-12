@@ -23,7 +23,7 @@ describe('Header 组件', () => {
 
   it('title是否正确 ?', () => {
     expect(
-      wrapper.container.querySelector('.ant-menu-item-selected')?.TEXT_NODE
+      wrapper.container.querySelector('.ant-menu-item-selected')?.textContent
     ).toEqual('首页');
   });
 });

@@ -3,6 +3,11 @@
   "compilerOptions": {
     // 配置编译目标代码的版本标准
     "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "paths": { "*": ["types/*"] },
     "allowJs": true,
     "esModuleInterop": true, //设置es模块化导出commonjs模块化代码

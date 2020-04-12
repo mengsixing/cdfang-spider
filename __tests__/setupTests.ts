@@ -1,5 +1,7 @@
-const customGlobal = global;
-Object.defineProperty(customGlobal, 'matchMedia', {
+import fetch from 'unfetch';
+
+window.fetch = fetch
+Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
     matches: false,

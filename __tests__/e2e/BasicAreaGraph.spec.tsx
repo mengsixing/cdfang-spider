@@ -27,7 +27,7 @@ describe('BasicAreaGraph 组件', () => {
   });
 
   it('自定义 title 是否正确渲染', () => {
-    wrapper.rerender(<BasicAreaGraph {...props} title="楼盘数" />)
+    wrapper.rerender(<BasicAreaGraph {...props} title="楼盘数" />);
     expect(wrapper.getByText(`楼盘数 / 月(统计图)`)).toBeInTheDocument();
   });
 

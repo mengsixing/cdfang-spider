@@ -1,6 +1,6 @@
 import fetch from 'unfetch';
 
-window.fetch = fetch
+window.fetch = fetch;
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({

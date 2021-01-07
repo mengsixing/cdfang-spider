@@ -27,7 +27,7 @@ const CurrentHouse: React.FunctionComponent = () => {
           <Col span={4}>{`${item.number}套`}</Col>
           <Col span={8}>
             {`登记截止时间：${item.endTime} `}
-            {item.status === '正在报名' ?(
+            {item.status === '正在报名' ? (
               <a
                 className="current-house-list-register-link"
                 rel="nofollow me noopener noreferrer"
@@ -36,8 +36,9 @@ const CurrentHouse: React.FunctionComponent = () => {
               >
                 登记
               </a>
-):item.status}
-
+            ) : (
+              item.status
+            )}
           </Col>
         </Row>
       </div>

@@ -30,14 +30,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lmjben/cdfang-spider.git"
+    "url": "git+https://github.com/mengsixing/cdfang-spider.git"
   },
-  "author": "lmjben",
+  "author": "mengsixing",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lmjben/cdfang-spider/issues"
+    "url": "https://github.com/mengsixing/cdfang-spider/issues"
   },
-  "homepage": "https://github.com/lmjben/cdfang-spider#readme",
+  "homepage": "https://github.com/mengsixing/cdfang-spider#readme",
   "dependencies": {
     "@ant-design/icons": "^4.0.5",
     "@antv/data-set": "^0.11.1",

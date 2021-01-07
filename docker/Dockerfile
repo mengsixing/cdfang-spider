@@ -1,7 +1,7 @@
 # 小体积的 node 镜像
 FROM mhart/alpine-node
 
-LABEL maintainer = "lmjben <yinhengliben@gmail.com>"
+LABEL maintainer = "mengsixing <yinhengliben@gmail.com>"
 
 RUN rm -rf /app
 RUN mkdir /app

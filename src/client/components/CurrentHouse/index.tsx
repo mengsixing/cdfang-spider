@@ -34,10 +34,14 @@ const CurrentHouse: React.FunctionComponent = () => {
                 target="_blank"
                 href={HOUSE_PURCHASE_REGISTRATION}
               >
-                登记
+                登记 🔥
               </a>
             ) : (
-              item.status
+              <span className="current-house-list-register-link">
+                {item.status === '未报名' ? '即将报名' : item.status}
+                {' '}
+                ⌛
+              </span>
             )}
           </Col>
         </Row>

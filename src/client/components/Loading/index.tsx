@@ -10,12 +10,10 @@ interface Iprops {
 const Loading: React.FunctionComponent<Iprops> = ({
   height = '50px',
   tip = '',
-}) => {
-  return (
-    <div className="common-loading" style={{ lineHeight: height, height }}>
-      <Spin tip={tip} />
-    </div>
+}) => (
+  <div className="common-loading" style={{ lineHeight: height, height }}>
+    <Spin tip={tip} />
+  </div>
   );
-};
 
 export default Loading;

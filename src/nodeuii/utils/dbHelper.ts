@@ -30,9 +30,7 @@ const DbHelper = {
       clearTimeout(connectTimeOut);
     });
     // 单例模式
-    DbHelper.connect = () => {
-      return mongoose;
-    };
+    DbHelper.connect = () => mongoose;
     return mongoose;
   },
   mongooseConnect(): void {

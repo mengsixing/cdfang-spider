@@ -72,9 +72,7 @@ const CommonTable: React.FunctionComponent = () => {
         },
       ],
       filterMultiple: true,
-      onFilter: (value: string, datalist: cdFang.IhouseData) => {
-        return datalist.status.indexOf(value) === 0;
-      },
+      onFilter: (value: string, datalist: cdFang.IhouseData) => datalist.status.indexOf(value) === 0,
       render: (text: string) => {
         if (text !== '报名结束') {
           return <span style={{ color: 'green' }}>{text}</span>;

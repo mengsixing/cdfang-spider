@@ -33,9 +33,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const { allData } = useContext(AppContext);
 
   // 构建区域图需要的数据
-  const arrayByDay = _.groupBy(allData, (item) => {
-    return dayjs(item.beginTime).format('YYYY-MM');
-  });
+  const arrayByDay = _.groupBy(allData, (item) => dayjs(item.beginTime).format('YYYY-MM'));
 
   const houseData: ImonthHouse[] = [];
   const builderData: ImonthBuilder[] = [];

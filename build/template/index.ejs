@@ -38,8 +38,10 @@
     <div id="root"></div>
     <!-- 根据不同的环境，引入不同的cdn -->
     <% if (htmlWebpackPlugin.options.env !== 'production') { %>
-    <script src="https://package.cdfangyuan.cn/react@16.8.6.development.js"></script>
-    <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.development.js"></script>
+    <!-- <script src="https://package.cdfangyuan.cn/react@16.8.6.development.js"></script> -->
+    <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
+    <!-- <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.development.js"></script> -->
     <% } else { %>
     <script src="https://package.cdfangyuan.cn/react@16.8.6.production.min.js"></script>
     <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.production.min.js"></script>

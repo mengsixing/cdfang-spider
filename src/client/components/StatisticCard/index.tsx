@@ -16,36 +16,34 @@ const StatisticCard: React.FunctionComponent = () => {
   const thisMonthInfo = util.getThisMonthInfo(allData);
   const thisQuarterInfo = util.getThisQuarterInfo(allData);
 
-  const renderCard = (info: IhouseInfo) => {
-    return (
-      <div>
-        <div className="statistic-card-text">
-          <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
-          <span
-            style={{
+  const renderCard = (info: IhouseInfo) => (
+    <div>
+      <div className="statistic-card-text">
+        <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
+        <span
+          style={{
               color: info.increaseBuildNumber
                 ? constants.RISE_COLOR
                 : constants.DECLINE_COLOR,
             }}
-          >
-            {info.increaseBuildNumberString}
-          </span>
-        </div>
-        <div className="statistic-card-text">
-          <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
-          <span
-            style={{
+        >
+          {info.increaseBuildNumberString}
+        </span>
+      </div>
+      <div className="statistic-card-text">
+        <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
+        <span
+          style={{
               color: info.increaseHouseNumber
                 ? constants.RISE_COLOR
                 : constants.DECLINE_COLOR,
             }}
-          >
-            {info.increaseHouseNumberString}
-          </span>
-        </div>
+        >
+          {info.increaseHouseNumberString}
+        </span>
       </div>
+    </div>
     );
-  };
 
   return (
     <Row gutter={16}>

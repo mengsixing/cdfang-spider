@@ -13,7 +13,7 @@ const analyticsSchema = new mongoose.Schema({
 const AnalyticsCol = mongoose.model('analytics', analyticsSchema);
 
 const analyticsModel = {
-  async add(item: cdFang.Ianalytics) {
+  async add(item: cdFang.Ianalytics): Promise<cdFang.Ianalytics> {
     const house = new AnalyticsCol(item);
     house.save(err => {
       if (err) {

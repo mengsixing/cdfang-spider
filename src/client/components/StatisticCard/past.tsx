@@ -14,16 +14,12 @@ const StatisticCardPast: React.FunctionComponent = () => {
   const allInfo = util.getAllInfo(allData);
 
   // 年度房源
-  const maxHouse = _.maxBy(allData, (house) => {
-    return house.number;
-  }) as cdFang.IhouseData;
+  const maxHouse = _.maxBy(allData, (house) => house.number) as cdFang.IhouseData;
 
   // 年度楼盘
   const dataByName = _.groupBy(allData, (item) => item.name);
   const maxBuilderName =
-    _.maxBy(Object.keys(dataByName), (item) => {
-      return dataByName[item].length;
-    }) || '';
+    _.maxBy(Object.keys(dataByName), (item) => dataByName[item].length) || '';
 
   let maxBuildLength = 0;
   let maxBuild = 0;
@@ -35,9 +31,7 @@ const StatisticCardPast: React.FunctionComponent = () => {
   // 年度区域
   const dataByArea = _.groupBy(allData, (item) => item.area);
   const maxAreaName =
-    _.maxBy(Object.keys(dataByArea), (item) => {
-      return dataByArea[item].length;
-    }) || '';
+    _.maxBy(Object.keys(dataByArea), (item) => dataByArea[item].length) || '';
   let maxAreaLength = 0;
   let maxArea = 0;
   if (dataByArea[maxAreaName]) {

@@ -11,8 +11,7 @@ interface Ipage {
 
 export const createRequestPromise = (
   pageNo: number
-): Promise<cdFang.IhouseData[]> => {
-  return new Promise(
+): Promise<cdFang.IhouseData[]> => new Promise(
     (resolve): void => {
       request
         .post(
@@ -43,7 +42,6 @@ export const createRequestPromise = (
         );
     }
   );
-};
 
 const initspider = async (pageStart: number, pageEnd: number) => {
   const allPromises = [];

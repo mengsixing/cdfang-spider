@@ -7,7 +7,7 @@ interface Iprops {
 }
 
 function RenderNoEmptyComponent(
-  WrapperedComponent: Function,
+  WrapperedComponent: React.FunctionComponent,
   checkProps: string[]
 ): React.FunctionComponent {
   const newComponent: React.FunctionComponent = (props: Iprops) => {

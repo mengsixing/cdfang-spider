@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import DataSet from '@antv/data-set';
 import dayjs from 'dayjs';
 import _ from 'lodash';

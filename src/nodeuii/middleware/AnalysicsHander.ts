@@ -7,7 +7,7 @@ const logger = log4js.getLogger('globallog');
 const analyticsHander = {
   init(app: Koa): void {
     // 捕获 请求
-    app.use(async (ctx: Koa.Context, next: Function) => {
+    app.use(async (ctx: Koa.Context, next: Koa.Next) => {
       logger.info(ctx.req.url);
       if (ctx.method !== 'OPTIONS') {
         // graphql 请求

@@ -40,6 +40,8 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
   },
   // 解决不能直接默认导入 ts 文件 的问题。import/no-unresolved
   settings: {

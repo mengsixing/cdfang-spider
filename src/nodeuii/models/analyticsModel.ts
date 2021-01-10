@@ -1,4 +1,5 @@
 import log4js from 'log4js';
+import { FilterQuery } from 'mongoose';
 import DbHelper from '../utils/dbHelper';
 
 const mongoose = DbHelper.connect();
@@ -23,7 +24,7 @@ const analyticsModel = {
     return item;
   },
 
-  find(query: object) {
+  find(query: FilterQuery<cdFang.Ianalytics>): cdFang.Ianalytics[] {
     return AnalyticsCol.find(query, err => {
       if (err) {
         logger.error(JSON.stringify(err));

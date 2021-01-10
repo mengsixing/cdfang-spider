@@ -4,7 +4,7 @@ import { Logger } from 'log4js';
 const ErrorHander = {
   init(app: Koa, logger: Logger): void {
     // 捕获内部错误
-    app.use(async (ctx: Koa.Context, next: Function) => {
+    app.use(async (ctx: Koa.Context, next: Koa.Next) => {
       try {
         await next();
       } catch (e) {
@@ -14,7 +14,7 @@ const ErrorHander = {
       }
     });
     // 捕获 404 错误
-    app.use(async (ctx: Koa.Context, next: Function) => {
+    app.use(async (ctx: Koa.Context, next: Koa.Next) => {
       await next();
       if (ctx.status === 404 && ctx.url !== '/404.html') {
         ctx.redirect('/404.html');

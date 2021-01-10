@@ -40,7 +40,7 @@
   "homepage": "https://github.com/mengsixing/cdfang-spider#readme",
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
-    "@antv/data-set": "^0.11.7",
+    "@antv/data-set": "^0.11.1",
     "antd": "^4.10.0",
     "apollo-boost": "^0.4.9",
     "apollo-server-koa": "^2.19.1",
@@ -72,7 +72,6 @@
     "supertest": "^6.0.1",
     "webpack": "^5.12.1",
     "webpack-bundle-analyzer": "^4.3.0",
-    "webpack-deep-scope-plugin": "^1.6.2",
     "webpack-merge": "^5.7.3",
     "workbox-webpack-plugin": "^6.0.2"
   },
@@ -149,7 +148,7 @@
       "jest-canvas-mock"
     ],
     "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "./node_modules/babel-jest"
+      "\\.[jt]sx?$": "babel-jest"
     },
     "moduleFileExtensions": [
       "js",

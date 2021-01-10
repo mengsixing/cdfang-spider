@@ -43,7 +43,7 @@ export const createRequestPromise = (
     }
   );
 
-const initspider = async (pageStart: number, pageEnd: number) => {
+const initspider = async (pageStart: number, pageEnd: number):Promise<cdFang.IhouseData[]> => {
   const allPromises = [];
   for (let i = pageStart; i <= pageEnd; i += 1) {
     allPromises.push(createRequestPromise(i));

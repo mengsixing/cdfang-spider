@@ -34,7 +34,7 @@ const CurrentHouse: React.FunctionComponent = () => {
                 target="_blank"
                 href={HOUSE_PURCHASE_REGISTRATION}
               >
-                登记 
+                正在登记
                 {' '}
                 <span role="img" aria-label="Fire">🔥</span>
               </a>

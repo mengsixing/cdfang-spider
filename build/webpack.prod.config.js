@@ -2,10 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin')
-const merge = require('webpack-merge');
-const {
-  default: WebpackDeepScopeAnalysisPlugin
-} = require('webpack-deep-scope-plugin');
+const { merge } = require('webpack-merge');
 const QiniuUploadPlugin = require('qiniu-upload-plugin');
 const qiniuConfig = require('./qiniu.config');
 const baseConfig = require('./webpack.base.config');
@@ -28,7 +25,9 @@ const prodConfig = {
           {
             loader: 'less-loader',
             options: {
-              javascriptEnabled: true
+              lessOptions:{
+                javascriptEnabled: true
+              }
             }
           }
         ]
@@ -39,7 +38,6 @@ const prodConfig = {
     new MiniCssExtractPlugin({
       filename: 'cdfang-spider-[name].[hash:8].css'
     }),
-    new WebpackDeepScopeAnalysisPlugin(),
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',
       favicon: './build/template/favicon.ico',

@@ -1,5 +1,8 @@
 name: ci
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build-and-deploy:
     name: ${{ matrix.kind }} ${{ matrix.os }}
@@ -9,23 +12,23 @@ jobs:
         os: [macOS-latest, ubuntu-latest, windows-latest]
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v2.3.1
         with:
           persist-credentials: false
 
-      - name: Install and Test 🔧
-        run: |
-          npm install
-          npm run test
-
-      - name: Build 🙅‍♀️
+      - name: Install and Build
         env:
           BUILD_ENV: ci
         run: |
+          npm install
           npm run build
 
-      - name: Codecov 💉
+      - name: Test
+        run: |
+          npm run test
+
+      - name: Codecov
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: codecov/codecov-action@v1.2.1
         with:

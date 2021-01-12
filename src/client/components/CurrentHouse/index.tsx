@@ -36,13 +36,17 @@ const CurrentHouse: React.FunctionComponent = () => {
               >
                 正在登记
                 {' '}
-                <span role="img" aria-label="Fire">🔥</span>
+                <span role="img" aria-label="Fire">
+                  🔥
+                </span>
               </a>
             ) : (
               <span className="current-house-list-register-link">
                 {item.status === '未报名' ? '即将报名' : item.status}
                 {' '}
-                <span role="img" aria-label="Funnel">⌛</span>
+                <span role="img" aria-label="Funnel">
+                  ⌛
+                </span>
               </span>
             )}
           </Col>

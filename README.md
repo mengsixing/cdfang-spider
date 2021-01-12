@@ -1,6 +1,6 @@
 # cdfang-spider
 
-[![Build Status](https://www.travis-ci.org/mengsixing/cdfang-spider.svg?branch=master)](https://www.travis-ci.org/mengsixing/cdfang-spider)
+[![Build Status](https://github.com/mengsixing/cdfang-spider/workflows/ci/badge.svg)](https://github.com/mengsixing/cdfang-spider/actions)
 [![codecov](https://codecov.io/gh/mengsixing/cdfang-spider/branch/master/graph/badge.svg)](https://codecov.io/gh/mengsixing/cdfang-spider)
 [![David](https://img.shields.io/david/mengsixing/cdfang-spider.svg)](https://david-dm.org/mengsixing/cdfang-spider)
 

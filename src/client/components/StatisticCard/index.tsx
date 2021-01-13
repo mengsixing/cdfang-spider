@@ -22,10 +22,10 @@ const StatisticCard: React.FunctionComponent = () => {
         <span>{`${constants.BUILDER_NUMBER}：${info.buildNumber}`}</span>
         <span
           style={{
-              color: info.increaseBuildNumber
-                ? constants.RISE_COLOR
-                : constants.DECLINE_COLOR,
-            }}
+            color: info.increaseBuildNumber
+              ? constants.RISE_COLOR
+              : constants.DECLINE_COLOR,
+          }}
         >
           {info.increaseBuildNumberString}
         </span>
@@ -34,16 +34,16 @@ const StatisticCard: React.FunctionComponent = () => {
         <span>{`${constants.HOUSE_NUMBER}：${info.houseNumber}`}</span>
         <span
           style={{
-              color: info.increaseHouseNumber
-                ? constants.RISE_COLOR
-                : constants.DECLINE_COLOR,
-            }}
+            color: info.increaseHouseNumber
+              ? constants.RISE_COLOR
+              : constants.DECLINE_COLOR,
+          }}
         >
           {info.increaseHouseNumberString}
         </span>
       </div>
     </div>
-    );
+  );
 
   return (
     <Row gutter={16}>

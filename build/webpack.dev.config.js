@@ -12,7 +12,6 @@ const devConfig = {
   },
   devServer: {
     hot: true,
-    inline: true,
     // 代理服务器端域名
     proxy: {
       '/': 'http://localhost:8082',
@@ -45,11 +44,7 @@ const devConfig = {
       env: process.env.NODE_ENV,
     }),
     new webpack.HotModuleReplacementPlugin(),
-  ],
-  resolve: {
-    alias: {
-    },
-  },
+  ]
 };
 
 module.exports = merge(baseConfig, devConfig);

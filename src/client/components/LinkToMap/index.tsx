@@ -16,6 +16,6 @@ const LinkToMap: React.FunctionComponent<Iprops> = ({
   >
     {name}
   </a>
-  );
+);
 
 export default LinkToMap;

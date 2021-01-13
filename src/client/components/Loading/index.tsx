@@ -14,6 +14,6 @@ const Loading: React.FunctionComponent<Iprops> = ({
   <div className="common-loading" style={{ lineHeight: height, height }}>
     <Spin tip={tip} />
   </div>
-  );
+);
 
 export default Loading;

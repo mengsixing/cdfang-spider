@@ -8,7 +8,10 @@ import { AppContext, IappContext } from '../../context/appContext';
 
 const { useState, useContext } = React;
 
-function openNotification(setLoading: (...args: boolean[])=>void, appState: IappContext) {
+function openNotification(
+  setLoading: (...args: boolean[]) => void,
+  appState: IappContext
+) {
   setLoading(true);
   const { getGraphqlClient } = config;
 

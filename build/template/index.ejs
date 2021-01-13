@@ -38,13 +38,11 @@
     <div id="root"></div>
     <!-- 根据不同的环境，引入不同的cdn -->
     <% if (htmlWebpackPlugin.options.env !== 'production') { %>
-    <!-- <script src="https://package.cdfangyuan.cn/react@16.8.6.development.js"></script> -->
     <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
-    <!-- <script src="https://package.cdfangyuan.cn/react-dom@16.8.6.development.js"></script> -->
     <% } else { %>
-    <script src="https://unpkg.com/react@17.0.1/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@17.0.1/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js"></script>
     <script src="https://package.cdfangyuan.cn/quicklink@1.0.1.min.js"></script>
     <script>
       // 注册 serviceWorker
@@ -59,7 +57,8 @@
       });
     </script>
     <% } %>
-    <script src="https://package.cdfangyuan.cn/bizcharts@3.2.2.min.js"></script>
-    <script src="https://package.cdfangyuan.cn/data-set@0.8.9.min.js"></script>
+    <script src="https://unpkg.com/lodash@4.17.20/lodash.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/bizcharts/3.5.8/umd/BizCharts.js"></script>
+    <script src="https://unpkg.com/@antv/data-set@0.11.1/build/data-set.js"></script>
   </body>
 </html>

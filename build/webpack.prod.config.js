@@ -12,7 +12,7 @@ const prodConfig = {
   output: {
     publicPath: qiniuConfig.publicPath,
     path: path.resolve('./dist/client'),
-    filename: 'cdfang-spider-[name]-[contenthash:8].js'
+    filename: 'cdfang-spider-[name]-[contenthash].js'
   },
   module: {
     rules: [
@@ -36,7 +36,7 @@ const prodConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'cdfang-spider-[name].[hash:8].css'
+      filename: 'cdfang-spider-[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
       template: './build/template/index.ejs',

@@ -5,30 +5,30 @@ import { AppContext, IappContext } from './appContext';
 const AppProvider = ({ children }: React.Props<{ value: IappContext }>) => {
   const changeData = (data: cdFang.IhouseData[]) => {
     changeAppState((prevState) => ({
-        ...prevState,
-        allData: data,
-      }));
+      ...prevState,
+      allData: data,
+    }));
   };
 
   const changeActivityKey = (key: string) => {
     changeAppState((prevState) => ({
-        ...prevState,
-        activityKey: key,
-      }));
+      ...prevState,
+      activityKey: key,
+    }));
   };
 
   const changeSelectedYear = (year: number) => {
     changeAppState((prevState) => ({
-        ...prevState,
-        selectedYear: year,
-      }));
+      ...prevState,
+      selectedYear: year,
+    }));
   };
 
   const changeLoading = (isLoading: boolean) => {
     changeAppState((prevState) => ({
-        ...prevState,
-        isLoading,
-      }));
+      ...prevState,
+      isLoading,
+    }));
   };
 
   const initAppState: IappContext = {

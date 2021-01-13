@@ -14,7 +14,10 @@ const StatisticCardPast: React.FunctionComponent = () => {
   const allInfo = util.getAllInfo(allData);
 
   // 年度房源
-  const maxHouse = _.maxBy(allData, (house) => house.number) as cdFang.IhouseData;
+  const maxHouse = _.maxBy(
+    allData,
+    (house) => house.number
+  ) as cdFang.IhouseData;
 
   // 年度楼盘
   const dataByName = _.groupBy(allData, (item) => item.name);

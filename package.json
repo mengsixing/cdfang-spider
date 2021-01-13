@@ -19,7 +19,6 @@
     "test": "cross-env NODE_ENV=test jest --no-cache --colors --coverage --forceExit --detectOpenHandles",
     "lint": "eslint --fix --ext tsx,ts src __tests__",
     "prettier": "prettier --write --check ./**/*.{ts,tsx,less}",
-    "coverage": "codecov",
     "commit": "npx git-cz"
   },
   "husky": {

@@ -24,6 +24,6 @@ const App: React.FunctionComponent = ({ children }) => (
       </Layout.Footer>
     </Layout>
   </div>
-  );
+);
 
 export default App;

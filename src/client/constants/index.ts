@@ -12,10 +12,12 @@ export const HOUSE_PURCHASE_REGISTRATION =
   'http://zw.cdzj.chengdu.gov.cn/lottery/accept/index';
 
 export const tabKeyRouterMap: { [x: string]: string } = {
+  '2020': '/2020',
   '2019': '/2019',
   '2018': '/2018',
   '2017': '/2017',
   home: '/',
+  '/2020': '2020',
   '/2019': '2019',
   '/2018': '2018',
   '/2017': '2017',

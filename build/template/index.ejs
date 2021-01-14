@@ -2,14 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="dns-prefetch" href="//cdn.yinhengli.com" />
     <link rel="dns-prefetch" href="//package.cdfangyuan.cn" />
     <meta
       name="viewport"
       content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="成都房源分析 - 基于房协网最新数据" />
+    <meta name="description" content="成都摇号房源分析 - 大数据可视化页面展示" />
     <title>成都房源分析</title>
     <script>
       var _hmt = _hmt || [];
@@ -20,29 +19,16 @@
         s.parentNode.insertBefore(hm, s);
       })();
     </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-141175707-1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'UA-141175707-1');
-    </script>
   </head>
   <body>
     <div id="root"></div>
     <!-- 根据不同的环境，引入不同的cdn -->
     <% if (htmlWebpackPlugin.options.env !== 'production') { %>
-    <script src="https://unpkg.com/react@17.0.1/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.development.js"></script>
+    <script src="https://package.cdfangyuan.cn/react@17.0.1.development.js"></script>
+    <script src="https://package.cdfangyuan.cn/react-dom@17.0.1.development.js"></script>
     <% } else { %>
-    <script crossorigin src="https://unpkg.com/react@17.0.1/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17.0.1/umd/react-dom.production.min.js"></script>
+      <script src="https://package.cdfangyuan.cn/react@17.0.1.production.min.js"></script>
+      <script src="https://package.cdfangyuan.cn/react-dom@17.0.1.production.min.js"></script>
     <script src="https://package.cdfangyuan.cn/quicklink@1.0.1.min.js"></script>
     <script>
       // 注册 serviceWorker

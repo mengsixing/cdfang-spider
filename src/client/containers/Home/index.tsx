@@ -80,7 +80,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
         <StatisticCard />
       </div>
       <div className="home-content-houses">
-        <Tabs type="card">
+        <Tabs>
           <TabPane tab={constants.HOUSE_NUMBER} key="1">
             <Row>
               <Col span={18}>
@@ -93,6 +93,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
                 <Rank data={houseRankData} title="月份" unit="套" />
               </Col>
             </Row>
+            <hr/>
             <BasicColumnGraph
               title="房源 / 区域(统计图)"
               data={chartHouseData}
@@ -113,6 +114,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
                 <Rank data={builderRankData} title="月份" unit="个" />
               </Col>
             </Row>
+            <hr/>
             <BasicColumnGraph
               title="楼盘数 / 区域(统计图)"
               data={chartBuilderData}

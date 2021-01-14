@@ -44,7 +44,7 @@
     "apollo-boost": "^0.4.9",
     "apollo-server-koa": "^2.19.1",
     "autoprefixer": "^9.8.6",
-    "bizcharts": "^3.5.8",
+    "bizcharts": "v3-latest",
     "cheerio": "^1.0.0-rc.5",
     "cssnano": "^4.1.10",
     "dayjs": "^1.10.2",

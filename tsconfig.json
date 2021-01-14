@@ -8,7 +8,11 @@
       "dom.iterable",
       "esnext"
     ],
-    "paths": { "*": ["types/*"] },
+    "paths": {
+      "*": [
+        "types/*"
+      ]
+    },
     "allowJs": true,
     "esModuleInterop": true, //设置es模块化导出commonjs模块化代码
     "allowSyntheticDefaultImports": true,
@@ -20,6 +24,14 @@
     "jsx": "react"
   },
   // 影响 webpack 构建
-  "include": ["./src", "./build", "./types", "./__tests__"],
-  "exclude": ["./node_modules", "./__mocks__"]
+  "include": [
+    "./src",
+    "./build",
+    "./types",
+    "./__tests__"
+  ],
+  "exclude": [
+    "./node_modules",
+    "./__mocks__"
+  ]
 }

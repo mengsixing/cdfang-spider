@@ -93,7 +93,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
                 <Rank data={houseRankData} title="月份" unit="套" />
               </Col>
             </Row>
-            <hr/>
+            <hr />
             <BasicColumnGraph
               title="房源 / 区域(统计图)"
               data={chartHouseData}
@@ -114,7 +114,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
                 <Rank data={builderRankData} title="月份" unit="个" />
               </Col>
             </Row>
-            <hr/>
+            <hr />
             <BasicColumnGraph
               title="楼盘数 / 区域(统计图)"
               data={chartBuilderData}

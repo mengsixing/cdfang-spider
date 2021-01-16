@@ -79,7 +79,28 @@ const spiderPage = async (pageNo = 1): Promise<Ipage> => {
   };
 };
 
+const spiderHousePrice = async (houseName:string): Promise<number> => {
+  const housePrice =  new Promise<number>((resolve)=>{
+    request
+    .get(
+      `https://cd.lianjia.com/xiaoqu/rs${encodeURIComponent(houseName)}/`
+    )
+    .end(
+      (err, result): void => {
+        if (err) {
+          return;
+        }
+        const $ = cheerio.load(result.text);
+        const price = Number.parseFloat($('.totalPrice').children('span').text())
+        resolve(price)
+      }
+    );
+  })
+  return housePrice;
+};
+
 export default {
   initspider,
-  spiderPage
+  spiderPage,
+  spiderHousePrice
 };

@@ -105,6 +105,9 @@ const houseModel = {
         logger.error(JSON.stringify(err));
       }
     }) as unknown) as cdFang.IhouseData[];
+  },
+  getPrice(title:string):number{
+    return 123
   }
 };
 

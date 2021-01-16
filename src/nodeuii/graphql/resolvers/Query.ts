@@ -42,6 +42,9 @@ export default {
     }
     return allHouses;
   },
+  getHousePrice: async (
+    _parent: never, // 不使用第一个变量
+    args: {houseName:string}) => spider.spiderHousePrice(args.houseName),
   spiderPageOne: async () => spider.spiderPage(),
   pvs: async (
     _parent: never, // 不使用第一个变量

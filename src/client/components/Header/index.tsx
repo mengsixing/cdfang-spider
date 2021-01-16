@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import {
   HomeOutlined,
-  GithubFilled,
+  GithubOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router';
@@ -61,7 +61,7 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
       <div className="cdfang-header-item">
         <span className="cdfang-header-item-pv">{`累计查询：${pvs}次`}</span>
         <Notice />
-        <GithubFilled onClick={gotoGithub} />
+        <GithubOutlined onClick={gotoGithub} />
       </div>
       <Menu
         theme="light"

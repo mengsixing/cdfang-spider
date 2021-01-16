@@ -66,6 +66,7 @@ const PastYear: React.FunctionComponent<RouteComponentProps> = () => {
           yAxis={constants.HOUSE_NUMBER}
           desc
         />
+        <hr />
         <BasicColumnGraph
           title="楼盘数排序图"
           data={chartBuilderData}

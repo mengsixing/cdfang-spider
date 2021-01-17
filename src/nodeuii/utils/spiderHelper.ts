@@ -99,8 +99,38 @@ const spiderHousePrice = async (houseName:string): Promise<number> => {
   return housePrice;
 };
 
+const initSpiderPrice = async (): Promise<string> => {
+  const houses = await houseModel.find({price:undefined})
+  houses.forEach(house=>{
+    if(typeof(house.price) !== 'number'){
+      request
+        .get(
+          `${config.spiderPriceDomain}/xiaoqu/rs${encodeURIComponent(house.name)}/`
+        )
+        .end(
+          (err, result): void => {
+            if (err) {
+              return;
+            }
+            const $ = cheerio.load(result.text);
+            let price;
+            if($('.totalPrice').length === 1){
+              price = Number.parseFloat($('.totalPrice').children('span').text()) || 0
+            } else {
+              price = 0
+            }
+            houseModel.update({name:house.name},{price})
+          }
+        );
+    }
+  })
+
+  return '后台操作进行中';
+};
+
 export default {
   initspider,
+  initSpiderPrice,
   spiderPage,
   spiderHousePrice
 };

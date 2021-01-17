@@ -55,6 +55,13 @@ router
       ctx.body = result;
     }
   )
+  .get(
+    '/spiderHousePrice',
+    async (ctx): Promise<void> => {
+      const result = await spider.initSpiderPrice();
+      ctx.body = result;
+    }
+  )
   // 支持 browserRouter
   .get(/\/20[1-9][0-9]/, ctx => {
     const file = fs.readFileSync(path.join('client/index.html'));

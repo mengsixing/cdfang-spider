@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import log4js from 'log4js';
-import { FilterQuery } from 'mongoose';
 import DbHelper from '../utils/dbHelper';
 
 const mongoose = DbHelper.connect();
@@ -14,7 +13,8 @@ const HouseSchema = new mongoose.Schema({
   number: Number,
   beginTime: String,
   endTime: String,
-  status: String
+  status: String,
+  price: Number
 });
 // 创建表
 const HouseCol = mongoose.model('house', HouseSchema);
@@ -32,7 +32,7 @@ const houseModel = {
     if (findItem.length > 0) {
       // 如果状态变更执行更新操作
       if (findItem[0].status !== item.status) {
-        this.update(item);
+        this.findOneAndUpdate(item);
       } else {
         result = false;
       }
@@ -81,11 +81,25 @@ const houseModel = {
    * 更新一个房源信息
    * @param {cdFang.IhouseData} item
    */
-  update(item: cdFang.IhouseData): void {
+  findOneAndUpdate(item: Partial<cdFang.IhouseData>,condition: Partial<cdFang.IhouseData> = { _id: item._id }): void {
     HouseCol.findOneAndUpdate(
-      { _id: item._id },
+      condition,
       item,
-      (err): void => {
+      null,
+      (err) => {
+        if (err) {
+          logger.error(JSON.stringify(err));
+        }
+      }
+    );
+  },
+
+  update(condition: Partial<cdFang.IhouseData>,item: Partial<cdFang.IhouseData>): void {
+    HouseCol.updateOne(
+      condition,
+      item,
+      null,
+      (err) => {
         if (err) {
           logger.error(JSON.stringify(err));
         }
@@ -99,15 +113,12 @@ const houseModel = {
    * @param {object} [query]
    * @returns {cdFang.IhouseData[]}
    */
-  find(query?: FilterQuery<cdFang.IhouseData>): cdFang.IhouseData[] {
-    return (HouseCol.find(query, err => {
+  find(query: Partial<cdFang.IhouseData>): cdFang.IhouseData[] {
+    return HouseCol.find(query, err => {
       if (err) {
         logger.error(JSON.stringify(err));
       }
-    }) as unknown) as cdFang.IhouseData[];
-  },
-  getPrice(title:string):number{
-    return 123
+    });
   }
 };
 

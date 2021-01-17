@@ -5,6 +5,7 @@ const mongoDBHost =
 
 export default {
   spiderDomain: 'http://zw.cdzj.chengdu.gov.cn',
+  spiderPriceDomain:'https://cd.lianjia.com',
   serverPort: 8082,
   // 和 docker-compose 里的 mongo 容器相对应
   databaseUrl: mongoDBHost

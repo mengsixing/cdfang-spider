@@ -2,7 +2,6 @@ import React from 'react';
 import { Menu } from 'antd';
 import {
   HomeOutlined,
-  GithubOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router';
@@ -61,7 +60,7 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
       <div className="cdfang-header-item">
         <span className="cdfang-header-item-pv">{`累计查询：${pvs}次`}</span>
         <Notice />
-        <GithubOutlined onClick={gotoGithub} />
+        <iframe src="https://ghbtns.com/github-btn.html?user=mengsixing&repo=cdfang-spider&type=star&count=true" frameBorder="0" scrolling="0" width="102" height="20" title="GitHub" />
       </div>
       <Menu
         theme="light"

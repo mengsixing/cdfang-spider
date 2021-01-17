@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { Layout, Col, Row, Tabs } from 'antd';
 import { RouteComponentProps } from 'react-router';
 
+import { FireTwoTone } from '@ant-design/icons';
 import utils from '../../utils';
 import BasicAreaGraph from '../../components/BasicAreaGraph';
 import WholeTable from '../../components/WholeTable';
@@ -146,7 +147,15 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
               desc
             />
           </TabPane>
-          <TabPane tab={constants.HOUSE_PRICE} key="3">
+          <TabPane
+            tab={
+              <span>
+                {constants.HOUSE_PRICE}
+                <FireTwoTone style={{ marginLeft: '5px' }} />
+              </span>
+            }
+            key="3"
+          >
             <Row>
               <Col span={18}>
                 <BasicAreaGraph

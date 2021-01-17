@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import log4js from 'log4js';
+import { FilterQuery } from 'mongoose';
 import DbHelper from '../utils/dbHelper';
 
 const mongoose = DbHelper.connect();
@@ -81,9 +82,9 @@ const houseModel = {
    * 更新一个房源信息
    * @param {cdFang.IhouseData} item
    */
-  findOneAndUpdate(item: Partial<cdFang.IhouseData>,condition: Partial<cdFang.IhouseData> = { _id: item._id }): void {
+  findOneAndUpdate(item: Partial<cdFang.IhouseData>,query: FilterQuery<cdFang.IhouseData> = { _id: item._id }): void {
     HouseCol.findOneAndUpdate(
-      condition,
+      query,
       item,
       null,
       (err) => {
@@ -94,9 +95,9 @@ const houseModel = {
     );
   },
 
-  update(condition: Partial<cdFang.IhouseData>,item: Partial<cdFang.IhouseData>): void {
+  update(query: FilterQuery<cdFang.IhouseData>,item: Partial<cdFang.IhouseData>): void {
     HouseCol.updateOne(
-      condition,
+      query,
       item,
       null,
       (err) => {
@@ -113,7 +114,7 @@ const houseModel = {
    * @param {object} [query]
    * @returns {cdFang.IhouseData[]}
    */
-  find(query: Partial<cdFang.IhouseData>): cdFang.IhouseData[] {
+  find(query: FilterQuery<cdFang.IhouseData>): cdFang.IhouseData[] {
     return HouseCol.find(query, err => {
       if (err) {
         logger.error(JSON.stringify(err));

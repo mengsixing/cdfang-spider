@@ -36,6 +36,7 @@ router
             beginTime: '2019-03-22 09:00:00',
             endTime: '2019-03-24 18:00:00',
             status: '正在报名',
+            price:0,
             __v: 0
           }
         ];
@@ -56,7 +57,7 @@ router
     }
   )
   .get(
-    '/spiderHousePrice',
+    '/initSpiderPrice',
     async (ctx): Promise<void> => {
       const result = await spider.initSpiderPrice();
       ctx.body = result;

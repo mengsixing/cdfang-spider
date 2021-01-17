@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import './styles.less';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
-import LinkToMap from '../LinkToMap';
+import HouseDetail from '../HouseDetail';
 
 interface Irank {
   _id: string;
@@ -37,7 +37,9 @@ const Rank: React.FunctionComponent<Iprops> = ({
             // eslint-disable-next-line no-underscore-dangle
             <li key={item._id}>
               <span className={istop3}>{index + 1}</span>
-              <span>{isLink ? <LinkToMap name={item.name} /> : item.name}</span>
+              <span>
+                {isLink ? <HouseDetail name={item.name} /> : item.name}
+              </span>
               <span>{item.number + unit}</span>
             </li>
           );

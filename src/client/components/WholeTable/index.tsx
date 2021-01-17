@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Table } from 'antd';
 import { AppContext } from '../../context/appContext';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
-import LinkToMap from '../LinkToMap';
+import HouseDetail from '../HouseDetail';
 
 const { useContext } = React;
 
@@ -30,7 +30,7 @@ const CommonTable: React.FunctionComponent = () => {
       title: '项目名称',
       dataIndex: 'name',
       key: 'name',
-      render: (name: string) => <LinkToMap name={name} />,
+      render: (name: string) => <HouseDetail name={name} />,
     },
     {
       title: '住房套数',

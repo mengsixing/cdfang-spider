@@ -4,7 +4,7 @@ import { NotificationOutlined } from '@ant-design/icons';
 import { HOUSE_PURCHASE_REGISTRATION } from '../../constants';
 import { AppContext } from '../../context/appContext';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
-import LinkToMap from '../LinkToMap';
+import HouseDetail from '../HouseDetail';
 import './styles.less';
 
 const CurrentHouse: React.FunctionComponent = () => {
@@ -22,7 +22,7 @@ const CurrentHouse: React.FunctionComponent = () => {
             {item.area}
           </Col>
           <Col span={8}>
-            <LinkToMap name={item.name} />
+            <HouseDetail name={item.name} />
           </Col>
           <Col span={4}>{`${item.number}套`}</Col>
           <Col span={8}>

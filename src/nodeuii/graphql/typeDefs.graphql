@@ -15,7 +15,7 @@ type PageOneArray {
 
 type Query {
   allHouses(year: Int): [House]
-  getHousePrice(houseName:String): Float
+  housePrice(houseName:String): Float
   spiderPageOne: PageOneArray
   pvs(routerName: String): Int
 }

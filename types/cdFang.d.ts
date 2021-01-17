@@ -8,7 +8,7 @@ declare namespace cdFang {
     name: string;
     number: number;
     status: string;
-    price: number;
+    price?: number;
   }
 
   interface Ianalytics {

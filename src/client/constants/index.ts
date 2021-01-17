@@ -1,5 +1,8 @@
 export const HOUSE_NUMBER = '房源数';
 export const BUILDER_NUMBER = '楼盘数';
+export const HOUSE_PRICE = '房价';
+export const HOUSE_PRICE_MAX = '最高价格';
+export const HOUSE_PRICE_MIN = '最低价格';
 export const SALE_TIMES = '开盘数';
 export const AREA = '区域';
 export const GITHUB_URL = 'https://github.com/mengsixing/cdfang-spider';

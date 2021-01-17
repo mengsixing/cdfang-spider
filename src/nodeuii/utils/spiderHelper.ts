@@ -91,7 +91,12 @@ const spiderHousePrice = async (houseName:string): Promise<number> => {
           return;
         }
         const $ = cheerio.load(result.text);
-        const price = Number.parseFloat($('.totalPrice').children('span').text())
+        let price;
+        if($('.totalPrice').length === 1){
+          price = Number.parseFloat($('.totalPrice').children('span').text()) || 0
+        } else {
+          price = 0
+        }
         resolve(price)
       }
     );

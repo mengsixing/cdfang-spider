@@ -26,6 +26,7 @@ export function requestData(year: string, callback: (...args: any[]) => void): v
             beginTime
             endTime
             status
+            price
           }
         }
       `

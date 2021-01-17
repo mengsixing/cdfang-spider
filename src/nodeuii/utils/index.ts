@@ -9,7 +9,8 @@ export function transformArray(array: string[][]): cdFang.IhouseData[] {
       number: Number.parseInt(item[6], 10),
       beginTime: item[8],
       endTime: item[9],
-      status: item[13]
+      status: item[13],
+      price: undefined
     })
   );
   return result;

@@ -34,6 +34,7 @@ export default {
           beginTime: '2019-03-22 09:00:00',
           endTime: '2019-03-24 18:00:00',
           status: '正在报名',
+          price:0,
           __v: 0
         }
       ];
@@ -44,7 +45,7 @@ export default {
   },
   housePrice: async (
     _parent: never, // 不使用第一个变量
-    args: {houseName:string}) => spider.spiderHousePrice(args.houseName),
+    args: {houseName:string}):Promise<number> => spider.spiderHousePrice(args.houseName),
   spiderPageOne: async () => spider.spiderPage(),
   pvs: async (
     _parent: never, // 不使用第一个变量

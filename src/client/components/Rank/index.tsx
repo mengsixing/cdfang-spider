@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import './styles.less';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import { RenderLoadingComponent } from '../HOC/RenderLoadingComponent';
 import HouseDetail from '../HouseDetail';
 
@@ -24,12 +25,34 @@ const Rank: React.FunctionComponent<Iprops> = ({
   unit,
   isLink,
 }) => {
-  const rankData = _.sortBy(data, (item: Irank) => -item.number);
+  const [rankData, changeRankData] = useState(
+    _.sortBy(data, (item: Irank) => -item.number)
+  );
+  const [desc, changeDesc] = useState(1);
   const rankTitle = title ? `排名：${title}` : '排名';
+
+  const changeSort = () => {
+    if (desc) {
+      changeRankData(_.sortBy(data, (item: Irank) => item.number));
+      changeDesc(0);
+    } else {
+      changeRankData(_.sortBy(data, (item: Irank) => -item.number));
+      changeDesc(1);
+    }
+  };
 
   return (
     <div className="rank">
-      <div className="rank-title">{rankTitle}</div>
+      <div className="rank-title">
+        <span>{rankTitle}</span>
+        <span
+          className="rank-title-desc"
+          onClick={changeSort}
+          aria-hidden="true"
+        >
+          {desc ? <ArrowDownOutlined /> : <ArrowUpOutlined />}
+        </span>
+      </div>
       <ul className="rank-list">
         {rankData.map((item: Irank, index: number) => {
           const istop3 = index < 3 ? 'top3' : '';

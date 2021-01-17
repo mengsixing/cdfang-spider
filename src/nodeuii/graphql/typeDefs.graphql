@@ -6,6 +6,7 @@ type House {
   beginTime: String
   endTime: String
   status: String
+  price: Int
 }
 
 type PageOneArray {

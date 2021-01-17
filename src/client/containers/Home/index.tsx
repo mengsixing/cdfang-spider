@@ -29,6 +29,12 @@ interface ImonthBuilder {
   [constants.BUILDER_NUMBER]: number;
 }
 
+interface ImonthHousePrice {
+  month: string;
+  [constants.HOUSE_PRICE_MAX]: number;
+  [constants.HOUSE_PRICE_MIN]: number;
+}
+
 const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const { allData } = useContext(AppContext);
 
@@ -39,6 +45,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
 
   const houseData: ImonthHouse[] = [];
   const builderData: ImonthBuilder[] = [];
+  const housePriceData: ImonthHousePrice[] = [];
   Object.keys(arrayByDay)
     .sort()
     .forEach((key) => {
@@ -51,6 +58,17 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
         month: key,
         [constants.HOUSE_NUMBER]: houseNumber,
       });
+
+      const hasPriceHouses = arrayByDay[key].filter((house) => house.price);
+      if (hasPriceHouses.length > 0) {
+        const housePriceMax = _.maxBy(hasPriceHouses, 'price')?.price || 0;
+        const housePriceMin = _.minBy(hasPriceHouses, 'price')?.price || 0;
+        housePriceData.push({
+          month: key,
+          [constants.HOUSE_PRICE_MAX]: housePriceMax,
+          [constants.HOUSE_PRICE_MIN]: housePriceMin,
+        });
+      }
     });
 
   // 构建排行数据
@@ -63,6 +81,11 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
     _id: utils.getRandomId(),
     name: item.month,
     number: item[constants.HOUSE_NUMBER],
+  }));
+  const housePriceRankData = housePriceData.map((item) => ({
+    _id: utils.getRandomId(),
+    name: item.month,
+    number: item[constants.HOUSE_PRICE_MAX],
   }));
 
   // 柱状图数据
@@ -122,6 +145,23 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
               yAxis={constants.BUILDER_NUMBER}
               desc
             />
+          </TabPane>
+          <TabPane tab={constants.HOUSE_PRICE} key="3">
+            <Row>
+              <Col span={18}>
+                <BasicAreaGraph
+                  data={housePriceData}
+                  title={constants.HOUSE_PRICE}
+                  fields={[
+                    constants.HOUSE_PRICE_MAX,
+                    constants.HOUSE_PRICE_MIN,
+                  ]}
+                />
+              </Col>
+              <Col span={6}>
+                <Rank data={housePriceRankData} title="月份" unit="元" />
+              </Col>
+            </Row>
           </TabPane>
         </Tabs>
       </div>

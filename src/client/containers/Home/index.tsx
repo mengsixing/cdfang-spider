@@ -99,9 +99,11 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
   );
 
   // 柱状图数据
-  const { chartHouseData, chartBuilderData,chartHousePriceData } = utils.getBasicColumnGraphData(
-    allData
-  );
+  const {
+    chartHouseData,
+    chartBuilderData,
+    chartHousePriceData,
+  } = utils.getBasicColumnGraphData(allData);
 
   return (
     <Content className="content">

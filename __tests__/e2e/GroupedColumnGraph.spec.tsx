@@ -14,11 +14,11 @@ const props: Iprops = {
       name: '融创香璟台西苑',
       number: '56',
       status: '报名结束',
-      price:'0',
+      price: '0',
       _id: '',
     },
   ],
-  title:'房价统计图'
+  title: '房价统计图',
 };
 
 let wrapper: RenderResult;

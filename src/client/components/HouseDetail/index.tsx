@@ -14,16 +14,13 @@ const HouseDetail: React.FunctionComponent<Iprops> = ({
   name,
   city = '510100', // 成都
 }) => {
-
-  const { allData } = useContext(
-    AppContext
-  );
-  const price = allData.find(data => data.name.includes(name))?.price
+  const { allData } = useContext(AppContext);
+  const price = allData.find((data) => data.name.includes(name))?.price;
   const content = (
     <div>
       <p>
         单价：
-        {price  ? (
+        {price ? (
           <span>
             <span className="house-price">{price}</span>元/m<sup>2</sup>
           </span>

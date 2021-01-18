@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import './styles.less';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
@@ -41,9 +41,10 @@ const Rank: React.FunctionComponent<Iprops> = ({
     }
   };
 
-  useEffect(()=>{
-    changeRankData(_.sortBy(data, (item: Irank) => item.number));
-  },[data])
+  useEffect(() => {
+    changeRankData(_.sortBy(data, (item: Irank) => -item.number));
+    changeDesc(1);
+  }, [data]);
 
   return (
     <div className="rank">

@@ -83,11 +83,19 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
     name: item.month,
     number: item[constants.HOUSE_NUMBER],
   }));
-  const housePriceRankData = housePriceData.map((item) => ({
+  const maxHousePriceRankData = housePriceData.map((item) => ({
     _id: utils.getRandomId(),
-    name: item.month,
+    name: `${item.month} 最高价`,
     number: item[constants.HOUSE_PRICE_MAX],
   }));
+  const minHousePriceRankData = housePriceData.map((item) => ({
+    _id: utils.getRandomId(),
+    name: `${item.month} 最低价`,
+    number: item[constants.HOUSE_PRICE_MAX],
+  }));
+  const housePriceRankData = maxHousePriceRankData.concat(
+    minHousePriceRankData
+  );
 
   // 柱状图数据
   const { chartHouseData, chartBuilderData } = utils.getBasicColumnGraphData(

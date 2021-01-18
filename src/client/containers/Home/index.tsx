@@ -11,6 +11,7 @@ import WholeTable from '../../components/WholeTable';
 import StatisticCard from '../../components/StatisticCard';
 import Rank from '../../components/Rank';
 import BasicColumnGraph from '../../components/BasicColumnGraph';
+import GroupedColumnGraph from '../../components/GroupedColumnGraph';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
 import './styles.less';
@@ -98,7 +99,7 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
   );
 
   // 柱状图数据
-  const { chartHouseData, chartBuilderData } = utils.getBasicColumnGraphData(
+  const { chartHouseData, chartBuilderData,chartHousePriceData } = utils.getBasicColumnGraphData(
     allData
   );
 
@@ -179,6 +180,14 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
                 <Rank data={housePriceRankData} title="月份" unit="元" />
               </Col>
             </Row>
+            <hr />
+            <GroupedColumnGraph
+              title="房价 / 区域(统计图)"
+              data={chartHousePriceData}
+              xAxis={constants.AREA}
+              yAxis={constants.HOUSE_PRICE}
+              desc
+            />
           </TabPane>
         </Tabs>
       </div>

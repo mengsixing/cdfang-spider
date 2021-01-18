@@ -12,11 +12,13 @@ const props: Iprops = {
       beginTime: '2018-12-27 09:00:00',
       endTime: '2018-12-29 18:00:00',
       name: '融创香璟台西苑',
-      number: 56,
+      number: '56',
       status: '报名结束',
+      price:'0',
       _id: '',
     },
   ],
+  title:'房价统计图'
 };
 
 let wrapper: RenderResult;
@@ -26,7 +28,7 @@ describe('GroupedColumnGraph 组件', () => {
   });
 
   it('是否正确渲染', () => {
-    expect(wrapper.getByText('月份统计图')).toBeInTheDocument();
+    expect(wrapper.getByText('房价统计图')).toBeInTheDocument();
     expect(wrapper.container.querySelector('canvas')).toBeInTheDocument();
   });
 });

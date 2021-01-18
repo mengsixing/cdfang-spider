@@ -82,6 +82,7 @@ function getBasicColumnGraphData(allData: cdFang.IhouseData[]) {
   const areasGroup = _.groupBy(allData, (item: cdFang.IhouseData) => item.area);
   const chartHouseData: cdFang.IareaHouse[] = [];
   const chartBuilderData: cdFang.IareaBuilder[] = [];
+  const chartHousePriceData: {[T:string]:string|number}[] = [{name:'最高价格'},{name:'最低价格'}];
   Object.keys(areasGroup).forEach(key => {
     chartHouseData.push({
       [AREA]: key,
@@ -91,8 +92,10 @@ function getBasicColumnGraphData(allData: cdFang.IhouseData[]) {
       [AREA]: key,
       [BUILDER_NUMBER]: areasGroup[key].length
     });
+    chartHousePriceData[0][key] = _.maxBy(areasGroup[key],'price')?.price || 0
+    chartHousePriceData[1][key] = _.minBy(areasGroup[key].filter(item=>item.price),'price')?.price || 0
   });
-  return { chartHouseData, chartBuilderData };
+  return { chartHouseData, chartBuilderData,chartHousePriceData };
 }
 
 function getYearList(): number[] {

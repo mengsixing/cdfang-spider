@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Popover } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import gql from 'graphql-tag';
-import config from '../../config';
+import { AppContext } from '../../context/appContext';
 import './styles.less';
 
+const { useContext } = React;
 interface Iprops {
   name: string;
   city?: string;
@@ -14,12 +14,16 @@ const HouseDetail: React.FunctionComponent<Iprops> = ({
   name,
   city = '510100', // 成都
 }) => {
-  const [price, setPrice] = useState(0);
+
+  const { allData } = useContext(
+    AppContext
+  );
+  const price = allData.find(data => data.name.includes(name))?.price
   const content = (
     <div>
       <p>
         单价：
-        {price > 0 ? (
+        {price  ? (
           <span>
             <span className="house-price">{price}</span>元/m<sup>2</sup>
           </span>
@@ -39,20 +43,7 @@ const HouseDetail: React.FunctionComponent<Iprops> = ({
       </p>
     </div>
   );
-  useEffect(() => {
-    const { getGraphqlClient } = config;
-    getGraphqlClient()
-      .query({
-        query: gql`
-        {
-          housePrice(houseName:"${name}")
-        }
-      `,
-      })
-      .then((result) => {
-        setPrice(result.data.housePrice);
-      });
-  }, [name]);
+
   return (
     <Popover placement="right" title={name} content={content}>
       <span className="house-detail-name">{name}</span>

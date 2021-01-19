@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 import dayjs from 'dayjs';
-import { Layout, Col, Row, Tabs } from 'antd';
+import { Layout, Col, Row, Tabs, Tag, Timeline } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import { RouteComponentProps } from 'react-router';
 
-import { FireTwoTone } from '@ant-design/icons';
 import utils from '../../utils';
 import BasicAreaGraph from '../../components/BasicAreaGraph';
 import WholeTable from '../../components/WholeTable';
@@ -12,6 +12,7 @@ import StatisticCard from '../../components/StatisticCard';
 import Rank from '../../components/Rank';
 import BasicColumnGraph from '../../components/BasicColumnGraph';
 import GroupedColumnGraph from '../../components/GroupedColumnGraph';
+import HouseDetail from '../../components/HouseDetail';
 import { AppContext } from '../../context/appContext';
 import * as constants from '../../constants';
 import './styles.less';
@@ -39,29 +40,33 @@ interface ImonthHousePrice {
 
 const Home: React.FunctionComponent<RouteComponentProps> = () => {
   const { allData } = useContext(AppContext);
+  const [desc, changeTimelineDesc] = useState(true);
 
   // 构建区域图需要的数据
-  const arrayByDay = _.groupBy(allData, (item) =>
+  const arrayByMonth = _.groupBy(allData, (item) =>
     dayjs(item.beginTime).format('YYYY-MM')
+  );
+  const arrayByDay = _.groupBy(allData, (item) =>
+    dayjs(item.beginTime).format('YYYY-MM-DD')
   );
 
   const houseData: ImonthHouse[] = [];
   const builderData: ImonthBuilder[] = [];
   const housePriceData: ImonthHousePrice[] = [];
-  Object.keys(arrayByDay)
+  Object.keys(arrayByMonth)
     .sort()
     .forEach((key) => {
-      const houseNumber = _.sumBy(arrayByDay[key], 'number');
+      const houseNumber = _.sumBy(arrayByMonth[key], 'number');
       builderData.push({
         month: key,
-        [constants.BUILDER_NUMBER]: arrayByDay[key].length,
+        [constants.BUILDER_NUMBER]: arrayByMonth[key].length,
       });
       houseData.push({
         month: key,
         [constants.HOUSE_NUMBER]: houseNumber,
       });
 
-      const hasPriceHouses = arrayByDay[key].filter((house) => house.price);
+      const hasPriceHouses = arrayByMonth[key].filter((house) => house.price);
       if (hasPriceHouses.length > 0) {
         const housePriceMax = _.maxBy(hasPriceHouses, 'price')?.price || 0;
         const housePriceMin = _.minBy(hasPriceHouses, 'price')?.price || 0;
@@ -162,7 +167,9 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
             tab={
               <span>
                 {constants.HOUSE_PRICE}
-                <FireTwoTone style={{ marginLeft: '5px' }} />
+                <Tag style={{ marginLeft: '5px' }} color="processing">
+                  new
+                </Tag>
               </span>
             }
             key="3"
@@ -192,6 +199,32 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
             />
           </TabPane>
         </Tabs>
+      </div>
+      <div className="content-section content-timeline">
+        <div className="content-timeline-title">
+          <span
+            onClick={()=>{changeTimelineDesc(!desc)}}
+            aria-hidden="true"
+          >
+            时间轴
+            {desc ? <ArrowDownOutlined /> : <ArrowUpOutlined />}
+          </span>
+        </div>
+        <div className="content-timeline-content">
+          <Timeline mode="alternate" reverse={desc}>
+            {Object.keys(arrayByDay)
+              .sort()
+              .map((day) => (
+                <Timeline.Item label={day}>
+                  {arrayByDay[day].map((item) => (
+                    <span className="content-timeline-item">
+                      <HouseDetail name={item.name} />
+                    </span>
+                  ))}
+                </Timeline.Item>
+              ))}
+          </Timeline>
+        </div>
       </div>
       <div className="content-section">
         <WholeTable />

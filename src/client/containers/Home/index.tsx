@@ -203,7 +203,9 @@ const Home: React.FunctionComponent<RouteComponentProps> = () => {
       <div className="content-section content-timeline">
         <div className="content-timeline-title">
           <span
-            onClick={()=>{changeTimelineDesc(!desc)}}
+            onClick={() => {
+              changeTimelineDesc(!desc);
+            }}
             aria-hidden="true"
           >
             时间轴

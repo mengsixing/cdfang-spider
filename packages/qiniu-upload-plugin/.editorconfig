@@ -1,0 +1,12 @@
+# EditorConfig is awesome: http://editorconfig.org/#example-file
+
+# top-most EditorConfig file
+root = true
+
+[Makefile]
+indent_style = tab
+
+[*.{js,md,jsx,es6,es}]
+charset = utf-8
+indent_style = space
+indent_size = 2

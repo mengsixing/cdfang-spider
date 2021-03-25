@@ -1,0 +1,8 @@
+29 error Error: Command failed with exit code 1: git add -- packages/qiniu-upload-plugin/package.json packages/qiniu-upload-plugin/package-lock.json lerna.json
+29 error The following paths are ignored by one of your .gitignore files:
+29 error packages/qiniu-upload-plugin/package-lock.json
+29 error Use -f if you really want to add them.
+29 error     at makeError (/Users/mengsixing/.nvm/versions/node/v14.15.1/lib/node_modules/lerna/node_modules/execa/lib/error.js:59:11)
+29 error     at handlePromise (/Users/mengsixing/.nvm/versions/node/v14.15.1/lib/node_modules/lerna/node_modules/execa/index.js:114:26)
+29 error     at processTicksAndRejections (internal/process/task_queues.js:93:5)
+29 error     at async Promise.all (index 0)

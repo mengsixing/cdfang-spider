@@ -1,6 +1,6 @@
 {
   "name": "qiniu-upload-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "上传 Webpack 打包出来的 assets 到 七牛云。",
   "main": "index.js",
   "scripts": {

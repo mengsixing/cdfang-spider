@@ -77,6 +77,18 @@ const Header: React.FunctionComponent<RouteComponentProps> = ({
           <HomeOutlined />
           首页
         </Menu.Item>
+        <Menu.Item key="2023">
+          <CalendarOutlined />
+          2023年
+        </Menu.Item>
+        <Menu.Item key="2022">
+          <CalendarOutlined />
+          2022年
+        </Menu.Item>
+        <Menu.Item key="2021">
+          <CalendarOutlined />
+          2021年
+        </Menu.Item>
         <Menu.Item key="2020">
           <CalendarOutlined />
           2020年

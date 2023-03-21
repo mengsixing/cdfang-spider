@@ -12,38 +12,38 @@ interface Ipage {
 export const createRequestPromise = (
   pageNo: number
 ): Promise<cdFang.IhouseData[]> => new Promise(
-  (resolve): void => {
-    request
-      .get(
-        `${config.spiderDomain}/lottery/accept/projectList?pageNo=${pageNo}`
-      )
-      .end(
-        (err, result): void => {
-          if (err) {
-            return;
-          }
-          const $ = cheerio.load(result.text);
-          const trList: string[][] = [];
-          $('#_projectInfo>tr').each(
-            (i, tr): void => {
-              const tdList: string[] = [];
-              $(tr)
-                .find('td')
-                .each(
-                  (j, td): void => {
-                    tdList.push($(td).text());
-                  }
-                );
-              trList.push(tdList);
+    (resolve): void => {
+      request
+        .get(
+          `${config.spiderDomain}/lottery/accept/projectList?pageNo=${pageNo}`
+        )
+        .end(
+          (err, result): void => {
+            if (err) {
+              return;
             }
-          );
-          resolve(util.transformArray(trList));
-        }
-      );
-  }
-);
+            const $ = cheerio.load(result.text);
+            const trList: string[][] = [];
+            $('#_projectInfo>tr').each(
+              (i, tr): void => {
+                const tdList: string[] = [];
+                $(tr)
+                  .find('td')
+                  .each(
+                    (j, td): void => {
+                      tdList.push($(td).text());
+                    }
+                  );
+                trList.push(tdList);
+              }
+            );
+            resolve(util.transformArray(trList));
+          }
+        );
+    }
+  );
 
-const initspider = async (pageStart: number, pageEnd: number): Promise<cdFang.IhouseData[]> => {
+const initspider = async (pageStart: number, pageEnd: number):Promise<cdFang.IhouseData[]> => {
   const allPromises = [];
   for (let i = pageStart; i <= pageEnd; i += 1) {
     allPromises.push(createRequestPromise(i));
@@ -79,36 +79,36 @@ const spiderPage = async (pageNo = 1): Promise<Ipage> => {
   };
 };
 
-const spiderHousePrice = async (houseName: string): Promise<number> => {
-  const housePrice = new Promise<number>((resolve) => {
+const spiderHousePrice = async (houseName:string): Promise<number> => {
+  const housePrice =  new Promise<number>((resolve)=>{
     request
-      .get(
-        `https://cd.lianjia.com/xiaoqu/rs${encodeURIComponent(houseName)}/`
-      )
-      .end(
-        (err, result): void => {
-          if (err) {
-            return;
-          }
-          const $ = cheerio.load(result.text);
-          let price;
-          if ($('.totalPrice').length === 1) {
-            price = Number.parseFloat($('.totalPrice').children('span').text()) || 0
-          } else {
-            price = 0
-          }
-          resolve(price)
+    .get(
+      `https://cd.lianjia.com/xiaoqu/rs${encodeURIComponent(houseName)}/`
+    )
+    .end(
+      (err, result): void => {
+        if (err) {
+          return;
         }
-      );
+        const $ = cheerio.load(result.text);
+        let price;
+        if($('.totalPrice').length === 1){
+          price = Number.parseFloat($('.totalPrice').children('span').text()) || 0
+        } else {
+          price = 0
+        }
+        resolve(price)
+      }
+    );
   })
   return housePrice;
 };
 
 const initSpiderPrice = async (): Promise<string> => {
-  const housesNotExist = await houseModel.find({ price: { $exists: false } })
-  const housesNotPrice = await houseModel.find({ price: 0 })
+  const housesNotExist = await houseModel.find({price:{$exists:false}})
+  const housesNotPrice = await houseModel.find({price:0})
   const needSpiderHouse = housesNotExist.concat(housesNotPrice)
-  needSpiderHouse.forEach(house => {
+  needSpiderHouse.forEach(house=>{
     request
       .get(
         `${config.spiderPriceDomain}/xiaoqu/rs${encodeURIComponent(house.name)}/`
@@ -120,13 +120,13 @@ const initSpiderPrice = async (): Promise<string> => {
           }
           const $ = cheerio.load(result.text);
           let price;
-          if ($('.totalPrice').length === 1) {
+          if($('.totalPrice').length === 1){
             price = Number.parseFloat($('.totalPrice').children('span').text()) || 0
           } else {
             price = 0
           }
           // eslint-disable-next-line no-underscore-dangle
-          houseModel.update({ _id: house._id }, { price })
+          houseModel.update({_id:house._id},{price})
         }
       );
   })

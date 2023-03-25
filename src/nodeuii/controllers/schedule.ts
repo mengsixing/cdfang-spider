@@ -10,12 +10,16 @@ const runEvery15Minute = async (): Promise<void> => {
   schedule.scheduleJob(
     '*/15 * * * *',
     async (): Promise<void> => {
-      const pageList = await Promise.all([
-        createRequestPromise(1),
-        createRequestPromise(2),
-        createRequestPromise(3)
-      ]);
-      const page = [...pageList[0], ...pageList[1], ...pageList[2]];
+      const pageList = [];
+      for (let i = 1; i < 50; ++i) {
+        const requestPromise = createRequestPromise(i);
+        pageList.push(requestPromise);
+      }
+      const page: any[] = [];
+      const values = await Promise.all(pageList);
+      for (const value of values) {
+        page.push(...value);
+      }
       const newNumber = await new Promise(
         (resolve): void => {
           let newDataNumber = 0;

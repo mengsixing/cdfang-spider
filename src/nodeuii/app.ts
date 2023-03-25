@@ -2,6 +2,7 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import log4js from 'log4js';
 import koaBody from 'koa-body';
+import 'data-set';
 
 import ErrorHander from './middleware/ErrorHander';
 import AnalysicsHander from './middleware/AnalysicsHander';

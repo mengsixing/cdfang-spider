@@ -1,50 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="dns-prefetch" href="//package.cdfangyuan.cn" />
-    <meta
-      name="viewport"
-      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="成都摇号房源分析 - 大数据可视化页面展示" />
-    <title>成都房源分析</title>
-    <script>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement('script');
-        hm.src = 'https://hm.baidu.com/hm.js?89c87739b200c8c68eca13f9fcb7ccbe';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- 根据不同的环境，引入不同的cdn -->
-    <% if (htmlWebpackPlugin.options.env !== 'production') { %>
-    <script src="https://package.cdfangyuan.cn/react@17.0.1.development.js"></script>
-    <script src="https://package.cdfangyuan.cn/react-dom@17.0.1.development.js"></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="dns-prefetch" href="//package.cdfangyuan.cn" />
+  <meta name="viewport"
+    content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="成都摇号房源分析 - 大数据可视化页面展示" />
+  <title>成都房源分析</title>
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement('script');
+      hm.src = 'https://hm.baidu.com/hm.js?89c87739b200c8c68eca13f9fcb7ccbe';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- 根据不同的环境，引入不同的cdn -->
+  <% if (htmlWebpackPlugin.options.env !=='production' ) { %>
+    <!-- <script src="https://package.cdfangyuan.cn/react@17.0.1.development.js"></script> -->
+    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/react/17.0.1/umd/react.production.min.js"></script>
+    <!-- <script src="https://package.cdfangyuan.cn/react-dom@17.0.1.development.js"></script> -->
+    <script
+      src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/react-dom/17.0.1/umd/react-dom.production.min.js"></script>
     <% } else { %>
       <script src="https://package.cdfangyuan.cn/react@17.0.1.production.min.js"></script>
       <script src="https://package.cdfangyuan.cn/react-dom@17.0.1.production.min.js"></script>
-    <script src="https://package.cdfangyuan.cn/quicklink@1.0.1.min.js"></script>
-    <script>
-      // 注册 serviceWorker
-      if ('serviceWorker' in navigator) {
+      <script src="https://package.cdfangyuan.cn/quicklink@1.0.1.min.js"></script>
+      <script>
+        // 注册 serviceWorker
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+          });
+        }
+        // 开启 quicklink
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js');
+          quicklink();
         });
-      }
-      // 开启 quicklink
-      window.addEventListener('load', () => {
-        quicklink();
-      });
-    </script>
-    <% } %>
-    <script src="https://package.cdfangyuan.cn/lodash@4.17.20.min.production.js"></script>
-    <script src="https://package.cdfangyuan.cn/bizcharts@3.5.8.js"></script>
-    <script src="https://package.cdfangyuan.cn/data-set@0.11.1.min.production.js"></script>
-  </body>
+      </script>
+      <% } %>
+        <!-- <script src="https://package.cdfangyuan.cn/lodash@4.17.20.min.production.js"></script> -->
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/lodash.js/4.17.20/lodash.min.js"></script>
+        <!-- <script src="https://package.cdfangyuan.cn/bizcharts@3.5.8.js"></script> -->
+        <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/bizcharts/3.5.10/BizCharts.min.js"></script>
+        <!-- <script src="https://package.cdfangyuan.cn/data-set@0.11.1.min.production.js"></script> -->
+        <!-- <script src="http://package.cdfangyuan.cn/data-set@0.11.1.min.production.js"></script> -->
+</body>
+
 </html>

@@ -16,6 +16,7 @@ const devConfig = {
     proxy: {
       '/': 'http://localhost:8082',
     },
+    disableHostCheck: true,
   },
   module: {
     rules: [
@@ -28,7 +29,7 @@ const devConfig = {
           {
             loader: 'less-loader',
             options: {
-              lessOptions:{
+              lessOptions: {
                 javascriptEnabled: true,
               }
             },
